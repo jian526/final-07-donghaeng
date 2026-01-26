@@ -19,7 +19,7 @@ export default function Header() {
       <header className={styles[`header-wrapper`]}>
         <div className={styles[`logo-wrapper`]}>
           <Link href="/">
-            <Image src="./logo/logo.svg" width={40} height={35} alt="로고 이미지" />
+            <Image src="/logo/logo.svg" width={40} height={35} alt="로고 이미지" />
           </Link>
         </div>
 
@@ -47,13 +47,13 @@ export default function Header() {
               </li>
               <li>
                 <Link href="/notifications">
-                  <Image src="./icon/notification.svg" width={43} height={50} alt="알림 이미지" />
+                  <Image src="/icon/notification.svg" width={43} height={50} alt="알림 이미지" />
                 </Link>
               </li>
               <li>
                 <Link href="/mypage">
                   <div className={styles[`image-background`]}>
-                    <Image src="./icon/profile.svg" width={41} height={41} alt="사용자 디폴트 이미지" />
+                    <Image src="/icon/profile.svg" width={41} height={41} alt="사용자 디폴트 이미지" />
                   </div>
                 </Link>
               </li>
@@ -75,10 +75,10 @@ export default function Header() {
         {/* 모바일 메뉴 */}
         <div className={styles[`mobile-menu`]}>
           <Link href="/notifications">
-            <Image src="./icon/notification.svg" width={25} height={30} alt="알림 이미지" />
+            <Image src="/icon/notification.svg" width={25} height={30} alt="알림 이미지" />
           </Link>
           <button className={styles[`hamburger-btn`]} onClick={toggleSidebar}>
-            <Image src="./icon/hamburger.svg" width={30} height={28} alt="메뉴" />
+            <Image src="/icon/hamburger.svg" width={30} height={28} alt="메뉴" />
           </button>
         </div>
       </header>
