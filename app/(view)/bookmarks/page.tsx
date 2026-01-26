@@ -165,7 +165,9 @@ export default function BookmarkPage() {
           )}
         </div>
       </main>
-      <Footer />
+      <div className="footerWrap">
+        <Footer />
+      </div>
     </div>
   );
 }
