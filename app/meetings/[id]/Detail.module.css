@@ -1,0 +1,340 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-white);
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 240px 108px 240px;
+}
+
+.contentCard {
+  width: 100%;
+  background-color: var(--bg-white);
+  border: 5px solid var(--border-lavender);
+  border-radius: 20px;
+  padding: 70px 35px 45px 35px;
+  position: relative;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.characterWrapper {
+  flex-shrink: 0;
+}
+
+.characterImage {
+  width: 120px;
+  height: 120px;
+  background: url('/images/img2.png') center/cover;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.titleSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.title {
+  font-family: var(--main-font);
+  font-size: 32px;
+  color: var(--text-black);
+}
+
+.metadata {
+  display: flex;
+  font-family: var(--sub-font-medium);
+  font-size: 1rem;
+  color: var(--text-gray);
+}
+
+.bookmarkButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.bookmarkButton:hover {
+  transform: scale(1.1);
+}
+
+.contentBody {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.8;
+  font-size: 18px;
+}
+
+.contentBody p {
+  color: var(--text-black);
+}
+
+.bottomSection {
+  display: flex;
+  align-items: center;
+
+  max-width: 1440px;
+  height: 220px;
+  background-color: var(--bg-lightlavender);
+  border-radius: 25px;
+  flex: 1;
+  padding: 45px;
+  margin-top: 50px;
+}
+
+.userCharacterWrapper {
+  display: flex;
+  margin-right: 45px;
+}
+.userCharacterImage {
+  width: 170px;
+  height: 150px;
+  background: url('/images/img2.png') center/cover;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.userName {
+  font-family: var(--main-font);
+  font-size: 28px;
+  color: var(--text-navy);
+  margin-bottom: 5px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.statusText {
+  font-size: 18px;
+  color: var(--text-navy);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.users {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: space-between;
+  align-items: start;
+  gap: 400px;
+}
+.userStatus {
+  display: flex;
+  gap: 5px;
+}
+
+.heartIcon {
+  display: inline-block;
+  width: 35px;
+  height: 32px;
+  background-color: var(--text-navy);
+  mask: url('/icon/heart.svg') no-repeat center;
+  mask-size: contain;
+  -webkit-mask: url('/icon/heart.svg') no-repeat center;
+  -webkit-mask-size: contain;
+}
+.userStatus span {
+  font-family: var(--sub-font-bold);
+  font-size: 16px;
+  color: var(--text-navy);
+}
+.bpm {
+  display: flex;
+  flex-direction: column;
+}
+
+.chatButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  transition: transform 0.2s ease;
+}
+
+.chatButton:hover {
+  transform: scale(1.1);
+}
+
+/* 버튼 영역 */
+.buttonContainer {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.applyBtn,
+.editBtn,
+.deleteBtn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: none;
+  justify-content: center;
+  border-radius: 25px;
+  padding: 27px 0;
+  font-family: var(--main-font);
+  font-size: 20px;
+  width: 300px;
+  height: 80px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.applyBtn {
+  background-color: var(--bg-lavender);
+  color: var(--text-navy);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.applyBtn:hover {
+  background-color: var(--c-purple-300);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.applyBtn:active {
+  transform: translateY(0);
+}
+.editBtn {
+  background-color: var(--bg-lavender);
+  color: var(--text-navy);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.editBtn:hover {
+  background-color: var(--c-purple-300);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.editBtn:active {
+  transform: translateY(0);
+}
+
+.deleteBtn {
+  background-color: var(--bg-white);
+  border: 5px solid var(--border-lavender);
+  color: var(--text-navy);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.deleteBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.deleteBtn:active {
+  transform: translateY(0);
+}
+
+/* 관리자 모드 버튼 컨테이너 */
+.hostMode {
+  display: flex;
+  gap: 18px;
+  width: fit-content;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.userMode {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+  }
+
+  .contentCard {
+    padding: 1.5rem;
+  }
+
+  .cardHeader {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .characterImage {
+    width: 100px;
+    height: 100px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .metadata {
+    font-size: 0.85rem;
+  }
+
+  .bottomSection {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .userCard {
+    width: 100%;
+  }
+
+  .applyBtn {
+    width: 100%;
+    padding: 1.25rem 2rem;
+  }
+}
