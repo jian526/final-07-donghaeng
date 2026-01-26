@@ -11,7 +11,7 @@ body {
 .logo-img {
   width: 220px;
   height: 192px;
-  background: url('./../../../public/logo/logo.svg') center/cover no-repeat;
+  background: url('./../../../public/logo/logo.svg') center/contain no-repeat;
   margin: 0 auto;
 }
 
@@ -43,7 +43,10 @@ body {
   height: 55px;
   border-radius: 20px;
   border: 5px solid var(--border-lavender);
-  background: #fff;
+  background: var(--bg-white);
+  padding-left: 20px;
+  color: var(--text-lavender);
+  font-family: var(--sub-font-medium);
 }
 
 .input::placeholder {
@@ -53,7 +56,6 @@ body {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  padding-left: 20px;
 }
 
 .field-message {
@@ -73,6 +75,8 @@ body {
   height: 55px;
   border-radius: 20px;
   margin: 15px 0;
+  color: var(--text-navy);
+  font-family: var(--main-font);
 }
 
 .a {
@@ -85,6 +89,7 @@ body {
   margin: 15px 0 0 0;
   justify-content: center;
   align-items: center;
+  font-family: var(--main-font);
 }
 
 .login-help {
@@ -105,5 +110,13 @@ body {
   .btn,
   .a {
     height: 68px;
+  }
+
+  .back-btn {
+    display: none;
+  }
+
+  .login-wrap {
+    margin: 80px auto;
   }
 }
