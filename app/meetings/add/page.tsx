@@ -1,3 +1,5 @@
+'use client';
+
 import style from './create.module.css';
 import DefaultLayout from '@/app/components/DefaultLayout';
 
