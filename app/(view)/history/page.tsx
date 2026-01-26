@@ -12,6 +12,7 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import DefaultLayout from '@/app/components/DefaultLayout';
 
 const meetings = [
   {
@@ -96,7 +97,6 @@ function MeetingCard({ meeting }: { meeting: (typeof meetings)[0] }) {
               <p>{meeting.date}</p>
             </li>
           </ul>
-          <p>{meeting.joined ? '참여 완료' : '참여 가능'}</p>
         </div>
       </div>
       <Link href={`/meetings/${meeting.id}`} className={style.arrowIcon}>
@@ -125,60 +125,60 @@ export default function HistoryPage() {
   }, []);
 
   return (
-    <div className={style.container}>
-      <Header />
-      <main className={style.main}>
-        <h1 className={style.title}>모임 조회</h1>
-        <div className={style.btnGroup}>
-          <button className={style.beforeBtn} onClick={() => setFilter('before')}>
-            참여 전
-          </button>
-          <button className={style.afterBtn} onClick={() => setFilter('after')}>
-            참여 후
-          </button>
-        </div>
-        <div className={style.cardContainer}>
-          {isDesktop ? (
-            <Swiper
-              modules={[Pagination]}
-              spaceBetween={5}
-              slidesPerView={3}
-              centeredSlides={true}
-              pagination={{ clickable: true }}
-              className={style.swiper}
-              onSlideChange={(swiper) => {
-                //모든 슬라이드 스케일 초기화
-                swiper.slides.forEach((slide) => {
-                  slide.style.transform = 'scale(0.7)';
-                  slide.style.transform = 'transform 0.1s';
-                });
-                //활성 슬라이드만 1배로
-                swiper.slides[swiper.activeIndex].style.transform = 'scale(1)';
-              }}
-              onInit={(swiper) => {
-                //초기 로드시에도 적용
-                swiper.slides.forEach((slide, index) => {
-                  slide.style.transition = 'transform 0.1s';
-                  slide.style.transform = index === swiper.activeIndex ? 'scale(1)' : 'scale(0.7)';
-                });
-              }}
-            >
-              {meetings.map((meeting) => (
-                <SwiperSlide key={meeting.id} className={style.swiperSlide}>
-                  <MeetingCard meeting={meeting} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          ) : (
-            <div className={style.mobileCardList}>
-              {meetings.map((meeting) => (
-                <MeetingCard key={meeting.id} meeting={meeting} />
-              ))}
-            </div>
-          )}
-        </div>
-      </main>
-      <Footer />
-    </div>
+    <>
+      <DefaultLayout>
+        <main className={style.main}>
+          <h1 className={style.title}>모임 조회</h1>
+          <div className={style.btnGroup}>
+            <button className={style.beforeBtn} onClick={() => setFilter('before')}>
+              참여 전
+            </button>
+            <button className={style.afterBtn} onClick={() => setFilter('after')}>
+              참여 후
+            </button>
+          </div>
+          <div className={style.cardContainer}>
+            {isDesktop ? (
+              <Swiper
+                modules={[Pagination]}
+                spaceBetween={5}
+                slidesPerView={3}
+                centeredSlides={true}
+                pagination={{ clickable: true }}
+                className={style.swiper}
+                onSlideChange={(swiper) => {
+                  //모든 슬라이드 스케일 초기화
+                  swiper.slides.forEach((slide) => {
+                    slide.style.transform = 'scale(0.7)';
+                    slide.style.transform = 'transform 0.1s';
+                  });
+                  //활성 슬라이드만 1배로
+                  swiper.slides[swiper.activeIndex].style.transform = 'scale(1)';
+                }}
+                onInit={(swiper) => {
+                  //초기 로드시에도 적용
+                  swiper.slides.forEach((slide, index) => {
+                    slide.style.transition = 'transform 0.1s';
+                    slide.style.transform = index === swiper.activeIndex ? 'scale(1)' : 'scale(0.7)';
+                  });
+                }}
+              >
+                {meetings.map((meeting) => (
+                  <SwiperSlide key={meeting.id} className={style.swiperSlide}>
+                    <MeetingCard meeting={meeting} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            ) : (
+              <div className={style.mobileCardList}>
+                {meetings.map((meeting) => (
+                  <MeetingCard key={meeting.id} meeting={meeting} />
+                ))}
+              </div>
+            )}
+          </div>
+        </main>
+      </DefaultLayout>
+    </>
   );
 }
