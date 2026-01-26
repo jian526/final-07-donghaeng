@@ -12,6 +12,7 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import DefaultLayout from '@/app/components/DefaultLayout';
 
 const meetings = [
   {
@@ -120,54 +121,52 @@ export default function BookmarkPage() {
   }, []);
 
   return (
-    <div className={style.container}>
-      <Header />
-      <main className={style.main}>
-        <h1 className={style.title}>북마크</h1>
-        <div className={style.cardContainer}>
-          {isDesktop ? (
-            <Swiper
-              modules={[Pagination]}
-              spaceBetween={5}
-              slidesPerView={3}
-              centeredSlides={true}
-              pagination={{ clickable: true }}
-              className={style.swiper}
-              onSlideChange={(swiper) => {
-                // 모든 슬라이드 스케일 초기화
-                swiper.slides.forEach((slide) => {
-                  slide.style.transform = 'scale(0.7)';
-                  slide.style.transition = 'transform 0.1s';
-                });
-                // 활성 슬라이드만 1배로
-                swiper.slides[swiper.activeIndex].style.transform = 'scale(1)';
-              }}
-              onInit={(swiper) => {
-                // 초기 로드시에도 적용
-                swiper.slides.forEach((slide, index) => {
-                  slide.style.transition = 'transform 0.1s';
-                  slide.style.transform = index === swiper.activeIndex ? 'scale(1)' : 'scale(0.7)';
-                });
-              }}
-            >
-              {meetings.map((meeting) => (
-                <SwiperSlide key={meeting.id} className={style.swiperSlide}>
-                  <MeetingCard meeting={meeting} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          ) : (
-            <div className={style.mobileCardList}>
-              {meetings.map((meeting) => (
-                <MeetingCard key={meeting.id} meeting={meeting} />
-              ))}
-            </div>
-          )}
-        </div>
-      </main>
-      <div className="footerWrap">
-        <Footer />
-      </div>
-    </div>
+    <>
+      <DefaultLayout>
+        <main className={style.main}>
+          <h1 className={style.title}>북마크</h1>
+          <div className={style.cardContainer}>
+            {isDesktop ? (
+              <Swiper
+                modules={[Pagination]}
+                spaceBetween={5}
+                slidesPerView={3}
+                centeredSlides={true}
+                pagination={{ clickable: true }}
+                className={style.swiper}
+                onSlideChange={(swiper) => {
+                  // 모든 슬라이드 스케일 초기화
+                  swiper.slides.forEach((slide) => {
+                    slide.style.transform = 'scale(0.7)';
+                    slide.style.transition = 'transform 0.1s';
+                  });
+                  // 활성 슬라이드만 1배로
+                  swiper.slides[swiper.activeIndex].style.transform = 'scale(1)';
+                }}
+                onInit={(swiper) => {
+                  // 초기 로드시에도 적용
+                  swiper.slides.forEach((slide, index) => {
+                    slide.style.transition = 'transform 0.1s';
+                    slide.style.transform = index === swiper.activeIndex ? 'scale(1)' : 'scale(0.7)';
+                  });
+                }}
+              >
+                {meetings.map((meeting) => (
+                  <SwiperSlide key={meeting.id} className={style.swiperSlide}>
+                    <MeetingCard meeting={meeting} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            ) : (
+              <div className={style.mobileCardList}>
+                {meetings.map((meeting) => (
+                  <MeetingCard key={meeting.id} meeting={meeting} />
+                ))}
+              </div>
+            )}
+          </div>
+        </main>
+      </DefaultLayout>
+    </>
   );
 }
