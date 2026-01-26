@@ -111,6 +111,11 @@
   }
 }
 
+/* 푸터를 감싸는 div */
+.footer-wrapper {
+  display: none;
+}
+
 @media (min-width: 1024px) {
   .manage-body {
     width: 100%;
@@ -177,5 +182,9 @@
 
   .btn-approve {
     margin-right: 20px;
+  }
+
+  .footer-wrapper {
+    display: block;
   }
 }

@@ -1,6 +1,7 @@
 import profile from '@/public/icon/profile.svg';
 import styles from './Manage.module.css';
 import Header from '@/app/components/Header';
+import Footer from '@/app/components/Footer';
 
 export default function Manage() {
   return (
@@ -42,6 +43,9 @@ export default function Manage() {
             </div>
           </div>
         </div>
+      </div>
+      <div className={styles['footer-wrapper']}>
+        <Footer />
       </div>
     </>
   );
