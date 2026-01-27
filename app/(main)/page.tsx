@@ -29,9 +29,8 @@ export default function Main() {
         <section className={styles[`map-preview-wrapper`]}>
           <div className={styles[`map-link`]}>
             <Link className={styles[`map-link-text`]} href="/map">
-              모임 지도
+              모임 지도<Image src="/icon/right.svg" width={12} height={20} alt="오른쪽화살표"></Image>
             </Link>
-            <Image src="/icon/right.svg" width={12} height={20} alt="오른쪽화살표"></Image>
           </div>
           <div className={styles[`map-view`]}>
             <div className={styles[`map-image`]} role="img" aria-label="지도 이미지" />
@@ -41,8 +40,9 @@ export default function Main() {
         {/* 카테고리 별 리스트 */}
         <section className={styles[`section-meetings-wrapper`]}>
           <div className={styles[`section-link`]}>
-            <Link href="/meetings">추천 리스트</Link>
-            <Image src="/icon/right.svg" width={12} height={20} alt="오른쪽화살표"></Image>
+            <Link href="/meetings" className={styles[`section-link-text`]}>
+              추천 리스트<Image src="/icon/right.svg" width={12} height={20} alt="오른쪽화살표"></Image>
+            </Link>
           </div>
           <div className={styles[`section-list`]}>
             <div className={styles[`meetings-wrapper`]}>
@@ -77,8 +77,10 @@ export default function Main() {
         </section>
         <section className={styles[`section-meetings-wrapper`]}>
           <div className={styles[`section-link`]}>
-            <Link href="/meetings">요리 / 식도락</Link>
-            <Image src="/icon/right.svg" width={12} height={20} alt="오른쪽화살표"></Image>
+            <Link href="/meetings" className={styles[`section-link-text`]}>
+              요리 / 식도락
+              <Image src="/icon/right.svg" width={12} height={20} alt="오른쪽화살표"></Image>
+            </Link>
           </div>
           <div className={styles[`section-list`]}>
             <div className={styles[`meetings-wrapper`]}>
