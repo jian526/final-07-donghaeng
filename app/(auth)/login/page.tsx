@@ -1,8 +1,11 @@
+'use client';
+
+import BlankLayout from '@/app/components/BlankLayout';
 import styles from './Login.module.css';
 
 export default function Login() {
   return (
-    <>
+    <BlankLayout>
       <div className={styles['login-wrap']}>
         <button type="button" className={styles['back-btn']} aria-label="이전페이지">
           <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,7 +48,7 @@ export default function Login() {
           </a>
         </form>
       </div>
-    </>
+    </BlankLayout>
     // #TODO
   );
 }
