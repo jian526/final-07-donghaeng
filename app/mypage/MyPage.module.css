@@ -1,3 +1,4 @@
+/* 마이페이지 div */
 .mypage-body {
   width: 100%;
   max-width: 500px;
@@ -13,6 +14,7 @@
   }
 }
 
+/* 프로필 정보 묶음 div */
 .profile-information-div {
   display: flex;
   flex-direction: column;
@@ -25,6 +27,7 @@
   border-radius: 25px;
 }
 
+/* 프로필 정보 */
 .profile-information {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -67,11 +70,13 @@
   }
 }
 
+/* 프로필 이미지와 수정 버튼을 감싸는 div */
 .profile-img-wrapper {
   position: relative;
   margin-right: 20px;
 }
 
+/* 수정 버튼 */
 .pencil-btn {
   position: absolute;
   width: 40px;
@@ -92,14 +97,17 @@
   }
 }
 
+/* 사용자 정보 - 모바일 */
 .user-info-mobile {
   width: 100%;
 }
 
+/* 사용자 정보 - 데스크탑 */
 .user-info-desktop {
   display: none;
 }
 
+/* 내 소개 - 모바일 */
 .my-introduce-mobile {
   font-size: 14px;
   width: 90%;
@@ -121,6 +129,7 @@
   }
 }
 
+/* 북마크, 참여 모임 조회 그룹 div */
 .history-meetings {
   display: flex;
   flex-direction: row;
@@ -150,15 +159,18 @@
   }
 }
 
+/* 관심 모임, 참여 완료 적용 text */
 .meetings-text {
   font-family: var(--sub-font-medium);
   margin-bottom: 5px;
 }
 
+/* 관심 모임, 참여 완료 밑 숫자 적용 text */
 .meetings-number {
   font-family: var(--main-font);
 }
 
+/* 북마크, 내가 참여한 모임 버튼 */
 .history-button {
   font-size: 16px;
   font-family: var(--main-font);
@@ -183,14 +195,17 @@
   }
 }
 
+/* 북마크 배경 */
 .btn-bookmark {
   background-color: var(--bg-lavender);
 }
 
+/* 참여 모임 배경 */
 .btn-attend-meetings {
   background-color: var(--bg-sky);
 }
 
+/* 1024px 이상 반응형 */
 @media (min-width: 1024px) {
   .mypage-body {
     max-width: 850px;
