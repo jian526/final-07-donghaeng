@@ -2,6 +2,7 @@ import Image from 'next/image';
 import styles from './Main.module.css';
 import DefaultLayout from '@/app/components/DefaultLayout';
 import Link from 'next/link';
+import BookmarkButton from '@/app/components/BookmarkButton';
 
 export default function Main() {
   return (
@@ -16,7 +17,9 @@ export default function Main() {
                 모임 검색
               </label>
               <input className={styles[`search-bar`]} type="search" id="search-bar" placeholder="관심 있는 모임을 검색으로 찾아보세요!" />
-              <Image className={styles[`search-image`]} src="/icon/search.svg" alt="검색아이콘" width={27} height={27} />
+              <button type="submit">
+                <Image className={styles[`search-image`]} src="/icon/search.svg" alt="검색아이콘" width={27} height={27} />
+              </button>
             </div>
           </form>
           <button type="button" className={styles[`ai-recommend`]}>
@@ -24,7 +27,6 @@ export default function Main() {
             <span>추천</span>
           </button>
         </section>
-
         {/* 지도 미리보기 */}
         <section className={styles[`map-preview-wrapper`]}>
           <div className={styles[`map-link`]}>
@@ -36,7 +38,6 @@ export default function Main() {
             <div className={styles[`map-image`]} role="img" aria-label="지도 이미지" />
           </div>
         </section>
-
         {/* 카테고리 별 리스트 */}
         <section className={styles[`section-meetings-wrapper`]}>
           <div className={styles[`section-link`]}>
@@ -46,32 +47,40 @@ export default function Main() {
           </div>
           <div className={styles[`section-list`]}>
             <div className={styles[`meetings-wrapper`]}>
-              <div className={styles[`meetings-image-box`]}>
+              <Link href="/meetings/1" className={styles[`meetings-image-box`]}>
                 <div className={styles[`temp-image`]}></div>
-                <Image className={styles[`bookmarks-image`]} src="/icon/bookmark.svg" width={19.83} height={25.5} alt="북마크"></Image>{' '}
-              </div>
-              <div className={styles[`meetings-title`]}>모임 이름 어쩌구</div>
+                <BookmarkButton />
+              </Link>
+              <Link href="/meetings/1" className={styles[`meetings-title`]}>
+                모임 이름 어쩌구
+              </Link>
             </div>
             <div className={styles[`meetings-wrapper`]}>
-              <div className={styles[`meetings-image-box`]}>
+              <Link href="/meetings/1" className={styles[`meetings-image-box`]}>
                 <div className={styles[`temp-image`]}></div>
-                <Image className={styles[`bookmarks-image`]} src="/icon/bookmark.svg" width={19.83} height={25.5} alt="북마크"></Image>
-              </div>
-              <div className={styles[`meetings-title`]}>모임 이름 어쩌구</div>
+                <BookmarkButton />
+              </Link>
+              <Link href="/meetings/1" className={styles[`meetings-title`]}>
+                모임 이름 어쩌구
+              </Link>
             </div>
             <div className={styles[`meetings-wrapper`]}>
-              <div className={styles[`meetings-image-box`]}>
+              <Link href="/meetings/1" className={styles[`meetings-image-box`]}>
                 <div className={styles[`temp-image`]}></div>
-                <Image className={styles[`bookmarks-image`]} src="/icon/bookmark.svg" width={19.83} height={25.5} alt="북마크"></Image>
-              </div>
-              <div className={styles[`meetings-title`]}>모임 이름 어쩌구</div>
+                <BookmarkButton />
+              </Link>
+              <Link href="/meetings/1" className={styles[`meetings-title`]}>
+                모임 이름 어쩌구
+              </Link>
             </div>
             <div className={styles[`meetings-wrapper`]}>
-              <div className={styles[`meetings-image-box`]}>
+              <Link href="/meetings/1" className={styles[`meetings-image-box`]}>
                 <div className={styles[`temp-image`]}></div>
-                <Image className={styles[`bookmarks-image`]} src="/icon/bookmark.svg" width={19.83} height={25.5} alt="북마크"></Image>
-              </div>
-              <div className={styles[`meetings-title`]}>모임 이름 어쩌구</div>
+                <BookmarkButton />
+              </Link>
+              <Link href="/meetings/1" className={styles[`meetings-title`]}>
+                모임 이름 어쩌구
+              </Link>
             </div>
           </div>
         </section>
@@ -84,32 +93,40 @@ export default function Main() {
           </div>
           <div className={styles[`section-list`]}>
             <div className={styles[`meetings-wrapper`]}>
-              <div className={styles[`meetings-image-box`]}>
+              <Link href="/meetings/1" className={styles[`meetings-image-box`]}>
                 <div className={styles[`temp-image`]}></div>
-                <Image className={styles[`bookmarks-image`]} src="/icon/bookmark.svg" width={19.83} height={25.5} alt="북마크"></Image>{' '}
-              </div>
-              <div className={styles[`meetings-title`]}>모임 이름 어쩌구</div>
+                <BookmarkButton />
+              </Link>
+              <Link href="/meetings/1" className={styles[`meetings-title`]}>
+                모임 이름 어쩌구
+              </Link>
             </div>
             <div className={styles[`meetings-wrapper`]}>
-              <div className={styles[`meetings-image-box`]}>
+              <Link href="/meetings/1" className={styles[`meetings-image-box`]}>
                 <div className={styles[`temp-image`]}></div>
-                <Image className={styles[`bookmarks-image`]} src="/icon/bookmark.svg" width={19.83} height={25.5} alt="북마크"></Image>
-              </div>
-              <div className={styles[`meetings-title`]}>모임 이름 어쩌구</div>
+                <BookmarkButton />
+              </Link>
+              <Link href="/meetings/1" className={styles[`meetings-title`]}>
+                모임 이름 어쩌구
+              </Link>
             </div>
             <div className={styles[`meetings-wrapper`]}>
-              <div className={styles[`meetings-image-box`]}>
+              <Link href="/meetings/1" className={styles[`meetings-image-box`]}>
                 <div className={styles[`temp-image`]}></div>
-                <Image className={styles[`bookmarks-image`]} src="/icon/bookmark.svg" width={19.83} height={25.5} alt="북마크"></Image>
-              </div>
-              <div className={styles[`meetings-title`]}>모임 이름 어쩌구</div>
+                <BookmarkButton />
+              </Link>
+              <Link href="/meetings/1" className={styles[`meetings-title`]}>
+                모임 이름 어쩌구
+              </Link>
             </div>
             <div className={styles[`meetings-wrapper`]}>
-              <div className={styles[`meetings-image-box`]}>
+              <Link href="/meetings/1" className={styles[`meetings-image-box`]}>
                 <div className={styles[`temp-image`]}></div>
-                <Image className={styles[`bookmarks-image`]} src="/icon/bookmark.svg" width={19.83} height={25.5} alt="북마크"></Image>
-              </div>
-              <div className={styles[`meetings-title`]}>모임 이름 어쩌구</div>
+                <BookmarkButton />
+              </Link>
+              <Link href="/meetings/1" className={styles[`meetings-title`]}>
+                모임 이름 어쩌구
+              </Link>
             </div>
           </div>
         </section>

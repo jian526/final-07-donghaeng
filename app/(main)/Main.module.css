@@ -16,6 +16,10 @@
   max-width: 1090px;
   margin: 25px auto;
 
+  .ai-recommend {
+    cursor: pointer;
+  }
+
   .search-bar-wrapper {
     display: inline-flex;
     border: 2px solid var(--border-navy);
@@ -28,6 +32,10 @@
       display: inline-flex;
       justify-content: center;
       align-items: center;
+
+      button {
+        cursor: pointer;
+      }
 
       .search-bar {
         width: 100%;
@@ -69,10 +77,15 @@
   }
 }
 .map-link {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
   padding-inline: 20px;
   margin-bottom: 20px;
-  height: 35px;
+  height: 1em;
+  overflow: hidden;
+  line-height: 0.5;
   font-size: 30px;
   font-family: var(--sub-font-medium);
 
@@ -98,10 +111,15 @@
   }
 }
 .section-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
   padding-inline: 20px;
   margin-bottom: 20px;
-  height: 35px;
-  display: block;
+  height: 1em;
+  overflow: hidden;
+  line-height: 0.5;
   font-size: 30px;
   font-family: var(--sub-font-medium);
 
@@ -130,14 +148,10 @@
       position: relative;
       background: gray;
       aspect-ratio: 1 / 1;
-
-      .bookmarks-image {
-        position: absolute;
-        right: 15.03px;
-        bottom: 19.41px;
-      }
     }
     .meetings-title {
+      display: flex;
+      width: fit-content;
       font-family: var(--sub-font-medium);
       font-size: 16px;
       color: var(--text-navy);
@@ -191,6 +205,11 @@
     .map-link {
       margin-bottom: 30px;
       font-size: 24px;
+      line-height: 0.8;
+
+      img {
+        padding-top: 5px;
+      }
     }
     .map-view {
       margin-bottom: 60px;
@@ -203,7 +222,13 @@
     .section-link {
       margin-bottom: 30px;
       font-size: 24px;
+      line-height: 0.8;
+
+      img {
+        padding-top: 5px;
+      }
     }
+
     .section-list {
       display: flex;
       flex-wrap: nowrap;
