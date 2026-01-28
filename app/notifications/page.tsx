@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import img from './sampleImg.jpg';
+import img from './sampleImg.png';
 import DefaultLayout from '@/app/components/DefaultLayout';
 import styles from './notifications.module.css';
 
