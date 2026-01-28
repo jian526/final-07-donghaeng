@@ -43,7 +43,7 @@ export default function Login() {
             회원가입
           </a>
           <br />
-          <a href="#" className={styles['login-help']}>
+          <a href="/signup" className={styles['login-help']}>
             비밀번호를 잊으셨나요?
           </a>
         </form>
