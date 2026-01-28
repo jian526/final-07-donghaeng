@@ -2,13 +2,45 @@
 
 import BlankLayout from '@/app/components/BlankLayout';
 import styles from './Login.module.css';
+import { useActionState, useEffect } from 'react';
+import { login } from '@/actions/user';
+import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import useUserStore from '@/zustand/userStore';
 import Link from 'next/link';
 
 export default function Login() {
+  const [userState, formActions, isPending] = useActionState(login, null);
+  const router = useRouter();
+  const redirect = useSearchParams().get('redirect');
+  const setUser = useUserStore((state) => state.setUser);
+
+  //로그인 성공시...
+  useEffect(() => {
+    if (userState?.ok === 1) {
+      setUser({
+        _id: userState.item._id,
+        email: userState.item.email,
+        name: userState.item.name,
+        region: userState.item.region,
+        age: userState.item.age,
+        gender: userState.item.gender,
+        image: userState.item.image,
+        comment: userState.item.comment,
+        bpm: userState.item.bpm,
+        token: {
+          accessToken: userState.item.token?.accessToken || '',
+          refreshToken: userState.item.token?.refreshToken || '',
+        },
+      });
+      router.replace(redirect || '/');
+    }
+  }, [userState, router, redirect, setUser]);
+
   return (
     <BlankLayout>
       <div className={styles['login-wrap']}>
-        <button type="button" className={styles['back-btn']} aria-label="이전페이지">
+        <button type="button" className={styles['back-btn']} aria-label="이전페이지" onClick={() => router.back()}>
           <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M0.439367 8.09227C-0.146456 8.59433 -0.146456 9.40968 0.439367 9.91175L9.43761 17.6235C10.0234 18.1255 10.9748 18.1255 11.5606 17.6235C12.1465 17.1214 12.1465 16.306 11.5606 15.804L3.62156 9L11.5559 2.19603C12.1418 1.69396 12.1418 0.878612 11.5559 0.376548C10.9701 -0.125516 10.0187 -0.125516 9.43292 0.376548L0.43468 8.08825L0.439367 8.09227Z"
@@ -17,13 +49,13 @@ export default function Login() {
           </svg>
         </button>
         <div className={styles['logo-img']}></div>
-        <form className={styles['form']}>
+        <form className={styles['form']} action={formActions}>
           <fieldset className={styles['email-fieldset fieldset']}>
             <label htmlFor="email" className={styles['label']}>
               이메일
             </label>
             <br />
-            <input className={styles['input']} type="email" id="email" placeholder="이메일을 입력해 주세요" />
+            <input className={styles['input']} name="email" type="email" id="email" placeholder="이메일을 입력해 주세요" required />
           </fieldset>
 
           <fieldset className={styles['password-fieldset fieldset']}>
@@ -31,23 +63,24 @@ export default function Login() {
               비밀번호
             </label>
             <br />
-            <input className={styles['input']} type="password" id="password" placeholder="비밀번호를 입력해 주세요" />
+            <input className={styles['input']} name="password" type="password" id="password" placeholder="비밀번호를 입력해 주세요" required />
 
-            <span className={styles['field-message']}>비밀번호를 다시 입력해 주세요</span>
+            {/* 에러메시지 */}
+            {userState?.ok === 0 && <span className={styles['field-message']}>비밀번호를 다시 입력해 주세요</span>}
           </fieldset>
 
-          <button type="submit" className={styles['btn']}>
-            <Link href="/">로그인</Link>
+          <button type="submit" className={styles['btn']} disabled={isPending}>
+            로그인
             {/* #TODO 디자인을 위한 a태그 - 기능 구현시 a태그 삭제예정! */}
           </button>
           <br />
-          <a href="/signup" className={styles['a']}>
+          <Link href="/signup" className={styles['a']}>
             회원가입
-          </a>
+          </Link>
           <br />
-          <a href="/signup" className={styles['login-help']}>
+          <Link href="/signup" className={styles['login-help']}>
             비밀번호를 잊으셨나요?
-          </a>
+          </Link>
         </form>
       </div>
     </BlankLayout>
