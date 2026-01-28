@@ -1,6 +1,7 @@
 'use client';
 
-import style from './create.module.css';
+import Link from 'next/link';
+import style from './edit.module.css';
 import DefaultLayout from '@/app/components/DefaultLayout';
 
 export default function Edit() {
@@ -172,10 +173,11 @@ export default function Edit() {
           <br />
           <div className={style['btn-wrap']}>
             <button className={style['btn']} type="submit">
-              수정
+              {/* #TODO 구현시 livk 삭제 예정! */}
+              <Link href={'/meetings'}>수정</Link>
             </button>
             <button className={style['btn-2']} type="button">
-              취소
+              <Link href={'/meetings'}>취소</Link>
             </button>
           </div>
         </div>
