@@ -1,11 +1,12 @@
 .wrap {
-  padding: 25px 75px;
+  padding: 25px clamp(20px, 10vw, 75px);
+  overflow-x: hidden;
 }
 .add-wrap {
   display: flexbox;
   justify-content: center;
   margin: 0 auto;
-  min-width: 320px;
+  min-width: 260px;
   max-width: 974px;
 }
 
@@ -47,7 +48,7 @@
 .content-input {
   width: 100%;
   max-width: 864px;
-  min-width: 350px;
+  min-width: 260px;
   min-height: 92px;
   max-height: 332px;
   border-radius: 25px;
