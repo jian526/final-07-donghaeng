@@ -5,8 +5,76 @@ import { useState } from 'react';
 import Image from 'next/image';
 import styles from './AiRecommendModal.module.css';
 import Link from 'next/link';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 type Step = 'intro' | 'age' | 'gender' | 'preference1' | 'preference2' | 'preference3' | 'result';
+
+type Meeting = {
+  id: number;
+  title: string;
+  category: {
+    location: string;
+    theme: string;
+    age: string;
+    gender: string;
+    people: string;
+  };
+  date: string;
+  joined: boolean;
+};
+
+function MeetingCard({ meeting }: { meeting: Meeting }) {
+  return (
+    <article className={styles.card}>
+      <div className={styles.cardContent}>
+        <figure className={styles.imageWrapper}>
+          <div className={styles.characterImage} role="img" aria-label="모임 대표 이미지"></div>
+          <figcaption className={`sr-only`}>모임 대표 이미지</figcaption>
+        </figure>
+        <div className={styles.infoWrapper}>
+          <h2 className={styles.cardTitle}>{meeting.title}</h2>
+          <ul className={styles.infoList}>
+            <li className={styles.infoItem}>
+              <span className={styles.bullet} aria-hidden="true">
+                <Image src="/icon/tag.svg" width={18} height={18} alt="장소 아이콘" />
+              </span>
+              <p>
+                {meeting.category.location}. {meeting.category.theme}
+              </p>
+            </li>
+            <li className={styles.infoItem}>
+              <span className={styles.bullet} aria-hidden="true">
+                <Image src="/icon/info.svg" width={18} height={18} alt="정보 아이콘" />
+              </span>
+              <p>
+                {meeting.category.age}, {meeting.category.gender}
+              </p>
+            </li>
+            <li className={styles.infoItem}>
+              <span className={styles.bullet} aria-hidden="true">
+                <Image src="/icon/people.svg" width={18} height={18} alt="사람들 아이콘" />
+              </span>
+              <p>{meeting.category.people}</p>
+            </li>
+            <li className={styles.infoItem}>
+              <span className={styles.bullet} aria-hidden="true">
+                <Image src="/icon/calendar.svg" width={18} height={18} alt="날짜 아이콘" />
+              </span>
+              <p>{meeting.date}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <Link href={`/meetings/${meeting.id}`} className={styles.arrowIcon}>
+        <Image src="/icon/arrow.svg" alt="상세보기" width={19} height={12} />
+      </Link>
+    </article>
+  );
+}
 
 export default function AiRecommendModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [step, setStep] = useState<Step>('intro');
@@ -17,6 +85,113 @@ export default function AiRecommendModal({ open, onClose }: { open: boolean; onC
     preference2: '',
     preference3: '',
   });
+
+  const meetings = [
+    {
+      id: 1,
+      title: '세상에서 제일 비싼 두쫀쿠 만들기',
+      category: {
+        location: '마포구',
+        theme: '보드게임',
+        age: '20~30대',
+        gender: '남녀무관',
+        people: '인원 4~5명',
+      },
+      date: '26.1.27(화) 오후 3:00',
+      joined: false,
+    },
+    {
+      id: 2,
+      title: '한강에서 자전거 타기',
+      category: {
+        location: '강남구',
+        theme: '운동',
+        age: '20~30대',
+        gender: '남녀무관',
+        people: '인원 3~4명',
+      },
+      date: '26.1.28(수) 오후 2:00',
+      joined: true,
+    },
+    {
+      id: 3,
+      title: '북촌 한옥마을 산책',
+      category: {
+        location: '종로구',
+        theme: '문화탐방',
+        age: '전연령',
+        gender: '여성만',
+        people: '인원 2~3명',
+      },
+      date: '26.1.29(목) 오후 4:00',
+      joined: false,
+    },
+    {
+      id: 4,
+      title: '북촌 한옥마을 산책',
+      category: {
+        location: '종로구',
+        theme: '문화탐방',
+        age: '전연령',
+        gender: '여성만',
+        people: '인원 2~3명',
+      },
+      date: '26.1.29(목) 오후 4:00',
+      joined: false,
+    },
+    {
+      id: 5,
+      title: '북촌 한옥마을 산책',
+      category: {
+        location: '종로구',
+        theme: '문화탐방',
+        age: '전연령',
+        gender: '여성만',
+        people: '인원 2~3명',
+      },
+      date: '26.1.29(목) 오후 4:00',
+      joined: false,
+    },
+    {
+      id: 6,
+      title: '북촌 한옥마을 산책',
+      category: {
+        location: '종로구',
+        theme: '문화탐방',
+        age: '전연령',
+        gender: '여성만',
+        people: '인원 2~3명',
+      },
+      date: '26.1.29(목) 오후 4:00',
+      joined: false,
+    },
+    {
+      id: 7,
+      title: '북촌 한옥마을 산책',
+      category: {
+        location: '종로구',
+        theme: '문화탐방',
+        age: '전연령',
+        gender: '여성만',
+        people: '인원 2~3명',
+      },
+      date: '26.1.29(목) 오후 4:00',
+      joined: false,
+    },
+    {
+      id: 8,
+      title: '북촌 한옥마을 산책',
+      category: {
+        location: '종로구',
+        theme: '문화탐방',
+        age: '전연령',
+        gender: '여성만',
+        people: '인원 2~3명',
+      },
+      date: '26.1.29(목) 오후 4:00',
+      joined: false,
+    },
+  ];
 
   // 이전 단계로 이동
   const goBack = () => {
@@ -164,7 +339,7 @@ export default function AiRecommendModal({ open, onClose }: { open: boolean; onC
           {/* Step: result */}
           {step === 'result' && (
             <>
-              <div className={styles[`recommend-wrapper`]}>
+              <div className={styles[`mobile-recommend-wrapper`]}>
                 <p>모임을 추천 해드릴게요!</p>
                 <div className={styles[`meetings-card`]}>
                   <Link href="/meetings/1">
@@ -193,6 +368,16 @@ export default function AiRecommendModal({ open, onClose }: { open: boolean; onC
                     <Image className={styles[`arrow-image`]} src="/icon/arrow.svg" width={19} height={8} alt="화살표"></Image>
                   </Link>
                 </div>
+              </div>
+              <div className={styles[`desktop-recommend-wrapper`]}>
+                <p>모임을 추천 해드릴게요!</p>
+                <Swiper modules={[Pagination]} spaceBetween={10} slidesPerView={'auto'} centeredSlides={true} pagination={{ clickable: true }} className={styles.swiper}>
+                  {meetings.map((meeting) => (
+                    <SwiperSlide key={meeting.id}>
+                      <MeetingCard meeting={meeting} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
               <button className={styles[`retry-btn`]} type="button" onClick={handleRetry}>
                 검사 다시하기

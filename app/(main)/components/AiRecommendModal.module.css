@@ -214,7 +214,7 @@
         }
       }
     }
-    .recommend-wrapper {
+    .mobile-recommend-wrapper {
       font-size: 20px;
       font-family: var(--main-font);
       margin: 20px;
@@ -272,6 +272,114 @@
     }
   }
 }
+.desktop-recommend-wrapper {
+  display: none;
+  font-family: var(--main-font);
+  margin: 20px;
+  overflow: hidden;
+
+  > p {
+    font-size: 20px;
+    color: var(--text-navy);
+    line-height: 160%;
+    margin-bottom: 20px;
+  }
+
+  .swiper {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-bottom: 30px;
+    overflow: hidden;
+
+    :global(.swiper-pagination-bullet) {
+      background: var(--border-darksky);
+      opacity: 1;
+    }
+
+    :global(.swiper-pagination-bullet-active) {
+      background: var(--bg-navy);
+    }
+  }
+
+  .card {
+    position: relative;
+    width: 413px;
+    height: 225px;
+    background-color: var(--bg-sky);
+    border: 5px solid var(--border-darksky);
+    border-radius: 25px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .cardContent {
+    display: flex;
+    align-items: center;
+  }
+
+  .characterImage {
+    width: 130px;
+    height: 130px;
+    background: url('/images/img.png') center/cover;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    flex-shrink: 0;
+  }
+
+  .infoWrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cardTitle {
+    font-family: var(--main-font);
+    font-size: 20px;
+    color: var(--text-black);
+    line-height: 1.4;
+    margin-right: 20px;
+    text-align: left;
+  }
+
+  .infoList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .infoItem {
+    font-family: var(--sub-font-medium);
+    color: var(--text-black);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .infoItem p {
+    font-size: 12px;
+  }
+
+  .arrowIcon {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .arrowIcon:hover {
+    transform: translateX(4px);
+  }
+}
 
 @media (min-width: 1024px) {
   .modal {
@@ -280,5 +388,11 @@
     .container {
       padding: 40px 0 20px 0;
     }
+  }
+  .mobile-recommend-wrapper {
+    display: none;
+  }
+  .desktop-recommend-wrapper {
+    display: block;
   }
 }
