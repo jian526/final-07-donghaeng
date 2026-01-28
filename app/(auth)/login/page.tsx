@@ -2,6 +2,7 @@
 
 import BlankLayout from '@/app/components/BlankLayout';
 import styles from './Login.module.css';
+import Link from 'next/link';
 
 export default function Login() {
   return (
@@ -36,10 +37,11 @@ export default function Login() {
           </fieldset>
 
           <button type="submit" className={styles['btn']}>
-            로그인
+            <Link href="/">로그인</Link>
+            {/* #TODO 디자인을 위한 a태그 - 기능 구현시 a태그 삭제예정! */}
           </button>
           <br />
-          <a href="#" className={styles['a']}>
+          <a href="/signup" className={styles['a']}>
             회원가입
           </a>
           <br />
@@ -49,6 +51,5 @@ export default function Login() {
         </form>
       </div>
     </BlankLayout>
-    // #TODO
   );
 }
