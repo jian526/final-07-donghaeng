@@ -1,10 +1,16 @@
+'use client';
+
 import Image from 'next/image';
 import styles from './Main.module.css';
 import DefaultLayout from '@/app/components/DefaultLayout';
 import Link from 'next/link';
 import BookmarkButton from '@/app/components/BookmarkButton';
+import AiRecommendModal from './components/AiRecommendModal';
+import { useState } from 'react';
 
 export default function Main() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <DefaultLayout>
       <main className={styles[`main-wrapper`]}>
@@ -22,7 +28,7 @@ export default function Main() {
               </button>
             </div>
           </form>
-          <button type="button" className={styles[`ai-recommend`]}>
+          <button type="button" className={styles[`ai-recommend`]} onClick={() => setIsModalOpen(true)}>
             <span>AI</span>
             <span>추천</span>
           </button>
@@ -130,6 +136,7 @@ export default function Main() {
             </div>
           </div>
         </section>
+        <AiRecommendModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </main>
     </DefaultLayout>
   );

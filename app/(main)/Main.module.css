@@ -2,7 +2,7 @@
   width: 100%;
   height: auto;
   aspect-ratio: 500 / 230;
-  background-image: url('/image/banner-mobile.png');
+  background-image: url('/images/banner-mobile.png');
   background-size: cover;
   background-position: center;
 }
@@ -105,7 +105,7 @@
   .map-image {
     height: auto;
     aspect-ratio: 500 / 270;
-    background-image: url('/image/map-mobile.png');
+    background-image: url('/images/map-mobile.png');
     background-size: cover;
     background-position: center;
   }
@@ -164,7 +164,7 @@
   .banner {
     height: auto;
     aspect-ratio: 1920 / 400;
-    background-image: url('/image/banner-desktop.png');
+    background-image: url('/images/banner-desktop.png');
   }
 
   .search-ai-wrapper {
