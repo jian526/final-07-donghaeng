@@ -242,7 +242,7 @@ export default function Signup() {
           'Client-Id': process.env.NEXT_PUBLIC_CLIENT_ID!,
         },
         body: JSON.stringify({
-          type: 'user',
+          type: 'seller',
           email: formData.email,
           password: formData.password,
           name: formData.name,
