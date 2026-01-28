@@ -1,8 +1,6 @@
 'use client';
 
 import style from './MeetingList.module.css';
-import Header from '@/app/components/Header';
-import Footer from '@/app/components/Footer';
 import Link from 'next/link';
 import { useState } from 'react';
 import DefaultLayout from '@/app/components/DefaultLayout';
@@ -14,7 +12,7 @@ import BookmarkButton from '@/app/components/BookmarkButton';
 import Filter from '@/app/components/Filter';
 
 export default function Meetinglist() {
-  const categories = ['전체', '운동', '사교', '인문학/책/글', '아웃도어/여행', '음악/악기', '업종/직무', '문화/공연/축제', '외국/언어', '게임/오락', '공예/만들기', '댄스/무용', '봉사활동', '사진/영상', '자기계발', '스포츠 관람', '반려동물', '요리/제조', '자동차/바이크'];
+  const categories = ['전체', '운동', '사교', '인문학 / 책 / 글', '아웃도어 / 여행', '음악 / 악기', '업종 / 직무', '문화 / 공연 / 축제', '외국 / 언어', '게임 / 오락', '공예 / 만들기', '댄스 / 무용', '봉사활동', '사진 / 영상', '자기계발', '스포츠 관람', '반려동물', '요리 / 제조', '자동차 / 바이크'];
 
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [searchTerm, setSearchTerm] = useState('');
@@ -35,45 +33,12 @@ export default function Meetinglist() {
       <DefaultLayout>
         <main className={style.mainLayout}>
           {/* 데스크톱: 사이드바 카테고리 (왼쪽) */}
-          <aside className={style.sidebar}>
-            <div className={style.categoryListDesktop}>
-              <ul className={style.categoryList}>
-                {categories.map((category, index) => (
-                  <li key={index} className={`${style.categoryItem} ${selectedCategory === category ? style.active : ''}`} onClick={() => setSelectedCategory(category)}>
-                    {category}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </aside>
-          {/* 모바일: 가로 Swiper 슬라이드 */}
-          <div className={style.categoryListMobile}>
-            <Swiper
-              className={style.categorySwiper}
-              modules={[FreeMode]}
-              freeMode={{
-                enabled: true,
-              }}
-              spaceBetween={10}
-              slidesPerView="auto"
-              grabCursor
-            >
-              {categories.map((category) => (
-                <SwiperSlide key={category} className={style.categorySlide}>
-                  <button type="button" className={`${style.categoryChip} ${selectedCategory === category ? style.categoryChipActive : ''}`} onClick={() => setSelectedCategory(category)}>
-                    {category}
-                  </button>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-          <section className={style.mainContent}>
+          <div className={style.topHeader}>
             <div className={style.breadcrumb}>
               <span>홈</span>
               <span className={style.breadcrumbSeparator}>&gt;</span>
               <span className={style.listTitle}>모임 리스트</span>
             </div>
-
             <div className={style.headerSection}>
               <div className={style.titleSection}>
                 <h1 className={style.pageTitle}>{searchTerm || '모임 리스트'}</h1>
@@ -83,41 +48,76 @@ export default function Meetinglist() {
                 <span className={style.mobileText}>모임 등록</span>
               </Link>
             </div>
-
-            <div className={style.meetingBorder}>
-              <div className={style.filterBar}>
-                <Filter />
+          </div>
+          <div className={style.row}>
+            <aside className={style.sidebar}>
+              <div className={style.categoryListDesktop}>
+                <ul className={style.categoryList}>
+                  {categories.map((category, index) => (
+                    <li key={index} className={`${style.categoryItem} ${selectedCategory === category ? style.active : ''}`} onClick={() => setSelectedCategory(category)}>
+                      {category}
+                    </li>
+                  ))}
+                </ul>
               </div>
-
-              <ul className={style.meetingGrid}>
-                {meetings.map((meeting) => (
-                  <li key={meeting.id} className={style.card}>
-                    <Link href={`/meetings/${meeting.id}`}>
-                      <figure className={style.meetingCard}>
-                        <div className={style.cardImage}></div>
-                        <figcaption className={style.cardContent}>
-                          <div className={style.cardHeader}>
-                            <h3 className={style.cardTitle}>{meeting.title}</h3>
-                            <div className={style.bookmarkIcon}>
-                              <BookmarkButton />
-                            </div>
-                          </div>
-                          <div className={style.cardMetadata}>
-                            <p className={style.metadataLine}>
-                              {meeting.location}. {meeting.date}
-                            </p>
-                            <p className={style.metadataLine}>
-                              {meeting.gender}. {meeting.age}
-                            </p>
-                          </div>
-                        </figcaption>
-                      </figure>
-                    </Link>
-                  </li>
+            </aside>
+            {/* 모바일: 가로 Swiper 슬라이드 */}
+            <div className={style.categoryListMobile}>
+              <Swiper
+                className={style.categorySwiper}
+                modules={[FreeMode]}
+                freeMode={{
+                  enabled: true,
+                }}
+                spaceBetween={10}
+                slidesPerView="auto"
+                grabCursor
+              >
+                {categories.map((category) => (
+                  <SwiperSlide key={category} className={style.categorySlide}>
+                    <button type="button" className={`${style.categoryChip} ${selectedCategory === category ? style.categoryChipActive : ''}`} onClick={() => setSelectedCategory(category)}>
+                      {category}
+                    </button>
+                  </SwiperSlide>
                 ))}
-              </ul>
+              </Swiper>
             </div>
-          </section>
+            <section className={style.mainContent}>
+              <div className={style.meetingBorder}>
+                <div className={style.filterBar}>
+                  <Filter />
+                </div>
+
+                <ul className={style.meetingGrid}>
+                  {meetings.map((meeting) => (
+                    <li key={meeting.id} className={style.card}>
+                      <Link href={`/meetings/${meeting.id}`}>
+                        <figure className={style.meetingCard}>
+                          <div className={style.cardImage}></div>
+                          <figcaption className={style.cardContent}>
+                            <div className={style.cardHeader}>
+                              <h3 className={style.cardTitle}>{meeting.title}</h3>
+                              <div className={style.bookmarkIcon}>
+                                <BookmarkButton />
+                              </div>
+                            </div>
+                            <div className={style.cardMetadata}>
+                              <p className={style.metadataLine}>
+                                {meeting.location}. {meeting.date}
+                              </p>
+                              <p className={style.metadataLine}>
+                                {meeting.gender}. {meeting.age}
+                              </p>
+                            </div>
+                          </figcaption>
+                        </figure>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          </div>
         </main>
       </DefaultLayout>
     </>
