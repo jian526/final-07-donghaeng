@@ -1,3 +1,16 @@
+import { Meetings } from '@/types/meetings';
+
+// 게시물 목록 조회 결과 타입
+export interface MeetingsListRes {
+  ok: 1;
+  item: Meetings[];
+}
+
+// 게시물 상세 조회 결과 타입
+export interface MeetingsInfoRes {
+  ok: 1;
+  item: Meetings;
+}
 import { User } from '@/types/user';
 
 // 회원 정보 타입
