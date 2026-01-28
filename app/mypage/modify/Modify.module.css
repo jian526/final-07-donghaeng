@@ -1,3 +1,4 @@
+/* 수정 페이지 전체 div */
 .modify-div {
   width: 100%;
   max-width: 500px;
@@ -14,23 +15,27 @@
   margin-bottom: 25px;
 }
 
+/* 프로필, 버튼을 묶는 div */
 .profile-top {
   display: flex;
   margin-bottom: 25px;
   position: relative;
 }
 
+/* 프로필 이미지 */
 .profile-img {
   width: 165px;
   height: 165px;
 }
 
+/* 프로필 이미지와 카메라 버튼 묶는 div */
 .img-wrapper {
   width: 165px;
   height: 165px;
   position: relative;
 }
 
+/* 카메라 버튼 */
 .btn-camera {
   width: 50px;
   height: 50px;
@@ -49,6 +54,7 @@
   }
 }
 
+/* 버튼 */
 .btn-div {
   font-size: 16px;
   font-family: var(--main-font);
@@ -74,6 +80,7 @@
   background-color: var(--bg-lavender);
 }
 
+/* 닉네임 */
 .nickname-div {
   display: flex;
   align-items: center;
@@ -86,19 +93,21 @@
   }
 }
 
+/* 소개 */
 .introduce-div {
   display: flex;
   align-items: center;
   margin-block: 30px;
   textarea {
     flex: 1;
-    padding-block: 10px;
+    padding-block: 20px;
     max-width: 300px;
     min-width: 150px;
     height: 100px;
   }
 }
 
+/* 공통 부분 */
 .nickname-div,
 .introduce-div,
 .address-div,
@@ -123,6 +132,7 @@
   }
 }
 
+/* 시, 구, 나이, 성별 */
 .address-div,
 .etc-div {
   display: flex;
@@ -159,6 +169,7 @@
   pointer-events: none;
 }
 
+/* 360px 이하일때 반응형 */
 @media (max-width: 360px) {
   .btn-div {
     flex-direction: column-reverse;
@@ -167,10 +178,10 @@
   }
 }
 
+/* 1024px 이상일때 반응형  */
 @media (min-width: 1024px) {
   .modify-div {
     max-width: 870px;
-    padding-inline: 110px;
     padding-block: 50px;
   }
 
