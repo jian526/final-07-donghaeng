@@ -34,7 +34,8 @@ export default function Detail() {
       console.log('요청 시작, _id:', _id);
 
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/seller/products/${_id}`, {
+        // ✅ /seller/products 대신 /products 사용
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${_id}`, {
           headers: {
             'client-id': CLIENT_ID,
             Authorization: `Bearer ${user.token.accessToken}`,
@@ -46,9 +47,13 @@ export default function Detail() {
         if (response.ok) {
           const data = await response.json();
           console.log('받아온 데이터:', data);
-          console.log('현재 유저 ID:', user._id);
-          console.log('호스트 ID:', data.item.seller_id);
+          console.log('현재 유저 ID:', user._id, '(타입:', typeof user._id, ')');
+          console.log('호스트 ID:', data.item.seller_id, '(타입:', typeof data.item.seller_id, ')');
           setSelectedMeeting(data.item);
+        } else if (response.status === 404) {
+          console.error('모임을 찾을 수 없습니다. ID:', _id);
+          alert('존재하지 않는 모임입니다.');
+          router.push('/meetings');
         } else {
           const errorData = await response.json();
           console.error('에러 응답:', errorData);

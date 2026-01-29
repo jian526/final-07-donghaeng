@@ -307,8 +307,8 @@
   width: 100%;
 }
 
-/* 반응형 - 1200px 이하 */
-@media (max-width: 1200px) {
+/* 반응형 - 1024px 이하 */
+@media (max-width: 1024px) {
   .main {
     padding: 40px 80px;
   }
