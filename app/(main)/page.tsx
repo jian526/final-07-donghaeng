@@ -70,7 +70,7 @@ export default function Main() {
               <div key={meeting._id} className={styles[`meetings-wrapper`]}>
                 <Link href={`/meetings/${meeting._id}`} className={styles[`meetings-image-box`]}>
                   <Image src={meeting.mainImages[0].path} alt={meeting.name} fill />
-                  <BookmarkButton />
+                  <BookmarkButton desktopWidth={23} desktopHeight={29} />
                 </Link>
                 <Link href={`/meetings/${meeting._id}`} className={styles[`meetings-title`]}>
                   {meeting.name}
@@ -91,7 +91,7 @@ export default function Main() {
               <div key={meeting._id} className={styles[`meetings-wrapper`]}>
                 <Link href={`/meetings/${meeting._id}`} className={styles[`meetings-image-box`]}>
                   <Image src={meeting.mainImages[0].path} alt={meeting.name} fill />
-                  <BookmarkButton />
+                  <BookmarkButton desktopWidth={23} desktopHeight={29} />
                 </Link>
                 <Link href={`/meetings/${meeting._id}`} className={styles[`meetings-title`]}>
                   {meeting.name}

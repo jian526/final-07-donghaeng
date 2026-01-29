@@ -1,3 +1,4 @@
+import { Bookmarks } from '@/types/bookmarks';
 import { Meetings } from '@/types/meetings';
 
 // 게시물 목록 조회 결과 타입
@@ -17,6 +18,10 @@ import { User } from '@/types/user';
 export interface UserInfoRes {
   ok: 1;
   item: User;
+}
+export interface BookmarksInfoRes {
+  ok: 1;
+  item: Bookmarks;
 }
 
 // 서버 검증 에러 타입
