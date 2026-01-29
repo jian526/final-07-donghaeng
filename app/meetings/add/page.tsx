@@ -76,21 +76,18 @@ export default function Add() {
                 <input type="file" id="meetings-img" name="meetings-img" accept="image/*" hidden />
               </fieldset>
 
-              <fieldset className={style['tag-fieldset']}>
-                <label htmlFor="tag">모임 태그</label>
-                <br />
-                <input className={style['tag-input']} type="text" name="tag" id="tag" />
-              </fieldset>
-
               <div className={style['field-parent-wrap']}>
+                <fieldset className={style['date-fieldset']}>
+                  <label htmlFor="date">날짜</label>
+
+                  <input type="date" className={style['date-input']} />
+                </fieldset>
+
                 <fieldset className={style['region-fieldset']}>
                   <label htmlFor="region" className={style['region-label']}>
                     지역
                   </label>
-                  <button type="button" className={`${style['select-btn']} ${style['btn']}`}>
-                    {' '}
-                    {'\u002B'} 추가
-                  </button>
+                  <input className={`${style['region-input']} `} type="text" name="region" id="region" placeholder="지역"></input>
                 </fieldset>
 
                 <fieldset className={style['gender-fieldset']}>
