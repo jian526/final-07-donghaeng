@@ -6,7 +6,7 @@ import { useRouter, useParams } from 'next/navigation';
 import Image from 'next/image';
 import BookmarkButton from '@/app/components/BookmarkButton';
 import { useEffect } from 'react';
-import { API_URL, CLIENT_ID } from '@/lib/user';
+import { CLIENT_ID } from '@/lib/user';
 import useUserStore from '@/zustand/userStore';
 import useMeetingStore from '@/zustand/meetingStore';
 
@@ -18,15 +18,12 @@ export default function Detail() {
   const { user, isLogin, isHydrated } = useUserStore();
   const { selectedMeeting: meeting, setSelectedMeeting, loading, setLoading } = useMeetingStore();
 
-  // ✅ 로그인한 사용자가 호스트인지 확인
-  const isHost = isLogin && user && meeting && user._id === meeting.seller_id;
+  const isHost = !!(isLogin && user?._id && meeting?.seller_id && user._id === meeting.seller_id);
 
   useEffect(() => {
-    // hydration이 완료되기 전에는 아무것도 하지 않음
     if (!isHydrated) return;
 
     const fetchMeeting = async () => {
-      // ✅ 로그인 체크 추가
       if (!isLogin || !user?.token?.accessToken) {
         alert('로그인이 필요합니다.');
         router.push('/login');
@@ -37,10 +34,11 @@ export default function Detail() {
       console.log('요청 시작, _id:', _id);
 
       try {
-        const response = await fetch(`${API_URL}/seller/products/${_id}`, {
+        // ✅ /seller/products 대신 /products 사용
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/${_id}`, {
           headers: {
             'client-id': CLIENT_ID,
-            Authorization: `Bearer ${user.token.accessToken}`, // ✅ 항상 포함
+            Authorization: `Bearer ${user.token.accessToken}`,
           },
         });
 
@@ -49,7 +47,13 @@ export default function Detail() {
         if (response.ok) {
           const data = await response.json();
           console.log('받아온 데이터:', data);
+          console.log('현재 유저 ID:', user._id, '(타입:', typeof user._id, ')');
+          console.log('호스트 ID:', data.item.seller_id, '(타입:', typeof data.item.seller_id, ')');
           setSelectedMeeting(data.item);
+        } else if (response.status === 404) {
+          console.error('모임을 찾을 수 없습니다. ID:', _id);
+          alert('존재하지 않는 모임입니다.');
+          router.push('/meetings');
         } else {
           const errorData = await response.json();
           console.error('에러 응답:', errorData);
@@ -69,7 +73,6 @@ export default function Detail() {
   }, [_id, isLogin, user, isHydrated, setSelectedMeeting, setLoading, router]);
 
   const handleJoin = () => {
-    // 신청하기는 로그인 필요
     if (!isLogin) {
       alert('로그인이 필요합니다.');
       router.push('/login');
@@ -81,7 +84,7 @@ export default function Detail() {
 
   const handleAdmit = () => {
     console.log('관리하기 클릭');
-    router.push(`/meetings/${_id}/manage`);
+    router.push(`/manage/${_id}`);
   };
 
   const handleEdit = () => {
@@ -90,7 +93,6 @@ export default function Detail() {
   };
 
   const handleDelete = async () => {
-    // 삭제는 로그인 필수
     if (!isLogin || !user) {
       alert('로그인이 필요합니다.');
       router.push('/login');
@@ -101,7 +103,7 @@ export default function Detail() {
       console.log('삭제하기 클릭');
 
       try {
-        const response = await fetch(`${API_URL}/seller/products/${_id}`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/seller/products/${_id}`, {
           method: 'DELETE',
           headers: {
             'client-id': CLIENT_ID,
@@ -111,8 +113,8 @@ export default function Detail() {
 
         if (response.ok) {
           alert('삭제되었습니다');
-          setSelectedMeeting(null); // ✅ 스토어 초기화
-          router.push('/');
+          setSelectedMeeting(null);
+          router.push('/meetings');
         } else {
           const errorData = await response.json();
           console.error('삭제 실패:', errorData);
@@ -125,8 +127,17 @@ export default function Detail() {
     }
   };
 
-  // hydration 전이거나 로딩 중일 때
-  if (!isHydrated || loading) {
+  if (!isHydrated) {
+    return (
+      <DefaultLayout>
+        <main className={style.main}>
+          <p>초기화 중...</p>
+        </main>
+      </DefaultLayout>
+    );
+  }
+
+  if (loading) {
     return (
       <DefaultLayout>
         <main className={style.main}>
@@ -146,13 +157,16 @@ export default function Detail() {
     );
   }
 
+  console.log('isHost 상태:', isHost);
+  console.log('표시할 버튼:', isHost ? '호스트 버튼' : '신청하기 버튼');
+
   return (
     <DefaultLayout>
       <main className={style.main}>
         <div className={style.contentCard}>
           <div className={style.cardHeader}>
             <figure className={style.characterWrapper}>
-              {meeting.mainImages && meeting.mainImages[0] && <Image src={`${API_URL}${meeting.mainImages[0].path}`} alt={meeting.mainImages[0].name} fill className={style.characterImage} />}
+              {meeting.mainImages && meeting.mainImages[0] && <Image src={meeting.mainImages[0].path} alt={meeting.mainImages[0].name} fill className={style.characterImage} unoptimized />}
               <figcaption className={'sr-only'}>캐릭터 이미지</figcaption>
             </figure>
             <div className={style.titleSection}>
@@ -163,7 +177,6 @@ export default function Detail() {
           </div>
           <div className={style.contentBody}>
             <p>{meeting.content}</p>
-            {/* ✅ 추가 정보 표시 */}
             <div className={style.meetingInfo}>
               <p>카테고리: {meeting.extra.category}</p>
               <p>지역: {meeting.extra.region}</p>
@@ -203,17 +216,10 @@ export default function Detail() {
           </div>
         </div>
 
-        {/* ✅ 버튼 영역 - 동적으로 표시 */}
+        {/* ✅ 호스트 여부에 따라 버튼 표시 */}
         <div className={style.buttonContainer}>
-          {!isHost ? (
-            // 일반 사용자 모드
-            <div className={style.userMode}>
-              <button className={style.applyBtn} onClick={handleJoin}>
-                신청하기
-              </button>
-            </div>
-          ) : (
-            // 호스트 모드 (본인이 등록한 모임)
+          {isHost ? (
+            // ✅ 호스트일 때: 관리하기, 수정하기, 삭제하기
             <div className={style.hostMode}>
               <button className={style.adminBtn} onClick={handleAdmit}>
                 관리하기
@@ -223,6 +229,13 @@ export default function Detail() {
               </button>
               <button className={style.deleteBtn} onClick={handleDelete}>
                 삭제하기
+              </button>
+            </div>
+          ) : (
+            // ✅ 일반 사용자일 때: 신청하기
+            <div className={style.userMode}>
+              <button className={style.applyBtn} onClick={handleJoin}>
+                신청하기
               </button>
             </div>
           )}
