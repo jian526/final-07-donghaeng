@@ -3,12 +3,13 @@
 import Link from 'next/link';
 import style from './create.module.css';
 import DefaultLayout from '@/app/components/DefaultLayout';
-import { useActionState, useEffect, useRef, useState, useTransition } from 'react';
+import { useActionState, useEffect, useState, useTransition } from 'react';
 import useUserStore from '@/zustand/userStore';
-import { uploadFile } from '@/lib/file';
+
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ActionState, createMeeting } from '@/actions/meetings';
+import { uploadFile } from '@/actions/file';
 
 export default function Add() {
   const router = useRouter();
@@ -25,6 +26,7 @@ export default function Add() {
   const [imagePreview, setImagePreview] = useState<string>('');
   const [uploadedImage, setUploadedImage] = useState<{ path: string; name: string } | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [imgUrl, setImgUrl] = useState<string>('');
 
   // 인원 증가/감소
   const handleDecrease = () => {
@@ -77,6 +79,7 @@ export default function Add() {
           path: result.item[0].path,
           name: result.item[0].name,
         });
+        setImgUrl(result.item[0].path);
       } else {
         alert('이미지 업로드에 실패했습니다.');
         setImagePreview('');
@@ -134,6 +137,7 @@ export default function Add() {
     submitData.append('shippingFees', '0');
 
     // extra 추가
+    submitData.append('mainImages', JSON.stringify([uploadedImage]));
     submitData.append('extra', JSON.stringify(extra));
 
     console.log('=== 최종 submitData ===');
