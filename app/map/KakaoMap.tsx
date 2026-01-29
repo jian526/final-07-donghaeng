@@ -1,7 +1,7 @@
 'use client'; // 클라이언트 선언
 
 // 사용할 라이브러리 import
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Script from 'next/script';
 import { Map, MapMarker, CustomOverlayMap, ZoomControl } from 'react-kakao-maps-sdk';
@@ -9,7 +9,6 @@ import styles from './Map.module.css';
 import Image from 'next/image';
 import tag from '@/public/icon/tag.svg';
 import calender from '@/public/icon/calendar.svg';
-import dobai from './images/doobai.png';
 import { Meetings } from '@/types/meetings';
 
 // 카카오맵 타입 선언
