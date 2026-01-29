@@ -1,36 +1,48 @@
 'use client';
 
-import { useState } from 'react';
 import style from './Detail.module.css';
 import DefaultLayout from '@/app/components/DefaultLayout';
+import { useRouter, useParams } from 'next/navigation';
 import Image from 'next/image';
 import BookmarkButton from '@/app/components/BookmarkButton';
 
 export default function Detail({ isHost = true }) {
-  const [isBookmarked, setIsBookmarked] = useState(false);
-
-  const handleBookmark = () => {
-    setIsBookmarked(!isBookmarked);
-  };
+  const router = useRouter();
+  const params = useParams();
+  const id = params.id;
 
   const handleJoin = () => {
     console.log('신청하기 클릭');
-    // 신청 로직
+    router.push(`/meetings/${id}/apply`);
   };
 
   const handleAdmit = () => {
     console.log('관리하기 클릭');
-    // 관리 페이지로 이동
+    router.push('/manage');
   };
   const handleEdit = () => {
     console.log('수정하기 클릭');
-    // 수정 페이지로 이동
+    router.push(`/meetings/${id}/edit`);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (confirm('정말 삭제하시겠습니까?')) {
       console.log('삭제하기 클릭');
-      // 삭제 로직
+      try {
+        const response = await fetch(`/posts/${id}`, {
+          method: 'DELETE',
+        });
+
+        if (response.ok) {
+          alert('삭제되었습니다');
+          router.push('/');
+        } else {
+          alert('삭제에 실패했습니다.');
+        }
+      } catch (error) {
+        console.error('삭제 중 오류 발생', error);
+        alert('삭제 중 오류가 발생했습니다.');
+      }
     }
   };
 
