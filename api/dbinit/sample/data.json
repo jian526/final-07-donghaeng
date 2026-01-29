@@ -85,7 +85,7 @@
       "name": "제이지",
       "phone": "01044445555",
       "address": "서울시 강남구 논현동 222",
-      "type": "user",
+      "type": "seller",
       "loginType": "email",
       "image": "uploadFiles/user-jayg.webp",
       "extra": {
@@ -598,13 +598,9 @@
         }
       ],
       "extra": {
-        "category": "운동",
-        "gender": "남녀무관",
-        "age": 20,
-        "date": "2026-03-04",
-        "region": "서울특별시 관악구 신림동",
-        "survey1": "줄넘기를 얼마나 오래 할 수 있으신가요?",
-        "survey2": "운동을 통해 감량하고 싶은 목표 체중이 있으신가요?"
+        "depth": 2,
+        "parent": 15,
+        "size": "200mm"
       }
     }
   ],
