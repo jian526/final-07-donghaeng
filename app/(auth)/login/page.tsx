@@ -71,8 +71,7 @@ export default function Login() {
             </fieldset>
 
             <button type="submit" className={styles['btn']} disabled={isPending}>
-              로그인
-              {/* #TODO 디자인을 위한 a태그 - 기능 구현시 a태그 삭제예정! */}
+              {isPending ? '로그인 중...' : '로그인'}
             </button>
             <br />
             <Link href="/signup" className={styles['a']}>

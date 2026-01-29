@@ -16,7 +16,6 @@ interface UserStoreState {
 const UserStore: StateCreator<UserStoreState> = (set) => ({
   isLogin: false,
   user: null,
-  // accessToken: null,
 
   setUser: (user: User) =>
     set({
@@ -26,14 +25,11 @@ const UserStore: StateCreator<UserStoreState> = (set) => ({
   resetUser: () => set({ user: null, isLogin: false }),
 });
 
-// 스토리지를 사용하지 않을 경우
-// const useUserStore = create<UserStoreState>(UserStore);
-
 // 스토리지를 사용할 경우 (sessionStorage에 저장)
 const useUserStore = create<UserStoreState>()(
   persist(UserStore, {
     name: 'user',
-    storage: createJSONStorage(() => localStorage), // 기본은 localStorage
+    storage: createJSONStorage(() => localStorage),
   })
 );
 
