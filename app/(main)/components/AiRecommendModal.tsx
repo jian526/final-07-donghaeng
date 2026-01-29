@@ -7,69 +7,54 @@ import styles from './AiRecommendModal.module.css';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
+import { Meetings } from '@/types/meetings';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 type Step = 'intro' | 'age' | 'gender' | 'preference1' | 'preference2' | 'preference3' | 'result';
 
-type Meeting = {
-  id: number;
-  title: string;
-  category: {
-    location: string;
-    theme: string;
-    age: string;
-    gender: string;
-    people: string;
-  };
-  date: string;
-  joined: boolean;
-};
-
-function MeetingCard({ meeting }: { meeting: Meeting }) {
+function MeetingCard({ meeting }: { meeting: Meetings }) {
   return (
     <article className={styles.card}>
       <div className={styles.cardContent}>
         <figure className={styles.imageWrapper}>
-          <div className={styles.characterImage} role="img" aria-label="모임 대표 이미지"></div>
-          <figcaption className={`sr-only`}>모임 대표 이미지</figcaption>
+          <Image className={styles.characterImage} src={meeting.mainImages[0].path} width={100} height={100} alt="모임 대표 이미지" />
+          <figcaption className="sr-only">모임 대표 이미지</figcaption>
         </figure>
         <div className={styles.infoWrapper}>
-          <h2 className={styles.cardTitle}>{meeting.title}</h2>
+          <h2 className={styles.cardTitle}>{meeting.name}</h2>
           <ul className={styles.infoList}>
             <li className={styles.infoItem}>
               <span className={styles.bullet} aria-hidden="true">
                 <Image src="/icon/tag.svg" width={18} height={18} alt="장소 아이콘" />
               </span>
-              <p>
-                {meeting.category.location}. {meeting.category.theme}
-              </p>
+              <p>{meeting.extra?.region}</p>
             </li>
             <li className={styles.infoItem}>
               <span className={styles.bullet} aria-hidden="true">
                 <Image src="/icon/info.svg" width={18} height={18} alt="정보 아이콘" />
               </span>
               <p>
-                {meeting.category.age}, {meeting.category.gender}
+                {meeting.extra?.age}대, {meeting.extra?.gender}
               </p>
             </li>
             <li className={styles.infoItem}>
               <span className={styles.bullet} aria-hidden="true">
                 <Image src="/icon/people.svg" width={18} height={18} alt="사람들 아이콘" />
               </span>
-              <p>{meeting.category.people}</p>
+              <p>인원 {meeting.quantity}명</p>
             </li>
             <li className={styles.infoItem}>
               <span className={styles.bullet} aria-hidden="true">
                 <Image src="/icon/calendar.svg" width={18} height={18} alt="날짜 아이콘" />
               </span>
-              <p>{meeting.date}</p>
+              <p>{meeting.extra?.date}</p>
             </li>
           </ul>
         </div>
       </div>
-      <Link href={`/meetings/${meeting.id}`} className={styles.arrowIcon}>
+      <Link href={`/meetings/${meeting._id}`} className={styles.arrowIcon}>
         <Image src="/icon/arrow.svg" alt="상세보기" width={19} height={12} />
       </Link>
     </article>
@@ -85,115 +70,8 @@ export default function AiRecommendModal({ open, onClose }: { open: boolean; onC
     preference2: '',
     preference3: '',
   });
-  const [aiResponse, setAiResponse] = useState('');
+  const [recommendedMeetings, setRecommendedMeetings] = useState<Meetings[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-
-  const meetings = [
-    {
-      id: 1,
-      title: '세상에서 제일 비싼 두쫀쿠 만들기',
-      category: {
-        location: '마포구',
-        theme: '보드게임',
-        age: '20~30대',
-        gender: '남녀무관',
-        people: '인원 4~5명',
-      },
-      date: '26.1.27(화) 오후 3:00',
-      joined: false,
-    },
-    {
-      id: 2,
-      title: '한강에서 자전거 타기',
-      category: {
-        location: '강남구',
-        theme: '운동',
-        age: '20~30대',
-        gender: '남녀무관',
-        people: '인원 3~4명',
-      },
-      date: '26.1.28(수) 오후 2:00',
-      joined: true,
-    },
-    {
-      id: 3,
-      title: '북촌 한옥마을 산책',
-      category: {
-        location: '종로구',
-        theme: '문화탐방',
-        age: '전연령',
-        gender: '여성만',
-        people: '인원 2~3명',
-      },
-      date: '26.1.29(목) 오후 4:00',
-      joined: false,
-    },
-    {
-      id: 4,
-      title: '북촌 한옥마을 산책',
-      category: {
-        location: '종로구',
-        theme: '문화탐방',
-        age: '전연령',
-        gender: '여성만',
-        people: '인원 2~3명',
-      },
-      date: '26.1.29(목) 오후 4:00',
-      joined: false,
-    },
-    {
-      id: 5,
-      title: '북촌 한옥마을 산책',
-      category: {
-        location: '종로구',
-        theme: '문화탐방',
-        age: '전연령',
-        gender: '여성만',
-        people: '인원 2~3명',
-      },
-      date: '26.1.29(목) 오후 4:00',
-      joined: false,
-    },
-    {
-      id: 6,
-      title: '북촌 한옥마을 산책',
-      category: {
-        location: '종로구',
-        theme: '문화탐방',
-        age: '전연령',
-        gender: '여성만',
-        people: '인원 2~3명',
-      },
-      date: '26.1.29(목) 오후 4:00',
-      joined: false,
-    },
-    {
-      id: 7,
-      title: '북촌 한옥마을 산책',
-      category: {
-        location: '종로구',
-        theme: '문화탐방',
-        age: '전연령',
-        gender: '여성만',
-        people: '인원 2~3명',
-      },
-      date: '26.1.29(목) 오후 4:00',
-      joined: false,
-    },
-    {
-      id: 8,
-      title: '북촌 한옥마을 산책',
-      category: {
-        location: '종로구',
-        theme: '문화탐방',
-        age: '전연령',
-        gender: '여성만',
-        people: '인원 2~3명',
-      },
-      date: '26.1.29(목) 오후 4:00',
-      joined: false,
-    },
-  ];
 
   // 이전 단계로 이동
   const goBack = () => {
@@ -208,13 +86,13 @@ export default function AiRecommendModal({ open, onClose }: { open: boolean; onC
   const handleClose = () => {
     setStep('intro');
     setAnswers({ age: '', gender: '', preference1: '', preference2: '', preference3: '' });
-    setAiResponse('');
+    setRecommendedMeetings([]);
     onClose();
   };
   const handleRetry = () => {
     setStep('intro');
     setAnswers({ age: '', gender: '', preference1: '', preference2: '', preference3: '' });
-    setAiResponse('');
+    setRecommendedMeetings([]);
   };
 
   // AI 추천 API 호출
@@ -227,10 +105,10 @@ export default function AiRecommendModal({ open, onClose }: { open: boolean; onC
         body: JSON.stringify({ answers: finalAnswers }),
       });
       const data = await res.json();
-      setAiResponse(data.message);
+      setRecommendedMeetings(data.meetings || []);
     } catch (error) {
       console.error('AI 추천 요청 실패:', error);
-      setAiResponse('추천을 가져오는데 실패했습니다.');
+      setRecommendedMeetings([]);
     } finally {
       setIsLoading(false);
     }
@@ -374,42 +252,33 @@ export default function AiRecommendModal({ open, onClose }: { open: boolean; onC
                 ) : (
                   <>
                     <p>모임을 추천 해드릴게요!</p>
-                    {aiResponse && <p className={styles[`ai-response`]}>{aiResponse}</p>}
+                    {recommendedMeetings.length === 0 && <p>추천할 모임이 없습니다.</p>}
                   </>
                 )}
-                <div className={styles[`meetings-card`]}>
-                  <Link href="/meetings/1">
-                    <div className={styles[`meetings-info`]}>
-                      <Image className={styles[`meetings-image`]} src="/images/img.png" width={60} height={60} alt="모임 이미지"></Image>
-                      <div className={styles[`meetings-title`]}>세상에서 제일 비싼 두쫀쿠 만들기</div>
-                    </div>
-                    <Image className={styles[`arrow-image`]} src="/icon/arrow.svg" width={19} height={8} alt="화살표"></Image>
-                  </Link>
-                </div>
-                <div className={styles[`meetings-card`]}>
-                  <Link href="/meetings/1">
-                    <div className={styles[`meetings-info`]}>
-                      <Image className={styles[`meetings-image`]} src="/images/img.png" width={60} height={60} alt="모임 이미지"></Image>
-                      <div className={styles[`meetings-title`]}>세상에서 제일 비싼 두쫀쿠 만들기</div>
-                    </div>
-                    <Image className={styles[`arrow-image`]} src="/icon/arrow.svg" width={19} height={8} alt="화살표"></Image>
-                  </Link>
-                </div>
-                <div className={styles[`meetings-card`]}>
-                  <Link href="/meetings/1">
-                    <div className={styles[`meetings-info`]}>
-                      <Image className={styles[`meetings-image`]} src="/images/img.png" width={60} height={60} alt="모임 이미지"></Image>
-                      <div className={styles[`meetings-title`]}>세상에서 제일 비싼 두쫀쿠 만들기</div>
-                    </div>
-                    <Image className={styles[`arrow-image`]} src="/icon/arrow.svg" width={19} height={8} alt="화살표"></Image>
-                  </Link>
-                </div>
+                {recommendedMeetings.map((meeting) => (
+                  <div key={meeting._id} className={styles[`meetings-card`]}>
+                    <Link href={`/meetings/${meeting._id}`}>
+                      <div className={styles[`meetings-info`]}>
+                        <Image className={styles[`meetings-image`]} src={meeting.mainImages[0].path} width={60} height={60} alt="모임 이미지" />
+                        <div className={styles[`meetings-title`]}>{meeting.name}</div>
+                      </div>
+                      <Image className={styles[`arrow-image`]} src="/icon/arrow.svg" width={19} height={8} alt="화살표" />
+                    </Link>
+                  </div>
+                ))}
               </div>
               <div className={styles[`desktop-recommend-wrapper`]}>
-                <p>모임을 추천 해드릴게요!</p>
+                {isLoading ? (
+                  <p>AI가 모임을 추천하고 있어요...</p>
+                ) : (
+                  <>
+                    <p>모임을 추천 해드릴게요!</p>
+                    {recommendedMeetings.length === 0 && <p>추천할 모임이 없습니다.</p>}
+                  </>
+                )}
                 <Swiper modules={[Pagination]} spaceBetween={10} slidesPerView={'auto'} centeredSlides={true} pagination={{ clickable: true }} className={styles.swiper}>
-                  {meetings.map((meeting) => (
-                    <SwiperSlide key={meeting.id}>
+                  {recommendedMeetings.map((meeting) => (
+                    <SwiperSlide key={meeting._id}>
                       <MeetingCard meeting={meeting} />
                     </SwiperSlide>
                   ))}
