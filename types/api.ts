@@ -27,6 +27,17 @@ export interface ServerValidationError {
   location: string;
 }
 
+// 북마크 목록 조회 결과 타입
+export interface BookmarksRes {
+  ok: 1;
+  item: {
+    byUser: Meetings[];
+    user: Meetings[];
+    product: Meetings[];
+    post: Meetings[];
+  };
+}
+
 // 에러 타입
 export interface ErrorRes {
   ok: 0;
@@ -34,4 +45,13 @@ export interface ErrorRes {
   errors?: {
     [fieldName: string]: ServerValidationError;
   };
+}
+
+// 파일 업로드 결과 타입
+export interface FileUploadRes {
+  ok: 1;
+  item: {
+    name: string;
+    path: string;
+  }[];
 }
