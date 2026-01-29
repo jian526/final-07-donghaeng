@@ -6,10 +6,24 @@ import DefaultLayout from '@/app/components/DefaultLayout';
 import Link from 'next/link';
 import BookmarkButton from '@/app/components/BookmarkButton';
 import AiRecommendModal from './components/AiRecommendModal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getMeetings } from '@/lib/meetings';
+import { Meetings } from '@/types/meetings';
 
 export default function Main() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [meetings, setMeetings] = useState<Meetings[]>([]);
+
+  useEffect(() => {
+    const fetchMeetings = async () => {
+      const res = await getMeetings();
+      if (res.ok === 1) {
+        setMeetings(res.item);
+      }
+    };
+    fetchMeetings();
+  }, []);
+  console.log(meetings);
 
   return (
     <DefaultLayout>
@@ -52,42 +66,17 @@ export default function Main() {
             </Link>
           </div>
           <div className={styles[`section-list`]}>
-            <div className={styles[`meetings-wrapper`]}>
-              <Link href="/meetings/1" className={styles[`meetings-image-box`]}>
-                <div className={styles[`temp-image`]}></div>
-                <BookmarkButton />
-              </Link>
-              <Link href="/meetings/1" className={styles[`meetings-title`]}>
-                모임 이름 어쩌구
-              </Link>
-            </div>
-            <div className={styles[`meetings-wrapper`]}>
-              <Link href="/meetings/1" className={styles[`meetings-image-box`]}>
-                <div className={styles[`temp-image`]}></div>
-                <BookmarkButton />
-              </Link>
-              <Link href="/meetings/1" className={styles[`meetings-title`]}>
-                모임 이름 어쩌구
-              </Link>
-            </div>
-            <div className={styles[`meetings-wrapper`]}>
-              <Link href="/meetings/1" className={styles[`meetings-image-box`]}>
-                <div className={styles[`temp-image`]}></div>
-                <BookmarkButton />
-              </Link>
-              <Link href="/meetings/1" className={styles[`meetings-title`]}>
-                모임 이름 어쩌구
-              </Link>
-            </div>
-            <div className={styles[`meetings-wrapper`]}>
-              <Link href="/meetings/1" className={styles[`meetings-image-box`]}>
-                <div className={styles[`temp-image`]}></div>
-                <BookmarkButton />
-              </Link>
-              <Link href="/meetings/1" className={styles[`meetings-title`]}>
-                모임 이름 어쩌구
-              </Link>
-            </div>
+            {meetings.slice(6, 10).map((meeting) => (
+              <div key={meeting._id} className={styles[`meetings-wrapper`]}>
+                <Link href={`/meetings/${meeting._id}`} className={styles[`meetings-image-box`]}>
+                  <Image src={meeting.mainImages[0].path} alt={meeting.name} fill />
+                  <BookmarkButton />
+                </Link>
+                <Link href={`/meetings/${meeting._id}`} className={styles[`meetings-title`]}>
+                  {meeting.name}
+                </Link>
+              </div>
+            ))}
           </div>
         </section>
         <section className={styles[`section-meetings-wrapper`]}>
@@ -98,42 +87,17 @@ export default function Main() {
             </Link>
           </div>
           <div className={styles[`section-list`]}>
-            <div className={styles[`meetings-wrapper`]}>
-              <Link href="/meetings/1" className={styles[`meetings-image-box`]}>
-                <div className={styles[`temp-image`]}></div>
-                <BookmarkButton />
-              </Link>
-              <Link href="/meetings/1" className={styles[`meetings-title`]}>
-                모임 이름 어쩌구
-              </Link>
-            </div>
-            <div className={styles[`meetings-wrapper`]}>
-              <Link href="/meetings/1" className={styles[`meetings-image-box`]}>
-                <div className={styles[`temp-image`]}></div>
-                <BookmarkButton />
-              </Link>
-              <Link href="/meetings/1" className={styles[`meetings-title`]}>
-                모임 이름 어쩌구
-              </Link>
-            </div>
-            <div className={styles[`meetings-wrapper`]}>
-              <Link href="/meetings/1" className={styles[`meetings-image-box`]}>
-                <div className={styles[`temp-image`]}></div>
-                <BookmarkButton />
-              </Link>
-              <Link href="/meetings/1" className={styles[`meetings-title`]}>
-                모임 이름 어쩌구
-              </Link>
-            </div>
-            <div className={styles[`meetings-wrapper`]}>
-              <Link href="/meetings/1" className={styles[`meetings-image-box`]}>
-                <div className={styles[`temp-image`]}></div>
-                <BookmarkButton />
-              </Link>
-              <Link href="/meetings/1" className={styles[`meetings-title`]}>
-                모임 이름 어쩌구
-              </Link>
-            </div>
+            {meetings.slice(10, 14).map((meeting) => (
+              <div key={meeting._id} className={styles[`meetings-wrapper`]}>
+                <Link href={`/meetings/${meeting._id}`} className={styles[`meetings-image-box`]}>
+                  <Image src={meeting.mainImages[0].path} alt={meeting.name} fill />
+                  <BookmarkButton />
+                </Link>
+                <Link href={`/meetings/${meeting._id}`} className={styles[`meetings-title`]}>
+                  {meeting.name}
+                </Link>
+              </div>
+            ))}
           </div>
         </section>
         <AiRecommendModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />

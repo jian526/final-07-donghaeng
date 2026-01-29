@@ -4,9 +4,13 @@ import Link from 'next/link';
 import styles from './Header.module.css';
 import MobileSidebar from '../components/MobileSidebar';
 import { useState } from 'react';
+import useUserStore from '@/zustand/userStore';
 
 export default function Header() {
-  const isLogin = true;
+  const isLogin = useUserStore((state) => state.isLogin);
+  const resetUser = useUserStore((state) => state.resetUser);
+  console.log('로그인상태', isLogin);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // 햄버거 버튼 클릭 핸들러
@@ -43,7 +47,7 @@ export default function Header() {
           <div className={styles[`user-info-wrapper`]}>
             <ul>
               <li>
-                <button>로그아웃</button>
+                <button onClick={resetUser}>로그아웃</button>
               </li>
               <li>
                 <Link href="/notifications">

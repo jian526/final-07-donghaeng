@@ -1,61 +1,43 @@
 .container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--bg-white);
-}
-
-.footerWrap {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-}
-
-.main {
   padding-bottom: 10rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
+  width: 100%;
 }
 .title {
+  margin: 0 auto;
+  margin-top: 35px;
+  margin-left: 20px;
   font-family: var(--main-font);
   font-size: 24px;
-  margin-left: 700px;
-  margin-top: 35px;
-  margin-bottom: 120px;
-  align-self: flex-start;
 }
-
-.cardContainer {
-  max-width: 1760px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
+.contentWrapper {
+  max-width: 767px;
+  margin: 0 auto;
+  margin-top: 60px; /* title과의 간격 */
 }
 
 /* Swiper 컨테이너 */
 .swiper {
-  width: 125%;
-  overflow: visible !important;
+  width: 100%;
+  padding: 60px 20px 80px 20px !important;
+  overflow: hidden !important;
+  margin: 0 auto;
 }
 
 .swiperSlide {
   display: flex;
+  width: 100%;
   justify-content: center;
   align-items: center;
+  height: auto;
+  padding: 0;
 }
 
 .swiper :global(.swiper-pagination) {
-  margin-bottom: 10px;
+  bottom: 20px !important;
 }
+
 .card {
   position: relative;
-  width: 100%;
   max-width: 767px;
   background-color: var(--bg-sky);
   border: 5px solid var(--border-darksky);
@@ -74,10 +56,18 @@
 .cardContent {
   display: flex;
   align-items: center;
+  gap: 24px;
 }
-.characterImage {
+
+.imageWrapper {
+  flex-shrink: 0;
   width: 240px;
   height: 240px;
+  margin-right: 36px;
+}
+.characterImage {
+  width: 100%;
+  height: 100%;
   background: url('/images/img.png') center/cover;
   border-radius: 25px;
   display: flex;
@@ -85,18 +75,7 @@
   justify-content: center;
   margin-right: 36px;
 }
-/* 스크린 리더 전용 텍스트 */
-.srOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
+
 .infoWrapper {
   flex: 1;
   display: flex;
@@ -142,30 +121,61 @@
   transform: translateX(4px);
 }
 
-/* 모바일 카드 리스트 */
-.mobileCardList {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-  margin-left: 20px;
-  margin-right: 20px;
-}
+@media (max-width: 1024px) {
+  .container {
+    width: 100%;
+    overflow-x: hidden; /* 추가 */
+  }
+  .contentWrapper {
+    width: 767px;
+    height: 350px;
+  }
 
-@media (max-width: 768px) {
-  .main {
+  .cardContent {
     width: 100%;
   }
 
-  .title {
-    margin-left: 20px;
+  .card {
+    max-width: 767px;
   }
 
+  .imageWrapper {
+    width: 150px;
+    height: 150px;
+  }
+
+  .cardTitle {
+    font-size: 17px;
+  }
+
+  .infoItem p {
+    font-size: 14px;
+  }
+}
+@media (max-width: 768px) {
+  .title {
+    margin-left: 8px;
+  }
+
+  /* 모바일 카드 리스트 */
+  .mobileCardList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+
+    min-width: 320px;
+  }
   .card {
-    max-width: 460px;
-    height: 216px;
+    margin-top: 50px;
+    max-width: 100%;
+    height: auto;
     padding: 30px 10px 30px 15px;
     border-radius: 20px;
+  }
+  .cardContent {
+    align-items: flex-start;
+    flex-wrap: wrap;
   }
   .infoWrapper {
     gap: 10px;
@@ -182,16 +192,18 @@
 
   .bookmarkIcon {
     top: 0;
-    left: 490px;
+    right: 20px;
   }
   .imageWrapper {
-    width: 170px;
+    width: 40vw;
+    max-width: 170px;
     margin-right: 20px;
-    height: 162px;
+    height: auto;
   }
   .characterImage {
     width: 100%;
-    height: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
     border-radius: 20px;
   }
 
@@ -199,5 +211,82 @@
     bottom: 5px;
     cursor: pointer;
     transition: transform 0.2s ease;
+  }
+}
+
+/* 반응형 - 768px 이하 (모바일) */
+@media (max-width: 768px) {
+  .title {
+    width: 80%; /* 가운데로 모이게 */
+    font-size: 22px;
+  }
+
+  /* 모바일 컨텐츠 래퍼 */
+  .mobileContentWrapper {
+    max-width: 560px; /* 컨텐츠를 가운데로 모음 */
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* 모바일 카드 리스트 */
+  .mobileCardList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .card {
+    max-width: 460px;
+    height: auto;
+    padding: 30px 15px 30px 20px;
+    border-radius: 20px;
+  }
+
+  .cardContent {
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .infoWrapper {
+    gap: 12px;
+  }
+
+  .cardTitle {
+    height: auto;
+    font-size: 24px;
+    margin-right: 40px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .bookmarkIcon {
+    top: 0;
+    right: 20px;
+  }
+
+  .imageWrapper {
+    width: 35vw;
+    max-width: 170px;
+    height: 35vw;
+    max-height: 160px;
+    margin-right: 15px;
+  }
+
+  .characterImage {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 15px;
+  }
+  .infoItem p {
+    font-size: 14px;
+  }
+  .arrowIcon {
+    right: 15px;
+    bottom: 15px;
   }
 }
