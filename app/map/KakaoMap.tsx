@@ -3,7 +3,7 @@
 // 사용할 라이브러리 import
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { Map, MapInfoWindow, MapMarker, MapTypeControl, ZoomControl } from 'react-kakao-maps-sdk';
 
 // 카카오맵 타입 선언
 interface KakaoMapProps {
@@ -39,6 +39,8 @@ export default function KakaoMap({ width = '100%', height = '500px', lat = 37.57
       {isLoaded ? (
         <Map center={{ lat, lng }} style={{ width: '100%', height: '100%' }} level={3}>
           <MapMarker position={{ lat, lng }} />
+          <ZoomControl position={'RIGHT'} />
+          <MapInfoWindow position={{ lat, lng }}></MapInfoWindow>
         </Map>
       ) : (
         <div style={{ width: '100%', height: '100%', background: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>지도 로딩중...</div>
