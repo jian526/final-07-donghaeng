@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import style from './Detail.module.css';
 import DefaultLayout from '@/app/components/DefaultLayout';
+import Image from 'next/image';
+import BookmarkButton from '@/app/components/BookmarkButton';
 
 export default function Detail({ isHost = true }) {
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -16,6 +18,10 @@ export default function Detail({ isHost = true }) {
     // 신청 로직
   };
 
+  const handleAdmit = () => {
+    console.log('관리하기 클릭');
+    // 관리 페이지로 이동
+  };
   const handleEdit = () => {
     console.log('수정하기 클릭');
     // 수정 페이지로 이동
@@ -36,21 +42,13 @@ export default function Detail({ isHost = true }) {
             <div className={style.cardHeader}>
               <figure className={style.characterWrapper}>
                 <div className={style.characterImage}></div>
-                <figcaption className={style.srOnly}>캐릭터 이미지</figcaption>
+                <figcaption className={'sr-only'}>캐릭터 이미지</figcaption>
               </figure>
               <div className={style.titleSection}>
                 <h1 className={style.title}>모아 팀프로젝트</h1>
-                <ul className={style.metadata}>
-                  <li>#카테고리</li>
-                  <li>#장소</li>
-                  <li>#나이대</li>
-                  <li>#성별</li>
-                  <li>#최소 최대 인원</li>
-                </ul>
+                <p className={style.dates}>26.1.27(화) 오후 3:00</p>
               </div>
-              <button className={style.bookmarkButton} onClick={handleBookmark} aria-label={isBookmarked ? '북마크 해제' : '북마크 추가'}>
-                <img src={isBookmarked ? '/icon/bookmark-on.svg' : '/icon/bookmark.svg'} alt="북마크" width={40} height={45} />
-              </button>
+              <BookmarkButton width={27} height={35} desktopWidth={40} desktopHeight={45} />
             </div>
             <div className={style.contentBody}>
               <p>
@@ -73,26 +71,27 @@ export default function Detail({ isHost = true }) {
           <div className={style.bottomSection}>
             <figure className={style.userCharacterWrapper}>
               <div className={style.userCharacterImage}></div>
-              <figcaption className={style.srOnly}>사용자 캐릭터</figcaption>
+              <figcaption className={'sr-only'}>사용자 캐릭터</figcaption>
             </figure>
+            <div className={style.infos}>
+              <div className={style.wrapper}>
+                <div className={style.info}>
+                  <div className={style.userInfo}>
+                    <p className={style.userName}>김지안</p>
+                    <p className={style.statusText}>힘들어요.....</p>
+                  </div>
 
-            <div className={style.info}>
-              <div className={style.userInfo}>
-                <p className={style.userName}>김지안</p>
-                <p className={style.statusText}>힘들어요.....</p>
-              </div>
-
-              <div className={style.users}>
-                <div className={style.userStatus}>
-                  <span className={style.heartIcon} aria-hidden="true"></span>
-                  <div className={style.bpm}>
-                    <span>90</span>
-                    <span>BPM</span>
+                  <div className={style.userStatus}>
+                    <span className={style.heartIcon} aria-hidden="true"></span>
+                    <div className={style.bpm}>
+                      <span>90</span>
+                      <span>BPM</span>
+                    </div>
                   </div>
                 </div>
-                <div className={style.chatButton} aria-label="채팅하기">
-                  <img src="/icon/chatting.svg" width={56} height={56} alt="채팅" aria-hidden="true" />
-                </div>
+              </div>
+              <div className={style.chatButton} aria-label="채팅하기">
+                <Image src="/icon/chatting.svg" width={56} height={56} alt="채팅" aria-hidden="true" />
               </div>
             </div>
           </div>
@@ -109,6 +108,9 @@ export default function Detail({ isHost = true }) {
             ) : (
               // 호스트 모드
               <div className={style.hostMode}>
+                <button className={style.adminBtn} onClick={handleAdmit}>
+                  관리하기
+                </button>
                 <button className={style.editBtn} onClick={handleEdit}>
                   수정하기
                 </button>
