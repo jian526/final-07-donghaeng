@@ -33,10 +33,22 @@ export default function Main() {
   // 카테고리별 랜덤 4개 모임
   const categoryMeetings = useMemo(() => {
     return {
-      운동: getRandomItems(meetings.filter((m) => m.extra.category === '운동'), 4),
-      '요리 / 제조': getRandomItems(meetings.filter((m) => m.extra.category === '요리 / 제조'), 4),
-      '문화 / 공연 / 축제': getRandomItems(meetings.filter((m) => m.extra.category === '문화 / 공연 / 축제'), 4),
-      '게임 / 오락': getRandomItems(meetings.filter((m) => m.extra.category === '게임 / 오락'), 4),
+      운동: getRandomItems(
+        meetings.filter((m) => m.extra.category === '운동'),
+        4
+      ),
+      '요리 / 제조': getRandomItems(
+        meetings.filter((m) => m.extra.category === '요리 / 제조'),
+        4
+      ),
+      '문화 / 공연 / 축제': getRandomItems(
+        meetings.filter((m) => m.extra.category === '문화 / 공연 / 축제'),
+        4
+      ),
+      '게임 / 오락': getRandomItems(
+        meetings.filter((m) => m.extra.category === '게임 / 오락'),
+        4
+      ),
     };
   }, [meetings]);
 
@@ -128,7 +140,7 @@ export default function Main() {
             {categoryMeetings['문화 / 공연 / 축제'].map((meeting) => (
               <div key={meeting._id} className={styles[`meetings-wrapper`]}>
                 <Link href={`/meetings/${meeting._id}`} className={styles[`meetings-image-box`]}>
-                  <Image src={meeting.mainImages[0].path} alt={meeting.name} fill sizes="(max-width: 1024px) 50vw, 25vw" />
+                  <Image src={meeting.mainImages[0].path} alt={meeting.name} fill />
                   <BookmarkButton desktopWidth={23} desktopHeight={29} />
                 </Link>
                 <Link href={`/meetings/${meeting._id}`} className={styles[`meetings-title`]}>

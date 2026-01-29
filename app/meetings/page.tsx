@@ -200,7 +200,7 @@ export default function Meetinglist() {
                               <div className={style.cardHeader}>
                                 <h3 className={style.cardTitle}>{meeting.name}</h3>
                                 <div className={style.bookmarkIcon}>
-                                  <BookmarkButton />
+                                  <BookmarkButton meetingId={meeting._id} />
                                 </div>
                               </div>
                               <div className={style.cardMetadata}>
