@@ -173,7 +173,7 @@ export default function Detail() {
               <h1 className={style.title}>{meeting.name}</h1>
               <p className={style.dates}>{meeting.extra.date}</p>
             </div>
-            <BookmarkButton width={27} height={35} desktopWidth={40} desktopHeight={45} />
+            <BookmarkButton meetingId={meeting._id} width={27} height={35} desktopWidth={40} desktopHeight={45} />
           </div>
           <div className={style.contentBody}>
             <p>{meeting.content}</p>
