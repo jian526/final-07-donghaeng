@@ -9,6 +9,8 @@
 }
 
 .bookmark-icon {
+  width: var(--bookmark-width);
+  height: var(--bookmark-height);
   fill: rgba(255, 255, 255, 0.5);
   stroke: var(--border-navy);
   stroke-width: 2;
@@ -17,4 +19,10 @@
 
 .bookmark-icon.active {
   fill: var(--bg-lavender);
+}
+@media (min-width: 1024px) {
+  .bookmark-icon {
+    width: var(--bookmark-desktop-width);
+    height: var(--bookmark-desktop-height);
+  }
 }

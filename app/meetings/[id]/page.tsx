@@ -4,6 +4,7 @@ import { useState } from 'react';
 import style from './Detail.module.css';
 import DefaultLayout from '@/app/components/DefaultLayout';
 import Image from 'next/image';
+import BookmarkButton from '@/app/components/BookmarkButton';
 
 export default function Detail({ isHost = true }) {
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -47,9 +48,7 @@ export default function Detail({ isHost = true }) {
                 <h1 className={style.title}>모아 팀프로젝트</h1>
                 <p className={style.dates}>26.1.27(화) 오후 3:00</p>
               </div>
-              <button className={style.bookmarkButton} onClick={handleBookmark} aria-label={isBookmarked ? '북마크 해제' : '북마크 추가'}>
-                <Image src={isBookmarked ? '/icon/bookmark-on.svg' : '/icon/bookmark.svg'} alt="북마크" width={40} height={45} />
-              </button>
+              <BookmarkButton width={27} height={35} desktopWidth={40} desktopHeight={45} />
             </div>
             <div className={style.contentBody}>
               <p>
