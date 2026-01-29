@@ -3,13 +3,183 @@
 import Link from 'next/link';
 import style from './create.module.css';
 import DefaultLayout from '@/app/components/DefaultLayout';
+import { useActionState, useEffect, useRef, useState, useTransition } from 'react';
+import useUserStore from '@/zustand/userStore';
+import { uploadFile } from '@/lib/file';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { ActionState, createMeeting } from '@/actions/meetings';
 
 export default function Add() {
+  const router = useRouter();
+  const { user } = useUserStore();
+
+  const initialState: ActionState | null = null;
+  const [state, formAction] = useActionState(createMeeting, initialState);
+  const [, startTransition] = useTransition();
+
+  // 인원 카운터
+  const [count, setCount] = useState(10);
+
+  // 이미지 미리보기
+  const [imagePreview, setImagePreview] = useState<string>('');
+  const [uploadedImage, setUploadedImage] = useState<{ path: string; name: string } | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+
+  // 인원 증가/감소
+  const handleDecrease = () => {
+    if (count > 0) setCount(count - 1);
+  };
+
+  const handleIncrease = () => {
+    if (count < 300) setCount(count + 1);
+  };
+
+  const handleCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value) || 0;
+    if (value >= 0 && value <= 300) {
+      setCount(value);
+    }
+  };
+
+  // 이미지 업로드 핸들러
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // 파일 크기 검증 (5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert('이미지 크기는 5MB 이하여야 합니다.');
+      return;
+    }
+
+    // 파일 타입 검증
+    if (!file.type.startsWith('image/')) {
+      alert('이미지 파일만 업로드 가능합니다.');
+      return;
+    }
+
+    // 미리보기 생성
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+
+    // 서버에 업로드
+    setIsUploading(true);
+    try {
+      const result = await uploadFile(file);
+
+      if (result.ok) {
+        // 업로드 성공
+        setUploadedImage({
+          path: result.item[0].path,
+          name: result.item[0].name,
+        });
+      } else {
+        alert('이미지 업로드에 실패했습니다.');
+        setImagePreview('');
+      }
+    } catch (error) {
+      console.error('이미지 업로드 오류:', error);
+      alert('이미지 업로드 중 오류가 발생했습니다.');
+      setImagePreview('');
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  // 폼 제출 전 처리
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    console.log('=== 폼 제출 시작 ===');
+    console.log('user:', user);
+
+    if (!user || !user.token || !user.token.accessToken) {
+      alert('로그인이 필요합니다.');
+      router.push('/login');
+      return;
+    }
+
+    // 폼 데이터 가져오기
+    const formData = new FormData(e.currentTarget);
+
+    console.log('=== 원본 FormData ===');
+    for (const [key, value] of formData.entries()) {
+      console.log(key, ':', value);
+    }
+
+    // extra 객체 구성
+    const extra = {
+      category: formData.get('category') as string,
+      gender: formData.get('gender') as string,
+      age: parseInt(formData.get('age') as string),
+      date: formData.get('date') as string,
+      region: formData.get('region') as string,
+      survey1: formData.get('question-1') as string,
+      survey2: formData.get('question-2') as string,
+    };
+
+    console.log('=== extra 객체 ===', extra);
+
+    // FormData 재구성
+    const submitData = new FormData();
+    submitData.append('accessToken', user.token.accessToken);
+    submitData.append('name', formData.get('meetings-title') as string);
+    submitData.append('content', formData.get('meetings-content') as string);
+    submitData.append('quantity', count.toString());
+    submitData.append('price', '0');
+    submitData.append('shippingFees', '0');
+
+    // // mainImages 추가 부분 수정 (142번째 줄 근처)
+    if (uploadedImage) {
+      submitData.append('mainImages', JSON.stringify([uploadedImage]));
+    } else {
+      // 기본 이미지 사용
+      submitData.append(
+        'mainImages',
+        JSON.stringify([
+          {
+            path: '/images/img2.jpg',
+            name: 'default.jpg',
+          },
+        ])
+      );
+    }
+
+    // extra 추가
+    submitData.append('extra', JSON.stringify(extra));
+
+    console.log('=== 최종 submitData ===');
+    for (const [key, value] of submitData.entries()) {
+      console.log(key, ':', value);
+    }
+
+    // Server Action 호출
+    startTransition(() => {
+      formAction(submitData);
+    });
+  };
+
+  // Server Action 결과 처리
+  useEffect(() => {
+    if (!state) return;
+
+    if (state.ok) {
+      alert('모임이 성공적으로 등록되었습니다.');
+      // redirect는 Server Action에서 처리됨
+    } else if (state.message) {
+      alert(state.message);
+    }
+  }, [state]);
+
   return (
     <DefaultLayout>
       <div className={style['wrap']}>
         <div className={style['add-wrap']}>
-          <form className={style['meetings-create']}>
+          <form className={style['meetings-create']} onSubmit={handleSubmit}>
             <div className={style['meetings-add']}>
               <h2>모임 등록</h2>
               <fieldset className={style['title-fieldset']}>
@@ -63,24 +233,31 @@ export default function Add() {
                 <label htmlFor="meetings-img-label">모임 이미지</label>
                 <label htmlFor="meetings-img" className="image-box">
                   <div className={style['ractingle-wrap']}>
-                    <div className={style['ractingle']}>
-                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M10.2857 1.28571C10.2857 0.574554 9.71116 0 9 0C8.28884 0 7.71429 0.574554 7.71429 1.28571V7.71429H1.28571C0.574554 7.71429 0 8.28884 0 9C0 9.71116 0.574554 10.2857 1.28571 10.2857H7.71429V16.7143C7.71429 17.4254 8.28884 18 9 18C9.71116 18 10.2857 17.4254 10.2857 16.7143V10.2857H16.7143C17.4254 10.2857 18 9.71116 18 9C18 8.28884 17.4254 7.71429 16.7143 7.71429H10.2857V1.28571Z"
-                          fill="#fff"
-                        />
-                      </svg>
-                    </div>
+                    {imagePreview ? (
+                      <div className={style['image-preview']}>
+                        <Image src={imagePreview} alt="미리보기" style={{ width: '100%', height: 'auto' }} />
+                      </div>
+                    ) : (
+                      <div className={style['ractingle']}>
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M10.2857 1.28571C10.2857 0.574554 9.71116 0 9 0C8.28884 0 7.71429 0.574554 7.71429 1.28571V7.71429H1.28571C0.574554 7.71429 0 8.28884 0 9C0 9.71116 0.574554 10.2857 1.28571 10.2857H7.71429V16.7143C7.71429 17.4254 8.28884 18 9 18C9.71116 18 10.2857 17.4254 10.2857 16.7143V10.2857H16.7143C17.4254 10.2857 18 9.71116 18 9C18 8.28884 17.4254 7.71429 16.7143 7.71429H10.2857V1.28571Z"
+                            fill="#fff"
+                          />
+                        </svg>
+                      </div>
+                    )}
                   </div>
                 </label>
-                <input type="file" id="meetings-img" name="meetings-img" accept="image/*" hidden />
+                <input type="file" id="meetings-img" name="meetings-img" accept="image/*" onChange={handleImageChange} disabled={isUploading} hidden />
+                {isUploading && <p>업로드 중...</p>}
               </fieldset>
 
               <div className={style['field-parent-wrap']}>
                 <fieldset className={style['date-fieldset']}>
                   <label htmlFor="date">날짜</label>
 
-                  <input type="date" className={style['date-input']} />
+                  <input type="date" className={style['date-input']} id="date" name="date" required min={new Date().toISOString().split('T')[0]} />
                 </fieldset>
 
                 <fieldset className={style['region-fieldset']}>
@@ -97,6 +274,7 @@ export default function Add() {
                       <option value="" disabled defaultValue=""></option>
                       <option value="m">남</option>
                       <option value="f">여</option>
+                      <option value="all">무관</option>
                     </select>
                     <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -112,10 +290,10 @@ export default function Add() {
                   <div>
                     <select required id="age" name="age" className={style['select-btn']}>
                       <option value="" disabled defaultValue=""></option>
-                      <option value="teen">10대</option>
-                      <option value="twenties">20대</option>
-                      <option value="thirties">30대</option>
-                      <option value="forties_plus">40대 이상</option>
+                      <option value="10">10대</option>
+                      <option value="20">20대</option>
+                      <option value="30">30대</option>
+                      <option value="40">40대 이상</option>
                     </select>
                     <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -134,13 +312,13 @@ export default function Add() {
                   (0~300)명
                 </label>
                 <div className={style['counter-wrapper']}>
-                  <button type="button" className={style['count-btn, descrase']}>
+                  <button type="button" className={style['count-btn, descrase']} onClick={handleDecrease}>
                     <svg width="18" height="3" viewBox="0 0 18 3" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M0 1.5C0 0.670312 0.574554 0 1.28571 0H16.7143C17.4254 0 18 0.670312 18 1.5C18 2.32969 17.4254 3 16.7143 3H1.28571C0.574554 3 0 2.32969 0 1.5Z" fill="#323577" />
                     </svg>
                   </button>
-                  <input type="number" id="count-input" name="count-input" min="0" max="300" defaultValue={10} />
-                  <button type="button" className={style['count-btn, increase']}>
+                  <input type="number" id="count-input" name="count-input" min="0" max="300" defaultValue={10} value={count} onChange={handleCountChange} readOnly />
+                  <button type="button" className={style['count-btn, increase']} onClick={handleIncrease}>
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M10.2857 1.28571C10.2857 0.574554 9.71116 0 9 0C8.28884 0 7.71429 0.574554 7.71429 1.28571V7.71429H1.28571C0.574554 7.71429 0 8.28884 0 9C0 9.71116 0.574554 10.2857 1.28571 10.2857H7.71429V16.7143C7.71429 17.4254 8.28884 18 9 18C9.71116 18 10.2857 17.4254 10.2857 16.7143V10.2857H16.7143C17.4254 10.2857 18 9.71116 18 9C18 8.28884 17.4254 7.71429 16.7143 7.71429H10.2857V1.28571Z"
@@ -166,17 +344,16 @@ export default function Add() {
                 </fieldset>
               </div>
             </div>
+            <br />
+            <div className={style['btn-wrap']}>
+              <button className={style['btn']} type="submit">
+                등록
+              </button>
+              <button className={style['btn-2']} type="button">
+                <Link href={'/meetings'}>취소</Link>
+              </button>
+            </div>
           </form>
-          <br />
-          <div className={style['btn-wrap']}>
-            {/* #TODO link 기능구현시 삭제예정*/}
-            <button className={style['btn']} type="submit">
-              <Link href="/meetings">등록</Link>
-            </button>
-            <button className={style['btn-2']} type="button">
-              <Link href={'/meetings'}>취소</Link>
-            </button>
-          </div>
         </div>
       </div>
     </DefaultLayout>
