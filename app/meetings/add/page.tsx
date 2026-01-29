@@ -133,22 +133,6 @@ export default function Add() {
     submitData.append('price', '0');
     submitData.append('shippingFees', '0');
 
-    // // mainImages 추가 부분 수정 (142번째 줄 근처)
-    if (uploadedImage) {
-      submitData.append('mainImages', JSON.stringify([uploadedImage]));
-    } else {
-      // 기본 이미지 사용
-      submitData.append(
-        'mainImages',
-        JSON.stringify([
-          {
-            path: '/images/img2.jpg',
-            name: 'default.jpg',
-          },
-        ])
-      );
-    }
-
     // extra 추가
     submitData.append('extra', JSON.stringify(extra));
 
