@@ -254,6 +254,8 @@
   white-space: nowrap;
 }
 .adminBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .editBtn {
   background-color: var(--bg-lavender);
@@ -308,10 +310,6 @@
 @media (max-width: 1200px) {
   .main {
     padding: 40px 80px;
-  }
-  .bookmarkButton {
-    width: 24px;
-    height: 35px;
   }
 
   .bottomSection {
@@ -393,10 +391,7 @@
   .infos {
     width: 10%;
   }
-  .heartIcon {
-    width: 15px;
-    height: 18px;
-  }
+
   .bpm span {
     font-size: 12px;
   }

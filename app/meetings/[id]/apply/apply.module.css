@@ -1,6 +1,7 @@
 /* 모임 신청 전체 body */
 .apply-body {
   width: 100%;
+  height: 875px;
   max-width: 500px;
   margin-top: 20px;
   margin-inline: auto;
