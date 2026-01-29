@@ -15,7 +15,7 @@ export default function Filter() {
 
   return (
     <>
-      <div>
+      <div className={styles['filter-div']}>
         <div className={`${styles.wrapper} ${styles['category-display']}`}>
           <select name="카테고리" id="" defaultValue="">
             <option value="" disabled hidden>
