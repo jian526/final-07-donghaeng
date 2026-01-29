@@ -92,6 +92,7 @@
   .map-link-text {
     img {
       margin-left: 10px;
+      height: auto;
     }
   }
 }
@@ -126,6 +127,7 @@
   .section-link-text {
     img {
       margin-left: 10px;
+      height: auto;
     }
   }
 }
@@ -148,6 +150,10 @@
       position: relative;
       background: gray;
       aspect-ratio: 1 / 1;
+
+      img {
+        object-fit: cover;
+      }
     }
     .meetings-title {
       display: flex;
@@ -209,6 +215,7 @@
 
       img {
         padding-top: 5px;
+        height: auto;
       }
     }
     .map-view {
