@@ -85,7 +85,7 @@
       "name": "제이지",
       "phone": "01044445555",
       "address": "서울시 강남구 논현동 222",
-      "type": "user",
+      "type": "seller",
       "loginType": "email",
       "image": "uploadFiles/user-jayg.webp",
       "extra": {
@@ -109,380 +109,877 @@
   "product": [
     {
       "seller_id": 2,
-      "price": 22800,
-      "shippingFees": 0,
-      "show": true,
-      "active": true,
-      "name": "캥거루 스턴트 독 로봇완구",
-      "quantity": 320,
-      "buyQuantity": 310,
-      "mainImages": [
-        {
-          "path": "uploadFiles/sample-dog.jpg",
-          "name": "sample-dog.jpg"
-        }
-      ],
-      "content": "<div class=\"product-detail\"><p>캥거루 스턴트 독 로봇완구 상세 설명</p></div>",
-      "extra": {
-        "isNew": true,
-        "isBest": true,
-        "category": ["PC03", "PC0301"],
-        "sort": 5
-      }
-    },
-    {
-      "seller_id": 2,
-      "price": 17260,
-      "shippingFees": 2500,
-      "show": true,
-      "active": true,
-      "name": "헬로카봇 스톰다이버",
-      "quantity": 200,
-      "buyQuantity": 198,
-      "mainImages": [
-        {
-          "path": "uploadFiles/sample-diver.jpg",
-          "name": "sample-diver.jpg"
-        }
-      ],
-      "content": "<div class=\"product-detail\"><p>헬로카봇 스톰다이버 상세 설명</p></div>",
-      "extra": {
-        "isNew": false,
-        "isBest": true,
-        "category": ["PC01", "PC0103"],
-        "sort": 4
-      }
-    },
-    {
-      "seller_id": 2,
-      "price": 48870,
-      "shippingFees": 0,
-      "show": true,
-      "active": true,
-      "name": "레고 클래식 라지 조립 박스 10698",
-      "quantity": 100,
-      "buyQuantity": 99,
-      "mainImages": [
-        {
-          "path": "uploadFiles/sample-classic.jpg",
-          "name": "sample-classic.jpg"
-        }
-      ],
-      "content": "<div class=\"product-detail\"><p>레고 클래식 라지 조립 박스 10698 상세 설명</p></div>",
-      "extra": {
-        "isNew": true,
-        "isBest": true,
-        "category": ["PC01", "PC0103"],
-        "sort": 3
-      }
-    },
-    {
-      "seller_id": 3,
-      "price": 45000,
-      "shippingFees": 3500,
-      "show": true,
-      "active": true,
-      "name": "레고 테크닉 42151 부가티 볼리드",
-      "quantity": 100,
-      "buyQuantity": 89,
-      "mainImages": [
-        {
-          "path": "uploadFiles/sample-bugatti.png",
-          "name": "sample-bugatti.png"
-        }
-      ],
-      "content": "<div class=\"product-detail\"><p>레고 테크닉 42151 부가티 볼리드 상세 설명</p></div>",
-      "extra": {
-        "isNew": false,
-        "isBest": true,
-        "category": ["PC03", "PC0303"],
-        "sort": 1
-      }
-    },
-    {
-      "seller_id": 2,
-      "price": 45000,
-      "shippingFees": 3500,
-      "show": true,
-      "active": true,
-      "name": "레고 마인크래프트 21246 깊고 어두운 전장",
-      "quantity": 100,
-      "buyQuantity": 98,
-      "mainImages": [
-        {
-          "path": "uploadFiles/sample-minecraft.png",
-          "name": "sample-minecraft.png"
-        }
-      ],
-      "content": "<div class=\"product-detail\"><p>레고 마인크래프트 21246 깊고 어두운 전장 상세 설명</p></div>",
-      "extra": {
-        "isNew": true,
-        "isBest": false,
-        "today": true,
-        "category": ["PC03", "PC0303"],
-        "sort": 2
-      }
-    },
-    {
-      "seller_id": 2,
-      "price": 54790,
-      "shippingFees": 4000,
-      "show": false,
-      "active": true,
-      "name": "레고 마블 76247 헐크버스터: 와칸다의 전투",
-      "quantity": 100,
-      "buyQuantity": 99,
-      "mainImages": [
-        {
-          "path": "uploadFiles/sample-hulk.png",
-          "name": "sample-hulk.png"
-        }
-      ],
-      "content": "<div class=\"product-detail\"><p>레고 마블 76247 헐크버스터: 와칸다의 전투 상세 설명</p></div>",
-      "extra": {
-        "isNew": false,
-        "isBest": false,
-        "category": ["PC03", "PC0303"],
-        "sort": 1
-      }
-    },
-    {
-      "seller_id": 3,
-      "price": 13000,
-      "shippingFees": 3500,
-      "show": true,
-      "active": true,
-      "name": "할리갈리 보드게임",
-      "quantity": 100,
-      "buyQuantity": 98,
-      "mainImages": [
-        {
-          "path": "uploadFiles/sample-halligalli.jpg",
-          "name": "sample-halligalli.jpg"
-        }
-      ],
-      "content": "<div class=\"product-detail\"><p>할리갈리 보드게임 상세 설명</p></div>",
-      "extra": {
-        "isNew": false,
-        "isBest": true,
-        "category": ["PC01", "PC0102", "PC010201"],
-        "sort": 3
-      }
-    },
-    {
-      "seller_id": 2,
-      "price": 26000,
-      "shippingFees": 3000,
-      "show": true,
-      "active": true,
-      "name": "루미큐브 클래식",
-      "quantity": 100,
-      "buyQuantity": 97,
-      "mainImages": [
-        {
-          "path": "uploadFiles/sample-rummikub.png",
-          "name": "sample-rummikub.png"
-        }
-      ],
-      "content": "<div class=\"product-detail\"><p>루미큐브 클래식 상세 설명</p></div>",
-      "extra": {
-        "isNew": true,
-        "isBest": true,
-        "category": ["PC01", "PC0102", "PC010202"],
-        "sort": 8
-      }
-    },
-    {
-      "seller_id": 3,
-      "price": 12000,
-      "shippingFees": 3000,
-      "show": true,
-      "active": true,
-      "name": "짱구는 못말려 숲속 산책 직소퍼즐",
-      "quantity": 100,
-      "buyQuantity": 96,
-      "mainImages": [
-        {
-          "path": "uploadFiles/sample-jjangu.jpg",
-          "name": "sample-jjangu.jpg"
-        }
-      ],
-      "content": "<div class=\"product-detail\"><p>짱구는 못말려 숲속 산책 직소퍼즐 상세 설명</p></div>",
-      "extra": {
-        "isNew": true,
-        "isBest": false,
-        "today": true,
-        "category": ["PC03", "PC0302"],
-        "sort": 2
-      }
-    },
-    {
-      "seller_id": 3,
-      "price": 24000,
-      "shippingFees": 0,
-      "show": true,
-      "active": true,
-      "name": "라푼젤 그녀의 꿈 직소퍼즐 KD-1000-001 + 그림 엽서(랜덤) + 품질보증서",
-      "quantity": 100,
-      "buyQuantity": 95,
-      "mainImages": [
-        {
-          "path": "uploadFiles/sample-rapunzel.jpg",
-          "name": "sample-rapunzel.jpg"
-        }
-      ],
-      "content": "<div class=\"product-detail\"><p>라푼젤 그녀의 꿈 직소퍼즐 KD-1000-001 + 그림 엽서(랜덤) + 품질보증서 상세 설명</p></div>",
-      "extra": {
-        "isNew": false,
-        "isBest": true,
-        "category": ["PC01", "PC0101"],
-        "sort": 4
-      }
-    },
-    {
-      "seller_id": 2,
-      "price": 14400,
-      "shippingFees": 3000,
-      "show": true,
-      "active": true,
-      "name": "KC인증 스키비디 토일렛 피규어 블럭 8종 중국 호환 레고 블록 장난감 어린이 선물",
-      "quantity": 100,
-      "buyQuantity": 94,
-      "mainImages": [
-        {
-          "path": "uploadFiles/sample-skibidi01.jpg",
-          "name": "sample-skibidi01.jpg"
-        },
-        {
-          "path": "uploadFiles/sample-skibidi02.jpg",
-          "name": "sample-skibidi02.jpg"
-        }
-      ],
-      "content": "<div align=\"center\"><p>*크리스마스 배송 안내</p></div><div align=\"center\"><p>택배사 물량 증가로 평소보다 2~3일 더 걸립니다.</p></div><div align=\"center\"><br></div><div align=\"center\"><img src=\"/sample-skibidi03.jpg\"></div><div align=\"center\"><br></div><div align=\"center\"><img src=\"/sample-skibidi04.jpg\"></div><div align=\"center\"><br></div><div align=\"center\"><p>*반품 안내</p></div>",
-      "extra": {
-        "isNew": false,
-        "isBest": false,
-        "today": true,
-        "category": ["PC01", "PC0103"],
-        "sort": 6
-      }
-    },
-    {
-      "seller_id": 2,
-      "price": 9000,
-      "shippingFees": 3000,
-      "show": true,
-      "active": true,
-      "name": "스키비디 토일렛 봉제 인형 (25cm-30cm) 시리즈 크리스마스 선물",
-      "quantity": 999,
-      "buyQuantity": 800,
-      "mainImages": [
-        {
-          "path": "uploadFiles/sample-skibidi11.jpg",
-          "name": "sample-skibidi11.jpg"
-        }
-      ],
-      "content": "<div align=\"center\"><img src=\"uploadFilessample-skibidi12.jpg\"></div><div align=\"center\"><br></div><div align=\"center\"><img src=\"uploadFiles/sample-skibidi13.jpg\"></div><div align=\"center\"><br></div><div align=\"center\"><img src=\"uploadFiles/sample-skibidi14.jpg\"></div><div align=\"center\"><br></div><div align=\"center\"><img src=\"uploadFiles/sample-skibidi15.jpg\"></div>",
-      "extra": {
-        "isNew": true,
-        "isBest": true,
-        "category": ["PC01", "PC0103"],
-        "sort": 7
-      }
-    },
-    {
-      "seller_id": 3,
-      "price": 21600,
-      "shippingFees": 5500,
-      "show": true,
-      "active": true,
-      "name": "KC인증 스키비디 토일렛 피규어 블럭 4종 중국 호환 레고 블록 장난감 어린이 선물",
-      "quantity": 99,
-      "buyQuantity": 94,
-      "mainImages": [
-        {
-          "path": "uploadFiles/sample-skibidi21.jpg",
-          "name": "sample-skibidi21.jpg"
-        }
-      ],
-      "content": "<div align=\"center\"><img src=\"uploadFiles/sample-skibidi22.jpg\"></div><div align=\"center\"><br></div><div align=\"center\"><img src=\"uploadFiles/sample-skibidi23.jpg\"></div><div align=\"center\"><br></div><div align=\"center\"><img src=\"uploadFiles/sample-skibidi24.jpg\"></div>",
-      "extra": {
-        "isNew": true,
-        "isBest": false,
-        "category": ["PC01", "PC0103"],
-        "sort": 6
-      }
-    },
-    {
-      "seller_id": 3,
-      "price": 12900,
-      "show": true,
-      "active": true,
-      "name": "푸쉬팝게임기 팝잇 푸시팝 게임기 두더지게임 핑거 뽁뽁이 애니멀 1+1",
-      "quantity": 300,
-      "buyQuantity": 298,
-      "mainImages": [
-        {
-          "path": "uploadFiles/sample-pushpop01.jpg",
-          "name": "sample-pushpop01.jpg"
-        },
-        {
-          "path": "uploadFiles/sample-pushpop02.jpg",
-          "name": "sample-pushpop02.jpg"
-        },
-        {
-          "path": "uploadFiles/sample-pushpop03.jpg",
-          "name": "sample-pushpop03.jpg"
-        }
-      ],
-      "content": "<div align=\"center\"><p>푸쉬팝게임기 팝잇 푸시팝 게임기 두더지게임 핑거 뽁뽁이 애니멀을 구매하시는 모든 분께 사은품(무작위)으로 하나 더 드립니다.</p></div><div align=\"center\"><img src=\"uploadFiles/sample-pushpop04.gif\"></div><div align=\"center\"><br></div><div align=\"center\"><img src=\"uploadFiles/sample-pushpop05.jpg\"></div><div align=\"center\"><br></div><div align=\"center\"><img src=\"uploadFiles/sample-pushpop06.jpg\"></div>",
-      "extra": {
-        "isNew": false,
-        "isBest": true,
-        "category": ["PC01", "PC0102"],
-        "sort": 5
-      }
-    },
-    {
-      "seller_id": 3,
-      "price": 12900,
-      "shippingFees": 3500,
-      "show": true,
-      "active": true,
-      "name": "샤넬 NO.5",
-      "quantity": 999999,
-      "buyQuantity": 0,
-      "mainImages": [
-        {
-          "path": "uploadFiles/sample-pushpop01.jpg",
-          "name": "sample-pushpop01.jpg"
-        }
-      ],
-      "content": "샤넬 향수",
-      "extra": {
-        "depth": 1
-      }
-    },
-    {
-      "seller_id": 3,
-      "price": 6900,
-      "shippingFees": 3500,
-      "name": "샤넬 NO.5",
-      "quantity": 1,
+      "price": 0,
+      "quantity": 30,
       "buyQuantity": 0,
       "show": true,
       "active": true,
+      "name": "한강 러닝 크루 모집",
+      "content": "매주 토요일 아침 7시, 한강 반포지구에서 함께 달려요! 5km부터 10km까지 본인 페이스에 맞게 선택 가능합니다. 러닝 후에는 근처 카페에서 가볍게 브런치도 함께해요. 초보자도 부담 없이 참여하실 수 있고, 페이스메이커가 함께하니 안심하세요.",
       "mainImages": [
         {
-          "path": "uploadFiles/sample-pushpop03.jpg",
-          "name": "sample-pushpop03.jpg"
+          "path": "uploadFiles/exercise_1.jpg",
+          "name": "exercise_1.jpg"
         }
       ],
-      "content": "3달 쓴 향수입니다.",
       "extra": {
-        "depth": 2,
-        "parent": 15,
-        "size": "200mm"
+        "category": "운동",
+        "gender": "남녀무관",
+        "age": 20,
+        "date": "2026-02-13",
+        "region": "서울특별시 마포구 상암동",
+        "survey1": "현재 주 몇 회 정도 러닝을 하시나요?",
+        "survey2": "선호하는 러닝 페이스는 어느 정도인가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "초보 헬스 같이해요",
+      "content": "헬스장이 처음이라 어떻게 시작해야 할지 모르시는 분들을 위한 모임입니다. 기구 사용법부터 기본 자세까지 서로 봐주면서 함께 성장해요. 매주 화목 저녁 8시에 모여서 약 1시간 30분 정도 운동하고, 운동 후에는 식단 정보도 공유합니다. 혼자 하기 막막했던 분들 환영해요!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_2.jpg",
+          "name": "exercise_2.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "남",
+        "age": 20,
+        "date": "2026-02-14",
+        "region": "서울특별시 강남구 역삼동",
+        "survey1": "헬스 경력이 어느 정도 되시나요?",
+        "survey2": "주로 어떤 부위 운동을 하고 싶으신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "주말 등산 모임",
+      "content": "서울 근교의 아름다운 산들을 함께 올라요! 북한산, 관악산, 도봉산 등 매주 다른 코스를 도전합니다. 등산 후에는 막걸리 한 잔과 함께 파전도 즐겨요. 초보자분들도 부담 없이 참여할 수 있도록 난이도를 조절하며, 안전하게 산행할 수 있도록 경험자가 리드합니다.",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_3.jpg",
+          "name": "exercise_3.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "남녀무관",
+        "age": 30,
+        "date": "2026-02-15",
+        "region": "서울특별시 은평구 진관동",
+        "survey1": "등산 경험이 있으신가요?",
+        "survey2": "선호하는 등산 난이도는 어느 정도인가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "배드민턴 복식 파트너 구해요",
+      "content": "평일 저녁 7시부터 9시까지 잠실 체육관에서 배드민턴 치실 분을 찾습니다. 실력은 상관없어요, 즐겁게 운동하는 게 목표입니다! 라켓이 없으시면 빌려드릴 수 있고, 셔틀콕은 공동 구매해서 사용해요. 운동 후에는 가볍게 맥주 한 잔 하면서 친목도 다져요.",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_4.jpg",
+          "name": "exercise_4.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "여",
+        "age": 20,
+        "date": "2026-02-16",
+        "region": "서울특별시 송파구 잠실동",
+        "survey1": "배드민턴 실력은 어느 정도인가요?",
+        "survey2": "주로 선호하는 운동 시간대는 언제인가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "요가 명상 클래스",
+      "content": "바쁜 일상 속에서 잠시 쉬어가는 시간이 필요하신 분들을 위한 모임입니다. 매주 일요일 오전 10시, 조용한 스튜디오에서 요가와 명상을 통해 마음의 평화를 찾아요. 초보자도 따라할 수 있는 기본 동작 위주로 진행하며, 수업 후에는 허브티와 함께 담소를 나눕니다.",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_5.jpg",
+          "name": "exercise_5.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "여",
+        "age": 30,
+        "date": "2026-02-17",
+        "region": "서울특별시 서초구 반포동",
+        "survey1": "요가 경험이 있으신가요?",
+        "survey2": "요가를 통해 얻고 싶은 효과는 무엇인가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "풋살 팀원 모집",
+      "content": "매주 일요일 오전 9시, 여의도 풋살장에서 신나게 뛰어요! 포지션 상관없이 즐기면서 운동하실 분이면 누구나 환영합니다. 팀 유니폼도 맞추고, 월 1회 다른 팀과 친선 경기도 해요. 경기 후에는 다 함께 점심 식사하며 경기 영상 보면서 피드백도 나눠요.",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_6.jpg",
+          "name": "exercise_6.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "남",
+        "age": 20,
+        "date": "2026-02-18",
+        "region": "서울특별시 영등포구 여의도동",
+        "survey1": "풋살/축구 경력이 어느 정도 되시나요?",
+        "survey2": "선호하는 포지션이 있으신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "수영 같이 배워요",
+      "content": "수영을 배우고 싶은데 혼자 시작하기 막막하신 분들! 함께 모여서 자유형부터 차근차근 배워봐요. 매주 수요일 저녁 광진구민체육센터 수영장에서 모입니다. 물에 대한 공포가 있으신 분도 괜찮아요, 서로 응원하면서 천천히 극복해나가요. 수영 후에는 사우나에서 피로도 풀어요.",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_7.jpg",
+          "name": "exercise_7.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "남녀무관",
+        "age": 20,
+        "date": "2026-02-19",
+        "region": "서울특별시 광진구 자양동",
+        "survey1": "현재 수영 실력은 어느 정도인가요?",
+        "survey2": "배우고 싶은 영법이 있으신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "자전거 라이딩 크루",
+      "content": "한강 자전거길을 함께 달려요! 매주 토요일 오후 2시에 이촌 한강공원에서 출발해서 여의도, 반포, 잠실까지 다양한 코스를 즐깁니다. 왕복 약 30~50km 정도 라이딩하고, 중간중간 쉬면서 사진도 찍어요. 라이딩 후에는 치맥 타임! 자전거 대여도 가능하니 부담 없이 참여하세요.",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_8.jpg",
+          "name": "exercise_8.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "남녀무관",
+        "age": 30,
+        "date": "2026-02-20",
+        "region": "서울특별시 용산구 이촌동",
+        "survey1": "자전거 라이딩 경험이 있으신가요?",
+        "survey2": "선호하는 라이딩 거리는 어느 정도인가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "테니스 레슨 모임",
+      "content": "테니스에 입문하고 싶은 분들을 위한 모임입니다! 기초 그립부터 포핸드, 백핸드까지 차근차근 배워봐요. 매주 토요일 오전 마곡 테니스장에서 2시간씩 연습하고, 실력이 늘면 랠리도 해봐요. 라켓 대여 가능하고, 테니스볼은 공동 구매해서 사용합니다. 운동 후 브런치도 함께해요!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_9.jpg",
+          "name": "exercise_9.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "남녀무관",
+        "age": 20,
+        "date": "2026-02-21",
+        "region": "서울특별시 강서구 마곡동",
+        "survey1": "테니스 경험이 있으신가요?",
+        "survey2": "테니스 라켓을 보유하고 계신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "필라테스 소모임",
+      "content": "코어 강화와 자세 교정이 필요하신 분들을 위한 필라테스 모임입니다. 매주 월금 저녁 성수동 스튜디오에서 진행해요. 기구 필라테스와 매트 필라테스를 번갈아 하며, 전문 강사님과 함께 정확한 자세를 배울 수 있어요. 수업 후에는 건강한 샐러드 맛집 투어도 함께 해요!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_10.jpg",
+          "name": "exercise_10.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "여",
+        "age": 30,
+        "date": "2026-02-22",
+        "region": "서울특별시 성동구 성수동",
+        "survey1": "필라테스 경험이 있으신가요?",
+        "survey2": "운동을 통해 개선하고 싶은 부분이 있으신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "농구 픽업게임 모집",
+      "content": "주말 저녁 6시, 상계동 야외 농구장에서 농구 한 게임 하실 분 모집합니다! 3대3 또는 5대5로 진행하고, 인원에 따라 유동적으로 운영해요. 실력보다는 매너가 중요합니다. 서로 존중하며 즐겁게 뛰어요. 게임 후에는 근처 치킨집에서 뒤풀이도 합니다!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_11.jpg",
+          "name": "exercise_11.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "남",
+        "age": 20,
+        "date": "2026-02-23",
+        "region": "서울특별시 노원구 상계동",
+        "survey1": "농구 실력은 어느 정도인가요?",
+        "survey2": "선호하는 포지션이 있으신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "클라이밍 입문 모임",
+      "content": "클라이밍에 관심은 있지만 시작이 두려우셨던 분들! 함께 기초부터 배워봐요. 매주 금요일 저녁 합정 클라이밍짐에서 모입니다. 홀드 잡는 법, 발 디디는 법 등 기본기부터 차근차근 익히고, 점점 높은 난이도에 도전해요. 장비는 대여 가능하고, 운동 후 맥주 한 잔은 필수!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_12.jpg",
+          "name": "exercise_12.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "남녀무관",
+        "age": 20,
+        "date": "2026-02-24",
+        "region": "서울특별시 마포구 합정동",
+        "survey1": "클라이밍 경험이 있으신가요?",
+        "survey2": "고소공포증이 있으신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "복싱 다이어트 모임",
+      "content": "복싱으로 스트레스 날리고 살도 빼요! 신사동 복싱장에서 매주 화목 저녁에 모입니다. 기본 스텝부터 잽, 스트레이트, 훅까지 재미있게 배우면서 칼로리도 불태워요. 복싱 초보자도 전혀 문제없어요. 트레이너님이 친절하게 알려주십니다. 다이어트 식단 공유도 해요!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_13.jpg",
+          "name": "exercise_13.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "남녀무관",
+        "age": 20,
+        "date": "2026-02-25",
+        "region": "서울특별시 강남구 신사동",
+        "survey1": "복싱 경험이 있으신가요?",
+        "survey2": "운동의 주된 목적이 무엇인가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "새벽 수영 모임",
+      "content": "출근 전 새벽 수영으로 상쾌하게 하루를 시작해요! 매일 아침 6시 종로 수영장에서 모입니다. 약 1시간 자유 수영 후 간단히 샤워하고 출근하면 하루가 달라져요. 아침형 인간이 되고 싶은 분, 수영으로 체력 기르고 싶은 분 모두 환영합니다. 주 3회 이상 참여 가능하신 분이면 좋겠어요!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_14.jpg",
+          "name": "exercise_14.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "남녀무관",
+        "age": 30,
+        "date": "2026-02-26",
+        "region": "서울특별시 종로구 종로동",
+        "survey1": "새벽 운동이 가능하신가요?",
+        "survey2": "수영 실력은 어느 정도인가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "골프 연습 모임",
+      "content": "골프에 입문하셨거나 실력을 키우고 싶으신 분들! 함께 스크린 골프 연습해요. 매주 주말 대치동 스크린골프장에서 2시간씩 연습하고, 서로 스윙 영상 찍어주면서 피드백도 나눠요. 월 1회 필드 라운딩도 계획하고 있어요. 골프 장비 상담이나 구매 팁도 공유합니다!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_15.jpg",
+          "name": "exercise_15.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "남녀무관",
+        "age": 40,
+        "date": "2026-02-27",
+        "region": "서울특별시 강남구 대치동",
+        "survey1": "골프 경력이 어느 정도 되시나요?",
+        "survey2": "평균 스코어는 어느 정도인가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "크로스핏 챌린지",
+      "content": "강도 높은 운동을 좋아하시는 분들! 함께 크로스핏으로 한계를 돌파해봐요. 매주 월수금 저녁 연희동 크로스핏 박스에서 진행합니다. 웨이트리프팅, 짐네스틱, 유산소를 결합한 다양한 WOD를 경험할 수 있어요. 서로 응원하며 성장하는 분위기입니다. 체력에 자신 없어도 스케일링 가능하니 도전해보세요!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_16.jpg",
+          "name": "exercise_16.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "남녀무관",
+        "age": 20,
+        "date": "2026-02-28",
+        "region": "서울특별시 서대문구 연희동",
+        "survey1": "고강도 운동 경험이 있으신가요?",
+        "survey2": "현재 체력 수준은 어느 정도라고 생각하시나요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "탁구 동호회",
+      "content": "퇴근 후 탁구 한 판 어때요? 매주 화목 저녁 7시 사당동 탁구장에서 모입니다. 초보부터 동호회 수준까지 다양한 실력자들이 모여서 즐겁게 랠리해요. 복식 경기, 리그전도 진행하고, 분기별로 내부 토너먼트도 열어요. 라켓은 대여 가능하고, 운동 후 회식도 종종 있어요!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_17.jpg",
+          "name": "exercise_17.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "남녀무관",
+        "age": 30,
+        "date": "2026-03-01",
+        "region": "서울특별시 동작구 사당동",
+        "survey1": "탁구 실력은 어느 정도인가요?",
+        "survey2": "개인 라켓을 보유하고 계신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "마라톤 완주 도전",
+      "content": "풀코스 마라톤 완주를 목표로 함께 훈련해요! 올림픽공원 러닝 트랙에서 매주 토일 오전에 모입니다. 하프 마라톤 경험자 또는 10km 이상 러닝 가능하신 분들 환영해요. 체계적인 훈련 프로그램과 함께 페이스 조절, 호흡법 등도 배우고, 함께 대회도 출전해요. 완주의 감동을 함께 나눠요!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_18.jpg",
+          "name": "exercise_18.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "남녀무관",
+        "age": 30,
+        "date": "2026-03-02",
+        "region": "서울특별시 송파구 올림픽공원",
+        "survey1": "마라톤 대회 참가 경험이 있으신가요?",
+        "survey2": "현재 10km 기록은 어느 정도인가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "스쿼시 파트너 구함",
+      "content": "스쿼시 같이 치실 파트너를 구합니다! 삼성동 스쿼시장에서 매주 수토 저녁에 연습해요. 비슷한 실력대끼리 매칭해서 게임하고, 서로 영상 찍어주면서 자세 교정도 해요. 스쿼시는 좁은 공간에서 칼로리 소모가 높아서 다이어트에도 효과적이에요. 운동 후 가볍게 식사도 함께해요!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_19.jpg",
+          "name": "exercise_19.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "남",
+        "age": 30,
+        "date": "2026-03-03",
+        "region": "서울특별시 강남구 삼성동",
+        "survey1": "스쿼시 경력이 어느 정도 되시나요?",
+        "survey2": "주로 선호하는 운동 시간대는 언제인가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "줄넘기 다이어트 모임",
+      "content": "간단하지만 효과 좋은 줄넘기로 함께 다이어트해요! 매일 저녁 7시 신림동 공원에서 모여서 30분씩 줄넘기 합니다. 기본 줄넘기부터 이중 뛰기, 교차 뛰기까지 다양한 기술도 배워요. 줄넘기는 장소 제약 없이 언제든 할 수 있어서 꾸준히 하기 좋아요. 체중 변화도 함께 공유하며 서로 동기부여해요!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/exercise_20.jpg",
+          "name": "exercise_20.jpg"
+        }
+      ],
+      "extra": {
+        "category": "운동",
+        "gender": "남녀무관",
+        "age": 20,
+        "date": "2026-03-04",
+        "region": "서울특별시 관악구 신림동",
+        "survey1": "줄넘기를 얼마나 오래 할 수 있으신가요?",
+        "survey2": "운동을 통해 감량하고 싶은 목표 체중이 있으신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 20,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "수제 비누 만들기 클래스",
+      "content": "천연 재료로 나만의 수제 비누를 만들어봐요! 에센셜 오일과 천연 색소를 사용해서 피부에 좋은 비누를 직접 제작합니다. 초보자도 쉽게 따라할 수 있고, 만든 비누는 집에 가져가실 수 있어요. 선물용으로도 딱이에요!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/cooking_1.jpg",
+          "name": "cooking_1.jpg"
+        }
+      ],
+      "extra": {
+        "category": "요리 / 제조",
+        "gender": "남녀무관",
+        "age": 20,
+        "date": "2026-02-15",
+        "region": "서울특별시 관악구 신림동",
+        "survey1": "수공예 경험이 있으신가요?",
+        "survey2": "어떤 향의 비누를 만들고 싶으신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 15,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "홈베이킹 쿠키 클래스",
+      "content": "다양한 모양의 쿠키를 함께 만들어봐요! 버터쿠키, 초코칩쿠키, 아이싱쿠키까지 한 번에 배울 수 있습니다. 베이킹 초보자도 환영해요. 만든 쿠키는 예쁘게 포장해서 가져가실 수 있고, 레시피도 공유해드려요.",
+      "mainImages": [
+        {
+          "path": "uploadFiles/cooking_2.jpg",
+          "name": "cooking_2.jpg"
+        }
+      ],
+      "extra": {
+        "category": "요리 / 제조",
+        "gender": "여",
+        "age": 20,
+        "date": "2026-02-18",
+        "region": "서울특별시 강남구 역삼동",
+        "survey1": "베이킹 경험이 있으신가요?",
+        "survey2": "어떤 종류의 쿠키를 가장 좋아하시나요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 12,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "캔들 공방 원데이 클래스",
+      "content": "향기로운 캔들을 직접 만들어보는 시간! 소이왁스를 사용해 환경 친화적인 캔들을 제작합니다. 다양한 용기와 향을 선택할 수 있고, 완성된 캔들은 바로 가져가실 수 있어요. 집에서 은은한 향기를 즐겨보세요.",
+      "mainImages": [
+        {
+          "path": "uploadFiles/cooking_3.jpg",
+          "name": "cooking_3.jpg"
+        }
+      ],
+      "extra": {
+        "category": "요리 / 제조",
+        "gender": "남녀무관",
+        "age": 30,
+        "date": "2026-02-20",
+        "region": "서울특별시 마포구 연남동",
+        "survey1": "캔들 제작 경험이 있으신가요?",
+        "survey2": "선호하는 향이 있으신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 10,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "이탈리안 파스타 쿠킹 모임",
+      "content": "정통 이탈리안 파스타를 함께 만들어봐요! 직접 면을 반죽하고, 토마토 소스부터 크림 소스까지 다양한 소스를 만들어 봅니다. 요리 후에는 다 같이 맛있게 식사하면서 와인 한 잔도 곁들여요.",
+      "mainImages": [
+        {
+          "path": "uploadFiles/cooking_4.jpg",
+          "name": "cooking_4.jpg"
+        }
+      ],
+      "extra": {
+        "category": "요리 / 제조",
+        "gender": "남녀무관",
+        "age": 30,
+        "date": "2026-02-22",
+        "region": "서울특별시 송파구 잠실동",
+        "survey1": "요리 실력은 어느 정도인가요?",
+        "survey2": "선호하는 파스타 종류가 있으신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 8,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "두부 & 순두부 만들기 체험",
+      "content": "국산 콩으로 직접 두부와 순두부를 만들어보는 전통 체험! 콩을 갈고 끓이고 응고시키는 전 과정을 함께합니다. 직접 만든 따끈한 순두부로 순두부찌개도 끓여 먹어요. 건강한 먹거리에 관심 있는 분들 환영합니다.",
+      "mainImages": [
+        {
+          "path": "uploadFiles/cooking_5.jpg",
+          "name": "cooking_5.jpg"
+        }
+      ],
+      "extra": {
+        "category": "요리 / 제조",
+        "gender": "남녀무관",
+        "age": 40,
+        "date": "2026-02-25",
+        "region": "서울특별시 동작구 사당동",
+        "survey1": "전통 음식 만들기에 관심이 있으신가요?",
+        "survey2": "두부 요리 중 가장 좋아하는 것은 무엇인가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 25,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "뮤지컬 관람 모임",
+      "content": "뮤지컬을 사랑하는 분들 모여라! 매월 인기 뮤지컬을 함께 관람하고 공연 후에는 카페에서 감상평을 나눠요. 혼자 보기 아쉬웠던 분들, 뮤지컬 이야기 나눌 친구가 필요하셨던 분들 환영합니다. 티켓은 단체 할인으로 저렴하게 구매해요!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/culture_1.jpg",
+          "name": "culture_1.jpg"
+        }
+      ],
+      "extra": {
+        "category": "문화 / 공연 / 축제",
+        "gender": "남녀무관",
+        "age": 20,
+        "date": "2026-02-16",
+        "region": "서울특별시 강남구 대치동",
+        "survey1": "좋아하는 뮤지컬 장르가 있으신가요?",
+        "survey2": "월 평균 몇 회 정도 공연을 관람하시나요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 20,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "재즈 클럽 투어",
+      "content": "서울의 숨은 재즈 클럽을 함께 탐방해요! 매주 금요일 밤 다양한 재즈바를 돌아다니며 라이브 공연을 즐깁니다. 재즈 초보자도 환영해요. 음악과 함께 와인 한 잔 기울이며 여유로운 밤을 보내봐요.",
+      "mainImages": [
+        {
+          "path": "uploadFiles/culture_2.jpg",
+          "name": "culture_2.jpg"
+        }
+      ],
+      "extra": {
+        "category": "문화 / 공연 / 축제",
+        "gender": "남녀무관",
+        "age": 30,
+        "date": "2026-02-20",
+        "region": "서울특별시 마포구 합정동",
+        "survey1": "재즈 음악을 좋아하시나요?",
+        "survey2": "선호하는 재즈 스타일이 있으신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 30,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "미술관 도슨트 투어",
+      "content": "서울 시내 미술관을 전문 도슨트와 함께 둘러봐요! 작품에 대한 깊이 있는 해설을 들으며 미술을 더 풍부하게 감상할 수 있습니다. 매월 다른 미술관과 전시를 선정하고, 관람 후에는 근처 카페에서 미술 이야기를 나눠요.",
+      "mainImages": [
+        {
+          "path": "uploadFiles/culture_3.jpg",
+          "name": "culture_3.jpg"
+        }
+      ],
+      "extra": {
+        "category": "문화 / 공연 / 축제",
+        "gender": "여",
+        "age": 20,
+        "date": "2026-02-22",
+        "region": "서울특별시 송파구 잠실동",
+        "survey1": "미술 관람을 자주 하시나요?",
+        "survey2": "관심 있는 미술 장르가 있으신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 15,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "인디밴드 공연 관람 모임",
+      "content": "홍대 인디 씬의 숨은 보석들을 함께 발굴해요! 매주 토요일 밤 홍대 인근 라이브 클럽에서 인디밴드 공연을 관람합니다. 새로운 음악을 발견하는 재미가 있고, 공연 후에는 밴드 멤버들과 대화할 기회도 있어요.",
+      "mainImages": [
+        {
+          "path": "uploadFiles/culture_4.jpg",
+          "name": "culture_4.jpg"
+        }
+      ],
+      "extra": {
+        "category": "문화 / 공연 / 축제",
+        "gender": "남녀무관",
+        "age": 20,
+        "date": "2026-02-25",
+        "region": "서울특별시 마포구 서교동",
+        "survey1": "인디 음악에 관심이 있으신가요?",
+        "survey2": "좋아하는 음악 장르가 무엇인가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 20,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "연극 동호회",
+      "content": "대학로 소극장 연극을 함께 관람해요! 매주 다양한 장르의 연극을 선정해서 관람하고, 공연 후에는 배우들과의 대화 시간도 참여합니다. 연극의 깊은 매력을 함께 느껴봐요. 연극 입문자도 환영합니다!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/culture_5.jpg",
+          "name": "culture_5.jpg"
+        }
+      ],
+      "extra": {
+        "category": "문화 / 공연 / 축제",
+        "gender": "남녀무관",
+        "age": 30,
+        "date": "2026-02-28",
+        "region": "서울특별시 동작구 흑석동",
+        "survey1": "연극 관람 경험이 있으신가요?",
+        "survey2": "선호하는 연극 장르가 있으신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 16,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "보드게임 정기 모임",
+      "content": "다양한 보드게임을 함께 즐겨요! 매주 토요일 오후에 모여서 전략 게임, 파티 게임, 협동 게임 등 다양한 장르를 플레이합니다. 보드게임 카페에서 진행하며, 게임 룰을 몰라도 친절하게 알려드려요. 새로운 게임을 배우고 싶은 분들 환영!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/game_1.jpg",
+          "name": "game_1.jpg"
+        }
+      ],
+      "extra": {
+        "category": "게임 / 오락",
+        "gender": "남녀무관",
+        "age": 20,
+        "date": "2026-02-14",
+        "region": "서울특별시 강남구 역삼동",
+        "survey1": "보드게임 경험이 있으신가요?",
+        "survey2": "선호하는 보드게임 장르가 있으신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 10,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "방탈출 카페 정복 모임",
+      "content": "서울의 다양한 방탈출 카페를 함께 정복해봐요! 매주 새로운 테마의 방탈출에 도전하고, 클리어 후에는 근처에서 맛있는 식사도 함께해요. 방탈출 초보자도 환영! 팀워크를 발휘해서 함께 문제를 풀어나가요.",
+      "mainImages": [
+        {
+          "path": "uploadFiles/game_2.jpg",
+          "name": "game_2.jpg"
+        }
+      ],
+      "extra": {
+        "category": "게임 / 오락",
+        "gender": "남녀무관",
+        "age": 20,
+        "date": "2026-02-18",
+        "region": "서울특별시 마포구 홍대입구",
+        "survey1": "방탈출 경험이 있으신가요?",
+        "survey2": "선호하는 방탈출 테마가 있으신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 8,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "닌텐도 스위치 게임 모임",
+      "content": "닌텐도 스위치로 함께 게임해요! 마리오카트, 스매시브라더스, 마리오파티 등 멀티플레이 게임을 즐깁니다. 매주 일요일 오후에 모여서 토너먼트도 열고, 신작 게임 정보도 공유해요. 게임 실력은 상관없어요!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/game_3.jpg",
+          "name": "game_3.jpg"
+        }
+      ],
+      "extra": {
+        "category": "게임 / 오락",
+        "gender": "남녀무관",
+        "age": 20,
+        "date": "2026-02-21",
+        "region": "서울특별시 송파구 잠실동",
+        "survey1": "닌텐도 스위치를 보유하고 계신가요?",
+        "survey2": "좋아하는 닌텐도 게임이 있으신가요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 12,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "마피아 게임 클럽",
+      "content": "심리 추리 게임의 꽃, 마피아 게임을 함께해요! 매주 금요일 저녁에 모여서 치열한 두뇌 싸움을 벌입니다. 시민과 마피아의 긴장감 넘치는 대결! 말빨과 눈치가 전부인 게임에서 여러분의 실력을 뽐내보세요.",
+      "mainImages": [
+        {
+          "path": "uploadFiles/game_4.jpg",
+          "name": "game_4.jpg"
+        }
+      ],
+      "extra": {
+        "category": "게임 / 오락",
+        "gender": "남녀무관",
+        "age": 20,
+        "date": "2026-02-24",
+        "region": "서울특별시 관악구 봉천동",
+        "survey1": "마피아 게임 경험이 있으신가요?",
+        "survey2": "심리 게임을 좋아하시나요?"
+      }
+    },
+    {
+      "seller_id": 2,
+      "price": 0,
+      "quantity": 6,
+      "buyQuantity": 0,
+      "show": true,
+      "active": true,
+      "name": "당구 동호회",
+      "content": "당구를 배우고 싶거나 실력을 키우고 싶은 분들 모여요! 매주 수요일 저녁에 당구장에서 만나서 함께 연습합니다. 4구, 3쿠션 등 다양한 종목을 즐기고, 실력자 분들이 초보자분들께 팁도 알려드려요. 게임 후에는 가볍게 맥주 한잔!",
+      "mainImages": [
+        {
+          "path": "uploadFiles/game_5.jpg",
+          "name": "game_5.jpg"
+        }
+      ],
+      "extra": {
+        "category": "게임 / 오락",
+        "gender": "남",
+        "age": 30,
+        "date": "2026-02-27",
+        "region": "서울특별시 동작구 노량진동",
+        "survey1": "당구 실력은 어느 정도인가요?",
+        "survey2": "선호하는 당구 종목이 있으신가요?"
       }
     }
   ],
