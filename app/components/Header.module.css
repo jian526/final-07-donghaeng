@@ -6,6 +6,10 @@
   height: 60px;
   border-bottom: 1px var(--bg-lavender) solid;
   padding: 0 20px;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 100;
 
   .logo-wrapper {
     img {
@@ -42,6 +46,7 @@
 /* 데스크탑 버전(1024px 이상) */
 @media (min-width: 1024px) {
   .header-wrapper {
+    position: static;
     height: 100px;
     padding: 0 80px;
 

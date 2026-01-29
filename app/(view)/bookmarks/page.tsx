@@ -2,17 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import style from './Bookmarks.module.css';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper';
 
 //Swiper 스타일 import
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import DefaultLayout from '@/app/components/DefaultLayout';
+import Image from 'next/image';
 
 const meetings = [
   {
@@ -58,19 +58,19 @@ function MeetingCard({ meeting }: { meeting: (typeof meetings)[0] }) {
   return (
     <article className={style.card}>
       <div className={style.bookmarkIcon} aria-label="북마크">
-        <img src="/icon/bookmark-on.svg" alt="북마크" width={23} height={29} aria-hidden="true" />
+        <Image src="/icon/bookmark-on.svg" alt="북마크" width={23} height={29} aria-hidden="true" />
       </div>
       <div className={style.cardContent}>
         <figure className={style.imageWrapper}>
           <div className={style.characterImage} role="img" aria-label="모임 대표 이미지"></div>
-          <figcaption className={style.srOnly}>모임 대표 이미지</figcaption>
+          <figcaption className={'sr-only'}>모임 대표 이미지</figcaption>
         </figure>
         <div className={style.infoWrapper}>
           <h2 className={style.cardTitle}>{meeting.title}</h2>
           <ul className={style.infoList}>
             <li className={style.infoItem}>
               <span className={style.bullet} aria-hidden="true">
-                <img src="/icon/tag.svg" width={18} height={18} alt="장소 아이콘" />
+                <Image src="/icon/tag.svg" width={18} height={18} alt="장소 아이콘" />
               </span>
               <p>
                 {meeting.category.location}. {meeting.category.theme}
@@ -78,7 +78,7 @@ function MeetingCard({ meeting }: { meeting: (typeof meetings)[0] }) {
             </li>
             <li className={style.infoItem}>
               <span className={style.bullet} aria-hidden="true">
-                <img src="/icon/info.svg" width={18} height={18} alt="정보 아이콘" />
+                <Image src="/icon/info.svg" width={18} height={18} alt="정보 아이콘" />
               </span>
               <p>
                 {meeting.category.age}, {meeting.category.gender}
@@ -86,13 +86,13 @@ function MeetingCard({ meeting }: { meeting: (typeof meetings)[0] }) {
             </li>
             <li className={style.infoItem}>
               <span className={style.bullet} aria-hidden="true">
-                <img src="/icon/people.svg" width={18} height={18} alt="사람들 아이콘" />
+                <Image src="/icon/people.svg" width={18} height={18} alt="사람들 아이콘" />
               </span>
               <p>{meeting.category.people}</p>
             </li>
             <li className={style.infoItem}>
               <span className={style.bullet} aria-hidden="true">
-                <img src="/icon/calendar.svg" width={18} height={18} alt="날짜 아이콘" />
+                <Image src="/icon/calendar.svg" width={18} height={18} alt="날짜 아이콘" />
               </span>
               <p>{meeting.date}</p>
             </li>
@@ -100,7 +100,7 @@ function MeetingCard({ meeting }: { meeting: (typeof meetings)[0] }) {
         </div>
       </div>
       <Link href={`/meetings/${meeting.id}`} className={style.arrowIcon}>
-        <img src="/icon/arrow.svg" alt="상세보기" width={20} height={20} />
+        <Image src="/icon/arrow.svg" alt="상세보기" width={20} height={20} />
       </Link>
     </article>
   );
@@ -108,6 +108,31 @@ function MeetingCard({ meeting }: { meeting: (typeof meetings)[0] }) {
 
 export default function BookmarkPage() {
   const [isDesktop, setIsDesktop] = useState(false);
+  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+
+  // 스케일 적용 함수
+  const applyScaleEffect = (swiper: SwiperType) => {
+    swiper.slides.forEach((slide, index) => {
+      slide.style.transition = 'all 0.3s ease';
+      if (index === swiper.activeIndex) {
+        slide.style.transform = 'scale(1)';
+        slide.style.opacity = '1';
+      } else {
+        slide.style.transform = 'scale(0.8)';
+        slide.style.opacity = '0.7';
+      }
+    });
+  };
+
+  // 필터 변경 시 Swiper 업데이트
+  useEffect(() => {
+    if (swiperInstance) {
+      setTimeout(() => {
+        swiperInstance.slideTo(0, 0);
+        applyScaleEffect(swiperInstance);
+      }, 50);
+    }
+  }, [swiperInstance]);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -123,48 +148,42 @@ export default function BookmarkPage() {
   return (
     <>
       <DefaultLayout>
-        <main className={style.main}>
-          <h1 className={style.title}>북마크</h1>
-          <div className={style.cardContainer}>
-            {isDesktop ? (
+        <main className={style.container}>
+          {isDesktop ? (
+            <div className={style.contentWrapper}>
+              <h1 className={style.title}>북마크</h1>
               <Swiper
+                className={style.swiper}
                 modules={[Pagination]}
-                spaceBetween={5}
-                slidesPerView={3}
+                spaceBetween={20}
+                slidesPerView="auto"
                 centeredSlides={true}
                 pagination={{ clickable: true }}
-                className={style.swiper}
+                onSwiper={setSwiperInstance}
                 onSlideChange={(swiper) => {
-                  // 모든 슬라이드 스케일 초기화
-                  swiper.slides.forEach((slide) => {
-                    slide.style.transform = 'scale(0.7)';
-                    slide.style.transition = 'transform 0.1s';
-                  });
-                  // 활성 슬라이드만 1배로
-                  swiper.slides[swiper.activeIndex].style.transform = 'scale(1)';
+                  applyScaleEffect(swiper);
                 }}
                 onInit={(swiper) => {
-                  // 초기 로드시에도 적용
-                  swiper.slides.forEach((slide, index) => {
-                    slide.style.transition = 'transform 0.1s';
-                    slide.style.transform = index === swiper.activeIndex ? 'scale(1)' : 'scale(0.7)';
-                  });
+                  applyScaleEffect(swiper);
                 }}
               >
                 {meetings.map((meeting) => (
-                  <SwiperSlide key={meeting.id} className={style.swiperSlide}>
+                  <SwiperSlide className={style.swiperSlide} key={meeting.id}>
                     <MeetingCard meeting={meeting} />
                   </SwiperSlide>
                 ))}
               </Swiper>
-            ) : (
+            </div>
+          ) : (
+            <div className={style.mobileContentWrapper}>
+              <h1 className={style.title}>북마크</h1>
               <div className={style.mobileCardList}>
                 {meetings.map((meeting) => (
                   <MeetingCard key={meeting.id} meeting={meeting} />
                 ))}
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </main>
       </DefaultLayout>
     </>

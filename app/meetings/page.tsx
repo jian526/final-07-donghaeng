@@ -1,10 +1,8 @@
 'use client';
 
 import style from './MeetingList.module.css';
-import Header from '@/app/components/Header';
-import Footer from '@/app/components/Footer';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DefaultLayout from '@/app/components/DefaultLayout';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper/modules';
@@ -12,68 +10,106 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import BookmarkButton from '@/app/components/BookmarkButton';
 import Filter from '@/app/components/Filter';
+import { Meetings } from '@/types/meetings';
 
 export default function Meetinglist() {
-  const categories = ['전체', '운동', '요리 / 제조', '문화 / 공연 / 축제', '게임 / 오락', '사교', '인문학 / 책 / 글', '아웃도어 / 여행', '음악 / 악기', '업종 / 직무', '외국 / 언어', '공예 / 만들기', '댄스 / 무용', '봉사활동', '사진 / 영상', '자기계발', '스포츠 관람', '반려동물', '자동차 / 바이크'];
+  const categories = ['전체', '운동', '사교', '인문학 / 책 / 글', '아웃도어 / 여행', '음악 / 악기', '업종 / 직무', '문화 / 공연 / 축제', '외국 / 언어', '게임 / 오락', '공예 / 만들기', '댄스 / 무용', '봉사활동', '사진 / 영상', '자기계발', '스포츠 관람', '반려동물', '요리 / 제조', '자동차 / 바이크'];
 
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [searchTerm, setSearchTerm] = useState('');
 
-  // 임시 모임 데이터
-  const meetings = Array.from({ length: 12 }, (_, i) => ({
-    id: i + 1,
-    title: '모임 이름 어쩌구',
-    location: '서울특별시',
-    date: '26.01.31',
-    gender: '성별무관',
-    age: '나이무관',
-    isBookmarked: true,
-  }));
+  const [meetings, setMeetings] = useState<Meetings[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // API에서 모임 데이터 가져오기
+  useEffect(() => {
+    const fetchMeetings = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/products/');
+
+        if (!response.ok) {
+          throw new Error('데이터를 불러오는데 실패했습니다');
+        }
+
+        const data = await response.json();
+
+        // API 응답 구조에 맞게 데이터 매핑
+        // 예시: data.products 또는 data.data 등
+        setMeetings(data.item || data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : '알 수 없는 오류가 발생했습니다');
+        console.error('모임 데이터 로딩 오류:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMeetings();
+  }, []);
+
+  // 날짜 포맷 변환 함수 (예: 2026-01-31 -> 26.01.31)
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const year = String(date.getFullYear()).slice(2);
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}.${month}.${day}`;
+  };
+
+  // 성별 표시 함수
+  const getGenderText = (gender: string) => {
+    if (gender === 'all') return '성별무관';
+    if (gender === 'male') return '남성만';
+    if (gender === 'female') return '여성만';
+    return gender;
+  };
+
+  // 나이 표시 함수
+  const getAgeText = (age: number) => {
+    if (age === 0) return '나이무관';
+    return `${age}세 이상`;
+  };
+
+  // 로딩 상태
+  if (loading) {
+    return (
+      <DefaultLayout>
+        <main className={style.mainLayout}>
+          <div className={style.loadingContainer}>
+            <p>모임 데이터를 불러오는 중...</p>
+          </div>
+        </main>
+      </DefaultLayout>
+    );
+  }
+
+  // 에러 상태
+  if (error) {
+    return (
+      <DefaultLayout>
+        <main className={style.mainLayout}>
+          <div className={style.errorContainer}>
+            <p>오류: {error}</p>
+            <button onClick={() => window.location.reload()}>다시 시도</button>
+          </div>
+        </main>
+      </DefaultLayout>
+    );
+  }
 
   return (
     <>
       <DefaultLayout>
         <main className={style.mainLayout}>
           {/* 데스크톱: 사이드바 카테고리 (왼쪽) */}
-          <aside className={style.sidebar}>
-            <div className={style.categoryListDesktop}>
-              <ul className={style.categoryList}>
-                {categories.map((category, index) => (
-                  <li key={index} className={`${style.categoryItem} ${selectedCategory === category ? style.active : ''}`} onClick={() => setSelectedCategory(category)}>
-                    {category}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </aside>
-          {/* 모바일: 가로 Swiper 슬라이드 */}
-          <div className={style.categoryListMobile}>
-            <Swiper
-              className={style.categorySwiper}
-              modules={[FreeMode]}
-              freeMode={{
-                enabled: true,
-              }}
-              spaceBetween={10}
-              slidesPerView="auto"
-              grabCursor
-            >
-              {categories.map((category) => (
-                <SwiperSlide key={category} className={style.categorySlide}>
-                  <button type="button" className={`${style.categoryChip} ${selectedCategory === category ? style.categoryChipActive : ''}`} onClick={() => setSelectedCategory(category)}>
-                    {category}
-                  </button>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-          <section className={style.mainContent}>
+          <div className={style.topHeader}>
             <div className={style.breadcrumb}>
               <span>홈</span>
               <span className={style.breadcrumbSeparator}>&gt;</span>
               <span className={style.listTitle}>모임 리스트</span>
             </div>
-
             <div className={style.headerSection}>
               <div className={style.titleSection}>
                 <h1 className={style.pageTitle}>{searchTerm || '모임 리스트'}</h1>
@@ -83,41 +119,76 @@ export default function Meetinglist() {
                 <span className={style.mobileText}>모임 등록</span>
               </Link>
             </div>
-
-            <div className={style.meetingBorder}>
-              <div className={style.filterBar}>
-                <Filter />
+          </div>
+          <div className={style.row}>
+            <aside className={style.sidebar}>
+              <div className={style.categoryListDesktop}>
+                <ul className={style.categoryList}>
+                  {categories.map((category, index) => (
+                    <li key={index} className={`${style.categoryItem} ${selectedCategory === category ? style.active : ''}`} onClick={() => setSelectedCategory(category)}>
+                      {category}
+                    </li>
+                  ))}
+                </ul>
               </div>
-
-              <ul className={style.meetingGrid}>
-                {meetings.map((meeting) => (
-                  <li key={meeting.id} className={style.card}>
-                    <Link href={`/meetings/${meeting.id}`}>
-                      <figure className={style.meetingCard}>
-                        <div className={style.cardImage}></div>
-                        <figcaption className={style.cardContent}>
-                          <div className={style.cardHeader}>
-                            <h3 className={style.cardTitle}>{meeting.title}</h3>
-                            <div className={style.bookmarkIcon}>
-                              <BookmarkButton />
-                            </div>
-                          </div>
-                          <div className={style.cardMetadata}>
-                            <p className={style.metadataLine}>
-                              {meeting.location}. {meeting.date}
-                            </p>
-                            <p className={style.metadataLine}>
-                              {meeting.gender}. {meeting.age}
-                            </p>
-                          </div>
-                        </figcaption>
-                      </figure>
-                    </Link>
-                  </li>
+            </aside>
+            {/* 모바일: 가로 Swiper 슬라이드 */}
+            <div className={style.categoryListMobile}>
+              <Swiper
+                className={style.categorySwiper}
+                modules={[FreeMode]}
+                freeMode={{
+                  enabled: true,
+                }}
+                spaceBetween={10}
+                slidesPerView="auto"
+                grabCursor
+              >
+                {categories.map((category) => (
+                  <SwiperSlide key={category} className={style.categorySlide}>
+                    <button type="button" className={`${style.categoryChip} ${selectedCategory === category ? style.categoryChipActive : ''}`} onClick={() => setSelectedCategory(category)}>
+                      {category}
+                    </button>
+                  </SwiperSlide>
                 ))}
-              </ul>
+              </Swiper>
             </div>
-          </section>
+            <section className={style.mainContent}>
+              <div className={style.meetingBorder}>
+                <div className={style.filterBar}>
+                  <Filter />
+                </div>
+
+                <ul className={style.meetingGrid}>
+                  {meetings.map((meeting) => (
+                    <li key={meeting._id} className={style.card}>
+                      <Link href={`/meetings/${meeting._id}`}>
+                        <figure className={style.meetingCard}>
+                          <div className={style.cardImage}></div>
+                          <figcaption className={style.cardContent}>
+                            <div className={style.cardHeader}>
+                              <h3 className={style.cardTitle}>{meeting.title}</h3>
+                              <div className={style.bookmarkIcon}>
+                                <BookmarkButton />
+                              </div>
+                            </div>
+                            <div className={style.cardMetadata}>
+                              <p className={style.metadataLine}>
+                                {meeting.location}. {meeting.date}
+                              </p>
+                              <p className={style.metadataLine}>
+                                {meeting.gender}. {meeting.age}
+                              </p>
+                            </div>
+                          </figcaption>
+                        </figure>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          </div>
         </main>
       </DefaultLayout>
     </>
