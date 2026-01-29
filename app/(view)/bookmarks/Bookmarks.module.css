@@ -15,14 +15,6 @@
   margin-top: 60px; /* title과의 간격 */
 }
 
-.emptyMessage {
-  text-align: center;
-  color: var(--text-black);
-  font-family: var(--sub-font-medium);
-  font-size: 16px;
-  margin-top: 40px;
-}
-
 /* Swiper 컨테이너 */
 .swiper {
   width: 100%;
@@ -54,10 +46,10 @@
   padding: 55px 20px 55px 44px;
 }
 
-.bookmarkIcon {
+.bookmarkIcon img {
   position: absolute;
-  top: 32%;
-  right: 50%;
+  top: -4px;
+  right: 30px;
   cursor: pointer;
 }
 
@@ -89,7 +81,6 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  margin-left: -25px;
 }
 
 .cardTitle {
@@ -97,7 +88,6 @@
   font-size: 24px;
   color: var(--text-navy);
   line-height: 1.4;
-  margin-top: 20px;
   margin-right: 50px;
 }
 
@@ -149,9 +139,13 @@
     max-width: 767px;
   }
 
-  .bookmarkIcon {
-    right: 50%;
-    top: 30%;
+  .imageWrapper {
+    width: 150px;
+    height: 150px;
+  }
+
+  .cardTitle {
+    font-size: 17px;
   }
 
   .infoItem p {
@@ -183,12 +177,7 @@
     align-items: flex-start;
     flex-wrap: wrap;
   }
-  .bookmarkIcon {
-    margin-top: 47px;
-    margin-right: -20px;
-  }
   .infoWrapper {
-    margin-left: 5px;
     gap: 10px;
   }
   .cardTitle {
