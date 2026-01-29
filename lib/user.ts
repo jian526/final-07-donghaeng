@@ -1,7 +1,7 @@
 import { ErrorRes, UserInfoRes } from '@/types/api';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID || '';
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;
+export const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID || '';
 
 /**
  * 회원 정보 조회

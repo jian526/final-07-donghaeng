@@ -6,8 +6,10 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 interface UserStoreState {
   isLogin: boolean;
   user: User | null;
+  isHydrated: boolean; // hydration 완료 여부
   setUser: (user: User) => void;
   resetUser: () => void;
+  setHydrated: (state: boolean) => void;
 }
 
 // 로그인한 사용자 정보를 관리하는 스토어 생성
@@ -16,6 +18,7 @@ interface UserStoreState {
 const UserStore: StateCreator<UserStoreState> = (set) => ({
   isLogin: false,
   user: null,
+  isHydrated: false,
 
   setUser: (user: User) =>
     set({
@@ -23,6 +26,7 @@ const UserStore: StateCreator<UserStoreState> = (set) => ({
       isLogin: true,
     }),
   resetUser: () => set({ user: null, isLogin: false }),
+  setHydrated: (state: boolean) => set({ isHydrated: state }),
 });
 
 // 스토리지를 사용할 경우 (sessionStorage에 저장)
@@ -30,6 +34,9 @@ const useUserStore = create<UserStoreState>()(
   persist(UserStore, {
     name: 'user',
     storage: createJSONStorage(() => localStorage),
+    onRehydrateStorage: () => (state) => {
+      state?.setHydrated(true);
+    },
   })
 );
 

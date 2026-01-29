@@ -1,4 +1,4 @@
-body {
+.main {
   margin: 30px 20px;
 }
 
@@ -84,6 +84,14 @@ body {
   line-height: normal;
   display: block;
   margin-bottom: 20px;
+}
+
+.ok-message {
+  display: block;
+  margin-bottom: 20px;
+  font-family: var(--danger-font) !important;
+  color: var(--text-navy);
+  padding-left: 10px;
 }
 
 .btn {
