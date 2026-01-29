@@ -85,6 +85,8 @@ export default function AiRecommendModal({ open, onClose }: { open: boolean; onC
     preference2: '',
     preference3: '',
   });
+  const [aiResponse, setAiResponse] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const meetings = [
     {
@@ -206,17 +208,44 @@ export default function AiRecommendModal({ open, onClose }: { open: boolean; onC
   const handleClose = () => {
     setStep('intro');
     setAnswers({ age: '', gender: '', preference1: '', preference2: '', preference3: '' });
+    setAiResponse('');
     onClose();
   };
   const handleRetry = () => {
     setStep('intro');
     setAnswers({ age: '', gender: '', preference1: '', preference2: '', preference3: '' });
+    setAiResponse('');
+  };
+
+  // AI 추천 API 호출
+  const fetchRecommendation = async (finalAnswers: typeof answers) => {
+    setIsLoading(true);
+    try {
+      const res = await fetch('/api/ai-recommend', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ answers: finalAnswers }),
+      });
+      const data = await res.json();
+      setAiResponse(data.message);
+    } catch (error) {
+      console.error('AI 추천 요청 실패:', error);
+      setAiResponse('추천을 가져오는데 실패했습니다.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // 선택 처리
   const handleSelect = (key: keyof typeof answers, value: string, nextStep: Step) => {
-    setAnswers((prev) => ({ ...prev, [key]: value }));
+    const newAnswers = { ...answers, [key]: value };
+    setAnswers(newAnswers);
     setStep(nextStep);
+
+    // 마지막 질문에서 result로 넘어갈 때 API 호출
+    if (nextStep === 'result') {
+      fetchRecommendation(newAnswers);
+    }
   };
 
   return (
@@ -340,7 +369,14 @@ export default function AiRecommendModal({ open, onClose }: { open: boolean; onC
           {step === 'result' && (
             <>
               <div className={styles[`mobile-recommend-wrapper`]}>
-                <p>모임을 추천 해드릴게요!</p>
+                {isLoading ? (
+                  <p>AI가 모임을 추천하고 있어요...</p>
+                ) : (
+                  <>
+                    <p>모임을 추천 해드릴게요!</p>
+                    {aiResponse && <p className={styles[`ai-response`]}>{aiResponse}</p>}
+                  </>
+                )}
                 <div className={styles[`meetings-card`]}>
                   <Link href="/meetings/1">
                     <div className={styles[`meetings-info`]}>
