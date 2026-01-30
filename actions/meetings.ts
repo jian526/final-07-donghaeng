@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID || '';
 
-type ActionState = ErrorRes | null;
+export type ActionState = ErrorRes | null;
 
 /**
  * 모임 지원
@@ -69,8 +69,19 @@ export async function createMeeting(prevState: ActionState, formData: FormData):
   const accessToken = formData.get('accessToken');
   formData.delete('accessToken');
 
-  // FormData를 일반 Object로 변환
-  const body = Object.fromEntries(formData.entries());
+  // JSON 문자열을 파싱해서 객체로 변환
+  const mainImagesStr = formData.get('mainImages') as string;
+  const extraStr = formData.get('extra') as string;
+
+  const body = {
+    price: Number(formData.get('price')),
+    shippingFees: Number(formData.get('shippingFees') || 0),
+    name: formData.get('name'),
+    content: formData.get('content'),
+    quantity: Number(formData.get('quantity')),
+    mainImages: mainImagesStr ? JSON.parse(mainImagesStr) : undefined,
+    extra: extraStr ? JSON.parse(extraStr) : undefined,
+  };
 
   let res: Response;
   let data: MeetingsInfoRes | ErrorRes;
@@ -85,6 +96,23 @@ export async function createMeeting(prevState: ActionState, formData: FormData):
       },
       body: JSON.stringify(body),
     });
+
+    // 에러 응답 상세 로깅 추가
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      console.error('❌ API 에러 응답 (422):');
+      console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+
+      try {
+        const errorData = JSON.parse(errorText);
+        console.error('에러 데이터:', JSON.stringify(errorData, null, 2));
+      } catch {
+        console.error('응답 본문:', errorText);
+      }
+
+      console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    }
 
     data = await res.json();
   } catch (error) {
