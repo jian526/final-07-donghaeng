@@ -21,16 +21,16 @@ export default function Filter() {
             <option value="" disabled hidden>
               카테고리
             </option>
-            <option value="전체">전체</option>
             <option value="운동">운동</option>
+            <option value="요리 / 제조">요리 / 제조</option>
+            <option value="문화 / 공연 / 축제">문화 / 공연 / 축제</option>
+            <option value="게임 / 오락">게임 / 오락</option>
             <option value="사교">사교</option>
             <option value="인문학 / 책 / 글">인문학 / 책 / 글</option>
             <option value="아웃도어 / 여행">아웃도어 / 여행</option>
             <option value="음악 / 악기">음악 / 악기</option>
             <option value="업종 / 직무">업종 / 직무</option>
-            <option value="문화 / 공연 / 축제">문화 / 공연 / 축제</option>
             <option value="외국 / 언어">외국 / 언어</option>
-            <option value="게임 / 오락">게임 / 오락</option>
             <option value="공예 / 만들기">공예 / 만들기</option>
             <option value="댄스 / 무용">댄스 / 무용</option>
             <option value="봉사활동">봉사활동</option>
@@ -38,7 +38,6 @@ export default function Filter() {
             <option value="자기계발">자기계발</option>
             <option value="스포츠 관람">스포츠 관람</option>
             <option value="반려동물">반려동물</option>
-            <option value="요리 / 제조">요리 / 제조</option>
             <option value="자동차 / 바이크">자동차 / 바이크</option>
           </select>
           <svg width="13" height="9" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,6 +66,7 @@ export default function Filter() {
             </option>
             <option value="남">남</option>
             <option value="여">여</option>
+            <option value="남녀무관">남녀무관</option>
           </select>
           <svg width="13" height="9" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -98,6 +98,10 @@ export default function Filter() {
               지역
             </option>
             <option value="종로구">종로구</option>
+            <option value="강남구">강남구</option>
+            <option value="송파구">송파구</option>
+            <option value="마포구">마포구</option>
+            <option value="관악구">관악구</option>
             <option value="중구">중구</option>
             <option value="용산구">용산구</option>
             <option value="성동구">성동구</option>
@@ -110,17 +114,13 @@ export default function Filter() {
             <option value="노원구">노원구</option>
             <option value="은평구">은평구</option>
             <option value="서대문구">서대문구</option>
-            <option value="마포구">마포구</option>
             <option value="양천구">양천구</option>
             <option value="강서구">강서구</option>
             <option value="구로구">구로구</option>
             <option value="금천구">금천구</option>
             <option value="영등포구">영등포구</option>
             <option value="동작구">동작구</option>
-            <option value="관악구">관악구</option>
             <option value="서초구">서초구</option>
-            <option value="강남구">강남구</option>
-            <option value="송파구">송파구</option>
           </select>
           <svg width="13" height="9" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
