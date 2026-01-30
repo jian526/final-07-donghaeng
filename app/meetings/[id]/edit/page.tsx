@@ -1,17 +1,201 @@
 'use client';
 
 import Link from 'next/link';
-import style from './edit.module.css';
+import style from './create.module.css';
 import DefaultLayout from '@/app/components/DefaultLayout';
+import { useActionState, useEffect, useState, useTransition } from 'react';
+import useUserStore from '@/zustand/userStore';
+
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { ActionState, createMeeting } from '@/actions/meetings';
+import { uploadFile } from '@/actions/file';
 
 export default function Edit() {
+  const router = useRouter();
+  const { user } = useUserStore();
+
+  const initialState: ActionState | null = null;
+  const [state, formAction] = useActionState(createMeeting, initialState);
+  const [, startTransition] = useTransition();
+
+  // 인원 카운터
+  const [count, setCount] = useState(10);
+
+  // 이미지 미리보기
+  const [imagePreview, setImagePreview] = useState<string>('');
+  const [uploadedImage, setUploadedImage] = useState<{ path: string; name: string } | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [, setImgUrl] = useState<string>('');
+
+  // 이미지 업로드 핸들러
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // 파일 크기 검증 (5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert('이미지 크기는 5MB 이하여야 합니다.');
+      return;
+    }
+
+    // 파일 타입 검증
+    if (!file.type.startsWith('image/')) {
+      alert('이미지 파일만 업로드 가능합니다.');
+      return;
+    }
+
+    // 미리보기 생성
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+
+    // 서버에 업로드
+    setIsUploading(true);
+    try {
+      const result = await uploadFile(file);
+
+      if (result.ok) {
+        // 업로드 성공
+        setUploadedImage({
+          path: result.item[0].path,
+          name: result.item[0].name,
+        });
+        setImgUrl(result.item[0].path);
+      } else {
+        alert('이미지 업로드에 실패했습니다.');
+        setImagePreview('');
+      }
+    } catch (error) {
+      console.error('이미지 업로드 오류:', error);
+      alert('이미지 업로드 중 오류가 발생했습니다.');
+      setImagePreview('');
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  // 인원 증가/감소
+  const handleDecrease = () => {
+    if (count > 0) setCount(count - 1);
+  };
+
+  const handleIncrease = () => {
+    if (count < 300) setCount(count + 1);
+  };
+
+  const handleCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value) || 0;
+    if (value >= 0 && value <= 300) {
+      setCount(value);
+    }
+  };
+
+  // 폼 제출 전 처리
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    console.log('=== 폼 제출 시작 ===');
+    console.log('user:', user);
+
+    if (!user || !user.token || !user.token.accessToken) {
+      alert('로그인이 필요합니다.');
+      router.push('/login');
+      return;
+    }
+
+    // 폼 데이터 가져오기
+    const formData = new FormData(e.currentTarget);
+
+    console.log('=== 원본 FormData ===');
+    for (const [key, value] of formData.entries()) {
+      console.log(key, ':', value);
+    }
+
+    // extra 객체 구성
+    const extra = {
+      category: formData.get('category') as string,
+      gender: formData.get('gender') as string,
+      age: parseInt(formData.get('age') as string),
+      date: formData.get('date') as string,
+      region: formData.get('region') as string,
+      survey1: formData.get('question-1') as string,
+      survey2: formData.get('question-2') as string,
+    };
+
+    let finalImage = uploadedImage;
+
+    // 이미지가 없으면 기본 이미지를 업로드
+    if (!uploadedImage) {
+      try {
+        // public 폴더의 기본 이미지를 fetch로 가져오기
+        const response = await fetch('/images/default-img.png');
+        const blob = await response.blob();
+        const file = new File([blob], 'ldefault-img.png', { type: 'image/jpeg' });
+
+        // 서버에 업로드
+        const result = await uploadFile(file);
+
+        if (result.ok) {
+          finalImage = {
+            path: result.item[0].path,
+            name: result.item[0].name,
+          };
+        }
+      } catch (error) {
+        console.error('기본 이미지 업로드 실패:', error);
+        alert('이미지를 선택해주세요!');
+        return;
+      }
+    }
+
+    console.log('=== extra 객체 ===', extra);
+
+    // FormData 재구성
+    const submitData = new FormData();
+    submitData.append('accessToken', user.token.accessToken);
+    submitData.append('name', formData.get('meetings-title') as string);
+    submitData.append('content', formData.get('meetings-content') as string);
+    submitData.append('quantity', count.toString());
+    submitData.append('price', '0');
+    submitData.append('shippingFees', '0');
+
+    // extra 추가
+    submitData.append('mainImages', JSON.stringify([finalImage]));
+    submitData.append('extra', JSON.stringify(extra));
+
+    console.log('=== 최종 submitData ===');
+    for (const [key, value] of submitData.entries()) {
+      console.log(key, ':', value);
+    }
+
+    // Server Action 호출
+    startTransition(() => {
+      formAction(submitData);
+    });
+  };
+
+  // Server Action 결과 처리
+  useEffect(() => {
+    if (!state) return;
+
+    if (state.ok) {
+      alert('모임이 성공적으로 등록되었습니다.');
+      // redirect는 Server Action에서 처리됨
+    } else if (state.message) {
+      alert(state.message);
+    }
+  }, [state]);
+
   return (
     <DefaultLayout>
       <div className={style['wrap']}>
         <div className={style['Edit-wrap']}>
-          <form className={style['meetings-create']}>
+          <form className={style['meetings-create']} onSubmit={handleSubmit}>
             <div className={style['meetings-Edit']}>
-              <h2>모임 수정</h2>
+              <h2>모임 등록</h2>
               <fieldset className={style['title-fieldset']}>
                 <label htmlFor="meetings-title">모임 제목</label>
                 <input className={style['title-input']} type="text" id="meetings-title" name="meetings-title" />
@@ -25,24 +209,24 @@ export default function Edit() {
                     <option value="" disabled>
                       선택
                     </option>
-                    <option value="exercise">운동</option>
-                    <option value="social">사교</option>
-                    <option value="humanities">인문학 / 책 / 글</option>
-                    <option value="outdoor">아웃도어 / 여행</option>
-                    <option value="music">음악 / 악기</option>
-                    <option value="career">업종 / 직무</option>
-                    <option value="culture">문화 / 공연 / 축제</option>
-                    <option value="language">외국 / 언어</option>
-                    <option value="game">게임 / 오락</option>
-                    <option value="craft">공예 / 만들기</option>
-                    <option value="dance">댄스 / 무용</option>
-                    <option value="volunteer">봉사활동</option>
-                    <option value="photo">사진 / 영상</option>
-                    <option value="self_dev">자기계발</option>
-                    <option value="sports_watch">스포츠 관람</option>
-                    <option value="pet">반려동물</option>
-                    <option value="cooking">요리 / 제조</option>
-                    <option value="car_bike">자동차 / 바이크</option>
+                    <option value="운동">운동</option>
+                    <option value="요리 / 제조">요리 / 제조</option>
+                    <option value="문화 / 공연 / 축제">문화 / 공연 / 축제</option>
+                    <option value="게임 / 오락">게임 / 오락</option>
+                    <option value="사교">사교</option>
+                    <option value="인문학 / 책 / 글">인문학 / 책 / 글</option>
+                    <option value="아웃도어 / 여행">아웃도어 / 여행</option>
+                    <option value="음악 / 악기">음악 / 악기</option>
+                    <option value="업종 / 직무">업종 / 직무</option>
+                    <option value="외국 / 언어">외국 / 언어</option>
+                    <option value="공예 / 만들기">공예 / 만들기</option>
+                    <option value="댄스 / 무용">댄스 / 무용</option>
+                    <option value="봉사활동">봉사활동</option>
+                    <option value="사진 / 영상">사진 / 영상</option>
+                    <option value="자기계발">자기계발</option>
+                    <option value="스포츠 관람">스포츠 관람</option>
+                    <option value="반려동물">반려동물</option>
+                    <option value="자동차 / 바이크">자동차 / 바이크</option>
                   </select>
                   <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -63,45 +247,48 @@ export default function Edit() {
                 <label htmlFor="meetings-img-label">모임 이미지</label>
                 <label htmlFor="meetings-img" className="image-box">
                   <div className={style['ractingle-wrap']}>
-                    <div className={style['ractingle']}>
-                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M10.2857 1.28571C10.2857 0.574554 9.71116 0 9 0C8.28884 0 7.71429 0.574554 7.71429 1.28571V7.71429H1.28571C0.574554 7.71429 0 8.28884 0 9C0 9.71116 0.574554 10.2857 1.28571 10.2857H7.71429V16.7143C7.71429 17.4254 8.28884 18 9 18C9.71116 18 10.2857 17.4254 10.2857 16.7143V10.2857H16.7143C17.4254 10.2857 18 9.71116 18 9C18 8.28884 17.4254 7.71429 16.7143 7.71429H10.2857V1.28571Z"
-                          fill="#fff"
-                        />
-                      </svg>
-                    </div>
+                    {imagePreview ? (
+                      <div className={style['image-preview']}>
+                        <Image src={imagePreview} alt="미리보기" style={{ width: '100%', height: 'auto' }} width={100} height={100} />
+                      </div>
+                    ) : (
+                      <div className={style['ractingle']}>
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M10.2857 1.28571C10.2857 0.574554 9.71116 0 9 0C8.28884 0 7.71429 0.574554 7.71429 1.28571V7.71429H1.28571C0.574554 7.71429 0 8.28884 0 9C0 9.71116 0.574554 10.2857 1.28571 10.2857H7.71429V16.7143C7.71429 17.4254 8.28884 18 9 18C9.71116 18 10.2857 17.4254 10.2857 16.7143V10.2857H16.7143C17.4254 10.2857 18 9.71116 18 9C18 8.28884 17.4254 7.71429 16.7143 7.71429H10.2857V1.28571Z"
+                            fill="#fff"
+                          />
+                        </svg>
+                      </div>
+                    )}
                   </div>
                 </label>
-                <input type="file" id="meetings-img" name="meetings-img" accept="image/*" hidden />
-              </fieldset>
-
-              <fieldset className={style['tag-fieldset']}>
-                <label htmlFor="tag">모임 태그</label>
-                <br />
-                <input className={style['tag-input']} type="text" name="tag" id="tag" />
+                <input type="file" id="meetings-img" name="meetings-img" accept="image/*" onChange={handleImageChange} disabled={isUploading} hidden />
+                {isUploading && <p>업로드 중...</p>}
               </fieldset>
 
               <div className={style['field-parent-wrap']}>
-                <fieldset className={style['region-fieldset']}>
-                  <label htmlFor="region" className={style['region-label']}>
-                    지역
-                  </label>
-                  <button type="button" className={`${style['select-btn']} ${style['btn']}`}>
-                    {' '}
-                    {'\u002B'} 추가
-                  </button>
+                <fieldset className={style['date-fieldset']}>
+                  <label htmlFor="date">날짜</label>
+
+                  <input type="date" className={style['date-input']} id="date" name="date" required min={new Date().toISOString().split('T')[0]} />
                 </fieldset>
 
-                {/* #TODO 추가버튼을 누르면 모달창 뜨게 하기! */}
+                <fieldset className={style['region-fieldset']}>
+                  <label htmlFor="region" className={style['region-label']}>
+                    장소
+                  </label>
+                  <input className={`${style['region-input']} `} type="text" name="region" id="region" placeholder="모임 장소를 입력해주세요" required></input>
+                </fieldset>
 
                 <fieldset className={style['gender-fieldset']}>
                   <label htmlFor="gender">성별</label>
                   <div>
                     <select className={style['select-btn']} required id="gender" name="gender">
                       <option value="" disabled defaultValue=""></option>
-                      <option value="m">남</option>
-                      <option value="f">여</option>
+                      <option value="남">남</option>
+                      <option value="여">여</option>
+                      <option value="무관">무관</option>
                     </select>
                     <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -117,10 +304,10 @@ export default function Edit() {
                   <div>
                     <select required id="age" name="age" className={style['select-btn']}>
                       <option value="" disabled defaultValue=""></option>
-                      <option value="teen">10대</option>
-                      <option value="twenties">20대</option>
-                      <option value="thirties">30대</option>
-                      <option value="forties_plus">40대 이상</option>
+                      <option value="10">10대</option>
+                      <option value="20">20대</option>
+                      <option value="30">30대</option>
+                      <option value="40">40대 이상</option>
                     </select>
                     <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -139,13 +326,13 @@ export default function Edit() {
                   (0~300)명
                 </label>
                 <div className={style['counter-wrapper']}>
-                  <button type="button" className={style['count-btn, descrase']}>
+                  <button type="button" className={style['count-btn, descrase']} onClick={handleDecrease}>
                     <svg width="18" height="3" viewBox="0 0 18 3" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M0 1.5C0 0.670312 0.574554 0 1.28571 0H16.7143C17.4254 0 18 0.670312 18 1.5C18 2.32969 17.4254 3 16.7143 3H1.28571C0.574554 3 0 2.32969 0 1.5Z" fill="#323577" />
                     </svg>
                   </button>
-                  <input type="number" id="count-input" name="count-input" min="0" max="300" defaultValue={10} />
-                  <button type="button" className={style['count-btn, increase']}>
+                  <input type="number" id="count-input" name="count-input" min="0" max="300" value={count} onChange={handleCountChange} readOnly />
+                  <button type="button" className={style['count-btn, increase']} onClick={handleIncrease}>
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M10.2857 1.28571C10.2857 0.574554 9.71116 0 9 0C8.28884 0 7.71429 0.574554 7.71429 1.28571V7.71429H1.28571C0.574554 7.71429 0 8.28884 0 9C0 9.71116 0.574554 10.2857 1.28571 10.2857H7.71429V16.7143C7.71429 17.4254 8.28884 18 9 18C9.71116 18 10.2857 17.4254 10.2857 16.7143V10.2857H16.7143C17.4254 10.2857 18 9.71116 18 9C18 8.28884 17.4254 7.71429 16.7143 7.71429H10.2857V1.28571Z"
@@ -171,17 +358,16 @@ export default function Edit() {
                 </fieldset>
               </div>
             </div>
+            <br />
+            <div className={style['btn-wrap']}>
+              <button className={style['btn']} type="submit">
+                등록
+              </button>
+              <button className={style['btn-2']} type="button">
+                <Link href={'/meetings'}>취소</Link>
+              </button>
+            </div>
           </form>
-          <br />
-          <div className={style['btn-wrap']}>
-            <button className={style['btn']} type="submit">
-              {/* #TODO 구현시 livk 삭제 예정! */}
-              <Link href={'/meetings'}>수정</Link>
-            </button>
-            <button className={style['btn-2']} type="button">
-              <Link href={'/meetings'}>취소</Link>
-            </button>
-          </div>
         </div>
       </div>
     </DefaultLayout>
