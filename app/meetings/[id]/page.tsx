@@ -35,7 +35,7 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
                 <h1 className={style.title}>{meeting.name}</h1>
                 <p className={style.dates}>{meeting.extra.date}</p>
               </div>
-              <BookmarkButton meetingId={meeting._id} meetingId={meeting._id} width={27} height={35} desktopWidth={40} desktopHeight={45} />
+              <BookmarkButton meetingId={meeting._id} width={27} height={35} desktopWidth={40} desktopHeight={45} />
             </div>
             <div className={style.contentBody}>
               <p>{meeting.content}</p>
