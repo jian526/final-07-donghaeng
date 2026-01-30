@@ -97,7 +97,7 @@ export async function createMeeting(prevState: ActionState, formData: FormData):
       body: JSON.stringify(body),
     });
 
-    // 🔥 에러 응답 상세 로깅 추가
+    // 에러 응답 상세 로깅 추가
     if (!res.ok) {
       const errorText = await res.text();
       console.error('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');

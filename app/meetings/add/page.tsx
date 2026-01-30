@@ -223,7 +223,7 @@ export default function Add() {
                   <div className={style['ractingle-wrap']}>
                     {imagePreview ? (
                       <div className={style['image-preview']}>
-                        <img src={imagePreview} alt="미리보기" style={{ width: '100%', height: 'auto' }} />
+                        <Image src={imagePreview} alt="미리보기" style={{ width: '100%', height: 'auto' }} width={100} height={100} />
                       </div>
                     ) : (
                       <div className={style['ractingle']}>
