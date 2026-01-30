@@ -1,10 +1,25 @@
 .mainLayout {
   flex: 1;
   display: flex;
-  max-width: 1761px;
+  flex-direction: column;
+  max-width: 1760px;
   margin: 0 auto;
   width: 100%;
   padding: 45px 40px 185px 80px;
+  gap: 40px;
+}
+
+.topHeader {
+  position: relative;
+  top: 0;
+  left: 10px;
+  max-width: 1760px;
+}
+.titleSection {
+  width: 100%;
+}
+.row {
+  display: flex;
   gap: 40px;
 }
 
@@ -14,19 +29,6 @@
   flex-shrink: 0;
   background-color: var(--bg-white);
   border: var(--border-sky);
-}
-
-.sidebarTitle {
-  font-family: var(--main-font);
-  font-size: 1.25rem;
-  color: var(--text-black);
-  margin: 0 0 1.5rem 0;
-  font-weight: bold;
-}
-
-.sidebarTitle span {
-  color: var(--text-gray);
-  font-weight: normal;
 }
 
 .categoryList {
@@ -42,6 +44,7 @@
   padding: 0.75rem 1rem;
   font-family: var(--sub-font-medium);
   font-size: 1rem;
+  white-space: nowrap;
   color: var(--text-black);
   cursor: pointer;
   border-radius: 8px;
@@ -63,7 +66,7 @@
 .categoryListDesktop {
   display: block;
   border: 5px solid var(--border-sky);
-  padding: 40px 50px;
+  padding: 37px 89px 37px 50px;
   border-radius: 25px;
 }
 
@@ -129,9 +132,11 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  margin-left: 5px;
   font-family: var(--sub-font-medium);
   font-size: 13px;
   color: var(--text-gray);
+  margin-bottom: 15px;
 }
 
 .breadcrumbSeparator {
@@ -141,20 +146,13 @@
 
 .headerSection {
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-}
-
-.titleSection {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .pageTitle {
   font-family: var(--main-font);
-  font-size: 2rem;
+  font-size: 32px;
   color: var(--text-black);
   margin: 0;
   font-weight: bold;
@@ -200,84 +198,10 @@
 .filterBar {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 50px;
 }
 .filterBar div {
   display: flex;
-}
-.subContainer {
-  position: relative;
-  display: inline-block;
-}
-
-.subContainer img {
-  position: absolute;
-  right: 30px;
-  top: 22%;
-  width: 13px;
-  height: 9px;
-  transform: translateY(-50%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.filterBar select {
-  margin-right: 20px;
-  /* 기본 화살표 숨기기 */
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: none;
-}
-
-.filterButton {
-  width: 111px;
-  height: 40px;
-  padding: 10px 15px 10px 20px;
-  margin-bottom: 50px;
-  line-height: 20px;
-  background-color: var(--bg-white);
-  border: 2px solid var(--border-lavender);
-  border-radius: 50px;
-  font-family: var(--sub-font-medium);
-  font-size: 16px;
-  color: var(--text-navy);
-  cursor: pointer;
-  display: block;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  /* 기본 화살표 숨기기 */
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: none;
-}
-
-.placeFilterButton {
-  width: 130px;
-  height: 40px;
-  padding: 10px 15px 10px 20px;
-  margin-bottom: 50px;
-  line-height: 20px;
-  background-color: var(--bg-white);
-  border: 2px solid var(--border-lavender);
-  border-radius: 50px;
-  font-family: var(--sub-font-medium);
-  font-size: 16px;
-  color: var(--text-navy);
-  cursor: pointer;
-  display: block;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  /* 기본 화살표 숨기기 */
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: none;
-}
-
-.filterButton:hover {
-  background-color: var(--bg-lightlavender);
-  border-color: var(--c-purple-300);
 }
 
 .meetingBorder {
@@ -346,11 +270,13 @@
   justify-content: space-between;
   align-items: flex-start;
   margin-top: 10px;
+  width: 70%;
 }
 
 .cardTitle {
   font-family: var(--sub-font-medium);
   font-size: 24px;
+
   color: var(--text-navy);
   margin-top: 10px;
   margin-bottom: 7px;
@@ -361,11 +287,6 @@
   position: absolute;
   top: 70px;
   right: 0px;
-  transition: transform 0.2s ease;
-}
-
-.bookmarkIcon:hover {
-  transform: scale(1.1);
 }
 
 .cardMetadata {
@@ -380,46 +301,8 @@
   margin: 0;
 }
 
-/* 태블릿 큰 화면 (1200px 이하) */
-@media (max-width: 1200px) {
-  .meetingBorder {
-    padding: 30px;
-  }
-
-  .meetingGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
-
-  .registerButton {
-    width: 180px;
-    padding: 18px 30px;
-    height: 60px;
-  }
-  .filterButton {
-    width: 88px;
-    height: 40px;
-    font-size: 16px;
-  }
-}
-
 /* 태블릿 (1024px 이하) */
 @media (max-width: 1024px) {
-  .mainLayout {
-    padding: 30px 20px 120px 40px;
-    gap: 30px;
-  }
-
-  .sidebar {
-    width: 200px;
-  }
-
-  .meetingBorder {
-    padding: 25px;
-  }
-}
-/* 모바일 (768px 이하) */
-@media (max-width: 900px) {
   .mainLayout {
     flex-direction: column;
     padding: 20px 15px 100px 15px;
@@ -431,8 +314,12 @@
     display: none;
   }
 
+  .row {
+    display: flex;
+    flex-direction: column;
+  }
   .categoryList {
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 0.5rem;
   }
@@ -444,18 +331,20 @@
   /* 모바일 Swiper 표시 */
   .categoryListMobile {
     display: block;
-    overflow: hidden;
+    width: 100%;
+    overflow-x: hidden;
     border-bottom: 1px solid var(--border-sky);
     padding-bottom: 10px;
+  }
+
+  .pageTitle {
+    text-align: left;
   }
 
   .categorySwiper {
     overflow: visible;
   }
-  .pageTitle {
-    position: relative;
-    left: 15px;
-  }
+
   .meetingGrid {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -515,6 +404,9 @@
     margin-bottom: 5px;
   }
 
+  .pageTitle {
+    text-align: left;
+  }
   .sidebar {
     width: 100%;
   }
@@ -525,12 +417,17 @@
     flex-direction: column;
     position: relative;
   }
+  .titleSection {
+    display: flex;
+    justify-content: space-between;
+  }
 
   .registerButton {
     width: 88px;
     height: 40px;
     position: absolute;
     right: 15px;
+    border-radius: 50px;
   }
 
   .meetingGrid {
@@ -550,7 +447,7 @@
   }
 
   .filterBar {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
 
   .filterButton {
@@ -559,6 +456,10 @@
     font-size: 0.85rem;
   }
 
+  .mainContent {
+    display: flex;
+    flex-direction: column;
+  }
   .meetingBorder {
     padding: 10px 15px;
     border: none;
@@ -568,11 +469,6 @@
   .meetingCard {
     max-width: 100%;
     height: 100%;
-  }
-
-  .breadcrumb {
-    position: relative;
-    left: 20px;
   }
 }
 
@@ -608,12 +504,5 @@
 
   .metadataLine {
     font-size: 16px;
-  }
-}
-
-/* 모바일 작은 화면 (480px 이하) */
-@media (max-width: 480px) {
-  .meetingCard {
-    min-width: 320px;
   }
 }

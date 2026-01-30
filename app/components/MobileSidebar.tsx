@@ -1,5 +1,7 @@
+'use client';
 import Link from 'next/link';
 import styles from './MobileSidebar.module.css';
+import useUserStore from '@/zustand/userStore';
 
 interface MobileSidebarProps {
   isOpen: boolean;
@@ -7,8 +9,10 @@ interface MobileSidebarProps {
 }
 
 export default function MobileSidebar({ isOpen, onClose }: MobileSidebarProps) {
-  const isLogin = true;
-  const userName = '홍길동';
+  const isLogin = useUserStore((state) => state.isLogin);
+  const user = useUserStore((state) => state.user);
+  const resetUser = useUserStore((state) => state.resetUser);
+  const userName = user?.name ?? '사용자';
   return (
     <>
       {/* 사이드바 열렸을 때 뒷배경을 검고 반투명 하게 할 장치 */}
@@ -42,7 +46,7 @@ export default function MobileSidebar({ isOpen, onClose }: MobileSidebarProps) {
                 </li>
               </ul>
             </div>
-            <button className={styles[`logout-btn`]}>로그아웃</button>
+            <button className={styles[`logout-btn`]} onClick={resetUser}>로그아웃</button>
           </div>
         ) : (
           <ul className={styles[`menu-wrapper`]}>
