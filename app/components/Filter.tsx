@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import styles from './Filter.module.css';
 
-export default function Filter() {
+// onFilterChanges prop을 받아오는데 props의 타입은 key: string, value: string 형태로 받아온다.
+export default function Filter({ onFilterChanges }: { onFilterChanges: (key: string, value: string) => void }) {
   const [date, setDate] = useState('');
 
   // 날짜 포맷 변환 (2026-01-28 -> 01.28)
@@ -17,10 +18,9 @@ export default function Filter() {
     <>
       <div className={styles['filter-div']}>
         <div className={`${styles.wrapper} ${styles['category-display']}`}>
-          <select name="카테고리" id="" defaultValue="">
-            <option value="" disabled hidden>
-              카테고리
-            </option>
+          {/* onChange 이벤트를 통해 선택이 바뀔 때 마다 onFilterChanges를 호출하여 실행 */}
+          <select name="카테고리" id="" defaultValue="" onChange={(e) => onFilterChanges('category', e.target.value)}>
+            <option value="">카테고리</option>
             <option value="운동">운동</option>
             <option value="요리 / 제조">요리 / 제조</option>
             <option value="문화 / 공연 / 축제">문화 / 공연 / 축제</option>
@@ -57,13 +57,18 @@ export default function Filter() {
               fill="#c4d9ff"
             />
           </svg>
-          <input type="date" className={styles.dateInput} min="2026-01-28" onChange={(e) => setDate(e.target.value)} />
+          <input
+            type="date"
+            className={styles.dateInput}
+            min="2026-01-28"
+            onChange={(e) => {
+              (setDate(e.target.value), onFilterChanges('date', e.target.value));
+            }}
+          />
         </div>
         <div className={styles.wrapper}>
-          <select name="성별" id="" defaultValue="">
-            <option value="" disabled hidden>
-              성별
-            </option>
+          <select name="성별" id="" defaultValue="" onChange={(e) => onFilterChanges('gender', e.target.value)}>
+            <option value="">성별</option>
             <option value="남">남</option>
             <option value="여">여</option>
             <option value="남녀무관">남녀무관</option>
@@ -76,10 +81,8 @@ export default function Filter() {
           </svg>
         </div>
         <div className={styles.wrapper}>
-          <select name="나이대" id="" defaultValue="">
-            <option value="" disabled hidden>
-              나이대
-            </option>
+          <select name="나이대" id="" defaultValue="" onChange={(e) => onFilterChanges('age', e.target.value)}>
+            <option value="">나이대</option>
             <option value="10대">10대</option>
             <option value="20대">20대</option>
             <option value="30대">30대</option>
@@ -93,10 +96,8 @@ export default function Filter() {
           </svg>
         </div>
         <div className={styles.wrapper}>
-          <select name="지역" id="" defaultValue="">
-            <option value="" disabled hidden>
-              지역
-            </option>
+          <select name="지역" id="" defaultValue="" onChange={(e) => onFilterChanges('region', e.target.value)}>
+            <option value="">지역</option>
             <option value="종로구">종로구</option>
             <option value="강남구">강남구</option>
             <option value="송파구">송파구</option>
@@ -130,10 +131,8 @@ export default function Filter() {
           </svg>
         </div>
         <div className={styles.wrapper}>
-          <select name="인원" id="" defaultValue="">
-            <option value="" disabled hidden>
-              인원
-            </option>
+          <select name="인원" id="" defaultValue="" onChange={(e) => onFilterChanges('quantity', e.target.value)}>
+            <option value="">인원</option>
             <option value="1 ~ 10명">1 ~ 10명</option>
             <option value="11 ~ 20명">11 ~ 20명</option>
             <option value="21 ~ 30명">21 ~ 30명</option>
