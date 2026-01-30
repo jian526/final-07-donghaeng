@@ -17,6 +17,7 @@ import { Meetings } from '@/types/meetings';
 import BookmarkButton from '@/app/components/BookmarkButton';
 import { getMyAddMeetings } from '@/lib/meetings';
 import useUserStore from '@/zustand/userStore';
+import { getAgeText, getGenderText } from '@/lib/common';
 
 // 날짜 포맷 변환 함수
 const formatDate = (dateString: string) => {
@@ -30,20 +31,6 @@ const formatDate = (dateString: string) => {
   const period = hours >= 12 ? '오후' : '오전';
   const hour12 = hours % 12 || 12;
   return `${year}.${month}.${day}(${dayName}) ${period} ${hour12}:00`;
-};
-
-// 성별 표시 함수
-const getGenderText = (gender: string) => {
-  if (gender === 'all') return '남녀무관';
-  if (gender === 'male') return '남성만';
-  if (gender === 'female') return '여성만';
-  return gender;
-};
-
-// 나이 표시 함수
-const getAgeText = (age: number) => {
-  if (age === 0) return '전연령';
-  return `${age}세 이상`;
 };
 
 //카드 컴포넌트 분리
@@ -134,6 +121,7 @@ export default function ManageAllPage() {
 
   // 스케일 적용 함수
   const applyScaleEffect = (swiper: SwiperType) => {
+    if (!swiper.slides) return;
     swiper.slides.forEach((slide, index) => {
       slide.style.transition = 'all 0.3s ease';
       if (index === swiper.activeIndex) {
