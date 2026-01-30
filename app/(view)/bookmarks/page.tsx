@@ -13,7 +13,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import DefaultLayout from '@/app/components/DefaultLayout';
 import Image from 'next/image';
-import { useBookmarkStore } from '@/app/store/bookmarkStore';
+import { useBookmarkStore } from '@/zustand/bookmarkStore';
 import { Meetings } from '@/types/meetings';
 import BookmarkButton from '@/app/components/BookmarkButton';
 
