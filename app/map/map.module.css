@@ -214,6 +214,7 @@
       max-width: 350px;
       height: 90px;
       border-bottom: 3px solid var(--border-darksky);
+      cursor: pointer;
 
       img {
         border-radius: 25px;
@@ -221,9 +222,9 @@
       }
 
       dt {
-        font-size: 16px;
+        font-size: 14px;
         font-family: var(--main-font);
-        margin-bottom: 5%;
+        margin-bottom: 4%;
       }
 
       dd {
