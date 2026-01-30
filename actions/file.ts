@@ -26,4 +26,3 @@ export async function uploadFile(file: File): Promise<FileUploadRes | ErrorRes> 
   });
   return res.json();
 }
-// 필요한줄 알고 만들었는데... 로그인때는 필요가 없네요 하핫... 정보수정할때 써보시길..._From.지안

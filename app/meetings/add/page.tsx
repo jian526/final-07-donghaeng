@@ -26,23 +26,7 @@ export default function Add() {
   const [imagePreview, setImagePreview] = useState<string>('');
   const [uploadedImage, setUploadedImage] = useState<{ path: string; name: string } | null>(null);
   const [isUploading, setIsUploading] = useState(false);
-  const [imgUrl, setImgUrl] = useState<string>('');
-
-  // 인원 증가/감소
-  const handleDecrease = () => {
-    if (count > 0) setCount(count - 1);
-  };
-
-  const handleIncrease = () => {
-    if (count < 300) setCount(count + 1);
-  };
-
-  const handleCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value) || 0;
-    if (value >= 0 && value <= 300) {
-      setCount(value);
-    }
-  };
+  const [, setImgUrl] = useState<string>('');
 
   // 이미지 업로드 핸들러
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,6 +77,22 @@ export default function Add() {
     }
   };
 
+  // 인원 증가/감소
+  const handleDecrease = () => {
+    if (count > 0) setCount(count - 1);
+  };
+
+  const handleIncrease = () => {
+    if (count < 300) setCount(count + 1);
+  };
+
+  const handleCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value) || 0;
+    if (value >= 0 && value <= 300) {
+      setCount(value);
+    }
+  };
+
   // 폼 제출 전 처리
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -125,6 +125,32 @@ export default function Add() {
       survey2: formData.get('question-2') as string,
     };
 
+    let finalImage = uploadedImage;
+
+    // 이미지가 없으면 기본 이미지를 업로드
+    if (!uploadedImage) {
+      try {
+        // public 폴더의 기본 이미지를 fetch로 가져오기
+        const response = await fetch('/images/default-img.png');
+        const blob = await response.blob();
+        const file = new File([blob], 'ldefault-img.png', { type: 'image/jpeg' });
+
+        // 서버에 업로드
+        const result = await uploadFile(file);
+
+        if (result.ok) {
+          finalImage = {
+            path: result.item[0].path,
+            name: result.item[0].name,
+          };
+        }
+      } catch (error) {
+        console.error('기본 이미지 업로드 실패:', error);
+        alert('이미지를 선택해주세요!');
+        return;
+      }
+    }
+
     console.log('=== extra 객체 ===', extra);
 
     // FormData 재구성
@@ -137,7 +163,7 @@ export default function Add() {
     submitData.append('shippingFees', '0');
 
     // extra 추가
-    submitData.append('mainImages', JSON.stringify([uploadedImage]));
+    submitData.append('mainImages', JSON.stringify([finalImage]));
     submitData.append('extra', JSON.stringify(extra));
 
     console.log('=== 최종 submitData ===');
@@ -250,9 +276,9 @@ export default function Add() {
 
                 <fieldset className={style['region-fieldset']}>
                   <label htmlFor="region" className={style['region-label']}>
-                    지역
+                    장소
                   </label>
-                  <input className={`${style['region-input']} `} type="text" name="region" id="region" placeholder="지역"></input>
+                  <input className={`${style['region-input']} `} type="text" name="region" id="region" placeholder="모임 장소를 입력해주세요" required></input>
                 </fieldset>
 
                 <fieldset className={style['gender-fieldset']}>
@@ -260,9 +286,9 @@ export default function Add() {
                   <div>
                     <select className={style['select-btn']} required id="gender" name="gender">
                       <option value="" disabled defaultValue=""></option>
-                      <option value="m">남</option>
-                      <option value="f">여</option>
-                      <option value="all">무관</option>
+                      <option value="남">남</option>
+                      <option value="여">여</option>
+                      <option value="무관">무관</option>
                     </select>
                     <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -305,7 +331,7 @@ export default function Add() {
                       <path d="M0 1.5C0 0.670312 0.574554 0 1.28571 0H16.7143C17.4254 0 18 0.670312 18 1.5C18 2.32969 17.4254 3 16.7143 3H1.28571C0.574554 3 0 2.32969 0 1.5Z" fill="#323577" />
                     </svg>
                   </button>
-                  <input type="number" id="count-input" name="count-input" min="0" max="300" defaultValue={10} value={count} onChange={handleCountChange} readOnly />
+                  <input type="number" id="count-input" name="count-input" min="0" max="300" value={count} onChange={handleCountChange} readOnly />
                   <button type="button" className={style['count-btn, increase']} onClick={handleIncrease}>
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
