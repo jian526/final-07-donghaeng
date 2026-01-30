@@ -183,24 +183,24 @@ export default function Add() {
                     <option value="" disabled>
                       선택
                     </option>
-                    <option value="exercise">운동</option>
-                    <option value="social">사교</option>
-                    <option value="humanities">인문학 / 책 / 글</option>
-                    <option value="outdoor">아웃도어 / 여행</option>
-                    <option value="music">음악 / 악기</option>
-                    <option value="career">업종 / 직무</option>
-                    <option value="culture">문화 / 공연 / 축제</option>
-                    <option value="language">외국 / 언어</option>
-                    <option value="game">게임 / 오락</option>
-                    <option value="craft">공예 / 만들기</option>
-                    <option value="dance">댄스 / 무용</option>
-                    <option value="volunteer">봉사활동</option>
-                    <option value="photo">사진 / 영상</option>
-                    <option value="self_dev">자기계발</option>
-                    <option value="sports_watch">스포츠 관람</option>
-                    <option value="pet">반려동물</option>
-                    <option value="cooking">요리 / 제조</option>
-                    <option value="car_bike">자동차 / 바이크</option>
+                    <option value="운동">운동</option>
+                    <option value="요리 / 제조">요리 / 제조</option>
+                    <option value="문화 / 공연 / 축제">문화 / 공연 / 축제</option>
+                    <option value="게임 / 오락">게임 / 오락</option>
+                    <option value="사교">사교</option>
+                    <option value="인문학 / 책 / 글">인문학 / 책 / 글</option>
+                    <option value="아웃도어 / 여행">아웃도어 / 여행</option>
+                    <option value="음악 / 악기">음악 / 악기</option>
+                    <option value="업종 / 직무">업종 / 직무</option>
+                    <option value="외국 / 언어">외국 / 언어</option>
+                    <option value="공예 / 만들기">공예 / 만들기</option>
+                    <option value="댄스 / 무용">댄스 / 무용</option>
+                    <option value="봉사활동">봉사활동</option>
+                    <option value="사진 / 영상">사진 / 영상</option>
+                    <option value="자기계발">자기계발</option>
+                    <option value="스포츠 관람">스포츠 관람</option>
+                    <option value="반려동물">반려동물</option>
+                    <option value="자동차 / 바이크">자동차 / 바이크</option>
                   </select>
                   <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
