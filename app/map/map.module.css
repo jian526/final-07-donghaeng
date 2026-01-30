@@ -214,6 +214,7 @@
       max-width: 350px;
       height: 90px;
       border-bottom: 3px solid var(--border-darksky);
+      cursor: pointer;
 
       img {
         border-radius: 25px;

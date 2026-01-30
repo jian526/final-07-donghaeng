@@ -3,6 +3,7 @@
 import tag from '@/public/icon/tag.svg';
 import calender from '@/public/icon/calendar.svg';
 import search from '@/public/icon/search.svg';
+import logo from '@/public/logo/logo.svg';
 import styles from './Map.module.css';
 import Filter from '@/app/components/Filter';
 import DefaultLayout from '@/app/components/DefaultLayout';
@@ -13,7 +14,10 @@ import { Meetings } from '@/types/meetings';
 import { getMeetings } from '@/lib/meetings';
 
 export default function Map() {
+  // api 데이터를 저장하는 배열
   const [meetings, setMeetings] = useState<Meetings[]>([]);
+  // 모임 리스트에서 모임 클릭 시 id를 저장할 state
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchMeetings = async () => {
@@ -40,8 +44,16 @@ export default function Map() {
               </div>
               <ul>
                 {meetings.map((meeting) => (
-                  <li key={meeting._id}>
-                    <Image src={meeting.mainImages[0].path} alt="모임 사진" width={90} height={80} />
+                  // li 클릭 시 해당되는 모임 id 저장
+
+                  <li
+                    key={meeting._id}
+                    onClick={() => {
+                      console.log('클릭한 모임 id:', meeting._id);
+                      setSelectedId(meeting._id);
+                    }}
+                  >
+                    <Image src={meeting.mainImages[0]?.path || logo.src} alt="모임 사진" width={90} height={80} />
                     <div className={styles['meeting-info-li-div']}>
                       <dt>{meeting.name}</dt>
                       <dd>
@@ -57,7 +69,8 @@ export default function Map() {
               </ul>
             </div>
 
-            <KakaoMap width="100%" height="700px" lat={37.5709} lng={126.978} className={styles.map} meetings={meetings} />
+            {/* props로 필요한 정보들 전달 */}
+            <KakaoMap width="100%" height="700px" lat={37.5709} lng={126.978} className={styles.map} meetings={meetings} selectedId={selectedId} />
           </div>
         </main>
       </DefaultLayout>
