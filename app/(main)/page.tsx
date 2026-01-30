@@ -9,6 +9,7 @@ import AiRecommendModal from './components/AiRecommendModal';
 import { useState, useEffect, useMemo } from 'react';
 import { getMeetings } from '@/lib/meetings';
 import { Meetings } from '@/types/meetings';
+import KakaoMap from '@/app/map/KakaoMap';
 
 // 배열에서 랜덤하게 n개 선택
 function getRandomItems<T>(arr: T[], n: number): T[] {
@@ -83,7 +84,7 @@ export default function Main() {
             </Link>
           </div>
           <div className={styles[`map-view`]}>
-            <div className={styles[`map-image`]} role="img" aria-label="지도 이미지" />
+            <KakaoMap lat={37.4986} lng={126.9917} meetings={meetings} />
           </div>
         </section>
         {/* 카테고리 별 리스트 */}
