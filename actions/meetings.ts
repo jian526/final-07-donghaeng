@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID || '';
 
-export type ActionState = ErrorRes | null;
+export type ActionState = { ok: 0 | 1; message: string } | null;
 
 /**
  * 모임 지원

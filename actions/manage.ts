@@ -1,7 +1,8 @@
-import { ActionState } from '@/actions/meetings';
-
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID || '';
+
+export type ActionState = { ok: 0 | 1; message: string } | null;
+
 /**
  * 신청자 목록 승인 및 거절
  * @param {string} accessToken - 인증 토큰
