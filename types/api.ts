@@ -1,10 +1,23 @@
 import { Bookmarks } from '@/types/bookmarks';
+import { Manage } from '@/types/manage';
 import { Meetings } from '@/types/meetings';
 
 // 게시물 목록 조회 결과 타입
 export interface MeetingsListRes {
   ok: 1;
   item: Meetings[];
+}
+
+export interface ManageListRes {
+  ok: 1;
+  item: Manage[];
+}
+
+export interface Answers {
+  extra: {
+    answer1: string;
+    answer2: string;
+  };
 }
 
 // 게시물 상세 조회 결과 타입
