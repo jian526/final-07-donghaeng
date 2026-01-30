@@ -33,7 +33,7 @@ export default function MobileSidebar({ isOpen, onClose }: MobileSidebarProps) {
                   <Link href="/mypage">마이페이지</Link>
                 </li>
                 <li>
-                  <Link href="/meetings">리스트</Link>
+                  <Link href="/meetings">모임</Link>
                 </li>
                 <li>
                   <Link href="/bookmarks">북마크</Link>
@@ -46,7 +46,9 @@ export default function MobileSidebar({ isOpen, onClose }: MobileSidebarProps) {
                 </li>
               </ul>
             </div>
-            <button className={styles[`logout-btn`]} onClick={resetUser}>로그아웃</button>
+            <button className={styles[`logout-btn`]} onClick={resetUser}>
+              로그아웃
+            </button>
           </div>
         ) : (
           <ul className={styles[`menu-wrapper`]}>

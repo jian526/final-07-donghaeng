@@ -1,31 +1,23 @@
 'use client'; // 클라이언트 선언
 
 // 사용할 라이브러리 import
+import tag from '@/public/icon/tag.svg';
+import calender from '@/public/icon/calendar.svg';
+import logo from '@/public/logo/logo.svg';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Script from 'next/script';
 import { Map, MapMarker, CustomOverlayMap, ZoomControl } from 'react-kakao-maps-sdk';
 import styles from './Map.module.css';
 import Image from 'next/image';
-import tag from '@/public/icon/tag.svg';
-import calender from '@/public/icon/calendar.svg';
 import { Meetings } from '@/types/meetings';
-
-// 카카오맵 타입 선언
-interface KakaoMapProps {
-  width?: string;
-  height?: string;
-  lat?: number;
-  lng?: number;
-  className?: string;
-  meetings?: Meetings[];
-}
+import { KakaoMapProps } from '@/types/kakaomap';
 
 // 카카오맵 함수 제작
 /*
-  props로 width, height, lat(위도), lng(경도), css클래스명을 받아옴
+  props로 width, height, lat(위도), lng(경도), css클래스명, 모임 배열, 모임 개인 id를 받아옴
  */
-export default function KakaoMap({ width = '100%', height = '500px', lat = 37.5709, lng = 126.978, className, meetings = [] }: KakaoMapProps) {
+export default function KakaoMap({ width = '100%', height = '500px', lat = 37.5709, lng = 126.978, className, meetings = [], selectedId }: KakaoMapProps) {
   const router = useRouter();
   // 로딩 판별 state
   const [isLoaded, setIsLoaded] = useState(false);
@@ -36,7 +28,12 @@ export default function KakaoMap({ width = '100%', height = '500px', lat = 37.57
   // 클릭한 마커의 모임 데이터 저장 (null이면 오버레이 닫힘)
   // markerData와 같지만 모임 하나만 저장하는 state
   const [selectedMarker, setSelectedMarker] = useState<{ meeting: Meetings; coords: { lat: number; lng: number } } | null>(null);
+
+  // 지도 중심 좌표를 저장하는 state
+  const [center, setCenter] = useState({ lat, lng });
+
   // 페이지 재방문 시 이미 로드된 SDK 감지
+  // sdk 로드 감지 useEffect
   useEffect(() => {
     if (window.kakao && window.kakao.maps) {
       window.kakao.maps.load(() => {
@@ -45,6 +42,7 @@ export default function KakaoMap({ width = '100%', height = '500px', lat = 37.57
     }
   }, []);
 
+  // 주소를 좌표로 변환하는 useEffect
   useEffect(() => {
     // 맵이 로드되지 않은 경우 반환
     if (!isLoaded || meetings.length === 0) return;
@@ -86,10 +84,24 @@ export default function KakaoMap({ width = '100%', height = '500px', lat = 37.57
     // isLoaded나 meetings가 바뀔 때마다 useEffect 실행
   }, [isLoaded, meetings]);
 
+  // 리스트의 모임 클릭 시 오버레이를 여는 useEffect
+  useEffect(() => {
+    // id가 없거나, 데이터의 길이가 0인 경우 반환
+    if (selectedId === null || markerData.length === 0) return;
+
+    // find를 통해 markerData와 같은 모임 id를 찾아 found에 저장
+    const found = markerData.find((item) => item.meeting._id === selectedId);
+    console.log('찾은 결과:', found);
+    if (found) {
+      setSelectedMarker(found);
+      setCenter(found.coords);
+    }
+  }, [selectedId, markerData]);
+
   return (
     // 컴포넌트를 감싸는 div
     <div className={className} style={{ width, height, overflow: 'hidden' }}>
-      {/* Script: 외부 스크립트의 로딩 우선순위를 최적화하여 페이지 서능을 향상시키는 도구 */}
+      {/* Script: 외부 스크립트의 로딩 우선순위를 최적화하여 페이지 성능을 향상시키는 도구 */}
       {/* strategy: 로딩 동작을 미세 조정, afterInteractive: 페이지 일부가 수화된 후 일찍 스크립트를 로드 */}
       <Script
         src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}&libraries=services&autoload=false`}
@@ -101,7 +113,7 @@ export default function KakaoMap({ width = '100%', height = '500px', lat = 37.57
         }}
       />
       {isLoaded ? (
-        <Map center={{ lat, lng }} style={{ width: '100%', height: '100%' }} level={3}>
+        <Map center={center} style={{ width: '100%', height: '100%' }} level={7}>
           {markerData.map((item, index) => (
             <MapMarker key={index} position={item.coords} onClick={() => setSelectedMarker(item)} />
           ))}
@@ -119,7 +131,7 @@ export default function KakaoMap({ width = '100%', height = '500px', lat = 37.57
                 </div>
                 <div className={styles['marker-info-content']}>
                   {/* 모임 사진 */}
-                  <Image src={selectedMarker.meeting.mainImages[0].path} alt="모임 사진" width={80} height={70} className={styles['marker-img']} />
+                  <Image src={selectedMarker.meeting.mainImages[0]?.path || logo.src} alt="모임 사진" width={80} height={70} className={styles['marker-img']} />
 
                   <div className={styles['marker-info']}>
                     {/* 모임 제목 */}

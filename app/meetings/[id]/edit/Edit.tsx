@@ -1,30 +1,37 @@
 'use client';
 
 import Link from 'next/link';
-import style from './create.module.css';
+import style from './edit.module.css';
 import DefaultLayout from '@/app/components/DefaultLayout';
-import { useActionState, useEffect, useState, useTransition } from 'react';
+import { CSSProperties, useActionState, useEffect, useState, useTransition } from 'react';
 import useUserStore from '@/zustand/userStore';
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { ActionState, createMeeting } from '@/actions/meetings';
+import { ActionState, updateMeeting } from '@/actions/meetings';
 import { uploadFile } from '@/actions/file';
+import { Meetings } from '@/types/meetings';
+import { ClipLoader } from 'react-spinners';
 
-export default function Add() {
+interface EditMeetingFormProps {
+  initialData: Meetings;
+  meetingId: string;
+}
+
+export default function Edit({ initialData, meetingId }: EditMeetingFormProps) {
   const router = useRouter();
   const { user } = useUserStore();
 
   const initialState: ActionState | null = null;
-  const [state, formAction] = useActionState(createMeeting, initialState);
+  const [state, formAction] = useActionState(updateMeeting, initialState);
   const [, startTransition] = useTransition();
 
   // 인원 카운터
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(initialData.quantity || 10);
 
   // 이미지 미리보기
-  const [imagePreview, setImagePreview] = useState<string>('');
-  const [uploadedImage, setUploadedImage] = useState<{ path: string; name: string } | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>(initialData.mainImages?.[0]?.path || '');
+  const [uploadedImage, setUploadedImage] = useState<{ path: string; name: string } | null>(initialData.mainImages?.[0] || null);
   const [isUploading, setIsUploading] = useState(false);
   const [, setImgUrl] = useState<string>('');
 
@@ -155,6 +162,7 @@ export default function Add() {
 
     // FormData 재구성
     const submitData = new FormData();
+    submitData.append('_id', meetingId);
     submitData.append('accessToken', user.token.accessToken);
     submitData.append('name', formData.get('meetings-title') as string);
     submitData.append('content', formData.get('meetings-content') as string);
@@ -182,7 +190,7 @@ export default function Add() {
     if (!state) return;
 
     if (state.ok) {
-      alert('모임이 성공적으로 등록되었습니다.');
+      alert('모임이 성공적으로 수정되었습니다.');
       // redirect는 Server Action에서 처리됨
     } else if (state.message) {
       alert(state.message);
@@ -192,20 +200,20 @@ export default function Add() {
   return (
     <DefaultLayout>
       <div className={style['wrap']}>
-        <div className={style['add-wrap']}>
+        <div className={style['Edit-wrap']}>
           <form className={style['meetings-create']} onSubmit={handleSubmit}>
-            <div className={style['meetings-add']}>
-              <h2>모임 등록</h2>
+            <div className={style['meetings-Edit']}>
+              <h2>모임 수정</h2>
               <fieldset className={style['title-fieldset']}>
                 <label htmlFor="meetings-title">모임 제목</label>
-                <input className={style['title-input']} type="text" id="meetings-title" name="meetings-title" />
+                <input className={style['title-input']} type="text" id="meetings-title" name="meetings-title" defaultValue={initialData.name} />
               </fieldset>
 
               <fieldset className={style['category-fieldset']}>
                 <label htmlFor="category">카테고리</label>
 
                 <div className={style['category-div']}>
-                  <select className={style['category-select']} name="category" id="category" required defaultValue="">
+                  <select className={style['category-select']} name="category" id="category" required defaultValue={initialData.extra?.category || ''}>
                     <option value="" disabled>
                       선택
                     </option>
@@ -240,51 +248,54 @@ export default function Add() {
               <fieldset className={style['context-fieldset']}>
                 <label htmlFor="meetings-content">모임 설명</label>
 
-                <textarea className={style['content-input']} id="meetings-content" name="meetings-content" />
+                <textarea className={style['content-input']} id="meetings-content" name="meetings-content" defaultValue={initialData.content} />
               </fieldset>
 
               <fieldset className={style['img-fieldset']}>
                 <label htmlFor="meetings-img-label">모임 이미지</label>
-                <label htmlFor="meetings-img" className="image-box">
-                  <div className={style['ractingle-wrap']}>
-                    {imagePreview ? (
-                      <div className={style['image-preview']}>
-                        <Image src={imagePreview} alt="미리보기" style={{ width: '100%', height: 'auto' }} width={100} height={100} />
-                      </div>
-                    ) : (
-                      <div className={style['ractingle']}>
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M10.2857 1.28571C10.2857 0.574554 9.71116 0 9 0C8.28884 0 7.71429 0.574554 7.71429 1.28571V7.71429H1.28571C0.574554 7.71429 0 8.28884 0 9C0 9.71116 0.574554 10.2857 1.28571 10.2857H7.71429V16.7143C7.71429 17.4254 8.28884 18 9 18C9.71116 18 10.2857 17.4254 10.2857 16.7143V10.2857H16.7143C17.4254 10.2857 18 9.71116 18 9C18 8.28884 17.4254 7.71429 16.7143 7.71429H10.2857V1.28571Z"
-                            fill="#fff"
-                          />
-                        </svg>
-                      </div>
-                    )}
-                  </div>
-                </label>
-                <input type="file" id="meetings-img" name="meetings-img" accept="image/*" onChange={handleImageChange} disabled={isUploading} hidden />
-                {isUploading && <p>업로드 중...</p>}
+
+                <div className={style['ractingle-wrap']}>
+                  <input type="file" id="meetings-img" name="meetings-img" accept="image/*" onChange={handleImageChange} disabled={isUploading} hidden />
+
+                  {isUploading ? (
+                    <div className={style['loading-wrapper']}>
+                      <ClipLoader size={50} color="#323577" />
+                    </div>
+                  ) : imagePreview ? (
+                    <div className={style['image-preview']} onClick={() => document.getElementById('meetings-img')?.click()} style={{ cursor: 'pointer' }}>
+                      <Image src={imagePreview} alt="미리보기" style={{ width: '100%', height: 'auto' }} width={100} height={100} />
+                    </div>
+                  ) : (
+                    <div className={style['ractingle']} onClick={() => document.getElementById('meetings-img')?.click()} style={{ cursor: 'pointer' }}>
+                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M10.2857 1.28571C10.2857 0.574554 9.71116 0 9 0C8.28884 0 7.71429 0.574554 7.71429 1.28571V7.71429H1.28571C0.574554 7.71429 0 8.28884 0 9C0 9.71116 0.574554 10.2857 1.28571 10.2857H7.71429V16.7143C7.71429 17.4254 8.28884 18 9 18C9.71116 18 10.2857 17.4254 10.2857 16.7143V10.2857H16.7143C17.4254 10.2857 18 9.71116 18 9C18 8.28884 17.4254 7.71429 16.7143 7.71429H10.2857V1.28571Z"
+                          fill="#fff"
+                        />
+                      </svg>
+                    </div>
+                  )}
+                </div>
               </fieldset>
 
               <div className={style['field-parent-wrap']}>
                 <fieldset className={style['date-fieldset']}>
                   <label htmlFor="date">날짜</label>
 
-                  <input type="date" className={style['date-input']} id="date" name="date" required min={new Date().toISOString().split('T')[0]} />
+                  <input type="date" className={style['date-input']} id="date" name="date" required min={new Date().toISOString().split('T')[0]} defaultValue={initialData.extra?.date} />
                 </fieldset>
 
                 <fieldset className={style['region-fieldset']}>
                   <label htmlFor="region" className={style['region-label']}>
                     장소
                   </label>
-                  <input className={`${style['region-input']} `} type="text" name="region" id="region" placeholder="모임 장소를 입력해주세요" required></input>
+                  <input className={`${style['region-input']} `} type="text" name="region" id="region" placeholder="모임 장소를 입력해주세요" required defaultValue={initialData.extra?.region}></input>
                 </fieldset>
 
                 <fieldset className={style['gender-fieldset']}>
                   <label htmlFor="gender">성별</label>
                   <div>
-                    <select className={style['select-btn']} required id="gender" name="gender">
+                    <select className={style['select-btn']} required id="gender" name="gender" defaultValue={initialData.extra?.gender || ''}>
                       <option value="" disabled defaultValue=""></option>
                       <option value="남">남</option>
                       <option value="여">여</option>
@@ -302,7 +313,7 @@ export default function Add() {
                 <fieldset className={style['age-fieldset']}>
                   <label htmlFor="age">나이</label>
                   <div>
-                    <select required id="age" name="age" className={style['select-btn']}>
+                    <select required id="age" name="age" className={style['select-btn']} defaultValue={initialData.extra?.age?.toString() || ''}>
                       <option value="" disabled defaultValue=""></option>
                       <option value="10">10대</option>
                       <option value="20">20대</option>
@@ -349,22 +360,22 @@ export default function Add() {
               <div className={style['question']}>
                 <fieldset className={style['question-1-field']}>
                   <label htmlFor="question-1">1번 질문</label>
-                  <input type="text" name="question-1" id="question-1" placeholder="신청자에게 물어볼 질문을 작성하세요" />
+                  <input type="text" name="question-1" id="question-1" placeholder="신청자에게 물어볼 질문을 작성하세요" defaultValue={initialData.extra?.survey1} required />
                 </fieldset>
 
                 <fieldset className={style['question-2-field']}>
                   <label htmlFor="question-2">2번 질문</label>
-                  <input type="text" name="question-2" id="question-2" placeholder="신청자에게 물어볼 질문을 작성하세요" />
+                  <input type="text" name="question-2" id="question-2" placeholder="신청자에게 물어볼 질문을 작성하세요" defaultValue={initialData.extra?.survey2} required />
                 </fieldset>
               </div>
             </div>
             <br />
             <div className={style['btn-wrap']}>
               <button className={style['btn']} type="submit">
-                등록
+                수정
               </button>
               <button className={style['btn-2']} type="button">
-                <Link href={'/meetings'}>취소</Link>
+                <Link href={`/meetings/${meetingId}`}>취소</Link>
               </button>
             </div>
           </form>
