@@ -1,9 +1,18 @@
+/* 필터 전체를 감싸는 div */
+.filter-div {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+/* select를 감싸는 div */
 .wrapper {
   position: relative;
   display: inline-flex;
+  flex: 1 1 auto;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 4px;
   padding: 7px;
   border: 3px solid var(--border-sky);
   border-radius: 50px;
@@ -13,17 +22,31 @@
   font-family: var(--sub-font-medium);
   color: var(--text-navy);
   line-height: 20px;
-  max-width: 110px;
-  min-width: 90px;
-  margin-right: 5px;
-  margin-block: 10px 30px;
+  max-width: 150px;
+  min-width: 0;
+  margin-right: 3px;
+  margin-block: 10px;
+  overflow: hidden;
 
   svg {
     pointer-events: none;
+    flex-shrink: 0;
   }
 
   select {
     cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+
+  /* 날짜 */
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
   }
 }
 

@@ -10,9 +10,13 @@ post {
   auth: inherit
 }
 
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
 body:json {
   {
-    "email": "u1@market.com",
+    "email": "s1@market.com",
     "password": "11111111"
   }
 }
