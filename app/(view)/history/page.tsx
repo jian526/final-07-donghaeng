@@ -13,7 +13,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import DefaultLayout from '@/app/components/DefaultLayout';
-import Image from 'next/image';
 import { Meetings } from '@/types/meetings';
 
 type MeetingWithJoined = Meetings & { joined: boolean; people: number };
