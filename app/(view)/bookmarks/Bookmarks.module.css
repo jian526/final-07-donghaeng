@@ -17,6 +17,7 @@
 
 /* Swiper 컨테이너 */
 .swiper {
+  position: relative;
   width: 100%;
   padding: 60px 20px 80px 20px !important;
   overflow: hidden !important;
@@ -46,10 +47,10 @@
   padding: 55px 20px 55px 44px;
 }
 
-.bookmarkIcon img {
+.bookmarkIcon {
   position: absolute;
-  top: -4px;
-  right: 30px;
+  top: 110px;
+  left: 390px;
   cursor: pointer;
 }
 
@@ -131,6 +132,9 @@
     height: 350px;
   }
 
+  .swiper {
+    padding: 50px 15px 70px 15px !important;
+  }
   .cardContent {
     width: 100%;
   }
@@ -139,84 +143,31 @@
     max-width: 767px;
   }
 
-  .imageWrapper {
-    width: 150px;
-    height: 150px;
+  .cardTitle {
+    font-size: 17px;
   }
-
   .infoItem p {
     font-size: 14px;
   }
-}
-@media (max-width: 768px) {
-  .title {
-    margin-left: 8px;
-  }
-
-  /* 모바일 카드 리스트 */
-  .mobileCardList {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-
-    min-width: 320px;
-  }
-  .card {
-    margin-top: 50px;
-    max-width: 100%;
-    height: auto;
-    padding: 30px 10px 30px 15px;
-    border-radius: 20px;
-  }
-  .cardContent {
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
-  .infoWrapper {
-    gap: 10px;
-  }
-  .cardTitle {
-    height: 60px;
-    font-size: 20px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
   .bookmarkIcon {
-    top: 0;
-    right: 20px;
-  }
-  .imageWrapper {
-    width: 40vw;
-    max-width: 170px;
-    margin-right: 20px;
-    height: auto;
-  }
-  .characterImage {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1;
-    border-radius: 20px;
+    left: 390px;
   }
 
-  .arrowIcon {
-    bottom: 5px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+  .cardTitle {
+    margin-top: 40px;
   }
 }
 
 /* 반응형 - 768px 이하 (모바일) */
 @media (max-width: 768px) {
+  .card {
+    position: relative;
+    top: 20px;
+  }
   .title {
     width: 80%; /* 가운데로 모이게 */
     font-size: 22px;
   }
-
   /* 모바일 컨텐츠 래퍼 */
   .mobileContentWrapper {
     max-width: 560px; /* 컨텐츠를 가운데로 모음 */
@@ -229,7 +180,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 100%;
+    min-width: 320px;
   }
 
   .card {
@@ -260,8 +211,9 @@
   }
 
   .bookmarkIcon {
-    top: 0;
-    right: 20px;
+    top: 47px;
+    right: 10px;
+    left: auto;
   }
 
   .imageWrapper {

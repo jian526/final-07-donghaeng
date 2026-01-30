@@ -1,6 +1,6 @@
 'use client';
 
-import { useBookmarkStore } from '@/app/store/bookmarkStore';
+import { useBookmarkStore } from '@/zustand/bookmarkStore';
 import styles from './BookmarkButton.module.css';
 
 interface BookmarkButtonProps {
