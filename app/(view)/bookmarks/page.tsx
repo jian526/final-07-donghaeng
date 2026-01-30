@@ -149,6 +149,7 @@ export default function BookmarkPage() {
 
   // 스케일 적용 함수
   const applyScaleEffect = (swiper: SwiperType) => {
+    if (!swiper.slides) return;
     swiper.slides.forEach((slide, index) => {
       slide.style.transition = 'all 0.3s ease';
       if (index === swiper.activeIndex) {
