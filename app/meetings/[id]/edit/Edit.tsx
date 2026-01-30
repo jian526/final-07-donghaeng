@@ -255,6 +255,7 @@ export default function Edit({ initialData, meetingId }: EditMeetingFormProps) {
 
                 <div className={style['ractingle-wrap']} onClick={() => document.getElementById('meetings-img')?.click()}>
                   {isUploading && <p>업로드 중...</p>}
+                  {/* #TODO react spinners 넣을 예정! */}
                   <div>
                     <input type="file" id="meetings-img" name="meetings-img" accept="image/*" onChange={handleImageChange} disabled={isUploading} hidden />
                     {imagePreview ? (
