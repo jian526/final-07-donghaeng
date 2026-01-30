@@ -11,29 +11,10 @@ import 'swiper/css/free-mode';
 import BookmarkButton from '@/app/components/BookmarkButton';
 import Filter from '@/app/components/Filter';
 import { Meetings } from '@/types/meetings';
+import useFilter from '@/hooks/useFilter';
 
 export default function Meetinglist() {
-  const categories = [
-    '전체',
-    '운동',
-    '요리 / 제조',
-    '문화 / 공연 / 축제',
-    '게임 / 오락',
-    '인문학 / 책 / 글',
-    '아웃도어 / 여행',
-    '사교',
-    '음악 / 악기',
-    '업종 / 직무',
-    '외국 / 언어',
-    '공예 / 만들기',
-    '댄스 / 무용',
-    '봉사활동',
-    '사진 / 영상',
-    '자기계발',
-    '스포츠 관람',
-    '반려동물',
-    '자동차 / 바이크',
-  ];
+  const categories = ['전체', '운동', '요리 / 제조', '문화 / 공연 / 축제', '게임 / 오락', '인문학 / 책 / 글', '아웃도어 / 여행', '사교', '음악 / 악기', '업종 / 직무', '외국 / 언어', '공예 / 만들기', '댄스 / 무용', '봉사활동', '사진 / 영상', '자기계발', '스포츠 관람', '반려동물', '자동차 / 바이크'];
 
   const [selectedCategory, setSelectedCategory] = useState('전체');
   const [searchTerm, setSearchTerm] = useState('');
@@ -41,6 +22,7 @@ export default function Meetinglist() {
   const [meetings, setMeetings] = useState<Meetings[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { filteredMeetings, handleFilterChange } = useFilter(meetings);
 
   // API에서 모임 데이터 가져오기
   useEffect(() => {
@@ -179,12 +161,12 @@ export default function Meetinglist() {
             <section className={style.mainContent}>
               <div className={style.meetingBorder}>
                 <div className={style.filterBar}>
-                  <Filter />
+                  <Filter onFilterChanges={handleFilterChange} showCategory={false} />
                 </div>
 
                 <ul className={style.meetingGrid}>
-                  {meetings.length > 0 ? (
-                    meetings.map((meeting) => (
+                  {filteredMeetings.length > 0 ? (
+                    filteredMeetings.map((meeting) => (
                       <li key={meeting._id} className={style.card}>
                         <Link href={`/meetings/${meeting._id}`}>
                           <figure className={style.meetingCard}>
