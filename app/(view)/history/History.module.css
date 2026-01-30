@@ -145,6 +145,10 @@ button.active {
 .arrowIcon:hover {
   transform: translateX(4px);
 }
+.mobileContentWrapper {
+  display: flex;
+  justify-content: center;
+}
 
 @media (max-width: 1024px) {
   .container {
