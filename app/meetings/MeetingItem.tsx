@@ -13,7 +13,7 @@ export default function MeetingItem({ meeting }: { meeting: Meetings }) {
             <div
               className={style.cardImage}
               style={{
-                backgroundImage: meeting.mainImages?.[0].path || 'none',
+                backgroundImage: meeting.mainImages?.[0]?.path ? `url(${meeting.mainImages[0].path})` : 'none',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
