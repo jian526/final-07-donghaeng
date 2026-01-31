@@ -47,6 +47,17 @@ export default function BookmarkPage() {
   // 북마크된 모임 필터링 (type이 'product'인 경우)
   const bookmarkedMeetings = bookmarks.filter((bookmark) => bookmark.type === 'product');
 
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
   // 로딩 중인 경우
   if (loading) {
     return (
