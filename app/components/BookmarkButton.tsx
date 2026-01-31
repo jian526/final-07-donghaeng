@@ -1,6 +1,8 @@
 'use client';
 
-import { useBookmarkStore } from '@/zustand/bookmarkStore';
+import useBookmarkStore from '@/zustand/bookmarkStore';
+import useUserStore from '@/zustand/userStore';
+import { addBookmarkToServer, deleteBookmarkFromServer } from '@/lib/bookmarks';
 import styles from './BookmarkButton.module.css';
 
 interface BookmarkButtonProps {
@@ -12,13 +14,39 @@ interface BookmarkButtonProps {
 }
 
 export default function BookmarkButton({ meetingId, width = 20, height = 26, desktopWidth, desktopHeight }: BookmarkButtonProps) {
-  const { toggleBookmark, isBookmarked } = useBookmarkStore();
-  const bookmarked = isBookmarked(meetingId);
+  const { bookmarks, isBookmarked, addBookmark, removeBookmark } = useBookmarkStore();
+  const { user } = useUserStore();
+  const accessToken = user?.token?.accessToken || '';
 
-  const handleClick = (e: React.MouseEvent) => {
+  const bookmarked = isBookmarked(meetingId, 'product');
+  const currentBookmark = bookmarks.find((b) => b.target_id === meetingId && b.type === 'product');
+
+  const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    toggleBookmark(meetingId);
+
+    if (!accessToken) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
+
+    try {
+      if (bookmarked && currentBookmark) {
+        //북마크 삭제
+        const result = await deleteBookmarkFromServer(currentBookmark._id, accessToken);
+        if (result.ok === 1) {
+          removeBookmark(currentBookmark._id);
+        }
+      } else {
+        //북마크 추가
+        const result = await addBookmarkToServer('product', meetingId, accessToken);
+        if (result.ok === 1 && result.item) {
+          addBookmark(result.item);
+        }
+      }
+    } catch (error) {
+      console.error('북마크 토글 에러: ', error);
+    }
   };
 
   const cssVars = {
