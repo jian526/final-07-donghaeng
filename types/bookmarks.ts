@@ -14,5 +14,5 @@ export interface BookmarksResponse {
 
 export interface BookmarkResponse {
   ok: number;
-  item: Bookmarks;
+  item: Bookmarks | null;
 }

@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import useBookmarkStore from '@/zustand/bookmarkStore';
 import useUserStore from '@/zustand/userStore';
 import { addBookmarkToServer, deleteBookmarkFromServer } from '@/lib/bookmarks';
@@ -14,6 +15,7 @@ interface BookmarkButtonProps {
 }
 
 export default function BookmarkButton({ meetingId, width = 20, height = 26, desktopWidth, desktopHeight }: BookmarkButtonProps) {
+  const [isLoading, setIsLoading] = useState(false);
   const { bookmarks, isBookmarked, addBookmark, removeBookmark } = useBookmarkStore();
   const { user } = useUserStore();
   const accessToken = user?.token?.accessToken || '';
@@ -25,11 +27,16 @@ export default function BookmarkButton({ meetingId, width = 20, height = 26, des
     e.preventDefault();
     e.stopPropagation();
 
+    // 로딩 중이라면 정지
+    if (isLoading) return;
+
     if (!accessToken) {
       alert('로그인이 필요합니다.');
       return;
     }
 
+    // 로딩 중이 아니라면 true로 변경
+    setIsLoading(true);
     try {
       if (bookmarked && currentBookmark) {
         //북마크 삭제
@@ -46,6 +53,9 @@ export default function BookmarkButton({ meetingId, width = 20, height = 26, des
       }
     } catch (error) {
       console.error('북마크 토글 에러: ', error);
+      // 최종적으로 통신이 성공했던, 실패했던 통신이 끝나면 로딩 상태를 false로 변경
+    } finally {
+      setIsLoading(false);
     }
   };
 
