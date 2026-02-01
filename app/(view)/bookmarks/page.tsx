@@ -44,8 +44,38 @@ export default function BookmarkPage() {
     fetchBookmarks();
   }, [bookmarks.length, setBookmarks, accessToken]);
 
+<<<<<<< HEAD
   // 북마크된 모임 필터링 (type이 'product'인 경우)
   const bookmarkedMeetings = bookmarks.filter((bookmark) => bookmark.type === 'product');
+=======
+    fetchMeetings();
+  }, []);
+
+  // 스케일 적용 함수
+  const applyScaleEffect = (swiper: SwiperType) => {
+    if (!swiper.slides) return;
+    swiper.slides.forEach((slide, index) => {
+      slide.style.transition = 'all 0.3s ease';
+      if (index === swiper.activeIndex) {
+        slide.style.transform = 'scale(1)';
+        slide.style.opacity = '1';
+      } else {
+        slide.style.transform = 'scale(0.8)';
+        slide.style.opacity = '0.7';
+      }
+    });
+  };
+
+  // 필터 변경 시 Swiper 업데이트
+  useEffect(() => {
+    if (swiperInstance) {
+      setTimeout(() => {
+        swiperInstance.slideTo(0, 0);
+        applyScaleEffect(swiperInstance);
+      }, 50);
+    }
+  }, [swiperInstance]);
+>>>>>>> d13fc14a2a021f5a19a048e66a0397ccf55eba4e
 
   useEffect(() => {
     const checkScreenSize = () => {
