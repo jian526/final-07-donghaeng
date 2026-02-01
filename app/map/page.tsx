@@ -53,7 +53,6 @@ export default function Map() {
               <ul>
                 {filteredMeetings.map((meeting) => (
                   // li 클릭 시 해당되는 모임 id 저장
-
                   <li
                     key={meeting._id}
                     onClick={() => {
