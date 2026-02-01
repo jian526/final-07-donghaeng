@@ -29,36 +29,38 @@ export async function getBookmarksByType(type: string): Promise<BookmarksRespons
   }
 }
 // 북마크 추가
-export const addBookmarkToServer = async (productId: string) => {
+export async function addBookmarkToServer(type: string, target_id: number, accessToken: string): Promise<BookmarkResponse> {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookmarks/product`, {
+    const res = await fetch(`${API_URL}/bookmarks/${type}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Client-Id': process.env.NEXT_PUBLIC_CLIENT_ID || '',
+        'Client-Id': CLIENT_ID,
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify({
-        product_id: Number(productId),
+        target_id: target_id,
         memo: '북마크',
       }),
     });
 
     // 409 Conflict는 이미 북마크가 존재한다는 의미이므로 성공으로 처리
-    if (response.status === 409) {
+    if (res.status === 409) {
       console.log('이미 북마크에 추가된 항목입니다.');
-      return true;
+      return { ok: 0, item: null };
     }
 
-    if (!response.ok) {
+    if (!res.ok) {
       throw new Error('북마크 추가에 실패했습니다.');
     }
 
-    return true;
+    const data = await res.json();
+    return data;
   } catch (error) {
     console.error('북마크 추가 에러:', error);
-    throw error;
+    return { ok: 0, item: null };
   }
-};
+}
 
 //북마크 삭제
 export async function deleteBookmarkFromServer(_id: number, accessToken: string): Promise<{ ok: number }> {

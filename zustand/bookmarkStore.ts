@@ -34,6 +34,9 @@ export interface BookmarkStoreState {
 
   // 스토어 초기화
   resetBookmark: () => void;
+
+  // 북마크 데이터 가져오기
+  fetchBookmarks: (accessToken: string) => Promise<void>;
 }
 
 // 북마크 정보를 관리하는 스토어 생성
@@ -77,12 +80,37 @@ const BookmarkStore: StateCreator<BookmarkStoreState> = (set, get) => ({
       selectedBookmark: null,
       bookmarks: [],
     }),
+
+  fetchBookmarks: async (accessToken: string) => {
+    set({ loading: true });
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookmarks/product`, {
+        cache: 'no-store',
+        headers: {
+          'Content-Type': 'application/json',
+          'Client-Id': process.env.NEXT_PUBLIC_CLIENT_ID || '',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      if (!res.ok) {
+        throw new Error('북마크 데이터를 가져오는데 실패했습니다.');
+      }
+      const data = await res.json();
+      if (data.ok === 1) {
+        set({ bookmarks: data.item });
+      }
+    } catch (error) {
+      console.error('북마크 fetch 에러:', error);
+    } finally {
+      set({ loading: false });
+    }
+  },
 });
 
 const useBookmarkStore = create<BookmarkStoreState>()(BookmarkStore);
 
 // 북마크 데이터를 가져오는 서버 함수
-async function getBookmarks() {
+export async function getBookmarks() {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookmarks`, {
       cache: 'no-store', // 항상 최신 데이터 가져오기
