@@ -77,7 +77,7 @@ export default function Map() {
             </div>
 
             {/* props로 필요한 정보들 전달 */}
-            <KakaoMap width="100%" height="700px" lat={37.5709} lng={126.978} className={styles.map} meetings={filteredMeetings} selectedId={selectedId} />
+            <KakaoMap width="100%" lat={37.5709} lng={126.978} className={styles.map} meetings={filteredMeetings} selectedId={selectedId} />
           </div>
         </main>
       </DefaultLayout>
