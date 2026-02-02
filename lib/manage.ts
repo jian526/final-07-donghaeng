@@ -1,3 +1,4 @@
+'use server';
 import { ErrorRes, ManageListRes } from '@/types/api';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;

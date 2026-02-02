@@ -36,8 +36,9 @@ export async function patchManage(prevState: ActionState, formData: FormData): P
     data = await res.json();
     if (data.ok) {
       updateTag('seller/orders');
+      return { ok: 1, message: '처리가 완료되었습니다.' };
     }
-    return res.json();
+    return { ok: 0, message: (data as ErrorRes).message };
   } catch (error) {
     // 네트워크 오류 처리
     console.error(error);

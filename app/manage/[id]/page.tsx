@@ -51,7 +51,7 @@ export default function ManagePage() {
 
     if (result?.ok === 1) {
       toast.success(isApprove ? '승인되었습니다.' : '거절되었습니다.');
-      // setRefreshKey((prev) => prev + 1);
+      setManage((prev) => prev?.filter((item) => item._id !== applicantId));
     } else {
       toast.error('처리 중 오류가 발생했습니다.');
     }
