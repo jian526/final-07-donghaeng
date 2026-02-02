@@ -52,6 +52,7 @@ export async function createApply(prevState: ActionState, formData: FormData): P
   // redirect()는 예외를 throw 해서 처리하는 방식이라서 try 문에서 사용하면 catch로 처리되므로 제대로 동작하지 않음
   // 따라서 try 문 밖에서 사용해야 함
   if (data.ok) {
+    updateTag('orders');
     redirect(`/meetings`); // 모임 목록 페이지로 리다이렉트
   } else {
     return data; // 에러 응답 객체 반환
@@ -124,7 +125,7 @@ export async function createMeeting(prevState: ActionState, formData: FormData):
   }
 
   if (data.ok) {
-    updateTag('products');
+    updateTag('seller/products');
     redirect(`/meetings`); // 모임 목록 페이지로 리다이렉트
   } else {
     return data; // 에러 응답 객체 반환
@@ -223,6 +224,8 @@ export async function deleteMeeting(prevState: ActionState, formData: FormData):
   }
 
   if (data.ok) {
+    updateTag('products');
+    updateTag(`products/${_id}`);
     redirect(`/meetings`); // 모임 목록 페이지로 리다이렉트
   } else {
     return data; // 에러 응답 객체 반환

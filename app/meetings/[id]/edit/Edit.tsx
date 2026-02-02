@@ -39,9 +39,9 @@ export default function Edit({ initialData, meetingId }: EditMeetingFormProps) {
   const [imagePreview, setImagePreview] = useState<string>(initialData.mainImages?.[0]?.path || '');
   //    이미 등록된 모임 이미지를 보여줘야하니까 초기값이 initalData.mainImaes... 어어 모임이미지가 없으면 공백
   const [uploadedImage, setUploadedImage] = useState<{ path: string; name: string } | null>(initialData.mainImages?.[0] || null);
-
+  //  서버로 보낼 이미지 정보가 필요.
   const [isUploading, setIsUploading] = useState(false);
-  const [, setImgUrl] = useState<string>('');
+  //  이미지가 업로드 중인지 확인하기 위해서 사용
 
   // 이미지 업로드 핸들러
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,7 +78,6 @@ export default function Edit({ initialData, meetingId }: EditMeetingFormProps) {
           path: result.item[0].path,
           name: result.item[0].name,
         });
-        setImgUrl(result.item[0].path);
       } else {
         alert('이미지 업로드에 실패했습니다.');
         setImagePreview('');
