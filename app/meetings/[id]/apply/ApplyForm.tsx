@@ -11,6 +11,7 @@ interface ApplyFormProps {
 }
 
 export default function ApplyForm({ meeting, id }: ApplyFormProps) {
+  // 유저 정보 가져오기
   const user = useUserStore((state) => state.user);
   const userId = user?._id;
   const accessToken = user?.token?.accessToken;
@@ -18,13 +19,14 @@ export default function ApplyForm({ meeting, id }: ApplyFormProps) {
 
   const processAction = async (id: string, answer1: string, answer2: string) => {
     const formData = new FormData();
+    formData.append('id', id);
     formData.append('accessToken', accessToken || '');
     formData.append(
       'products',
       JSON.stringify([
         {
           _id: Number(id),
-          quantity: 1,
+          quantity: 0,
         },
       ])
     );
@@ -40,7 +42,7 @@ export default function ApplyForm({ meeting, id }: ApplyFormProps) {
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault(); // 폼 제출 시 페이지가 리로드됨을 방지
     const form = e.currentTarget;
     const answer1 = (form.elements.namedItem('answer1') as HTMLTextAreaElement).value;
     const answer2 = (form.elements.namedItem('answer2') as HTMLTextAreaElement).value;

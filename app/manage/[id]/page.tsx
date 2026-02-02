@@ -116,9 +116,9 @@ export default function ManagePage() {
           ) : manage && manage.length > 0 ? (
             manage.map((applicant) => (
               <div key={applicant._id} className={styles['applicant-div']}>
-                <Image src={applicant.user.image} loading="eager" width={100} height={100} alt="프로필이미지" className={styles['profile-img-desktop']} />
+                <Image src={applicant.user.image || '/logo/logo.svg'} loading="eager" width={100} height={100} alt="프로필이미지" className={styles['profile-img-desktop']} />
                 <div className={styles['applicant-information']}>
-                  <Image src={applicant.user.image} loading="eager" width={100} height={100} alt="프로필이미지" className={styles['profile-img-mobile']} />
+                  <Image src={applicant.user.image || '/logo/logo.svg'} loading="eager" width={100} height={100} alt="프로필이미지" className={styles['profile-img-mobile']} />
                   <span>{applicant.user.name}</span>
                   <figure>
                     <svg width="57" height="51" viewBox="0 0 57 51" fill="none" xmlns="http://www.w3.org/2000/svg">
