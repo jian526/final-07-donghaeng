@@ -185,7 +185,7 @@ export async function updateMeeting(prevState: ActionState, formData: FormData):
   if (data.ok) {
     updateTag('products');
     updateTag(`products/${_id}`);
-    redirect(`/meetings`); // 모임 목록 페이지로 리다이렉트
+    redirect(`/meetings/${_id}`); // 모임 상세페이지로 리다이렉트
   } else {
     return data; // 에러 응답 객체 반환
   }
