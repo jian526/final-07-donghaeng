@@ -13,7 +13,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import DefaultLayout from '@/app/components/DefaultLayout';
 import Image from 'next/image';
-import { useBookmarkStore } from '@/app/store/bookmarkStore';
+import { useBookmarkStore } from '@/zustand/bookmarkStore';
 import { Meetings } from '@/types/meetings';
 import BookmarkButton from '@/app/components/BookmarkButton';
 
@@ -149,6 +149,7 @@ export default function BookmarkPage() {
 
   // 스케일 적용 함수
   const applyScaleEffect = (swiper: SwiperType) => {
+    if (!swiper.slides) return;
     swiper.slides.forEach((slide, index) => {
       slide.style.transition = 'all 0.3s ease';
       if (index === swiper.activeIndex) {

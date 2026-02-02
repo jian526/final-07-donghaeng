@@ -31,14 +31,17 @@ export default function Header() {
         <div className={styles[`meetings-wrapper`]}>
           <ul>
             <li>
-              <Link href="/meetings">리스트</Link>
+              <Link href="/meetings">모임</Link>
             </li>
             <li>
+              <Link href="/meetings">지도</Link>
+            </li>
+            {/* <li>
               <Link href="/bookmarks">북마크</Link>
             </li>
             <li>
               <Link href="/history">모임 조회</Link>
-            </li>
+            </li> */}
           </ul>
         </div>
 

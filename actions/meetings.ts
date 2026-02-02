@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation';
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID || '';
 
-export type ActionState = ErrorRes | null;
+export type ActionState = { ok: 0 | 1; message: string } | null;
 
 /**
  * 모임 지원
@@ -147,8 +147,18 @@ export async function updateMeeting(prevState: ActionState, formData: FormData):
   formData.delete('accessToken');
   formData.delete('_id');
 
-  // FormData를 일반 Object로 변환
-  const body = Object.fromEntries(formData.entries());
+  const mainImagesStr = formData.get('mainImages') as string;
+  const extraStr = formData.get('extra') as string;
+
+  const body = {
+    price: Number(formData.get('price')),
+    shippingFees: Number(formData.get('shippingFees') || 0),
+    name: formData.get('name'),
+    content: formData.get('content'),
+    quantity: Number(formData.get('quantity')),
+    mainImages: mainImagesStr ? JSON.parse(mainImagesStr) : undefined,
+    extra: extraStr ? JSON.parse(extraStr) : undefined,
+  };
 
   let res: Response;
   let data: MeetingsInfoRes | ErrorRes;
