@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import style from './edit.module.css';
 import DefaultLayout from '@/app/components/DefaultLayout';
-import { CSSProperties, useActionState, useEffect, useState, useTransition } from 'react';
+import { useActionState, useEffect, useState, useTransition } from 'react';
 import useUserStore from '@/zustand/userStore';
 
 import Image from 'next/image';
