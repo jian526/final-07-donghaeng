@@ -18,6 +18,7 @@ export default function ApplyForm({ meeting, id }: ApplyFormProps) {
 
   const processAction = async (id: string, answer1: string, answer2: string) => {
     const formData = new FormData();
+    formData.append('id', id);
     formData.append('accessToken', accessToken || '');
     formData.append(
       'products',

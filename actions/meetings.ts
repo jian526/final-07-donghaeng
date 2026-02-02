@@ -23,6 +23,7 @@ export async function createApply(prevState: ActionState, formData: FormData): P
   const accessToken = formData.get('accessToken');
   const productsStr = formData.get('products') as string;
   const extraStr = formData.get('extra') as string;
+  const id = formData.get('id');
 
   const body = {
     products: productsStr ? JSON.parse(productsStr) : undefined,
@@ -56,7 +57,7 @@ export async function createApply(prevState: ActionState, formData: FormData): P
   // 따라서 try 문 밖에서 사용해야 함
   if (data.ok) {
     updateTag('orders');
-    redirect(`/meetings`); // 모임 목록 페이지로 리다이렉트
+    redirect(`/meetings/${id}`); // 모임 목록 페이지로 리다이렉트
   } else {
     return data; // 에러 응답 객체 반환
   }
