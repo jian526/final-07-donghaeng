@@ -16,7 +16,7 @@ export async function getManage(accessToken: string): Promise<ManageListRes | Er
       },
       cache: 'force-cache',
       next: {
-        tags: [`seller/orders?state=OS020`],
+        tags: [`seller/orders`],
       },
     });
     return res.json();
