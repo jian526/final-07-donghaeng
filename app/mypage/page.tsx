@@ -98,9 +98,14 @@ export default function Mypage() {
                   북마크
                 </button>
               </Link>
+              <Link href="/manage">
+                <button type="button" className={styles['btn-manage']}>
+                  관리하기
+                </button>
+              </Link>
               <Link href="/history">
                 <button type="button" className={styles['btn-attend-meetings']}>
-                  내가 참여한 모임
+                  참여 모임
                 </button>
               </Link>
             </div>
