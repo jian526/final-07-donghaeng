@@ -3,14 +3,14 @@
 import profile from '@/public/icon/profile.svg';
 import pencil from '@/public/icon/pencil.svg';
 import styles from './MyPage.module.css';
-import DefaultLayout from '@/app/components/DefaultLayout';
 import Link from 'next/link';
 import Image from 'next/image';
+import DefaultLayout from '@/app/components/DefaultLayout';
 import useUserStore from '@/zustand/userStore';
 import { useBookmarkStore } from '@/zustand/bookmarkStore';
 
 export default function Mypage() {
-  const { user, isLogin } = useUserStore();
+  const { user } = useUserStore();
   const { bookmarkedIds } = useBookmarkStore();
   return (
     <>
@@ -21,7 +21,7 @@ export default function Mypage() {
             <div className={styles['profile-information']}>
               <div className={styles['profile-img-wrapper']}>
                 <Image src={user?.image || profile.src} alt="프로필이미지" width={135} height={135} className={styles['profile-img']} />
-                <Link href="/mypage/modify">
+                <Link href={`/mypage/modify/${user?._id}`}>
                   <button type="button" className={styles['pencil-btn']}>
                     <img src={pencil.src} alt="연필" />
                   </button>
