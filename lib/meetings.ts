@@ -1,4 +1,4 @@
-import { ErrorRes, MeetingsInfoRes, MeetingsListRes } from '@/types/api';
+import { ApplyListRes, ErrorRes, MeetingsInfoRes, MeetingsListRes } from '@/types/api';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID || '';
@@ -52,9 +52,9 @@ export async function getDetail(_id: string): Promise<MeetingsInfoRes | ErrorRes
 /**
  * 사용자가 했던 모임 리스트 조회
  * @param {string} accessToken - 인증 토큰
- * @returns {Promise<MeetingsListRes | ErrorRes>} - 모임 목록 응답 객체
+ * @returns {Promise<ApplyListRes | ErrorRes>} - 모임 목록 응답 객체
  */
-export async function getMyMeetings(accessToken: string): Promise<MeetingsListRes | ErrorRes> {
+export async function getMyMeetings(accessToken: string): Promise<ApplyListRes | ErrorRes> {
   try {
     const res = await fetch(`${API_URL}/orders`, {
       headers: {
@@ -62,6 +62,9 @@ export async function getMyMeetings(accessToken: string): Promise<MeetingsListRe
         Authorization: `Bearer ${accessToken}`,
       },
       cache: 'force-cache',
+      next: {
+        tags: [`orders`],
+      },
     });
     return res.json();
   } catch (error) {
@@ -83,6 +86,9 @@ export async function getMyAddMeetings(accessToken: string): Promise<MeetingsLis
         Authorization: `Bearer ${accessToken}`,
       },
       cache: 'force-cache',
+      next: {
+        tags: [`seller/products`],
+      },
     });
     return res.json();
   } catch (error) {

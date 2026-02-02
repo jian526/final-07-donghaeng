@@ -1,13 +1,14 @@
 'use client';
 import styles from './Manage.module.css';
 import DefaultLayout from '@/app/components/DefaultLayout';
-import { useActionState, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { getManage } from '@/lib/manage';
 import { patchManage } from '@/actions/manage';
 import useUserStore from '@/zustand/userStore';
 import { Manage } from '@/types/manage';
 import Image from 'next/image';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function ManagePage() {
   const params = useParams();
@@ -15,7 +16,7 @@ export default function ManagePage() {
 
   const [manage, setManage] = useState<Manage[]>();
   const [isLoading, setIsLoading] = useState(true);
-  const [state, formAction] = useActionState(patchManage, null);
+  // const [refreshKey, setRefreshKey] = useState(0);
 
   const user = useUserStore((state) => state.user);
   const userId = user?._id;
@@ -36,12 +37,77 @@ export default function ManagePage() {
       setIsLoading(false);
     };
     fetchManage();
-  }, [userId, accessToken, state, product_id]);
+  }, [userId, accessToken, product_id]);
+
+  // 실제 API 호출 처리
+  const processAction = async (applicantId: number, isApprove: boolean) => {
+    const formData = new FormData();
+    formData.append('accessToken', accessToken || '');
+    formData.append('_id', String(applicantId));
+    formData.append('state', isApprove ? 'OS040' : 'OS310');
+    formData.append('memo', isApprove ? '모임장이 신청을 승인하였습니다.' : '모임장이 신청을 거절하였습니다.');
+
+    const result = await patchManage(null, formData);
+
+    if (result?.ok === 1) {
+      toast.success(isApprove ? '승인되었습니다.' : '거절되었습니다.');
+      setManage((prev) => prev?.filter((item) => item._id !== applicantId));
+    } else {
+      toast.error('처리 중 오류가 발생했습니다.');
+    }
+  };
+
+  // 승인/거절 핸들러 - 확인 토스트 표시
+  const handleAction = (applicantId: number, actionType: 'approve' | 'reject') => {
+    const isApprove = actionType === 'approve';
+    const confirmMessage = isApprove ? '모임을 승인하시겠습니까?' : '모임을 거절하시겠습니까?';
+
+    toast(
+      (t) => (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'center' }}>
+          <span style={{ fontWeight: 500 }}>{confirmMessage}</span>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button
+              onClick={() => {
+                toast.dismiss(t.id);
+                processAction(applicantId, isApprove);
+              }}
+              style={{
+                padding: '6px 16px',
+                backgroundColor: isApprove ? '#323577' : '#dc2626',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+              }}
+            >
+              확인
+            </button>
+            <button
+              onClick={() => toast.dismiss(t.id)}
+              style={{
+                padding: '6px 16px',
+                backgroundColor: '#e5e7eb',
+                color: '#374151',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+              }}
+            >
+              취소
+            </button>
+          </div>
+        </div>
+      ),
+      { duration: Infinity }
+    );
+  };
 
   console.log('신청자 목록', manage);
 
   return (
     <>
+      <Toaster position="top-center" />
       <DefaultLayout>
         <main className={styles['manage-body']}>
           <h1 className={styles['manage-title']}>신청자 목록</h1>
@@ -50,9 +116,9 @@ export default function ManagePage() {
           ) : manage && manage.length > 0 ? (
             manage.map((applicant) => (
               <div key={applicant._id} className={styles['applicant-div']}>
-                <Image src={applicant.user.image} loading="eager" width={100} height={100} alt="프로필이미지" className={styles['profile-img-desktop']} />
+                <Image src={applicant.user.image || '/logo/logo.svg'} loading="eager" width={100} height={100} alt="프로필이미지" className={styles['profile-img-desktop']} />
                 <div className={styles['applicant-information']}>
-                  <Image src={applicant.user.image} loading="eager" width={100} height={100} alt="프로필이미지" className={styles['profile-img-mobile']} />
+                  <Image src={applicant.user.image || '/logo/logo.svg'} loading="eager" width={100} height={100} alt="프로필이미지" className={styles['profile-img-mobile']} />
                   <span>{applicant.user.name}</span>
                   <figure>
                     <svg width="57" height="51" viewBox="0 0 57 51" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,24 +133,12 @@ export default function ManagePage() {
                     </figcaption>
                   </figure>
                   <div className={styles['btn-div']}>
-                    <form action={formAction}>
-                      <input type="hidden" name="accessToken" value={accessToken || ''} />
-                      <input type="hidden" name="_id" value={applicant._id} />
-                      <input type="hidden" name="state" value={'OS040'} />
-                      <input type="hidden" name="memo" value={'모임장이 신청을 승인하였습니다.'} />
-                      <button type="submit" className={styles['btn-approve']}>
-                        승인
-                      </button>
-                    </form>
-                    <form action={formAction}>
-                      <input type="hidden" name="accessToken" value={accessToken || ''} />
-                      <input type="hidden" name="_id" value={applicant._id} />
-                      <input type="hidden" name="state" value={'OS310'} />
-                      <input type="hidden" name="memo" value={'모임장이 신청을 거절하였습니다.'} />
-                      <button type="submit" className={styles['btn-no']}>
-                        거절
-                      </button>
-                    </form>
+                    <button type="button" className={styles['btn-approve']} onClick={() => handleAction(applicant._id, 'approve')}>
+                      승인
+                    </button>
+                    <button type="button" className={styles['btn-no']} onClick={() => handleAction(applicant._id, 'reject')}>
+                      거절
+                    </button>
                   </div>
                 </div>
                 <div className={styles['question-div-bundle']}>

@@ -1,3 +1,4 @@
+'use server';
 import { ErrorRes, ManageListRes } from '@/types/api';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -15,6 +16,9 @@ export async function getManage(accessToken: string): Promise<ManageListRes | Er
         Authorization: `Bearer ${accessToken}`,
       },
       cache: 'force-cache',
+      next: {
+        tags: [`seller/orders`],
+      },
     });
     return res.json();
   } catch (error) {

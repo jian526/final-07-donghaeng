@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ActionState, createMeeting } from '@/actions/meetings';
 import { uploadFile } from '@/actions/file';
+import { ClipLoader } from 'react-spinners';
 
 export default function Add() {
   const router = useRouter();
@@ -133,7 +134,7 @@ export default function Add() {
         // public 폴더의 기본 이미지를 fetch로 가져오기
         const response = await fetch('/images/default-img.png');
         const blob = await response.blob();
-        const file = new File([blob], 'ldefault-img.png', { type: 'image/jpeg' });
+        const file = new File([blob], 'default-img.png', { type: 'image/jpeg' });
 
         // 서버에 업로드
         const result = await uploadFile(file);
@@ -245,26 +246,29 @@ export default function Add() {
 
               <fieldset className={style['img-fieldset']}>
                 <label htmlFor="meetings-img-label">모임 이미지</label>
-                <label htmlFor="meetings-img" className="image-box">
-                  <div className={style['ractingle-wrap']}>
-                    {imagePreview ? (
-                      <div className={style['image-preview']}>
-                        <Image src={imagePreview} alt="미리보기" style={{ width: '100%', height: 'auto' }} width={100} height={100} />
-                      </div>
-                    ) : (
-                      <div className={style['ractingle']}>
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M10.2857 1.28571C10.2857 0.574554 9.71116 0 9 0C8.28884 0 7.71429 0.574554 7.71429 1.28571V7.71429H1.28571C0.574554 7.71429 0 8.28884 0 9C0 9.71116 0.574554 10.2857 1.28571 10.2857H7.71429V16.7143C7.71429 17.4254 8.28884 18 9 18C9.71116 18 10.2857 17.4254 10.2857 16.7143V10.2857H16.7143C17.4254 10.2857 18 9.71116 18 9C18 8.28884 17.4254 7.71429 16.7143 7.71429H10.2857V1.28571Z"
-                            fill="#fff"
-                          />
-                        </svg>
-                      </div>
-                    )}
-                  </div>
-                </label>
-                <input type="file" id="meetings-img" name="meetings-img" accept="image/*" onChange={handleImageChange} disabled={isUploading} hidden />
-                {isUploading && <p>업로드 중...</p>}
+
+                <div className={style['ractingle-wrap']}>
+                  <input type="file" id="meetings-img" name="meetings-img" accept="image/*" onChange={handleImageChange} disabled={isUploading} hidden />
+
+                  {isUploading ? (
+                    <div className={style['loading-wrapper']}>
+                      <ClipLoader size={50} color="#323577" />
+                    </div>
+                  ) : imagePreview ? (
+                    <div className={style['image-preview']} onClick={() => document.getElementById('meetings-img')?.click()} style={{ cursor: 'pointer' }}>
+                      <Image src={imagePreview} alt="미리보기" style={{ width: '100%', height: 'auto' }} width={100} height={100} />
+                    </div>
+                  ) : (
+                    <div className={style['ractingle']} onClick={() => document.getElementById('meetings-img')?.click()} style={{ cursor: 'pointer' }}>
+                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M10.2857 1.28571C10.2857 0.574554 9.71116 0 9 0C8.28884 0 7.71429 0.574554 7.71429 1.28571V7.71429H1.28571C0.574554 7.71429 0 8.28884 0 9C0 9.71116 0.574554 10.2857 1.28571 10.2857H7.71429V16.7143C7.71429 17.4254 8.28884 18 9 18C9.71116 18 10.2857 17.4254 10.2857 16.7143V10.2857H16.7143C17.4254 10.2857 18 9.71116 18 9C18 8.28884 17.4254 7.71429 16.7143 7.71429H10.2857V1.28571Z"
+                          fill="#fff"
+                        />
+                      </svg>
+                    </div>
+                  )}
+                </div>
               </fieldset>
 
               <div className={style['field-parent-wrap']}>
@@ -349,12 +353,12 @@ export default function Add() {
               <div className={style['question']}>
                 <fieldset className={style['question-1-field']}>
                   <label htmlFor="question-1">1번 질문</label>
-                  <input type="text" name="question-1" id="question-1" placeholder="신청자에게 물어볼 질문을 작성하세요" />
+                  <input type="text" name="question-1" id="question-1" placeholder="신청자에게 물어볼 질문을 작성하세요" required />
                 </fieldset>
 
                 <fieldset className={style['question-2-field']}>
                   <label htmlFor="question-2">2번 질문</label>
-                  <input type="text" name="question-2" id="question-2" placeholder="신청자에게 물어볼 질문을 작성하세요" />
+                  <input type="text" name="question-2" id="question-2" placeholder="신청자에게 물어볼 질문을 작성하세요" required />
                 </fieldset>
               </div>
             </div>

@@ -8,7 +8,10 @@ export interface Meetings {
   content: string;
   quantity: number;
   buyQuantity: number;
+  image?: { path: string };
+  // ㄴ> 내가 지원한 모임에서 받아오는 데이터의 이미지
   mainImages: [{ path: string; name: string }];
+  // ㄴ> 모임장이 등록한 이미지
   extra: {
     category: string;
     gender: string;
