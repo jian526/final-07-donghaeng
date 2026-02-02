@@ -36,7 +36,7 @@ export default function Header() {
                 <Link href="/meetings">모임</Link>
               </li>
               <li>
-                <Link href="/meetings">지도</Link>
+                <Link href="/map">지도</Link>
               </li>
               {/* <li>
               <Link href="/bookmarks">북마크</Link>
@@ -62,12 +62,7 @@ export default function Header() {
                 <li>
                   <Link href="/mypage">
                     <div className={styles[`image-background`]}>
-                      <Image
-                        src={user?.image || '/icon/profile.svg'}
-                        width={41}
-                        height={41}
-                        alt="사용자 프로필 이미지"
-                      />
+                      <Image src={user?.image || '/icon/profile.svg'} width={41} height={41} alt="사용자 프로필 이미지" />
                     </div>
                   </Link>
                 </li>
