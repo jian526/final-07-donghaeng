@@ -203,10 +203,11 @@ export default function Edit({ initialData, meetingId }: EditMeetingFormProps) {
       alert(state.message);
     }
   }, [state]);
+  //  서버에 수정 요청을 보낸뒤, 결과를 사용자에게 반응해줌 값이 바뀔때만 effect를 실행하라....
 
   return (
     <DefaultLayout>
-      <div className={style['wrap']}>
+      <main className={style['wrap']}>
         <div className={style['Edit-wrap']}>
           <form className={style['meetings-create']} onSubmit={handleSubmit}>
             <div className={style['meetings-Edit']}>
@@ -387,7 +388,7 @@ export default function Edit({ initialData, meetingId }: EditMeetingFormProps) {
             </div>
           </form>
         </div>
-      </div>
+      </main>
     </DefaultLayout>
   );
 }
