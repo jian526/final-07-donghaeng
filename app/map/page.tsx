@@ -36,7 +36,7 @@ export default function Map() {
 
   return (
     <>
-      <DefaultLayout>
+      <DefaultLayout hideFooter={hideFooter}>
         <main className={styles['map-body']}>
           <div className={styles['filter-div']}>
             {/* onFilterChanges: 사용자가 정의한 함수명
