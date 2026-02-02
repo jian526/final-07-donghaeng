@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import style from './edit.module.css';
 import DefaultLayout from '@/app/components/DefaultLayout';
-import { useActionState, useEffect, useState, useTransition } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import useUserStore from '@/zustand/userStore';
 
 import Image from 'next/image';
@@ -29,8 +29,6 @@ export default function Edit({ initialData, meetingId }: EditMeetingFormProps) {
   const [state, formAction] = useActionState(updateMeeting, initialState);
   // updateMeeting: 서버에 모임수정 요청 보내는 서버액션, useActionState: 요청의 결과를 state로 받아 볼수 있게 해줌
   // 결과적으로 formAction >> 서버에 수정 요청이 됨됨됨... state: 서버에서 응답 결과
-
-  const [, startTransition] = useTransition();
 
   // 인원 카운터
   const [count, setCount] = useState(initialData.quantity || 10);
@@ -186,10 +184,7 @@ export default function Edit({ initialData, meetingId }: EditMeetingFormProps) {
       console.log(key, ':', value);
     }
 
-    // Server Action 호출
-    startTransition(() => {
-      formAction(submitData);
-    });
+    formAction(submitData);
   };
 
   // Server Action 결과 처리
@@ -204,9 +199,11 @@ export default function Edit({ initialData, meetingId }: EditMeetingFormProps) {
     }
   }, [state]);
 
+  //  서버에 수정 요청을 보낸뒤, 결과를 사용자에게 반응해줌 값이 바뀔때만 effect를 실행하라....
+
   return (
     <DefaultLayout>
-      <div className={style['wrap']}>
+      <main className={style['wrap']}>
         <div className={style['Edit-wrap']}>
           <form className={style['meetings-create']} onSubmit={handleSubmit}>
             <div className={style['meetings-Edit']}>
@@ -387,7 +384,7 @@ export default function Edit({ initialData, meetingId }: EditMeetingFormProps) {
             </div>
           </form>
         </div>
-      </div>
+      </main>
     </DefaultLayout>
   );
 }
