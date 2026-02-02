@@ -21,10 +21,13 @@ export type ActionState = { ok: 0 | 1; message: string } | null;
  */
 export async function createApply(prevState: ActionState, formData: FormData): Promise<ActionState> {
   const accessToken = formData.get('accessToken');
-  formData.delete('accessToken');
+  const productsStr = formData.get('products') as string;
+  const extraStr = formData.get('extra') as string;
 
-  // FormData를 일반 Object로 변환
-  const body = Object.fromEntries(formData.entries());
+  const body = {
+    products: productsStr ? JSON.parse(productsStr) : undefined,
+    extra: extraStr ? JSON.parse(extraStr) : undefined,
+  };
 
   let res: Response;
   let data: MeetingsInfoRes | ErrorRes;
