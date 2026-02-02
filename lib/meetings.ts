@@ -83,6 +83,9 @@ export async function getMyAddMeetings(accessToken: string): Promise<MeetingsLis
         Authorization: `Bearer ${accessToken}`,
       },
       cache: 'force-cache',
+      next: {
+        tags: [`posts/`],
+      },
     });
     return res.json();
   } catch (error) {
