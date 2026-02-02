@@ -363,23 +363,23 @@ export default function Signup() {
                     <br />
                     <select className={style['select']} name="region" value={formData.region} onChange={handleChange} id="region" required>
                       <option value="">지역을 선택해 주세요</option>
-                      <option value="seoul">서울특별시</option>
-                      <option value="busan">부산광역시</option>
-                      <option value="daegu">대구광역시</option>
-                      <option value="incheon">인천광역시</option>
-                      <option value="gwangju">광주광역시</option>
-                      <option value="daejeon">대전광역시</option>
-                      <option value="ulsan">울산광역시</option>
-                      <option value="sejong">세종특별자치시</option>
-                      <option value="gyeonggi">경기도</option>
-                      <option value="gangwon">강원특별자치도</option>
-                      <option value="chungbuk">충청북도</option>
-                      <option value="chungnam">충청남도</option>
-                      <option value="jeonbuk">전라북도</option>
-                      <option value="jeonnam">전라남도</option>
-                      <option value="gyeongbuk">경상북도</option>
-                      <option value="gyeongnam">경상남도</option>
-                      <option value="jeju">제주특별자치도</option>
+                      <option value="서울특별시">서울특별시</option>
+                      <option value="부산광역시">부산광역시</option>
+                      <option value="대구광역시">대구광역시</option>
+                      <option value="인천광역시">인천광역시</option>
+                      <option value="광주광역시">광주광역시</option>
+                      <option value="대전광역시">대전광역시</option>
+                      <option value="울산광역시">울산광역시</option>
+                      <option value="세종특별자치시">세종특별자치시</option>
+                      <option value="경기도">경기도</option>
+                      <option value="강원특별자치도">강원특별자치도</option>
+                      <option value="충청북도">충청북도</option>
+                      <option value="충청남도">충청남도</option>
+                      <option value="전라북도">전라북도</option>
+                      <option value="전라남도">전라남도</option>
+                      <option value="경상북도">경상북도</option>
+                      <option value="경상남도">경상남도</option>
+                      <option value="제주특별자치도">제주특별자치도</option>
                     </select>
                   </div>
                   <svg className={style['svg-1']} width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -423,8 +423,8 @@ export default function Signup() {
                       </label>
                       <select className={style['select']} name="gender" value={formData.gender} onChange={handleChange} id="gender" required>
                         <option value="">선택</option>
-                        <option value="m">남</option>
-                        <option value="f">여</option>
+                        <option value="남">남</option>
+                        <option value="여">여</option>
                       </select>
                     </div>
                     <svg className={style['svg-3']} width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
