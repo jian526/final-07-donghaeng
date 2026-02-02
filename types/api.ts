@@ -1,3 +1,4 @@
+import { Apply } from '@/types/apply';
 import { Bookmarks } from '@/types/bookmarks';
 import { Manage } from '@/types/manage';
 import { Meetings } from '@/types/meetings';
@@ -72,4 +73,9 @@ export interface FileUploadRes {
     name: string;
     path: string;
   }[];
+}
+
+export interface ApplyListRes {
+  ok: 1;
+  item: Apply[];
 }
