@@ -15,12 +15,7 @@ export default async function Main() {
   const meetings: Meetings[] = res.ok === 1 ? res.item : [];
 
   // 카테고리별 최신 4개 모임
-  const categoryMeetings = Object.fromEntries(
-    CATEGORIES.map((category) => [
-      category,
-      meetings.filter((m) => m.extra.category === category).slice(0, 4),
-    ])
-  ) as Record<(typeof CATEGORIES)[number], Meetings[]>;
+  const categoryMeetings = Object.fromEntries(CATEGORIES.map((category) => [category, meetings.filter((m) => m.extra.category === category).slice(0, 4)])) as Record<(typeof CATEGORIES)[number], Meetings[]>;
 
   return (
     <DefaultLayout>
@@ -37,7 +32,7 @@ export default async function Main() {
             </Link>
           </div>
           <div className={styles[`map-view`]}>
-            <KakaoMap lat={37.4986} lng={126.9917} meetings={meetings} />
+            <KakaoMap className={styles.map} lat={37.4986} lng={126.9917} meetings={meetings} />
           </div>
         </section>
         {/* 카테고리 별 리스트 */}
