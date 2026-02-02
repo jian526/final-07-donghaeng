@@ -7,15 +7,30 @@ import styles from './Modify.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 import DefaultLayout from '@/app/components/DefaultLayout';
-import { use, useActionState, useEffect } from 'react';
+import { useActionState, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import useUserStore from '@/zustand/userStore';
 import { updateUser } from '@/actions/user';
+import { uploadFile } from '@/actions/file';
 
 export default function Modify() {
+  // 라우터 선언
   const router = useRouter();
+
+  // zustand 스토어 선언
   const { user, setUser } = useUserStore();
+
+  // actions에서 선언한 updataUser 사용
   const [state, formAction, isPending] = useActionState(updateUser, null);
+
+  // 파일을 참조할 ref
+  const fileInput = useRef<HTMLInputElement>(null);
+
+  // 파일의 상태를 변경하는 state
+  const [profileImage, setProfileImage] = useState(user?.image || profile.src);
+
+  // 업로드된 이미지 경로를 저장하는 state
+  const [uploadImagePath, setUploadImagePath] = useState(user?.image || '');
 
   // useEffect를 사용해서 zustand 갱신
   // redirect는 갱신이 되지 않고 페이지를 이동한다.
@@ -30,6 +45,27 @@ export default function Modify() {
     }
   }, [state]);
 
+  // 선택한 이미지를 미리보는 함수
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    // 사용자가 선택한 첫 번째 파일
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // 미리보기
+    if (file) {
+      // 파일을 브라우저에서 바로 볼 수 있는 임시 URL로 변환
+      const imageUrl = URL.createObjectURL(file);
+      // 미리보기 state 업데이트
+      setProfileImage(imageUrl);
+    }
+
+    // 서버에 경로 업로드
+    const result = await uploadFile(file);
+    if (result.ok === 1) {
+      setUploadImagePath(result.item[0].path);
+    }
+  };
+
   return (
     <>
       <DefaultLayout>
@@ -38,11 +74,13 @@ export default function Modify() {
           <input type="hidden" name="accessToken" value={user?.token?.accessToken || ''} />
           <input type="hidden" name="_id" value={user?._id || ''} />
           <input type="hidden" name="email" value={user?.email || ''} />
+          <input type="hidden" name="image" value={uploadImagePath} />
+          <input type="file" name="image-preview" accept="image/*" hidden ref={fileInput} onChange={handleImageChange} />
           <main className={styles['modify-div']}>
             <div className={styles['profile-top']}>
               <div className={styles['img-wrapper']}>
-                <Image src={profile.src} alt="프로필이미지" width={165} height={165} className={styles['profile-img']} />
-                <button type="button" className={styles['btn-camera']}>
+                <Image src={profileImage} alt="프로필이미지" width={165} height={165} className={styles['profile-img']} />
+                <button type="button" className={styles['btn-camera']} onClick={() => fileInput.current?.click()}>
                   <Image src={camera.src} width={29} height={27} alt="카메라이미지" />
                 </button>
               </div>

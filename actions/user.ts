@@ -119,6 +119,7 @@ export async function updateUser(state: UserActionState, formData: FormData): Pr
 
   const body = {
     email: formData.get('email'),
+    image: formData.get('image'),
     name: formData.get('name'),
     comment: formData.get('comment'),
     region: formData.get('region'),
