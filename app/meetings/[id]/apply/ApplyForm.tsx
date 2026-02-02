@@ -54,11 +54,11 @@ export default function ApplyForm({ meeting, id }: ApplyFormProps) {
       <h1 className={styles['apply-title']}>모임 신청</h1>
       <div className={styles['question-div']}>
         <h3>{meeting.extra.survey1}</h3>
-        <textarea name="answer1"></textarea>
+        <textarea name="answer1" required></textarea>
       </div>
       <div className={styles['question-div']}>
         <h3>{meeting.extra.survey2}</h3>
-        <textarea name="answer2"></textarea>
+        <textarea name="answer2" required></textarea>
       </div>
       <div className={styles['btn-div']}>
         <button type="submit" className={styles['btn-apply']}>
