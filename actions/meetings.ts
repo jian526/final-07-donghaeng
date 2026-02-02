@@ -125,6 +125,7 @@ export async function createMeeting(prevState: ActionState, formData: FormData):
   }
 
   if (data.ok) {
+    updateTag('products');
     updateTag('seller/products');
     redirect(`/meetings`); // 모임 목록 페이지로 리다이렉트
   } else {
