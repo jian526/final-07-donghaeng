@@ -1,4 +1,7 @@
+'use server';
+
 import { ErrorRes, MeetingsInfoRes } from '@/types/api';
+import { updateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -121,6 +124,7 @@ export async function createMeeting(prevState: ActionState, formData: FormData):
   }
 
   if (data.ok) {
+    updateTag('products');
     redirect(`/meetings`); // 모임 목록 페이지로 리다이렉트
   } else {
     return data; // 에러 응답 객체 반환
@@ -167,6 +171,8 @@ export async function updateMeeting(prevState: ActionState, formData: FormData):
   }
 
   if (data.ok) {
+    updateTag('products');
+    updateTag(`products/${_id}`);
     redirect(`/meetings`); // 모임 목록 페이지로 리다이렉트
   } else {
     return data; // 에러 응답 객체 반환
