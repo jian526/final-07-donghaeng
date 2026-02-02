@@ -1,3 +1,5 @@
+import { updateTag } from 'next/cache';
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID || '';
 
@@ -33,4 +35,7 @@ export async function patchManage(prevState: ActionState, formData: FormData): P
     console.error(error);
     return { ok: 0, message: '일시적인 네트워크 문제로 승인 처리에 실패했습니다.' };
   }
+  // if(data.ok){
+  //   updateTag('seller/orders?state=OS020')
+  // }
 }

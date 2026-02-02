@@ -15,6 +15,9 @@ export async function getManage(accessToken: string): Promise<ManageListRes | Er
         Authorization: `Bearer ${accessToken}`,
       },
       cache: 'force-cache',
+      next: {
+        tags: [`seller/orders?state=OS020`],
+      },
     });
     return res.json();
   } catch (error) {

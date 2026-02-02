@@ -62,6 +62,9 @@ export async function getMyMeetings(accessToken: string): Promise<MeetingsListRe
         Authorization: `Bearer ${accessToken}`,
       },
       cache: 'force-cache',
+      next: {
+        tags: [`orders`],
+      },
     });
     return res.json();
   } catch (error) {
@@ -83,6 +86,9 @@ export async function getMyAddMeetings(accessToken: string): Promise<MeetingsLis
         Authorization: `Bearer ${accessToken}`,
       },
       cache: 'force-cache',
+      next: {
+        tags: [`seller/products`],
+      },
     });
     return res.json();
   } catch (error) {
