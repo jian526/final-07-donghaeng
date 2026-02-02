@@ -133,7 +133,7 @@ export default function Add() {
         // public 폴더의 기본 이미지를 fetch로 가져오기
         const response = await fetch('/images/default-img.png');
         const blob = await response.blob();
-        const file = new File([blob], 'ldefault-img.png', { type: 'image/jpeg' });
+        const file = new File([blob], 'default-img.png', { type: 'image/jpeg' });
 
         // 서버에 업로드
         const result = await uploadFile(file);
