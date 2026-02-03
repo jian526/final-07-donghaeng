@@ -5,7 +5,6 @@ import style from './MeetingList.module.css';
 import Link from 'next/link';
 import { Meetings } from '@/types/meetings';
 import { formatDate } from '@/lib/common';
-import { useEffect } from 'react';
 
 export default function MeetingItem({ meeting }: { meeting: Meetings }) {
   return (

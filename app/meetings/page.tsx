@@ -1,8 +1,6 @@
-'use client';
 import style from './MeetingList.module.css';
 import Link from 'next/link';
 import DefaultLayout from '@/app/components/DefaultLayout';
-
 import { getMeetings } from '@/lib/meetings';
 import Category from '@/app/meetings/Category';
 import MeetingItem from '@/app/meetings/MeetingItem';
