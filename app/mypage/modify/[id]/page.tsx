@@ -12,25 +12,29 @@ import { useRouter } from 'next/navigation';
 import useUserStore from '@/zustand/userStore';
 import { updateUser } from '@/actions/user';
 import { uploadFile } from '@/actions/file';
+import { regionData } from '@/docs/regionData';
 
 export default function Modify() {
   // 라우터 선언
   const router = useRouter();
-
   // zustand 스토어 선언
   const { user, setUser } = useUserStore();
-
   // actions에서 선언한 updataUser 사용
   const [state, formAction, isPending] = useActionState(updateUser, null);
 
   // 파일을 참조할 ref
   const fileInput = useRef<HTMLInputElement>(null);
-
   // 파일의 상태를 변경하는 state
   const [profileImage, setProfileImage] = useState(user?.image || profile.src);
-
   // 업로드된 이미지 경로를 저장하는 state
   const [uploadImagePath, setUploadImagePath] = useState(user?.image || '');
+
+  // user.region을 지역과 시/군/구로 공백을 기준으로 나누는 변수
+  const parts = user?.region?.split(' ');
+  // 지역(시/도) 상태 저장 state(기존 지역이 있었으면 parts에서 가져오기 1번째는 지역)
+  const [selectedCity, setSelectedCity] = useState(parts?.[0] || '');
+  // 지역(시/군/구) 상태 저장 state(기존 지역이 있었으면 parts에서 가져오기 2번째는 시/군/구)
+  const [selectedDistrict, setSelectedDistrict] = useState(parts?.[1] || '');
 
   // useEffect를 사용해서 zustand 갱신
   // redirect는 갱신이 되지 않고 페이지를 이동한다.
@@ -75,6 +79,7 @@ export default function Modify() {
           <input type="hidden" name="_id" value={user?._id || ''} />
           <input type="hidden" name="email" value={user?.email || ''} />
           <input type="hidden" name="image" value={uploadImagePath} />
+          <input type="hidden" name="region" value={selectedDistrict ? `${selectedCity} ${selectedDistrict}` : selectedCity} />
           <input type="file" name="image-preview" accept="image/*" hidden ref={fileInput} onChange={handleImageChange} />
           <main className={styles['modify-div']}>
             <div className={styles['profile-top']}>
@@ -92,7 +97,7 @@ export default function Modify() {
                   </button>
                 </Link>
                 <button type="submit" className={styles['btn-complete']}>
-                  완료
+                  {isPending ? '수정중...' : '완료'}
                 </button>
               </div>
             </div>
@@ -104,61 +109,39 @@ export default function Modify() {
 
               <div className={styles['introduce-div']}>
                 <span>소개</span>
-                <textarea name="comment" defaultValue={user?.comment || '나의 소개를 쓰는 공간'}></textarea>
+                <textarea name="comment" maxLength={50} defaultValue={user?.comment || '나의 소개를 쓰는 공간'}></textarea>
               </div>
               <div className={styles['address-div']}>
                 <div>
-                  <span>시 </span>
-                  <select name="region" defaultValue={user?.region || '서울특별시'} className={styles['city']}>
-                    <option value="서울특별시">서울특별시</option>
-                    <option value="인천광역시">인천광역시</option>
-                    <option value="대전광역시">대전광역시</option>
-                    <option value="세종특별자치시">세종특별자치시</option>
-                    <option value="광주광역시">광주광역시</option>
-                    <option value="대구광역시">대구광역시</option>
-                    <option value="울산광역시">울산광역시</option>
-                    <option value="부산광역시">부산광역시</option>
-                    <option value="경기도">경기도</option>
-                    <option value="강원특별자치도">강원특별자치도</option>
-                    <option value="충청북도">충청북도</option>
-                    <option value="충청남도">충청남도</option>
-                    <option value="전라남도">전라남도</option>
-                    <option value="전북특별자치도">전북특별자치도</option>
-                    <option value="경상남도">경상남도</option>
-                    <option value="경상북도">경상북도</option>
-                    <option value="제주특별자치도">제주특별자치도</option>
+                  <span>지역 </span>
+                  <select
+                    value={selectedCity}
+                    onChange={(e) => {
+                      setSelectedCity(e.target.value);
+                      setSelectedDistrict('');
+                    }}
+                    className={styles['city']}
+                  >
+                    <option value="">지역</option>
+                    {Object.keys(regionData).map((city) => (
+                      <option key={city} value={city}>
+                        {city}
+                      </option>
+                    ))}
                   </select>
                   <img src={down.src} alt="화살표" />
                 </div>
 
                 <div>
-                  <span>구 </span>
-                  <select name="구" defaultValue={''} className={styles['district']}>
-                    <option value="종로구">종로구</option>
-                    <option value="중구">중구</option>
-                    <option value="용산구">용산구</option>
-                    <option value="성동구">성동구</option>
-                    <option value="광진구">광진구</option>
-                    <option value="동대문구">동대문구</option>
-                    <option value="중랑구">중랑구</option>
-                    <option value="성북구">성북구</option>
-                    <option value="강북구">강북구</option>
-                    <option value="도봉구">도봉구</option>
-                    <option value="노원구">노원구</option>
-                    <option value="은평구">은평구</option>
-                    <option value="서대문구">서대문구</option>
-                    <option value="마포구">마포구</option>
-                    <option value="양천구">양천구</option>
-                    <option value="강서구">강서구</option>
-                    <option value="구로구">구로구</option>
-                    <option value="금천구">금천구</option>
-                    <option value="영등포구">영등포구</option>
-                    <option value="동작구">동작구</option>
-                    <option value="관악구">관악구</option>
-                    <option value="서초구">서초구</option>
-                    <option value="강남구">강남구</option>
-                    <option value="송파구">송파구</option>
-                    <option value="강동구">강동구</option>
+                  <span>시/군/구 </span>
+                  <select value={selectedDistrict} disabled={!selectedCity} className={styles['district']} onChange={(e) => setSelectedDistrict(e.target.value)}>
+                    <option value="">{selectedCity ? '시/군/구' : '지역을 선택해주세요'}</option>
+                    {selectedCity &&
+                      regionData[selectedCity]?.map((district) => (
+                        <option key={district} value={district}>
+                          {district}
+                        </option>
+                      ))}
                   </select>
                   <img src={down.src} alt="화살표" />
                 </div>
