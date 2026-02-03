@@ -16,18 +16,30 @@ interface BookmarkButtonProps {
 
 export default function BookmarkButton({ meetingId, width = 20, height = 26, desktopWidth, desktopHeight }: BookmarkButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const { bookmarks, isBookmarked, addBookmark, removeBookmark } = useBookmarkStore();
+  const bookmarks = useBookmarkStore((state) => state.bookmarks);
+  const addBookmark = useBookmarkStore((state) => state.addBookmark);
+  const removeBookmark = useBookmarkStore((state) => state.removeBookmark);
   const { user } = useUserStore();
   const accessToken = user?.token?.accessToken || '';
+  const currentBookmark = bookmarks?.find((b) => b.product._id === meetingId);
 
-  const bookmarked = isBookmarked(meetingId, 'product');
-  const currentBookmark = bookmarks.find((b) => b.target_id === meetingId && b.type === 'product');
+  console.log(`BookmarkButton [${meetingId}] - meetingId type:`, typeof meetingId);
+  console.log(
+    `BookmarkButton [${meetingId}] - bookmarks target_ids:`,
+    bookmarks?.map((b) => ({ target_id: b, type: typeof b._id }))
+  );
+  console.log(
+    `Bookmark [${meetingId}] - currentBookmark:`,
+    bookmarks?.map((b) => b.product._id),
+    'meetingId',
+    meetingId
+  );
+  console.log(`BookmarkButton [${meetingId}] - currentBookmark:`, currentBookmark);
 
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
-    // 로딩 중이라면 정지
     if (isLoading) return;
 
     if (!accessToken) {
@@ -35,10 +47,10 @@ export default function BookmarkButton({ meetingId, width = 20, height = 26, des
       return;
     }
 
-    // 로딩 중이 아니라면 true로 변경
     setIsLoading(true);
     try {
-      if (bookmarked && currentBookmark) {
+      console.log('in Function ::: ', currentBookmark);
+      if (currentBookmark) {
         //북마크 삭제
         const result = await deleteBookmarkFromServer(currentBookmark._id, accessToken);
         if (result.ok === 1) {
@@ -48,12 +60,13 @@ export default function BookmarkButton({ meetingId, width = 20, height = 26, des
         //북마크 추가
         const result = await addBookmarkToServer('product', meetingId, accessToken);
         if (result.ok === 1 && result.item) {
-          addBookmark(result.item);
+          console.log(result.item);
+          console.log({ ...result.item, product: { _id: meetingId } });
+          addBookmark({ ...result.item, product: { _id: meetingId } });
         }
       }
     } catch (error) {
       console.error('북마크 토글 에러: ', error);
-      // 최종적으로 통신이 성공했던, 실패했던 통신이 끝나면 로딩 상태를 false로 변경
     } finally {
       setIsLoading(false);
     }
@@ -67,8 +80,8 @@ export default function BookmarkButton({ meetingId, width = 20, height = 26, des
   } as React.CSSProperties;
 
   return (
-    <button type="button" className={styles['bookmark-btn']} onClick={handleClick} aria-label={bookmarked ? '북마크 해제' : '북마크 추가'}>
-      <svg style={cssVars} viewBox="0 0 23 29" fill="none" xmlns="http://www.w3.org/2000/svg" className={`${styles['bookmark-icon']} ${bookmarked ? styles['active'] : ''}`}>
+    <button type="button" className={styles['bookmark-btn']} onClick={handleClick} aria-label={currentBookmark ? '북마크 해제' : '북마크 추가'}>
+      <svg style={cssVars} viewBox="0 0 23 29" fill="none" xmlns="http://www.w3.org/2000/svg" className={`${styles['bookmark-icon']} ${currentBookmark ? styles['active'] : ''}`}>
         <path d="M3.83301 1H19.167C20.782 1.00016 21.9998 2.22975 22 3.625V27.1904C21.9998 27.4458 21.8496 27.7226 21.5488 27.8848C21.2571 28.0419 20.8859 28.0392 20.5879 27.8721H20.5889L11.9932 22.9951L11.5 22.7148L11.0068 22.9951L2.40527 27.8721C2.11263 28.0358 1.73893 28.04 1.43848 27.8809C1.15358 27.73 1.00016 27.4565 1 27.1904V3.625C1.00019 2.22975 2.21796 1.00017 3.83301 1Z" />
       </svg>
     </button>

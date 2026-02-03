@@ -1,3 +1,4 @@
+import { ErrorRes } from '@/types/api';
 import { Bookmarks, BookmarksResponse, BookmarkResponse } from '@/types/bookmarks';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -85,7 +86,7 @@ export async function deleteBookmarkFromServer(_id: number, accessToken: string)
 }
 
 //전체 북마크 목록 조회
-export async function getAllBookmarks(accessToken: string): Promise<BookmarksResponse> {
+export async function getAllBookmarks(accessToken: string): Promise<BookmarksResponse | ErrorRes> {
   try {
     const res = await fetch(`${API_URL}/bookmarks/product`, {
       method: 'GET',

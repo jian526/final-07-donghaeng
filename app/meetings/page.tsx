@@ -1,3 +1,4 @@
+'use client';
 import style from './MeetingList.module.css';
 import Link from 'next/link';
 import DefaultLayout from '@/app/components/DefaultLayout';
@@ -5,10 +6,40 @@ import DefaultLayout from '@/app/components/DefaultLayout';
 import { getMeetings } from '@/lib/meetings';
 import Category from '@/app/meetings/Category';
 import MeetingItem from '@/app/meetings/MeetingItem';
+import { getAllBookmarks } from '@/lib/bookmarks';
+import useUserStore from '@/zustand/userStore';
+import { useEffect, useState } from 'react';
+import { ErrorRes, MeetingsListRes } from '@/types/api';
+import { BookmarkResponse, Bookmarks, BookmarksResponse } from '@/types/bookmarks';
+import useBookmarkStore from '@/zustand/bookmarkStore';
 
-export default async function Meetinglist() {
-  const result = await getMeetings();
-  console.log(result);
+export default function Meetinglist() {
+  const { user } = useUserStore();
+  const accessToken = user?.token?.accessToken || '';
+  const [result, setResult] = useState<MeetingsListRes | ErrorRes>();
+  const { bookmarks, setBookmarks } = useBookmarkStore();
+
+  useEffect(() => {
+    const getDefaultData = async () => {
+      const result = await getMeetings();
+      setResult(result);
+    };
+    getDefaultData();
+  }, []);
+
+  useEffect(() => {
+    const fetchBookmarks = async () => {
+      console.log('fetchBookmarks useEffect - user:', user, 'accessToken:', accessToken);
+      if (user && accessToken) {
+        const myBookmarks = (await getAllBookmarks(accessToken)) as BookmarksResponse;
+        console.log('myBookmarks response:', myBookmarks);
+        const bookmarkItems = myBookmarks.item;
+        setBookmarks(bookmarkItems as Bookmarks[]);
+        console.log('setBookmarks called with:', bookmarkItems);
+      }
+    };
+    fetchBookmarks();
+  }, [user, accessToken, setBookmarks]);
 
   return (
     <>
@@ -38,7 +69,7 @@ export default async function Meetinglist() {
               <div className={style.meetingBorder}>
                 <div className={style.filterBar}></div>
 
-                <ul className={style.meetingGrid}>{result.ok ? result.item.map((meeting) => <MeetingItem key={meeting._id} meeting={meeting} />) : <p>에러발생</p>}</ul>
+                <ul className={style.meetingGrid}>{result && bookmarks && result.ok ? result.item.map((meeting) => <MeetingItem key={meeting._id} meeting={meeting} />) : <p>에러발생</p>}</ul>
               </div>
             </section>
           </div>

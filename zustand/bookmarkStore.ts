@@ -70,7 +70,7 @@ const BookmarkStore: StateCreator<BookmarkStoreState> = (set, get) => ({
   },
 
   isBookmarked: (targetId, type) => {
-    return get().bookmarks.some((bookmark) => bookmark.target_id === targetId && bookmark.type === type);
+    return get().bookmarks.some((bookmark) => bookmark._id === targetId);
   },
 
   setLoading: (loading) => set({ loading }),
