@@ -234,13 +234,13 @@
   max-width: 380px;
   height: auto;
   min-height: 350px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: all 0.2s ease;
   cursor: pointer;
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
 }
 
 .meetingCard:hover {
@@ -505,4 +505,9 @@
   .metadataLine {
     font-size: 16px;
   }
+}
+.none-data {
+  font-family: var(--sub-font-medium);
+  display: flex;
+  align-items: center;
 }

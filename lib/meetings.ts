@@ -5,18 +5,25 @@ const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID || '';
 
 /**
  * 게시판 타입에 해당하는 모임 목록 조회
+ * @param {string} keyword - 검색 키워드 (선택)
  * @returns {Promise<MeetingsListRes | ErrorRes>} - 모임 목록 응답 객체
  */
-export async function getMeetings(): Promise<MeetingsListRes | ErrorRes> {
+export async function getMeetings(keyword?: string): Promise<MeetingsListRes | ErrorRes> {
   try {
-    const res = await fetch(`${API_URL}/products`, {
+    const params = new URLSearchParams();
+
+    if (keyword) {
+      // keyword가 존재하면 params에 keyword 파라미터를 추가
+      params.set('keyword', keyword);
+    }
+    const queryString = params.toString();
+    const url = queryString ? `${API_URL}/products?${queryString}` : `${API_URL}/products`;
+
+    const res = await fetch(url, {
       headers: {
         'Client-Id': CLIENT_ID,
       },
-      cache: 'force-cache',
-      next: {
-        tags: [`products`],
-      },
+      cache: 'no-store',
     });
     return res.json();
   } catch (error) {
