@@ -68,7 +68,7 @@ export async function getMyMeetings(accessToken: string): Promise<ApplyListRes |
         'Client-Id': CLIENT_ID,
         Authorization: `Bearer ${accessToken}`,
       },
-      cache: 'force-cache',
+      cache: 'no-store',
       next: {
         tags: [`orders`],
       },
