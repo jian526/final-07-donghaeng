@@ -234,3 +234,35 @@ export async function deleteMeeting(prevState: ActionState, formData: FormData):
     return data; // 에러 응답 객체 반환
   }
 }
+
+/**
+ * 상품 buyQuantity 업데이트
+ * @param {string} accessToken - 인증 토큰
+ * @param {number} productId - 상품 ID
+ * @param {number} buyQuantity - 업데이트할 buyQuantity 값
+ * @returns {Promise<ActionState>} - 업데이트 결과 응답 객체
+ */
+export async function updateBuyQuantity(accessToken: string, productId: number, buyQuantity: number): Promise<ActionState> {
+  try {
+    const res = await fetch(`${API_URL}/seller/products/${productId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Client-Id': CLIENT_ID,
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({ buyQuantity }),
+    });
+
+    const data = await res.json();
+    if (data.ok) {
+      updateTag('products');
+      updateTag(`products/${productId}`);
+      return { ok: 1, message: 'buyQuantity 업데이트 완료' };
+    }
+    return { ok: 0, message: data.message || 'buyQuantity 업데이트 실패' };
+  } catch (error) {
+    console.error(error);
+    return { ok: 0, message: '네트워크 오류로 buyQuantity 업데이트에 실패했습니다.' };
+  }
+}

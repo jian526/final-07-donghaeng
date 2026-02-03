@@ -208,11 +208,11 @@
   border: 5px solid var(--border-lavender);
   width: 100%;
   max-width: 1350px;
-  padding-top: 40px;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding: 40px;
   border-radius: 25px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 /* 모임 카드 그리드 */
@@ -234,13 +234,13 @@
   max-width: 380px;
   height: auto;
   min-height: 350px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: all 0.2s ease;
   cursor: pointer;
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
 }
 
 .meetingCard:hover {
@@ -505,4 +505,14 @@
   .metadataLine {
     font-size: 16px;
   }
+}
+.none-data {
+  font-family: var(--sub-font-medium);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  min-height: 300px;
+  color: var(--text-gray);
+  padding-bottom: 40px;
 }
