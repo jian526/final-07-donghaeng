@@ -7,7 +7,7 @@ import { MeetingCard } from '@/app/components/MeetingCard';
 import BookmarkSwiper from '@/app/(view)/bookmarks/BookmarkSwiper';
 import useBookmarkStore from '@/zustand/bookmarkStore';
 import useUserStore from '@/zustand/userStore';
-import { getAllBookmarks } from '@/lib/bookmarks';
+import { getUserBookmarksList } from '@/lib/bookmarks';
 
 export default function BookmarkPage() {
   const [isDesktop, setIsDesktop] = useState(false);
@@ -31,7 +31,7 @@ export default function BookmarkPage() {
       }
 
       try {
-        const res = await getAllBookmarks(accessToken);
+        const res = await getUserBookmarksList(accessToken);
         if (res.ok === 1 && res.item) {
           setBookmarks(res.item);
         }
