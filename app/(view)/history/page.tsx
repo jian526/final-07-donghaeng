@@ -21,27 +21,37 @@ export default function HistoryPage() {
   const { user } = useUserStore();
   const router = useRouter();
   const [meetings, setMeetings] = useState<Apply[]>([]);
-  const accessToken = user?.token?.accessToken || '';
+  const accessToken = user?.token?.accessToken;
+  const [isEmpty, setIsEmpty] = useState(false);
+  const hasHydrated = useUserStore((state) => state.hasHydrated);
 
   useEffect(() => {
-    if (!accessToken) return;
+    if (!hasHydrated) return;
+
+    if (!accessToken) {
+      router.replace('/login');
+    }
 
     const fetchMeetings = async () => {
-      const res = await getMyMeetings(accessToken);
+      const res = await getMyMeetings(accessToken || ' ');
       if (!res || res.ok === 0) return;
+
+      if (res.item.length === 0) {
+        setMeetings([]);
+        setIsEmpty(true);
+      } else {
+        setMeetings(res.item);
+        setIsEmpty(false);
+      }
 
       console.log('데이터를 잘 불러와주나요', res, '');
       setMeetings(res.item);
     };
 
     fetchMeetings();
-  }, [accessToken]);
+  }, [hasHydrated, accessToken, router]);
 
-  useEffect(() => {
-    if (!accessToken) {
-      router.replace('/login');
-    }
-  }, [accessToken, router]);
+  if (!hasHydrated) return null;
 
   if (!accessToken) {
     return null;
@@ -58,34 +68,38 @@ export default function HistoryPage() {
                 <button className={`${style.beforeBtn} `}>참여 전</button>
                 <button className={`${style.afterBtn} `}>참여 후</button>
               </div>
-              <Swiper
-                modules={[Pagination]}
-                spaceBetween={40}
-                slidesPerView={'auto'}
-                centeredSlides={true}
-                pagination={{
-                  clickable: true,
-                }}
-                className={style.swiper}
-                breakpoints={{
-                  0: {
-                    enabled: false, // 모바일
-                    centeredSlides: false,
-                  },
-                  1024: {
-                    enabled: true, // 웹
-                    centeredSlides: true,
-                  },
-                }}
-              >
-                {meetings.map((apply) =>
-                  apply.products.map((meeting) => (
-                    <SwiperSlide key={meeting._id}>
-                      <MeetingCard meeting={meeting} />
-                    </SwiperSlide>
-                  ))
-                )}
-              </Swiper>
+              {isEmpty ? (
+                <div className={style.empty}> 신청한 모임이 없습니다.</div>
+              ) : (
+                <Swiper
+                  modules={[Pagination]}
+                  spaceBetween={40}
+                  slidesPerView={'auto'}
+                  centeredSlides={true}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  className={style.swiper}
+                  breakpoints={{
+                    0: {
+                      enabled: false, // 모바일
+                      centeredSlides: false,
+                    },
+                    1024: {
+                      enabled: true, // 웹
+                      centeredSlides: true,
+                    },
+                  }}
+                >
+                  {meetings.map((apply) =>
+                    apply.products.map((meeting) => (
+                      <SwiperSlide key={meeting._id}>
+                        <MeetingCard meeting={meeting} />
+                      </SwiperSlide>
+                    ))
+                  )}
+                </Swiper>
+              )}
             </div>
           }
         </main>
