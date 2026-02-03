@@ -181,7 +181,6 @@ export default function KakaoMap({ width = '100%', lat = 37.5709, lng = 126.978,
               {overlayMap}
             </CustomOverlayMap>
           )}
-          <ZoomControl position={'RIGHT'} />
         </Map>
       ) : (
         <div style={{ width: '100%', height: '100%', background: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>지도 로딩중...</div>
