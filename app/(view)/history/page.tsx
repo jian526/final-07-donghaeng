@@ -15,17 +15,19 @@ import useUserStore from '@/zustand/userStore';
 import { getMyMeetings } from '@/lib/meetings';
 import { Apply } from '@/types/apply';
 import MeetingCard from '@/app/(view)/history/MeetingCard';
+import { useRouter } from 'next/navigation';
 
 export default function HistoryPage() {
   const { user } = useUserStore();
-  // const router = useRouter();
+  const router = useRouter();
   const [meetings, setMeetings] = useState<Apply[]>([]);
+  const accessToken = user?.token?.accessToken || '';
 
   useEffect(() => {
-    if (!user || !user.token || !user.token.accessToken) return;
+    if (!accessToken) return;
 
     const fetchMeetings = async () => {
-      const res = await getMyMeetings(user!.token!.accessToken);
+      const res = await getMyMeetings(accessToken);
       if (!res || res.ok === 0) return;
 
       console.log('데이터를 잘 불러와주나요', res, '');
@@ -33,7 +35,17 @@ export default function HistoryPage() {
     };
 
     fetchMeetings();
-  }, [user]);
+  }, [accessToken]);
+
+  useEffect(() => {
+    if (!accessToken) {
+      router.replace('/login');
+    }
+  }, [accessToken, router]);
+
+  if (!accessToken) {
+    return null;
+  }
 
   return (
     <>
