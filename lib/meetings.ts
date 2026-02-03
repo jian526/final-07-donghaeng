@@ -97,3 +97,24 @@ export async function getMyAddMeetings(accessToken: string): Promise<MeetingsLis
     return { ok: 0, message: '일시적인 네트워크 문제로 사용자 모임 목록 조회에 실패했습니다.' };
   }
 }
+
+/**
+ * 사용자가 등록한 모임 상세 조회
+ * @param {string} accessToken - 인증 토큰
+ * @param {number} productId - 상품 ID
+ * @returns {Promise<MeetingsInfoRes | ErrorRes>} - 상품 상세 정보 응답 객체
+ */
+export async function getSellerProduct(accessToken: string, productId: number): Promise<MeetingsInfoRes | ErrorRes> {
+  try {
+    const res = await fetch(`${API_URL}/seller/products/${productId}`, {
+      headers: {
+        'Client-Id': CLIENT_ID,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return res.json();
+  } catch (error) {
+    console.error(error);
+    return { ok: 0, message: '일시적인 네트워크 문제로 상품 조회에 실패했습니다.' };
+  }
+}

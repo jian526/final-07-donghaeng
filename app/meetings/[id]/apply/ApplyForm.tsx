@@ -26,7 +26,7 @@ export default function ApplyForm({ meeting, id }: ApplyFormProps) {
       JSON.stringify([
         {
           _id: Number(id),
-          quantity: 1,
+          quantity: 0,
         },
       ])
     );

@@ -4,7 +4,9 @@ import DefaultLayout from '@/app/components/DefaultLayout';
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { getManage } from '@/lib/manage';
+import { getSellerProduct } from '@/lib/meetings';
 import { patchManage } from '@/actions/manage';
+import { updateBuyQuantity } from '@/actions/meetings';
 import useUserStore from '@/zustand/userStore';
 import { Manage } from '@/types/manage';
 import Image from 'next/image';
@@ -50,6 +52,20 @@ export default function ManagePage() {
     const result = await patchManage(null, formData);
 
     if (result?.ok === 1) {
+      // 승인인 경우 buyQuantity +1
+      if (isApprove) {
+        const applicant = manage?.find((item) => item._id === applicantId);
+        const productId = applicant?.products[0]?._id;
+        if (productId && accessToken) {
+          // 현재 product 정보 조회
+          const productData = await getSellerProduct(accessToken, productId);
+          const currentBuyQuantity = productData.ok === 1 ? productData.item?.buyQuantity || 0 : 0;
+          console.log('지금 몇인데 바이퀀티티', currentBuyQuantity);
+
+          // buyQuantity +1 업데이트
+          await updateBuyQuantity(accessToken, productId, currentBuyQuantity + 1);
+        }
+      }
       toast.success(isApprove ? '승인되었습니다.' : '거절되었습니다.');
       setManage((prev) => prev?.filter((item) => item._id !== applicantId));
     } else {
