@@ -149,6 +149,15 @@
   transform: translateX(4px);
 }
 
+.empty {
+  display: flex;
+  justify-self: center;
+  /* align-items: center; */
+  height: 300px;
+  padding: 20px 0 50px 0;
+  font-family: var(--danger-font);
+}
+
 /* 최소크기창을 위한 글씨체 줄임 */
 @media (max-width: 400px) {
   .cardTitle {
