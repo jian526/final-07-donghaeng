@@ -23,9 +23,6 @@ export default function Filter({ onFilterChanges, showCategory = true }: { onFil
     return `${month}.${day}`;
   };
 
-  // 지역 데이터(객체의 key, value 쌍으로 정의)
-  // string과 string으로 이루어진 배열로 정의
-
   return (
     <>
       <div className={styles['filter-div']}>
