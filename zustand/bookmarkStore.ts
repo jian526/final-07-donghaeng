@@ -1,103 +1,84 @@
-// stores/bookmarkStore.ts
 import { Bookmarks } from '@/types/bookmarks';
 import { create, StateCreator } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import { getUserBookmarksList } from '@/lib/bookmarks';
 
-// 북마크 정보를 관리하는 스토어의 상태 인터페이스
-export interface BookmarkStoreState {
-  bookmarks: Bookmarks[]; // 전체 북마크 목록
-  selectedBookmark: Bookmarks | null; // 선택된 북마크 상세
+interface BookmarkStoreState {
+  bookmarks: Bookmarks[];
   loading: boolean;
 
   // 북마크 목록 설정
   setBookmarks: (bookmarks: Bookmarks[]) => void;
 
-  // 단일 북마크 선택
-  setSelectedBookmark: (bookmark: Bookmarks | null) => void;
-
-  // 북마크 추가
+  // 북마크 추가 (로컬 상태)
   addBookmark: (bookmark: Bookmarks) => void;
 
-  // 북마크 업데이트 (메모 수정 등)
-  updateBookmark: (bookmarkId: number, updates: Partial<Bookmarks>) => void;
-
-  // 북마크 삭제
+  // 북마크 삭제 (로컬 상태)
   removeBookmark: (bookmarkId: number) => void;
 
-  // 타입별 북마크 필터링
-  getBookmarksByType: (type: string) => Bookmarks[];
+  // 특정 상품이 북마크되어 있는지 확인
+  isBookmarked: (targetId: number) => boolean;
 
-  // 특정 대상의 북마크 여부 확인
-  isBookmarked: (targetId: number, type: string) => boolean;
+  // 북마크 ID 조회 (삭제 시 필요)
+  getBookmarkId: (targetId: number) => number | null;
 
   // 로딩 상태 설정
   setLoading: (loading: boolean) => void;
 
-  // 스토어 초기화
+  // 스토어 초기화 (로그아웃 시)
   resetBookmark: () => void;
 
-  // 북마크 데이터 가져오기
+  // 북마크 데이터 가져오기 (로그인 시)
   fetchBookmarks: (accessToken: string) => Promise<void>;
 }
 
-// 북마크 정보를 관리하는 스토어 생성
 const BookmarkStore: StateCreator<BookmarkStoreState> = (set, get) => ({
   bookmarks: [],
-  selectedBookmark: null,
   loading: false,
 
   setBookmarks: (bookmarks) => set({ bookmarks }),
-
-  setSelectedBookmark: (bookmark) => set({ selectedBookmark: bookmark }),
 
   addBookmark: (bookmark) =>
     set((state) => ({
       bookmarks: [...state.bookmarks, bookmark],
     })),
 
-  updateBookmark: (bookmarkId, updates) =>
-    set((state) => ({
-      bookmarks: state.bookmarks.map((bookmark) => (bookmark._id === bookmarkId ? { ...bookmark, ...updates } : bookmark)),
-    })),
-
   removeBookmark: (bookmarkId) =>
     set((state) => ({
       bookmarks: state.bookmarks.filter((bookmark) => bookmark._id !== bookmarkId),
-      selectedBookmark: state.selectedBookmark?._id === bookmarkId ? null : state.selectedBookmark,
     })),
 
-  getBookmarksByType: (type) => {
-    return get().bookmarks.filter((bookmark) => bookmark.type === type);
+  isBookmarked: (targetId) => {
+    return get().bookmarks.some((bookmark) => bookmark.product._id === targetId);
   },
 
-  isBookmarked: (targetId, type) => {
-    return get().bookmarks.some((bookmark) => bookmark._id === targetId);
+  getBookmarkId: (targetId) => {
+    const bookmark = get().bookmarks.find((b) => b.product._id === targetId);
+    return bookmark ? bookmark._id : null;
   },
 
   setLoading: (loading) => set({ loading }),
 
-  resetBookmark: () =>
+  resetBookmark: () => {
+    // 이전 버전의 localStorage 데이터도 삭제
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('bookmark-storage');
+    }
     set({
-      selectedBookmark: null,
       bookmarks: [],
-    }),
+      loading: false,
+    });
+  },
 
   fetchBookmarks: async (accessToken: string) => {
+    console.log('fetchBookmarks 호출됨, token:', accessToken ? '있음' : '없음');
     set({ loading: true });
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookmarks/product`, {
-        cache: 'no-store',
-        headers: {
-          'Content-Type': 'application/json',
-          'Client-Id': process.env.NEXT_PUBLIC_CLIENT_ID || '',
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      if (!res.ok) {
-        throw new Error('북마크 데이터를 가져오는데 실패했습니다.');
-      }
-      const data = await res.json();
-      if (data.ok === 1) {
-        set({ bookmarks: data.item });
+      const result = await getUserBookmarksList(accessToken);
+      console.log('북마크 API 응답:', result);
+      if (result.ok && 'item' in result) {
+        console.log('북마크 저장:', result.item);
+        set({ bookmarks: result.item });
       }
     } catch (error) {
       console.error('북마크 fetch 에러:', error);
@@ -107,29 +88,11 @@ const BookmarkStore: StateCreator<BookmarkStoreState> = (set, get) => ({
   },
 });
 
-const useBookmarkStore = create<BookmarkStoreState>()(BookmarkStore);
-
-// 북마크 데이터를 가져오는 서버 함수
-export async function getBookmarks() {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookmarks`, {
-      cache: 'no-store', // 항상 최신 데이터 가져오기
-      headers: {
-        'Content-Type': 'application/json',
-        // 필요시 인증 헤더 추가
-        // 'Authorization': `Bearer ${token}`,
-      },
-    });
-    if (!res.ok) {
-      throw new Error('북마크 데이터를 가져오는데 실패했습니다.');
-    }
-
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.error('북마크 fetch 에러:', error);
-    return { ok: 0, item: [] };
-  }
-}
+const useBookmarkStore = create<BookmarkStoreState>()(
+  persist(BookmarkStore, {
+    name: 'bookmark-storage',
+    storage: createJSONStorage(() => localStorage),
+  })
+);
 
 export default useBookmarkStore;

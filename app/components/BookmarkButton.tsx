@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import useBookmarkStore from '@/zustand/bookmarkStore';
 import useUserStore from '@/zustand/userStore';
-import { addBookmarkToServer, deleteBookmarkFromServer } from '@/lib/bookmarks';
+import useBookmarkStore from '@/zustand/bookmarkStore';
 import styles from './BookmarkButton.module.css';
+import { addBookmarks, deleteBookmark } from '@/actions/bookmarks';
 
 interface BookmarkButtonProps {
   meetingId: number;
@@ -15,60 +14,44 @@ interface BookmarkButtonProps {
 }
 
 export default function BookmarkButton({ meetingId, width = 20, height = 26, desktopWidth, desktopHeight }: BookmarkButtonProps) {
-  const [isLoading, setIsLoading] = useState(false);
-  const bookmarks = useBookmarkStore((state) => state.bookmarks);
-  const addBookmark = useBookmarkStore((state) => state.addBookmark);
-  const removeBookmark = useBookmarkStore((state) => state.removeBookmark);
   const { user } = useUserStore();
+  const { isBookmarked, getBookmarkId, removeBookmark, addBookmark } = useBookmarkStore();
   const accessToken = user?.token?.accessToken || '';
-  const currentBookmark = bookmarks?.find((b) => b.product._id === meetingId);
 
-  console.log(`BookmarkButton [${meetingId}] - meetingId type:`, typeof meetingId);
-  console.log(
-    `BookmarkButton [${meetingId}] - bookmarks target_ids:`,
-    bookmarks?.map((b) => ({ target_id: b, type: typeof b._id }))
-  );
-  console.log(
-    `Bookmark [${meetingId}] - currentBookmark:`,
-    bookmarks?.map((b) => b.product._id),
-    'meetingId',
-    meetingId
-  );
-  console.log(`BookmarkButton [${meetingId}] - currentBookmark:`, currentBookmark);
+  const currentBookmark = isBookmarked(meetingId);
 
+  // 북마크 추가/제거 처리
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
-    if (isLoading) return;
+    if (!accessToken) return;
 
-    if (!accessToken) {
-      alert('로그인이 필요합니다.');
-      return;
-    }
+    const formData = new FormData();
+    formData.append('accessToken', accessToken);
+    formData.append('target_id', String(meetingId));
 
-    setIsLoading(true);
-    try {
-      console.log('in Function ::: ', currentBookmark);
-      if (currentBookmark) {
-        //북마크 삭제
-        const result = await deleteBookmarkFromServer(currentBookmark._id, accessToken);
-        if (result.ok === 1) {
-          removeBookmark(currentBookmark._id);
-        }
-      } else {
-        //북마크 추가
-        const result = await addBookmarkToServer('product', meetingId, accessToken);
-        if (result.ok === 1 && result.item) {
-          console.log(result.item);
-          console.log({ ...result.item, product: { _id: meetingId } });
-          addBookmark({ ...result.item, product: { _id: meetingId } });
+    if (currentBookmark) {
+      // 제거
+      const bookmarkId = getBookmarkId(meetingId);
+      if (bookmarkId) {
+        formData.set('_id', String(bookmarkId));
+        const result = await deleteBookmark(null, formData);
+        if (!result) {
+          removeBookmark(bookmarkId);
         }
       }
-    } catch (error) {
-      console.error('북마크 토글 에러: ', error);
-    } finally {
-      setIsLoading(false);
+    } else {
+      // 추가
+      const result = await addBookmarks(null, formData); // 북마크 추가 api 실행
+      if (result.ok) {
+        // 성공 시 로컬 상태에 바로 추가
+        const newBookmark = {
+          ...result.item,
+          product: { _id: meetingId },
+        };
+        addBookmark(newBookmark); // 새로 북마크한 데이터를 로컬에 등록
+      }
     }
   };
 
