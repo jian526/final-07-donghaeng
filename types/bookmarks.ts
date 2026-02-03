@@ -8,14 +8,3 @@ export interface Bookmarks {
   _id: number;
   createdAt: string;
 }
-
-//API 응답 타입
-export interface BookmarksResponse {
-  ok: number;
-  item: Bookmarks[];
-}
-
-export interface BookmarkResponse {
-  ok: number;
-  item: Bookmarks | null;
-}
