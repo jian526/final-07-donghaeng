@@ -1,32 +1,18 @@
-'use client';
-
 import style from './MeetingList.module.css';
 import Link from 'next/link';
-import { useState } from 'react';
 import DefaultLayout from '@/app/components/DefaultLayout';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import BookmarkButton from '@/app/components/BookmarkButton';
-import Filter from '@/app/components/Filter';
 
-export default function Meetinglist() {
-  const categories = ['전체', '운동', '사교', '인문학 / 책 / 글', '아웃도어 / 여행', '음악 / 악기', '업종 / 직무', '문화 / 공연 / 축제', '외국 / 언어', '게임 / 오락', '공예 / 만들기', '댄스 / 무용', '봉사활동', '사진 / 영상', '자기계발', '스포츠 관람', '반려동물', '요리 / 제조', '자동차 / 바이크'];
+import { getMeetings } from '@/lib/meetings';
+import Category from '@/app/meetings/Category';
+import MeetingItem from '@/app/meetings/MeetingItem';
 
-  const [selectedCategory, setSelectedCategory] = useState('전체');
-  const [searchTerm, setSearchTerm] = useState('');
+interface PageProps {
+  searchParams: Promise<{ keyword?: string }>;
+}
 
-  // 임시 모임 데이터
-  const meetings = Array.from({ length: 12 }, (_, i) => ({
-    id: i + 1,
-    title: '모임 이름 어쩌구',
-    location: '서울특별시',
-    date: '26.01.31',
-    gender: '성별무관',
-    age: '나이무관',
-    isBookmarked: true,
-  }));
+export default async function Meetinglist({ searchParams }: PageProps) {
+  const { keyword } = await searchParams;
+  const result = await getMeetings(keyword); // 키워드에 대한 모임리스트 조회
 
   return (
     <>
@@ -41,7 +27,7 @@ export default function Meetinglist() {
             </div>
             <div className={style.headerSection}>
               <div className={style.titleSection}>
-                <h1 className={style.pageTitle}>{searchTerm || '모임 리스트'}</h1>
+                <h1 className={style.pageTitle}>{keyword ? `"${keyword}" 검색 결과` : '모임 리스트'}</h1>
               </div>
               <Link href="/meetings/add" className={style.registerButton}>
                 <span className={style.desktopText}>모임 등록하기</span>
@@ -50,71 +36,24 @@ export default function Meetinglist() {
             </div>
           </div>
           <div className={style.row}>
-            <aside className={style.sidebar}>
-              <div className={style.categoryListDesktop}>
-                <ul className={style.categoryList}>
-                  {categories.map((category, index) => (
-                    <li key={index} className={`${style.categoryItem} ${selectedCategory === category ? style.active : ''}`} onClick={() => setSelectedCategory(category)}>
-                      {category}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </aside>
-            {/* 모바일: 가로 Swiper 슬라이드 */}
-            <div className={style.categoryListMobile}>
-              <Swiper
-                className={style.categorySwiper}
-                modules={[FreeMode]}
-                freeMode={{
-                  enabled: true,
-                }}
-                spaceBetween={10}
-                slidesPerView="auto"
-                grabCursor
-              >
-                {categories.map((category) => (
-                  <SwiperSlide key={category} className={style.categorySlide}>
-                    <button type="button" className={`${style.categoryChip} ${selectedCategory === category ? style.categoryChipActive : ''}`} onClick={() => setSelectedCategory(category)}>
-                      {category}
-                    </button>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
+            <Category />
+
             <section className={style.mainContent}>
               <div className={style.meetingBorder}>
-                <div className={style.filterBar}>
-                  <Filter />
-                </div>
-
-                <ul className={style.meetingGrid}>
-                  {meetings.map((meeting) => (
-                    <li key={meeting.id} className={style.card}>
-                      <Link href={`/meetings/${meeting.id}`}>
-                        <figure className={style.meetingCard}>
-                          <div className={style.cardImage}></div>
-                          <figcaption className={style.cardContent}>
-                            <div className={style.cardHeader}>
-                              <h3 className={style.cardTitle}>{meeting.title}</h3>
-                              <div className={style.bookmarkIcon}>
-                                <BookmarkButton />
-                              </div>
-                            </div>
-                            <div className={style.cardMetadata}>
-                              <p className={style.metadataLine}>
-                                {meeting.location}. {meeting.date}
-                              </p>
-                              <p className={style.metadataLine}>
-                                {meeting.gender}. {meeting.age}
-                              </p>
-                            </div>
-                          </figcaption>
-                        </figure>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                <div className={style.filterBar}></div>
+                {result.ok ? (
+                  result.item.length > 0 ? (
+                    <ul className={style.meetingGrid}>
+                      {result.item.map((meeting) => (
+                        <MeetingItem key={meeting._id} meeting={meeting} />
+                      ))}
+                    </ul>
+                  ) : (
+                    <div className={style['none-data']}>검색 결과가 없습니다.</div>
+                  )
+                ) : (
+                  <p>에러발생</p>
+                )}
               </div>
             </section>
           </div>

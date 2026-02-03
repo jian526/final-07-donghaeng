@@ -92,6 +92,7 @@
   .map-link-text {
     img {
       margin-left: 10px;
+      height: auto;
     }
   }
 }
@@ -101,6 +102,10 @@
   margin-bottom: 25px;
   border-radius: 20px;
   overflow: hidden;
+
+  .map {
+    height: 300px;
+  }
 
   .map-image {
     height: auto;
@@ -126,6 +131,7 @@
   .section-link-text {
     img {
       margin-left: 10px;
+      height: auto;
     }
   }
 }
@@ -148,6 +154,10 @@
       position: relative;
       background: gray;
       aspect-ratio: 1 / 1;
+
+      img {
+        object-fit: cover;
+      }
     }
     .meetings-title {
       display: flex;
@@ -209,10 +219,15 @@
 
       img {
         padding-top: 5px;
+        height: auto;
       }
     }
     .map-view {
       margin-bottom: 60px;
+
+      .map {
+        height: 500px;
+      }
     }
   }
   .section-meetings-wrapper {

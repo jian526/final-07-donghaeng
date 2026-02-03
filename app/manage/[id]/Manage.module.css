@@ -1,8 +1,11 @@
 /* 신청자 목록 body */
 .manage-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   width: 100%;
   max-width: 500px;
-  height: 800px;
+  /* height: 800px; */
   margin-inline: auto;
   margin-bottom: 25px;
 }
@@ -70,6 +73,7 @@
     width: 60px;
     height: 30px;
     border-radius: 25px;
+    cursor: pointer;
   }
 }
 
