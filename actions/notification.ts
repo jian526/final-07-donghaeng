@@ -20,8 +20,10 @@ export async function createNoti(prevState: ActionState, formData: FormData): Pr
   // FormData를 객체로 변환
   const body = Object.fromEntries(formData.entries());
 
+  // 응답 객체 선언
   let data: NotificationListRes | ErrorRes;
 
+  // API 호출
   try {
     const res = await fetch(`${API_URL}/notifications`, {
       method: 'POST',
@@ -30,6 +32,7 @@ export async function createNoti(prevState: ActionState, formData: FormData): Pr
         'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
       },
+      // body에 정보 담기(타입, 신청자 id, 모임 승인 여부 content, 모임 id, 제목, 이미지)
       body: JSON.stringify({
         type: body.type || 'noti',
         target_id: Number(body.target_id),

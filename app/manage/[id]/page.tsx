@@ -68,7 +68,9 @@ export default function ManagePage() {
           await updateBuyQuantity(accessToken, productId, currentBuyQuantity + 1);
         }
       }
+      // 알림 생성
       if (applicant && accessToken) {
+        // 알림에 필요한 정보들을 append를 통해 넣기
         const notiFormData = new FormData();
         notiFormData.append('accessToken', accessToken);
         notiFormData.append('target_id', String(applicant.user_id));

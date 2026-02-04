@@ -4,8 +4,8 @@ import useUserStore from '@/zustand/userStore';
 import { NewNotification } from '@/types/notification';
 import useNotiStore from '@/zustand/notificationStore';
 
-let globalNotiSocket: Socket | null = null;
-let isConnecting = false;
+let globalNotiSocket: Socket | null = null; // 소켓 연결 객체를 하나만 유지하기 위한 변수
+let isConnecting = false; // 현재 연결 시도 여부를 체크하는 변수
 
 export function useNoti() {
   const user = useUserStore((state) => state.user);
@@ -14,9 +14,11 @@ export function useNoti() {
   const { notiSocket, setNotiSocket, notifications, setNotifications } = useNotiStore();
 
   useEffect(() => {
+    // 로그인 하지 않거나, 소켓 연결이 되어있거나, 현재 연결 시도 중이면 반환
     if (!userId || notiSocket || isConnecting) return;
 
-    // 싱글톤 패턴: globalNotiSocket을 사용하여 컴포넌트가 리렌더링되더라도 소켓이 불필요하게 여러 번 생성되지 않도록 관리함
+    // 싱글톤 패턴: globalNotiSocket을 사용하여 컴포넌트가 리렌더링되더라도
+    // 소켓이 불필요하게 여러 번 생성되지 않도록 관리함
     if (globalNotiSocket) {
       setNotiSocket(globalNotiSocket);
       return;
@@ -27,11 +29,11 @@ export function useNoti() {
 
     // 2. 소켓 연결 생성
     const socket = io(`${process.env.NEXT_PUBLIC_NOTI_URL}/${process.env.NEXT_PUBLIC_CLIENT_ID}`, {
-      reconnectionAttempts: 5,
+      reconnectionAttempts: 5, // 연결이 끊기면 최대 5번 재시도
     });
 
-    globalNotiSocket = socket;
-    setNotiSocket(socket);
+    globalNotiSocket = socket; // 전역 변수에 저장
+    setNotiSocket(socket); // zustand에 저장
 
     // 3. 이벤트 리스너 등록
     socket.on('connect', () => {
@@ -64,6 +66,7 @@ export function useNoti() {
     });
   }, [userId, notiSocket, setNotiSocket, setNotifications]);
 
+  // 전체 읽음 처리, 로컬에서 isRead: true로 처리
   const markAllRead = () => {
     if (notiSocket && userId) {
       notiSocket.emit('markAllRead', userId);
@@ -73,6 +76,7 @@ export function useNoti() {
     }
   };
 
+  // 전체 삭제 처리, 로컬에서 빈 배열로 처리
   const deleteAll = () => {
     if (notiSocket && userId) {
       notiSocket.emit('deleteAll', userId);
@@ -81,5 +85,6 @@ export function useNoti() {
     }
   };
 
+  // 알림 목록, 전체 읽음, 전체 삭제 반환
   return { notifications, setNotifications, markAllRead, deleteAll };
 }
