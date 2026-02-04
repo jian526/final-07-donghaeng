@@ -73,7 +73,7 @@
   padding: 0;
   margin: 0;
   font-size: 15px;
-  color: var(--text-gray);
+  color: var(--text-black);
 }
 
 /* | 구분선 */
@@ -246,11 +246,9 @@
   border: none;
   justify-content: center;
   border-radius: 25px;
-  padding: 27px 0;
   font-family: var(--main-font);
   font-size: 20px;
   min-width: 120px;
-  padding: 0 40px;
   height: 80px;
   cursor: pointer;
   transition: all 0.3s;
@@ -341,6 +339,10 @@
     padding: 40px;
     margin-right: -40px;
   }
+  .imageGroup {
+    position: relative;
+    z-index: 0;
+  }
   .contentCard {
     display: flex;
     flex-direction: column;
@@ -361,6 +363,14 @@
   }
   .characterImage {
     object-position: top;
+    opacity: 50%;
+  }
+
+  .contentBody {
+    position: relative;
+    z-index: 5;
+    background-color: var(--bg-white);
+    border-radius: 25px;
   }
 
   .bottomSection {
@@ -395,12 +405,17 @@
     margin-right: 10%;
   }
 }
-
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .headerContent {
-    margin-top: -60px;
+    margin-top: -190px;
+    width: 90%;
+    z-index: 10;
   }
-
+}
+@media (max-width: 480px) {
+  .bookmarkPart {
+    right: -30px;
+  }
   .bpm p {
     font-size: 12px;
   }
@@ -414,14 +429,17 @@
   }
   .hostMode {
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
   }
   .adminBtn,
   .editBtn,
   .deleteBtn {
-    min-width: 83vw;
+    min-width: 25vw;
     width: 100%;
+    height: 50px;
+    font-size: 14px;
   }
 }
 
@@ -429,6 +447,20 @@
   .contentCard {
     width: calc(100vw - 40px);
     min-width: unset;
+  }
+  .characterWrapper {
+    height: 160px;
+  }
+  .title {
+    font-size: 24px;
+  }
+  .headerContent {
+    margin-left: -20px;
+    margin-top: -210px;
+  }
+  .meetingInfo {
+    font-size: 13px;
+    width: 150%;
   }
 
   /* bottomSection 전체 재구성 */
@@ -439,7 +471,6 @@
     gap: 12px;
     min-height: auto;
   }
-
   /* 호스트 캐릭터 이미지 축소 */
   .userCharacterImage {
     width: 80px;
