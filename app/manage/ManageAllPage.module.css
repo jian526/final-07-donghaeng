@@ -47,13 +47,6 @@
   padding: 55px 20px 55px 44px;
 }
 
-.bookmarkIcon {
-  position: absolute;
-  top: 110px;
-  left: 390px;
-  cursor: pointer;
-}
-
 .cardContent {
   display: flex;
   align-items: center;
@@ -148,9 +141,6 @@
   }
   .infoItem p {
     font-size: 14px;
-  }
-  .bookmarkIcon {
-    left: 390px;
   }
 
   .cardTitle {
