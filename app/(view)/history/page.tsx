@@ -24,6 +24,30 @@ export default function HistoryPage() {
   const accessToken = user?.token?.accessToken;
   const [isEmpty, setIsEmpty] = useState(false);
   const hasHydrated = useUserStore((state) => state.hasHydrated);
+  const [filter, setFilter] = useState<'all' | 'before' | 'after'>('all');
+
+  const isPastMeeting = (meetingDate: string) => {
+    if (!meetingDate) return false;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const meeting = new Date(meetingDate);
+    meeting.setHours(0, 0, 0, 0);
+    return meeting < today;
+  };
+
+  const getFilteredMeetings = () => {
+    if (filter === 'all') return meetings;
+
+    return meetings
+      .map((apply) => ({
+        ...apply,
+        products: apply.products.filter((meeting) => {
+          const isPast = isPastMeeting(meeting.extra?.date || '');
+          return filter === 'after' ? isPast : !isPast;
+        }),
+      }))
+      .filter((apply) => apply.products.length > 0);
+  };
 
   useEffect(() => {
     if (!hasHydrated) return;
@@ -57,6 +81,8 @@ export default function HistoryPage() {
     return null;
   }
 
+  const filteredMeetings = getFilteredMeetings();
+
   return (
     <>
       <DefaultLayout>
@@ -65,8 +91,12 @@ export default function HistoryPage() {
             <div className={style.contentWrapper}>
               <h1 className={style.title}>모임 조회</h1>
               <div className={style.btnGroup}>
-                <button className={`${style.beforeBtn} `}>참여 전</button>
-                <button className={`${style.afterBtn} `}>참여 후</button>
+                <button className={`${style.beforeBtn}  ${filter === 'before' ? style.active : ''} `} onClick={() => setFilter('before')}>
+                  참여 전
+                </button>
+                <button className={`${style.afterBtn} ${filter === 'after' ? style.active : ''} `} onClick={() => setFilter('after')}>
+                  참여 후
+                </button>
               </div>
               {isEmpty ? (
                 <div className={style.empty}> 신청한 모임이 없습니다.</div>
@@ -91,10 +121,10 @@ export default function HistoryPage() {
                     },
                   }}
                 >
-                  {meetings.map((apply) =>
+                  {filteredMeetings.map((apply) =>
                     apply.products.map((meeting) => (
                       <SwiperSlide key={meeting._id}>
-                        <MeetingCard meeting={meeting} />
+                        <MeetingCard meeting={meeting} isPast={isPastMeeting(meeting.extra?.date || '')} />
                       </SwiperSlide>
                     ))
                   )}
