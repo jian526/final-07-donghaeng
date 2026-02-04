@@ -350,10 +350,15 @@
     position: relative;
     padding: 0;
   }
+  .headerContent {
+    z-index: 10;
+  }
   .cardHeader {
     flex-direction: column;
     position: relative;
     z-index: 10;
+    padding: 0px 30px 25px 0px;
+    height: 200px;
   }
   .characterWrapper {
     width: 82.5vw;
@@ -366,17 +371,23 @@
     object-position: top;
     opacity: 50%;
   }
+  .title {
+    margin-left: 20px;
+  }
+  .meetingInfo {
+    margin-left: 20px;
+  }
 
   .contentBody {
     width: 100%;
-    height: 400px;
+    height: 300px;
+    padding: 20px;
     position: relative;
     top: -35px;
     z-index: 20;
     background-color: var(--bg-white);
     border-radius: 25px;
     display: block;
-    text-align: center;
   }
 
   .bottomSection {
@@ -418,14 +429,11 @@
 @media (max-width: 768px) {
   .headerContent {
     width: 90%;
-    z-index: 10;
+
     margin: 50px 30px 25px 30px;
   }
 }
 @media (max-width: 480px) {
-  .bookmarkPart {
-    right: -30px;
-  }
   .bpm p {
     font-size: 12px;
   }
@@ -463,10 +471,7 @@
     width: calc(100vw - 40px);
     min-width: unset;
   }
-  .characterWrapper {
-    height: 300px;
-    position: relative;
-  }
+
   .title {
     margin-top: 0px;
     font-size: 24px;
@@ -474,7 +479,7 @@
 
   .meetingInfo {
     font-size: 13px;
-    width: 150%;
+    width: 110%;
   }
 
   /* bottomSection 전체 재구성 */
