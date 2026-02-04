@@ -7,11 +7,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import DefaultLayout from '@/app/components/DefaultLayout';
 import useUserStore from '@/zustand/userStore';
-import { useBookmarkStore } from '@/zustand/bookmarkStore';
+import useBookmarkStore from '@/zustand/bookmarkStore';
 
 export default function Mypage() {
   const { user } = useUserStore();
-  const { bookmarkedIds } = useBookmarkStore();
+  const { bookmarks } = useBookmarkStore();
   return (
     <>
       <DefaultLayout>
@@ -83,7 +83,7 @@ export default function Mypage() {
             <div className={styles['history-meetings']}>
               <p>
                 <span className={styles['meetings-text']}>관심 모임 </span>
-                <span className={styles['meetings-number']}>{bookmarkedIds.length}</span>
+                <span className={styles['meetings-number']}>{bookmarks.length}</span>
               </p>
 
               <span>|</span>
