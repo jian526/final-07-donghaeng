@@ -95,10 +95,7 @@ export async function getMyAddMeetings(accessToken: string): Promise<MeetingsLis
         'Client-Id': CLIENT_ID,
         Authorization: `Bearer ${accessToken}`,
       },
-      cache: 'force-cache',
-      next: {
-        tags: [`seller/products`],
-      },
+      cache: 'no-store',
     });
     return res.json();
   } catch (error) {
