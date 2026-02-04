@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import style from './ManageAllPage.module.css';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -14,7 +15,6 @@ import 'swiper/css/pagination';
 import DefaultLayout from '@/app/components/DefaultLayout';
 import Image from 'next/image';
 import { Meetings } from '@/types/meetings';
-import BookmarkButton from '@/app/components/BookmarkButton';
 import { getMyAddMeetings } from '@/lib/meetings';
 import useUserStore from '@/zustand/userStore';
 import { getAgeText, getGenderText } from '@/lib/common';
@@ -37,9 +37,6 @@ const formatDate = (dateString: string) => {
 function MeetingCard({ meeting }: { meeting: Meetings }) {
   return (
     <article className={style.card}>
-      <div className={style.bookmarkIcon} aria-label="북마크">
-        <BookmarkButton meetingId={meeting._id} width={23} height={29} />
-      </div>
       <div className={style.cardContent}>
         <figure className={style.imageWrapper}>
           <div
@@ -96,13 +93,22 @@ function MeetingCard({ meeting }: { meeting: Meetings }) {
 }
 
 export default function ManageAllPage() {
+  const router = useRouter();
   const [isDesktop, setIsDesktop] = useState(false);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
   const [meetings, setMeetings] = useState<Meetings[]>([]);
   const user = useUserStore((state) => state.user);
+  const hasHydrated = useUserStore((state) => state.hasHydrated);
   const userId = user?._id;
   const accessToken = user?.token?.accessToken;
+
+  // 비로그인 시 로그인 페이지로 이동
+  useEffect(() => {
+    if (hasHydrated && !accessToken) {
+      router.push('/login');
+    }
+  }, [hasHydrated, accessToken, router]);
 
   // API에서 모임 데이터 가져오기
   useEffect(() => {
