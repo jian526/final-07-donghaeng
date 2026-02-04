@@ -31,6 +31,7 @@ export default function Signup() {
     region: '',
     age: '',
     gender: '',
+    image: '/images/default-profile.png',
   });
 
   // 중복확인 상태 추가
@@ -48,6 +49,7 @@ export default function Signup() {
     region: '',
     age: '',
     gender: '',
+    image: '/images/default-profile.png',
   });
 
   // 성공 상태
@@ -269,6 +271,7 @@ export default function Signup() {
           region: formData.region,
           age: Number(formData.age),
           gender: formData.gender,
+          image: formData.image,
         }),
       });
 
