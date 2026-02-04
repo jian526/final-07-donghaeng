@@ -158,6 +158,10 @@
   font-family: var(--danger-font);
 }
 
+.past-meeting {
+  filter: grayscale(100%);
+}
+
 /* 최소크기창을 위한 글씨체 줄임 */
 @media (max-width: 400px) {
   .cardTitle {

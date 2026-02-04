@@ -1,20 +1,24 @@
 import Link from 'next/link';
-import styles from './History.module.css';
+import styles from './Bookmarks.module.css';
 import { Meetings } from '@/types/meetings';
 import Image from 'next/image';
+import BookmarkButton from '@/app/components/BookmarkButton';
 
 //카드 컴포넌트 분리
-export default function MeetingCard({ meeting, isPast = false }: { meeting: Meetings; isPast?: boolean }) {
+export default function BookmarkMeetingCard({ meeting }: { meeting: Meetings }) {
   // products[0]에서 실제 모임 데이터 추출
 
-  console.log('=== MeetingCard 디버깅 ===');
+  console.log('=== BookmarkMeetingCard 디버깅 ===');
   console.log('product:', meeting);
 
   // 안전하게 이미지 URL 처리
-  const imageUrl = meeting.image?.path || '/images/default-img.png';
+  const imageUrl = meeting.mainImages[0].path || '/images/default-img.png';
 
   return (
-    <article className={`${styles.card} ${isPast ? styles['past-meeting'] : ''}`}>
+    <article className={styles.card}>
+      <div className={styles.bookmarkIcon} aria-label="북마크">
+        <BookmarkButton meetingId={meeting._id} width={23} height={29} />
+      </div>
       <div className={styles.cardContent}>
         <figure className={styles.imageWrapper}>
           <Image className={styles.characterImage} src={imageUrl} width={130} height={130} alt="모임 대표 이미지" unoptimized />
