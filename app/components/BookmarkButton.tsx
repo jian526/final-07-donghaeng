@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import useUserStore from '@/zustand/userStore';
 import useBookmarkStore from '@/zustand/bookmarkStore';
 import styles from './BookmarkButton.module.css';
@@ -14,6 +15,7 @@ interface BookmarkButtonProps {
 }
 
 export default function BookmarkButton({ meetingId, width = 20, height = 26, desktopWidth, desktopHeight }: BookmarkButtonProps) {
+  const router = useRouter();
   const { user } = useUserStore();
   const { isBookmarked, getBookmarkId, removeBookmark, hasHydrated } = useBookmarkStore();
   const accessToken = user?.token?.accessToken || '';
@@ -27,7 +29,10 @@ export default function BookmarkButton({ meetingId, width = 20, height = 26, des
     e.preventDefault();
     e.stopPropagation();
 
-    if (!accessToken) return;
+    if (!accessToken) {
+      router.push('/login');
+      return;
+    }
 
     const formData = new FormData();
     formData.append('accessToken', accessToken);
