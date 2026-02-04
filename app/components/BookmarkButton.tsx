@@ -15,9 +15,9 @@ interface BookmarkButtonProps {
 
 export default function BookmarkButton({ meetingId, width = 20, height = 26, desktopWidth, desktopHeight }: BookmarkButtonProps) {
   const { user } = useUserStore();
-  const { isBookmarked, getBookmarkId, removeBookmark, addBookmark } = useBookmarkStore();
+  const { isBookmarked, getBookmarkId, removeBookmark } = useBookmarkStore();
   const accessToken = user?.token?.accessToken || '';
-
+  const fetchBookmarks = useBookmarkStore((state) => state.fetchBookmarks);
   const currentBookmark = isBookmarked(meetingId);
 
   // 북마크 추가/제거 처리
@@ -45,12 +45,7 @@ export default function BookmarkButton({ meetingId, width = 20, height = 26, des
       // 추가
       const result = await addBookmarks(null, formData); // 북마크 추가 api 실행
       if (result.ok) {
-        // 성공 시 로컬 상태에 바로 추가
-        const newBookmark = {
-          ...result.item,
-          product: { _id: meetingId },
-        };
-        addBookmark(newBookmark); // 새로 북마크한 데이터를 로컬에 등록
+        await fetchBookmarks(accessToken); // 추가할때 북마크를 리패치
       }
     }
   };

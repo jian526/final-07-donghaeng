@@ -10,9 +10,6 @@ interface BookmarkStoreState {
   // 북마크 목록 설정
   setBookmarks: (bookmarks: Bookmarks[]) => void;
 
-  // 북마크 추가 (로컬 상태)
-  addBookmark: (bookmark: Bookmarks) => void;
-
   // 북마크 삭제 (로컬 상태)
   removeBookmark: (bookmarkId: number) => void;
 
@@ -28,7 +25,7 @@ interface BookmarkStoreState {
   // 스토어 초기화 (로그아웃 시)
   resetBookmark: () => void;
 
-  // 북마크 데이터 가져오기 (로그인 시)
+  // 북마크 데이터 가져오기 (로그인 시 및 추가할때)
   fetchBookmarks: (accessToken: string) => Promise<void>;
 }
 
@@ -37,11 +34,6 @@ const BookmarkStore: StateCreator<BookmarkStoreState> = (set, get) => ({
   loading: false,
 
   setBookmarks: (bookmarks) => set({ bookmarks }),
-
-  addBookmark: (bookmark) =>
-    set((state) => ({
-      bookmarks: [...state.bookmarks, bookmark],
-    })),
 
   removeBookmark: (bookmarkId) =>
     set((state) => ({
