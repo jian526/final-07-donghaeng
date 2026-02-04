@@ -2,7 +2,7 @@
 import styles from './Manage.module.css';
 import DefaultLayout from '@/app/components/DefaultLayout';
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { getManage } from '@/lib/manage';
 import { getSellerProduct } from '@/lib/meetings';
 import { patchManage } from '@/actions/manage';
@@ -14,6 +14,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 export default function ManagePage() {
   const params = useParams();
+  const router = useRouter();
   const product_id = Number(params.id); // URL에서 [id] 파라미터 가져오기
 
   const [manage, setManage] = useState<Manage[]>();
@@ -21,9 +22,17 @@ export default function ManagePage() {
   // const [refreshKey, setRefreshKey] = useState(0);
 
   const user = useUserStore((state) => state.user);
+  const hasHydrated = useUserStore((state) => state.hasHydrated);
   const userId = user?._id;
   const accessToken = user?.token?.accessToken;
   console.log('유저아이디', userId);
+
+  // 비로그인 시 로그인 페이지로 이동
+  useEffect(() => {
+    if (hasHydrated && !accessToken) {
+      router.push('/login');
+    }
+  }, [hasHydrated, accessToken, router]);
 
   useEffect(() => {
     // 모임리스트 조회
@@ -78,43 +87,52 @@ export default function ManagePage() {
     const isApprove = actionType === 'approve';
     const confirmMessage = isApprove ? '모임을 승인하시겠습니까?' : '모임을 거절하시겠습니까?';
 
+    // 기존 토스트 모두 닫기
+    toast.dismiss();
+
     toast(
-      (t) => (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'center' }}>
-          <span style={{ fontWeight: 500 }}>{confirmMessage}</span>
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <button
-              onClick={() => {
-                toast.dismiss(t.id);
-                processAction(applicantId, isApprove);
-              }}
-              style={{
-                padding: '6px 16px',
-                backgroundColor: isApprove ? '#323577' : '#dc2626',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
-              }}
-            >
-              확인
-            </button>
-            <button
-              onClick={() => toast.dismiss(t.id)}
-              style={{
-                padding: '6px 16px',
-                backgroundColor: '#e5e7eb',
-                color: '#374151',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
-              }}
-            >
-              취소
-            </button>
+      (t) => {
+        let isClicked = false;
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'center' }}>
+            <span style={{ fontWeight: 500 }}>{confirmMessage}</span>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button
+                onClick={(e) => {
+                  if (isClicked) return;
+                  isClicked = true;
+                  (e.target as HTMLButtonElement).disabled = true;
+                  toast.dismiss(t.id);
+                  processAction(applicantId, isApprove);
+                }}
+                style={{
+                  padding: '6px 16px',
+                  backgroundColor: isApprove ? '#323577' : '#dc2626',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                }}
+              >
+                확인
+              </button>
+              <button
+                onClick={() => toast.dismiss(t.id)}
+                style={{
+                  padding: '6px 16px',
+                  backgroundColor: '#e5e7eb',
+                  color: '#374151',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                }}
+              >
+                취소
+              </button>
+            </div>
           </div>
-        </div>
-      ),
+        );
+      },
       { duration: Infinity }
     );
   };
