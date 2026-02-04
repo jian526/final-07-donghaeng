@@ -1,110 +1,100 @@
 'use client';
+
 import { useState, useEffect } from 'react';
 import style from './Bookmarks.module.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+
+//Swiper 스타일 import
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 import DefaultLayout from '@/app/components/DefaultLayout';
-import { MeetingCard } from '@/app/components/MeetingCard';
-import BookmarkSwiper from '@/app/(view)/bookmarks/BookmarkSwiper';
-import useBookmarkStore from '@/zustand/bookmarkStore';
 import useUserStore from '@/zustand/userStore';
 import { getUserBookmarksList } from '@/lib/bookmarks';
+import { Bookmarks } from '@/types/bookmarks';
+import { useRouter } from 'next/navigation';
+import BookmarkMeetingCard from '@/app/(view)/bookmarks/BookmarkMeetingCard';
 
-export default function BookmarkPage() {
-  const [isDesktop, setIsDesktop] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const { bookmarks, setBookmarks } = useBookmarkStore();
+export default function BookmarksPage() {
   const { user } = useUserStore();
-  const accessToken = user?.token?.accessToken || '';
-
-  // 페이지 로드 시 북마크 데이터 가져오기 (store에 데이터가 없을 때만)
-  useEffect(() => {
-    const fetchBookmarks = async () => {
-      // store에 이미 데이터가 있으면 API 호출 안 함
-      if (bookmarks.length > 0) {
-        setLoading(false);
-        return;
-      }
-
-      if (!accessToken) {
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const res = await getUserBookmarksList(accessToken);
-        if (res.ok === 1 && res.item) {
-          setBookmarks(res.item);
-        }
-      } catch (error) {
-        console.error('북마크 조회 에러:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchBookmarks();
-  }, [bookmarks.length, setBookmarks, accessToken]);
-
-  // 북마크된 모임 필터링 (type이 'product'인 경우)
-  const bookmarkedMeetings = bookmarks.filter((bookmark) => bookmark.type === 'product');
+  const router = useRouter();
+  const [bookmarks, setBookmarks] = useState<Bookmarks[]>([]);
+  const accessToken = user?.token?.accessToken;
+  const [isEmpty, setIsEmpty] = useState(false);
+  const hasHydrated = useUserStore((state) => state.hasHydrated);
 
   useEffect(() => {
-    const checkScreenSize = () => {
-      setIsDesktop(window.innerWidth >= 768);
+    if (!hasHydrated) return;
+
+    if (!accessToken) {
+      router.replace('/login');
+    }
+
+    const fetchMeetings = async () => {
+      const res = await getUserBookmarksList(accessToken || ' ');
+      if (!res || res.ok === 0 || !('item' in res)) return;
+
+      if (res.item.length === 0) {
+        setBookmarks([]);
+        setIsEmpty(true);
+      } else {
+        setBookmarks(res.item);
+        setIsEmpty(false);
+      }
+
+      console.log('데이터를 잘 불러와주나요', res, '');
     };
 
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
+    fetchMeetings();
+  }, [hasHydrated, accessToken, router]);
 
-    return () => window.removeEventListener('resize', checkScreenSize);
-  }, []);
+  if (!hasHydrated) return null;
 
-  // 로딩 중인 경우
-  if (loading) {
-    return (
-      <DefaultLayout>
-        <main className={style.container}>
-          <div className={style.contentWrapper}>
-            <h1 className={style.title}>북마크</h1>
-            <p className={style.emptyMessage}>로딩중...</p>
-          </div>
-        </main>
-      </DefaultLayout>
-    );
-  }
-
-  // 북마크가 없는 경우
-  if (bookmarkedMeetings.length === 0) {
-    return (
-      <DefaultLayout>
-        <main className={style.container}>
-          <div className={style.contentWrapper}>
-            <h1 className={style.title}>북마크</h1>
-            <p className={style.emptyMessage}>북마크한 모임이 없습니다.</p>
-          </div>
-        </main>
-      </DefaultLayout>
-    );
+  if (!accessToken) {
+    return null;
   }
 
   return (
     <>
       <DefaultLayout>
         <main className={style.container}>
-          {isDesktop ? (
+          {
             <div className={style.contentWrapper}>
               <h1 className={style.title}>북마크</h1>
-              <BookmarkSwiper bookmarkedMeetings={bookmarkedMeetings} />
+              {isEmpty ? (
+                <div className={style.empty}> 신청한 모임이 없습니다.</div>
+              ) : (
+                <Swiper
+                  modules={[Pagination]}
+                  spaceBetween={40}
+                  slidesPerView={'auto'}
+                  centeredSlides={true}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  className={style.swiper}
+                  breakpoints={{
+                    0: {
+                      enabled: false, // 모바일
+                      centeredSlides: false,
+                    },
+                    1024: {
+                      enabled: true, // 웹
+                      centeredSlides: true,
+                    },
+                  }}
+                >
+                  {bookmarks.map((bookmark) => (
+                    <SwiperSlide key={bookmark._id}>
+                      <BookmarkMeetingCard meeting={bookmark.product} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )}
             </div>
-          ) : (
-            <div className={style.mobileContentWrapper}>
-              <h1 className={style.title}>북마크</h1>
-              <div className={style.mobileCardList}>
-                {bookmarkedMeetings.map((bookmark) => (
-                  <MeetingCard key={bookmark._id} meetingId={bookmark.target_id} />
-                ))}
-              </div>
-            </div>
-          )}
+          }
         </main>
       </DefaultLayout>
     </>
