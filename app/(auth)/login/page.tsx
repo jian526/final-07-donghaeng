@@ -16,9 +16,19 @@ export default function Login() {
   const redirect = useSearchParams().get('redirect');
   const setUser = useUserStore((state) => state.setUser);
   const fetchBookmarks = useBookmarkStore((state) => state.fetchBookmarks);
+  const { user } = useUserStore();
+  const accessToken = user?.token?.accessToken;
+  const hasHydrated = useUserStore((state) => state.hasHydrated);
 
-  //로그인 성공시...
   useEffect(() => {
+    if (!hasHydrated) return;
+    // 로컬 스토리지 복원 안끝났으면 아~무것도 안함
+
+    if (accessToken) {
+      router.replace('/');
+    }
+    // 로그인 했으면 메인 페이지로 강제이동
+
     const handleLoginSuccess = async () => {
       if (userState?.ok === 1) {
         const accessToken = userState.item.token?.accessToken || '';
@@ -49,7 +59,7 @@ export default function Login() {
     };
 
     handleLoginSuccess();
-  }, [userState, router, redirect, setUser, fetchBookmarks]);
+  }, [userState, router, redirect, setUser, fetchBookmarks, hasHydrated, accessToken]);
 
   return (
     <BlankLayout>

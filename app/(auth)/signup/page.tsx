@@ -2,10 +2,25 @@
 
 import BlankLayout from '@/app/components/BlankLayout';
 import style from './signup.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import useUserStore from '@/zustand/userStore';
 
 export default function Signup() {
+  const { user } = useUserStore();
+  const accessToken = user?.token?.accessToken;
+  const hasHydrated = useUserStore((state) => state.hasHydrated);
+  const router = useRouter();
+  useEffect(() => {
+    if (!hasHydrated) return;
+    // 로컬 스토리지 복원 안끝났으면 아~무것도 안함
+
+    if (accessToken) {
+      router.replace('/');
+    }
+    // 로그인 했으면 메인 페이지로 강제이동
+  }, [router, hasHydrated, accessToken]);
+
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -41,7 +56,6 @@ export default function Signup() {
     name: '',
   });
 
-  const router = useRouter();
   // 이메일 중복확인
   const checkEmailDuplicate = async () => {
     if (!formData.email) {
