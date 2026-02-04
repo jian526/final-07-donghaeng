@@ -3,6 +3,7 @@ import { Bookmarks } from '@/types/bookmarks';
 import { Manage } from '@/types/manage';
 import { Meetings } from '@/types/meetings';
 import { User } from '@/types/user';
+import { Notification } from '@/types/notification';
 
 // 게시물 목록 조회 응답 타입
 export interface MeetingsListRes {
@@ -69,4 +70,10 @@ export interface FileUploadRes {
     name: string;
     path: string;
   }[];
+}
+
+// 알림 목록 조회 응답 타입
+export interface NotificationListRes {
+  ok: 1;
+  item: Notification[];
 }
