@@ -32,6 +32,18 @@ export default function Edit({ initialData, meetingId }: EditMeetingFormProps) {
 
   const [, startTransition] = useTransition();
 
+  const accessToken = user?.token?.accessToken;
+  const hasHydrated = useUserStore((state) => state.hasHydrated);
+  useEffect(() => {
+    if (!hasHydrated) return;
+    // 로컬 스토리지 복원 안끝났으면 아~무것도 안함
+
+    if (!accessToken) {
+      router.replace('/login');
+    }
+    // 로그인 안했으면 로그인페이지로 강제이동
+  }, [router, hasHydrated, accessToken]);
+
   // 인원 카운터
   const [count, setCount] = useState(initialData.quantity || 10);
 
