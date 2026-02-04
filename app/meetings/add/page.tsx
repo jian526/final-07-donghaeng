@@ -253,7 +253,7 @@ export default function Add() {
               <fieldset className={style['context-fieldset']}>
                 <label htmlFor="meetings-content">모임 설명</label>
 
-                <textarea className={style['content-input']} id="meetings-content" name="meetings-content" />
+                <textarea className={style['content-input']} id="meetings-content" name="meetings-content" placeholder="10글자 이상 입력해야합니다." />
               </fieldset>
 
               <fieldset className={style['img-fieldset']}>
