@@ -7,6 +7,7 @@ import { login } from '@/actions/user';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import useUserStore from '@/zustand/userStore';
+import useBookmarkStore from '@/zustand/bookmarkStore';
 import Link from 'next/link';
 
 export default function Login() {
@@ -14,28 +15,41 @@ export default function Login() {
   const router = useRouter();
   const redirect = useSearchParams().get('redirect');
   const setUser = useUserStore((state) => state.setUser);
+  const fetchBookmarks = useBookmarkStore((state) => state.fetchBookmarks);
 
   //로그인 성공시...
   useEffect(() => {
-    if (userState?.ok === 1) {
-      setUser({
-        _id: userState.item._id,
-        email: userState.item.email,
-        name: userState.item.name,
-        region: userState.item.region,
-        age: userState.item.age,
-        gender: userState.item.gender,
-        image: userState.item.image,
-        comment: userState.item.comment,
-        bpm: userState.item.bpm,
-        token: {
-          accessToken: userState.item.token?.accessToken || '',
-          refreshToken: userState.item.token?.refreshToken || '',
-        },
-      });
-      router.push(redirect || '/');
-    }
-  }, [userState, router, redirect, setUser]);
+    const handleLoginSuccess = async () => {
+      if (userState?.ok === 1) {
+        const accessToken = userState.item.token?.accessToken || '';
+
+        setUser({
+          _id: userState.item._id,
+          email: userState.item.email,
+          name: userState.item.name,
+          region: userState.item.region,
+          age: userState.item.age,
+          gender: userState.item.gender,
+          image: userState.item.image,
+          comment: userState.item.comment,
+          bpm: userState.item.bpm,
+          token: {
+            accessToken,
+            refreshToken: userState.item.token?.refreshToken || '',
+          },
+        });
+
+        // 로그인 성공 시 북마크 목록 fetch
+        if (accessToken) {
+          await fetchBookmarks(accessToken);
+        }
+
+        router.push(redirect || '/');
+      }
+    };
+
+    handleLoginSuccess();
+  }, [userState, router, redirect, setUser, fetchBookmarks]);
 
   return (
     <BlankLayout>

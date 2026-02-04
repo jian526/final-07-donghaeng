@@ -1,3 +1,5 @@
+'use client';
+
 import BookmarkButton from '@/app/components/BookmarkButton';
 import style from './MeetingList.module.css';
 import Link from 'next/link';

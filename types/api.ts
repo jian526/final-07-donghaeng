@@ -2,40 +2,47 @@ import { Apply } from '@/types/apply';
 import { Bookmarks } from '@/types/bookmarks';
 import { Manage } from '@/types/manage';
 import { Meetings } from '@/types/meetings';
+import { User } from '@/types/user';
 
-// 게시물 목록 조회 결과 타입
+// 게시물 목록 조회 응답 타입
 export interface MeetingsListRes {
   ok: 1;
   item: Meetings[];
 }
+// 게시물 상세 조회 응답 타입
+export interface MeetingsInfoRes {
+  ok: 1;
+  item: Meetings;
+}
 
+// 신청한 리스트 관리 응답 타입
 export interface ManageListRes {
   ok: 1;
   item: Manage[];
 }
 
-export interface Answers {
-  extra: {
-    answer1: string;
-    answer2: string;
-  };
-}
-
-// 게시물 상세 조회 결과 타입
-export interface MeetingsInfoRes {
-  ok: 1;
-  item: Meetings;
-}
-import { User } from '@/types/user';
-
-// 회원 정보 타입
+// 회원 정보 응답 타입
 export interface UserInfoRes {
   ok: 1;
   item: User;
 }
+
+// 사용자가 지원했던(참여했던) 모임 리스트 응답타입
+export interface ApplyListRes {
+  ok: 1;
+  item: Apply[];
+}
+
+// 북마크 한개의 응답타입
 export interface BookmarksInfoRes {
   ok: 1;
   item: Bookmarks;
+}
+
+// 북마크 리스트의 응답타입
+export interface BookmarksResponse {
+  ok: number;
+  item: Bookmarks[];
 }
 
 // 서버 검증 에러 타입
@@ -44,17 +51,6 @@ export interface ServerValidationError {
   value: string;
   msg: string;
   location: string;
-}
-
-// 북마크 목록 조회 결과 타입
-export interface BookmarksRes {
-  ok: 1;
-  item: {
-    byUser: Meetings[];
-    user: Meetings[];
-    product: Meetings[];
-    post: Meetings[];
-  };
 }
 
 // 에러 타입
@@ -73,9 +69,4 @@ export interface FileUploadRes {
     name: string;
     path: string;
   }[];
-}
-
-export interface ApplyListRes {
-  ok: 1;
-  item: Apply[];
 }
