@@ -339,10 +339,6 @@
     padding: 40px;
     margin-right: -40px;
   }
-  .imageGroup {
-    position: relative;
-    z-index: 0;
-  }
   .contentCard {
     display: flex;
     flex-direction: column;
@@ -351,15 +347,20 @@
     padding-top: 0;
     margin-right: 0;
     word-wrap: break-word;
+    position: relative;
+    padding: 0;
   }
   .cardHeader {
     flex-direction: column;
+    position: relative;
+    z-index: 10;
   }
   .characterWrapper {
-    margin-left: -35px;
     width: 82.5vw;
     min-width: 270px;
-    height: 130px;
+    height: 300px;
+    position: absolute;
+    border-radius: 0;
   }
   .characterImage {
     object-position: top;
@@ -367,10 +368,15 @@
   }
 
   .contentBody {
+    width: 100%;
+    height: 400px;
     position: relative;
-    z-index: 5;
+    top: -35px;
+    z-index: 20;
     background-color: var(--bg-white);
     border-radius: 25px;
+    display: block;
+    text-align: center;
   }
 
   .bottomSection {
@@ -404,12 +410,16 @@
   .buttonContainer {
     margin-right: 10%;
   }
+  .title {
+    margin-top: 0px;
+    font-size: 24px;
+  }
 }
 @media (max-width: 768px) {
   .headerContent {
-    margin-top: -190px;
     width: 90%;
     z-index: 10;
+    margin: 50px 30px 25px 30px;
   }
 }
 @media (max-width: 480px) {
@@ -441,6 +451,11 @@
     height: 50px;
     font-size: 14px;
   }
+
+  .title {
+    margin-top: 0px;
+    font-size: 24px;
+  }
 }
 
 @media (max-width: 320px) {
@@ -449,15 +464,14 @@
     min-width: unset;
   }
   .characterWrapper {
-    height: 160px;
+    height: 300px;
+    position: relative;
   }
   .title {
+    margin-top: 0px;
     font-size: 24px;
   }
-  .headerContent {
-    margin-left: -20px;
-    margin-top: -210px;
-  }
+
   .meetingInfo {
     font-size: 13px;
     width: 150%;
