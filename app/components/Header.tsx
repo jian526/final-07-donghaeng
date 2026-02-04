@@ -5,14 +5,22 @@ import styles from './Header.module.css';
 import MobileSidebar from '../components/MobileSidebar';
 import { useState } from 'react';
 import useUserStore from '@/zustand/userStore';
+import useBookmarkStore from '@/zustand/bookmarkStore';
 
 export default function Header() {
   const isLogin = useUserStore((state) => state.isLogin);
   const user = useUserStore((state) => state.user);
   const resetUser = useUserStore((state) => state.resetUser);
+  const resetBookmark = useBookmarkStore((state) => state.resetBookmark);
   console.log('로그인상태', isLogin);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // 로그아웃 핸들러
+  const handleLogout = () => {
+    resetUser();
+    resetBookmark();
+  };
 
   // 햄버거 버튼 클릭 핸들러
   const toggleSidebar = () => {
@@ -52,7 +60,7 @@ export default function Header() {
             <div className={styles[`user-info-wrapper`]}>
               <ul>
                 <li>
-                  <button onClick={resetUser}>로그아웃</button>
+                  <button onClick={handleLogout}>로그아웃</button>
                 </li>
                 <li>
                   <Link href="/notifications">
