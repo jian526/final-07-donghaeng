@@ -444,8 +444,8 @@
     top: 35%;
   }
   .chatButton img {
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
   }
   .hostMode {
     display: flex;
@@ -537,5 +537,6 @@
   .chatButton {
     position: absolute;
     top: 30%;
+    right: 15px;
   }
 }
