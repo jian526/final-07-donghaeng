@@ -6,6 +6,7 @@ import { getUserBookmarksList } from '@/lib/bookmarks';
 interface BookmarkStoreState {
   bookmarks: Bookmarks[];
   loading: boolean;
+  hasHydrated: boolean;
 
   // 북마크 목록 설정
   setBookmarks: (bookmarks: Bookmarks[]) => void;
@@ -27,13 +28,19 @@ interface BookmarkStoreState {
 
   // 북마크 데이터 가져오기 (로그인 시 및 추가할때)
   fetchBookmarks: (accessToken: string) => Promise<void>;
+
+  // hydration 완료 설정
+  setHasHydrated: (state: boolean) => void;
 }
 
 const BookmarkStore: StateCreator<BookmarkStoreState> = (set, get) => ({
   bookmarks: [],
   loading: false,
+  hasHydrated: false,
 
   setBookmarks: (bookmarks) => set({ bookmarks }),
+
+  setHasHydrated: (state) => set({ hasHydrated: state }),
 
   removeBookmark: (bookmarkId) =>
     set((state) => ({
@@ -84,6 +91,9 @@ const useBookmarkStore = create<BookmarkStoreState>()(
   persist(BookmarkStore, {
     name: 'bookmark-storage',
     storage: createJSONStorage(() => localStorage),
+    onRehydrateStorage: () => (state) => {
+      state?.setHasHydrated(true);
+    },
   })
 );
 

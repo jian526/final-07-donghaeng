@@ -15,10 +15,12 @@ interface BookmarkButtonProps {
 
 export default function BookmarkButton({ meetingId, width = 20, height = 26, desktopWidth, desktopHeight }: BookmarkButtonProps) {
   const { user } = useUserStore();
-  const { isBookmarked, getBookmarkId, removeBookmark } = useBookmarkStore();
+  const { isBookmarked, getBookmarkId, removeBookmark, hasHydrated } = useBookmarkStore();
   const accessToken = user?.token?.accessToken || '';
   const fetchBookmarks = useBookmarkStore((state) => state.fetchBookmarks);
-  const currentBookmark = isBookmarked(meetingId);
+
+  // hydration 완료 후에만 북마크 상태 확인 (hydration 에러 방지)
+  const currentBookmark = hasHydrated ? isBookmarked(meetingId) : false;
 
   // 북마크 추가/제거 처리
   const handleClick = async (e: React.MouseEvent) => {
