@@ -169,7 +169,6 @@
 }
 
 .statusText {
-  width: 90%;
   font-size: 18px;
   color: var(--text-navy);
   white-space: wrap;
@@ -353,6 +352,7 @@
     word-wrap: break-word;
     position: relative;
     padding: 0;
+    overflow: hidden;
   }
   .headerContent {
     z-index: 10;
@@ -568,7 +568,7 @@
   }
 
   .statusText {
-    width: 100%;
+    width: 90%;
     font-size: 14px;
   }
 
