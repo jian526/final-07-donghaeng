@@ -26,6 +26,8 @@
 .profile-img {
   width: 165px;
   height: 165px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 /* 프로필 이미지와 카메라 버튼 묶는 div */

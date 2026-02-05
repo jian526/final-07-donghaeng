@@ -115,7 +115,7 @@
   display: flex;
   align-items: flex-start;
   max-width: 1440px;
-  min-height: 220px;
+  min-height: 110px;
   background-color: var(--bg-lightlavender);
   border-radius: 25px;
   padding: 45px;
@@ -169,7 +169,7 @@
 }
 
 .statusText {
-  width: 70%;
+  width: 90%;
   font-size: 18px;
   color: var(--text-navy);
   white-space: wrap;
@@ -188,7 +188,7 @@
   display: inline-flex;
   width: 35px;
   height: 32px;
-  background-color: var(--text-navy);
+  background-color: var(--text-lavender);
   mask: url('/icon/heart.svg') no-repeat center;
   mask-size: contain;
   -webkit-mask: url('/icon/heart.svg') no-repeat center;
@@ -199,13 +199,14 @@
 .bpm {
   display: flex;
   flex-direction: column;
+  gap: 10px;
   margin-top: 5px;
 }
 
 .bpm p {
   font-family: var(--sub-font-bold);
   font-size: 15px;
-  color: var(--text-navy);
+  color: var(--text-lavender);
 }
 .beatPoint {
   margin-top: -2px;
@@ -238,6 +239,7 @@
 }
 
 .applyBtn,
+.appliedBtn,
 .adminBtn,
 .editBtn,
 .deleteBtn {
@@ -270,10 +272,10 @@
 .applyBtn:active {
   transform: translateY(0);
 }
-
-.adminBtn {
-  background-color: var(--bg-sky);
+.appliedBtn {
+  background-color: var(--text-gray);
   color: var(--text-navy);
+  cursor: not-allowed;
   transition: all 0.2s ease;
   white-space: nowrap;
 }
@@ -393,7 +395,6 @@
   .bottomSection {
     flex-wrap: wrap;
     width: 84vw;
-    min-height: 180px;
     padding: 30px;
   }
 
@@ -425,23 +426,57 @@
     margin-top: 0px;
     font-size: 24px;
   }
+  .bookmarkPart {
+    top: 125px;
+  }
 }
 @media (max-width: 768px) {
   .headerContent {
     width: 90%;
     margin: 50px 30px 25px 30px;
   }
+  .statusRow {
+    gap: 0;
+  }
   .chatButton {
-    margin-right: 20px;
+    position: absolute;
+    top: 30%;
+    right: 50px;
+  }
+  .statusText {
+    width: 100%;
   }
 }
 @media (max-width: 480px) {
+  .userCharacterImage {
+    width: 100px;
+    height: 80px;
+  }
+  .title {
+    margin-left: -10px;
+  }
+  .meetingInfo {
+    margin-left: -10px;
+  }
+  .bottomSection {
+    padding: 20px;
+    height: 100px;
+  }
+  .chatButton img {
+    width: 40px !important;
+    height: 40px !important;
+  }
   .bpm p {
     font-size: 12px;
   }
 
+  .heartIcon {
+    width: 25px;
+    height: 25px;
+    /* margin-top: 8px; */
+  }
   .chatButton {
-    top: 35%;
+    right: 28px;
   }
   .chatButton img {
     width: 30px;
@@ -455,16 +490,25 @@
   }
   .adminBtn,
   .editBtn,
-  .deleteBtn {
+  .deleteBtn,
+  .applyBtn,
+  .appliedBtn {
     min-width: 25vw;
     width: 100%;
     height: 50px;
     font-size: 14px;
   }
-
+  .applyBtn,
+  .appliedBtn {
+    width: 100px;
+  }
   .title {
     margin-top: 0px;
+    width: 80%;
     font-size: 24px;
+  }
+  .bookmarkPart {
+    top: 110px;
   }
 }
 
@@ -472,12 +516,13 @@
   .contentCard {
     width: calc(100vw - 40px);
     min-width: unset;
+    margin-left: -15px;
   }
 
   .title {
     margin-top: 0px;
     margin-left: -10px;
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .meetingInfo {
@@ -490,9 +535,8 @@
   .bottomSection {
     width: calc(100vw - 40px);
     min-width: unset;
-    padding: 16px;
+    margin-left: -15px;
     gap: 12px;
-    min-height: auto;
   }
   /* 호스트 캐릭터 이미지 축소 */
   .userCharacterImage {
@@ -516,7 +560,6 @@
     gap: 8px;
   }
 
-  /* 이름 줄바꿈 허용 */
   .userName {
     white-space: normal;
     font-size: 18px;
@@ -527,18 +570,10 @@
     font-size: 14px;
   }
 
-  .heartIcon {
-    width: 20px;
-    height: 18px;
-  }
-
   .bpm p {
     font-size: 12px;
   }
-
-  .chatButton {
-    position: absolute;
-    top: 30%;
-    right: 15px;
+  .userMode {
+    margin-right: -25px;
   }
 }
