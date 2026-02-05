@@ -234,7 +234,7 @@
   max-width: 380px;
   height: auto;
   min-height: 350px;
-  padding-bottom: 10px;
+  padding: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -367,9 +367,6 @@
     grid-template-columns: repeat(1, 1fr);
     width: 100%;
   }
-  .card {
-  }
-
   .cardImage {
     width: 40%;
     min-width: 120px;
@@ -379,7 +376,7 @@
 
   .meetingCard {
     flex-direction: row;
-    padding: 0px;
+    padding: 0;
     width: 100%;
     max-width: 100%;
     min-height: 138px;
@@ -403,8 +400,10 @@
   }
 
   .bookmarkIcon {
-    top: 10px;
-    right: 5px;
+    width: 27px;
+    height: 25px;
+    top: 30px;
+    right: 100px;
   }
 
   .cardHeader {
@@ -498,12 +497,8 @@
 
   .card {
     margin-bottom: 20px;
-    padding-bottom: 0;
-    max-width: 100%;
-  }
 
-  .meetingCard {
-    min-height: auto;
+    max-width: 100%;
   }
 
   .cardImage {
