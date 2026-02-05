@@ -130,4 +130,7 @@
       display: none;
     }
   }
+  .logout-btn {
+    cursor: pointer;
+  }
 }
