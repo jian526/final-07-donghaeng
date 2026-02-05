@@ -108,9 +108,8 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
                   <div className={style.userStatus}>
                     <span className={style.heartIcon} aria-hidden="true"></span>
                     <div className={style.bpm}>
-                      <p className={style.beatPoint}>{hostUser.bpm}</p>
-                      <br />
-                      <p>70 BPM</p>
+                      <p className={style.beatPoint}>{hostUser.bpm}70</p>
+                      <p>BPM</p>
                     </div>
                   </div>
                 </div>
