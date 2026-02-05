@@ -6,6 +6,7 @@ import MobileSidebar from '../components/MobileSidebar';
 import { useState } from 'react';
 import useUserStore from '@/zustand/userStore';
 import useBookmarkStore from '@/zustand/bookmarkStore';
+import ChatNotification from '@/app/chat/components/ChatBadge';
 
 export default function Header() {
   const isLogin = useUserStore((state) => state.isLogin);
@@ -65,6 +66,9 @@ export default function Header() {
                   </button>
                 </li>
                 <li>
+                  <ChatNotification />
+                </li>
+                <li>
                   <Link href="/notifications">
                     <Image src="/icon/notification.svg" width={43} height={50} alt="알림 이미지" />
                   </Link>
@@ -96,6 +100,7 @@ export default function Header() {
             <Link href="/notifications">
               <Image src="/icon/notification.svg" width={25} height={30} alt="알림 이미지" />
             </Link>
+            <ChatNotification />
             <button className={styles[`hamburger-btn`]} onClick={toggleSidebar}>
               <Image src="/icon/hamburger.svg" width={30} height={28} alt="메뉴" />
             </button>
