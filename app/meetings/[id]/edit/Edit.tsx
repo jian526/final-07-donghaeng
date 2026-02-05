@@ -32,6 +32,18 @@ export default function Edit({ initialData, meetingId }: EditMeetingFormProps) {
 
   const [, startTransition] = useTransition();
 
+  const accessToken = user?.token?.accessToken;
+  const hasHydrated = useUserStore((state) => state.hasHydrated);
+  useEffect(() => {
+    if (!hasHydrated) return;
+    // 로컬 스토리지 복원 안끝났으면 아~무것도 안함
+
+    if (!accessToken) {
+      router.replace('/login');
+    }
+    // 로그인 안했으면 로그인페이지로 강제이동
+  }, [router, hasHydrated, accessToken]);
+
   // 인원 카운터
   const [count, setCount] = useState(initialData.quantity || 10);
 
@@ -271,7 +283,7 @@ export default function Edit({ initialData, meetingId }: EditMeetingFormProps) {
                     </div>
                   ) : imagePreview ? (
                     <div className={style['image-preview']} onClick={() => document.getElementById('meetings-img')?.click()} style={{ cursor: 'pointer' }}>
-                      <Image src={imagePreview} alt="미리보기" style={{ width: '100%', height: 'auto' }} width={100} height={100} />
+                      <Image src={imagePreview} alt="미리보기" style={{ objectFit: 'cover', objectPosition: 'center' }} width={100} height={100} />{' '}
                     </div>
                   ) : (
                     <div className={style['ractingle']} onClick={() => document.getElementById('meetings-img')?.click()} style={{ cursor: 'pointer' }}>
@@ -382,9 +394,11 @@ export default function Edit({ initialData, meetingId }: EditMeetingFormProps) {
               <button className={style['btn']} type="submit">
                 수정
               </button>
-              <button className={style['btn-2']} type="button">
-                <Link href={`/meetings/${meetingId}`}>취소</Link>
-              </button>
+              <Link href={`/meetings/${meetingId}`}>
+                <button className={style['btn-2']} type="button">
+                  취소
+                </button>
+              </Link>
             </div>
           </form>
         </div>

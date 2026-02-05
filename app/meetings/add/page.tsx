@@ -17,8 +17,25 @@ export default function Add() {
   const { user } = useUserStore();
 
   const initialState: ActionState | null = null;
+  // 초기값 설정. 타입지정...
+
   const [state, formAction] = useActionState(createMeeting, initialState);
+  // 폼 제출하면 createMeeting 실행
+
   const [, startTransition] = useTransition();
+  // 폼 제출할때 화면 멈추는것을 방지하기 위해...
+
+  const accessToken = user?.token?.accessToken;
+  const hasHydrated = useUserStore((state) => state.hasHydrated);
+  useEffect(() => {
+    if (!hasHydrated) return;
+    // 로컬 스토리지 복원 안끝났으면 아~무것도 안함
+
+    if (!accessToken) {
+      router.replace('/login');
+    }
+    // 로그인 안했으면 로그인페이지로 강제이동
+  }, [router, hasHydrated, accessToken]);
 
   // 인원 카운터
   const [count, setCount] = useState(10);
@@ -241,7 +258,7 @@ export default function Add() {
               <fieldset className={style['context-fieldset']}>
                 <label htmlFor="meetings-content">모임 설명</label>
 
-                <textarea className={style['content-input']} id="meetings-content" name="meetings-content" />
+                <textarea className={style['content-input']} id="meetings-content" name="meetings-content" placeholder="10글자 이상 입력해야합니다." />
               </fieldset>
 
               <fieldset className={style['img-fieldset']}>
@@ -256,7 +273,7 @@ export default function Add() {
                     </div>
                   ) : imagePreview ? (
                     <div className={style['image-preview']} onClick={() => document.getElementById('meetings-img')?.click()} style={{ cursor: 'pointer' }}>
-                      <Image src={imagePreview} alt="미리보기" style={{ width: '100%', height: 'auto' }} width={100} height={100} />
+                      <Image src={imagePreview} alt="미리보기" style={{ objectFit: 'cover', objectPosition: 'center' }} width={100} height={100} />
                     </div>
                   ) : (
                     <div className={style['ractingle']} onClick={() => document.getElementById('meetings-img')?.click()} style={{ cursor: 'pointer' }}>
@@ -305,7 +322,7 @@ export default function Add() {
 
                 <fieldset className={style['age-fieldset']}>
                   <label htmlFor="age">나이</label>
-                  <div>
+                  <div className={style['age-select']}>
                     <select required id="age" name="age" className={style['select-btn']}>
                       <option value="" disabled defaultValue=""></option>
                       <option value="10">10대</option>
@@ -367,9 +384,11 @@ export default function Add() {
               <button className={style['btn']} type="submit">
                 등록
               </button>
-              <button className={style['btn-2']} type="button">
-                <Link href={'/meetings'}>취소</Link>
-              </button>
+              <Link href={'/meetings'}>
+                <button className={style['btn-2']} type="button">
+                  취소
+                </button>
+              </Link>
             </div>
           </form>
         </div>

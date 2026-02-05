@@ -65,7 +65,10 @@ export async function getDetail(_id: string): Promise<MeetingsInfoRes | ErrorRes
  */
 export async function getMyMeetings(accessToken: string): Promise<ApplyListRes | ErrorRes> {
   try {
-    const res = await fetch(`${API_URL}/orders`, {
+    const custom = encodeURIComponent(JSON.stringify({ state: 'OS040' }));
+    // state 파라미터가 없어서 찾아보니 custom query를 사용하면 된다고함.
+    // 객체를 문자열로 변환후에 URL로 인코딩하여 전달하니 원하는대로 나오게 되었다.
+    const res = await fetch(`${API_URL}/orders?custom=${custom}`, {
       headers: {
         'Client-Id': CLIENT_ID,
         Authorization: `Bearer ${accessToken}`,
