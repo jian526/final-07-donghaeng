@@ -75,6 +75,8 @@ export async function getMeetings(keyword?: string, category?: string): Promise<
       // keyword가 존재하면 params에 keyword 파라미터를 추가
       params.set('keyword', keyword);
     }
+    params.set('populate', 'seller_id');
+
     const queryString = params.toString();
     const url = queryString ? `${API_URL}/products?${queryString}` : `${API_URL}/products`;
 
