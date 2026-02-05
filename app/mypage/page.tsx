@@ -8,10 +8,35 @@ import Image from 'next/image';
 import DefaultLayout from '@/app/components/DefaultLayout';
 import useUserStore from '@/zustand/userStore';
 import useBookmarkStore from '@/zustand/bookmarkStore';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Mypage() {
+  // zustand에서 유저정보 가져오기
   const { user } = useUserStore();
+
+  // zustand에서 북마크 가져오기
   const { bookmarks } = useBookmarkStore();
+
+  // 토큰 가져오기
+  const accessToken = user?.token?.accessToken;
+  // 페이지 이동 처리
+  const router = useRouter();
+
+  // zustand의 복원 여부 확인
+  // 로컬스토리지 복원이 끝나기 전에 잘못된 리다이렉트가 발생하는 걸 방지
+  const hasHydrated = useUserStore((state) => state.hasHydrated);
+
+  // 토큰이 없는 경우 강제 이동
+  useEffect(() => {
+    // 로컬 스토리지 복원 안끝났으면 아~무것도 안함
+    if (!hasHydrated) return;
+
+    if (!accessToken) {
+      router.replace('/login');
+    }
+  }, [hasHydrated, accessToken, router]);
+
   return (
     <>
       <DefaultLayout>
