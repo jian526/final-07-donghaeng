@@ -238,6 +238,7 @@
 }
 
 .applyBtn,
+.appliedBtn,
 .adminBtn,
 .editBtn,
 .deleteBtn {
@@ -270,10 +271,10 @@
 .applyBtn:active {
   transform: translateY(0);
 }
-
-.adminBtn {
-  background-color: var(--bg-sky);
+.appliedBtn {
+  background-color: var(--text-gray);
   color: var(--text-navy);
+  cursor: not-allowed;
   transition: all 0.2s ease;
   white-space: nowrap;
 }
