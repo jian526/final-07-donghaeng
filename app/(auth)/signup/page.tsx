@@ -65,7 +65,9 @@ export default function Signup() {
       return;
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    // 이메일 정규식
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(formData.email)) {
       setErrors({ ...errors, email: '올바른 이메일 형식이 아닙니다.' });
       return;
     }
@@ -83,22 +85,40 @@ export default function Signup() {
       const data = await res.json();
 
       console.log('이메일 중복확인 응답:', data);
-      console.log('data.ok:', data.ok);
+      console.log('응답 상태:', res.status);
 
+      // HTTP 상태 코드 먼저 체크
+      if (!res.ok) {
+        // 422, 409 등 에러 응답 처리
+        if (res.status === 409) {
+          setCheckStatus({ ...checkStatus, email: false });
+          setErrors({ ...errors, email: '이미 존재하는 이메일입니다.' });
+          setSuccessMessages({ ...successMessages, email: '' });
+        } else if (res.status === 422) {
+          setCheckStatus({ ...checkStatus, email: false });
+          setErrors({ ...errors, email: data.message || '유효하지 않은 이메일입니다.' });
+          setSuccessMessages({ ...successMessages, email: '' });
+        } else {
+          throw new Error(data.message || '이메일 확인 실패');
+        }
+        return;
+      }
+
+      // 200 응답일 때만 data.ok 체크
       if (data.ok === 1) {
-        // 사용 가능한 이메일
         setCheckStatus({ ...checkStatus, email: true });
         setErrors({ ...errors, email: '' });
         setSuccessMessages({ ...successMessages, email: '중복확인 완료' });
-      } else if (res.status === 409) {
-        // 이미 사용중인 이메일
+      } else {
         setCheckStatus({ ...checkStatus, email: false });
-        setErrors({ ...errors, email: '이미 존재하는 이메일입니다.' });
+        setErrors({ ...errors, email: data.message || '사용할 수 없는 이메일입니다.' });
         setSuccessMessages({ ...successMessages, email: '' });
       }
     } catch (error) {
       console.error(error);
-      alert('중복확인에 실패했습니다.');
+      setCheckStatus({ ...checkStatus, email: false });
+      setErrors({ ...errors, email: '이메일 중복 확인에 실패했습니다.' });
+      setSuccessMessages({ ...successMessages, email: '' });
     }
   };
 
