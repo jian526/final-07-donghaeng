@@ -130,7 +130,7 @@ export default function ManageAllPage() {
         <main className={style.container}>
           {
             <div className={style.contentWrapper}>
-              <h1 className={style.title}>모임 조회</h1>
+              <h1 className={style.title}>등록 모임</h1>
               {isEmpty ? (
                 <div className={style.empty}> 신청한 모임이 없습니다.</div>
               ) : (
