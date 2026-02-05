@@ -126,11 +126,13 @@
   text-align: center;
   font-size: 14px;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .btn {
   background-color: var(--bg-lavender) !important;
   display: inline-block;
+  cursor: pointer;
 }
 
 .field-parent-wrap {
@@ -313,6 +315,7 @@
   font-family: var(--sub-font-bold);
   text-align: center;
   padding: 5px;
+  cursor: pointer;
 }
 
 .btn-wrap {

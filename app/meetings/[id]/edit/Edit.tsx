@@ -394,9 +394,11 @@ export default function Edit({ initialData, meetingId }: EditMeetingFormProps) {
               <button className={style['btn']} type="submit">
                 수정
               </button>
-              <button className={style['btn-2']} type="button">
-                <Link href={`/meetings/${meetingId}`}>취소</Link>
-              </button>
+              <Link href={`/meetings/${meetingId}`}>
+                <button className={style['btn-2']} type="button">
+                  취소
+                </button>
+              </Link>
             </div>
           </form>
         </div>

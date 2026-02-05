@@ -43,11 +43,12 @@
 
 .beforeBtn,
 .afterBtn {
-  width: 88px;
+  width: 75px;
   height: 45px;
   border-radius: 25px;
   font-family: var(--sub-font-medium);
   font-weight: 700;
+  cursor: pointer;
 }
 .beforeBtn {
   margin-right: 15px;
