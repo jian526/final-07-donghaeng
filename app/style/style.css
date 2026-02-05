@@ -27,6 +27,7 @@
 
   /* Background */
   --bg-lavender: var(--c-lavender-200);
+  --bg-darklavender: var(--c-purple-300);
   --bg-navy: var(--c-indigo-900);
   --bg-white: var(--c-white);
   --bg-lightlavender: var(--c-lilac-50);

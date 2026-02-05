@@ -5,14 +5,15 @@
   padding: 16px;
   cursor: pointer;
   transition: background-color 0.2s;
+  border-bottom: 1px solid var(--border-gray);
 }
 
 .item:hover {
-  background-color: #f9fafb;
+  background-color: var(--bg-lightlavender);
 }
 
 .itemActive {
-  background-color: #fff7ed;
+  background-color: var(--bg-lavender);
 }
 
 .leaveButton {
@@ -20,7 +21,7 @@
   top: 8px;
   right: 8px;
   padding: 4px;
-  color: #9ca3af;
+  color: var(--text-gray);
   opacity: 0;
   transition: opacity 0.2s;
   z-index: 10;
@@ -31,7 +32,7 @@
 }
 
 .leaveButton:hover {
-  color: #ef4444;
+  color: var(--text-red);
 }
 
 .leaveButtonIcon {
@@ -48,8 +49,9 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: #e5e7eb;
+  background-color: var(--bg-lavender);
   object-fit: cover;
+  border: 2px solid var(--border-lavender);
 }
 
 .onlineIndicator {
@@ -59,7 +61,7 @@
   width: 12px;
   height: 12px;
   background-color: #22c55e;
-  border: 2px solid #fff;
+  border: 2px solid var(--bg-white);
   border-radius: 50%;
 }
 
@@ -86,28 +88,38 @@
 
 .name {
   font-size: 0.875rem;
+  line-height: 1.4;
   font-weight: 600;
-  color: #111827;
+  color: var(--text-navy);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-family: var(--main-font);
 }
 
 .chatTypeBadge {
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 10px;
-  padding: 2px 5px;
-  border-radius: 4px;
-  border: 1px solid #fed7aa;
-  background-color: #fff7ed;
-  color: #ea580c;
+  padding: 3px 6px 1px 6px;
+  border-radius: 10px;
+  border: 1px solid var(--border-lavender);
+  background-color: var(--bg-lightlavender);
+  color: var(--text-navy);
+  font-family: var(--main-font);
+  text-align: center;
+  line-height: 1.2;
+  vertical-align: baseline;
 }
 
 .time {
   font-size: 10px;
-  color: #6b7280;
+  color: var(--text-gray);
   margin-left: 8px;
   flex-shrink: 0;
+  font-family: var(--sub-font-medium);
 }
 
 .roomNameRow {
@@ -116,17 +128,19 @@
 }
 
 .roomName {
-  font-size: 10px;
-  color: #1f2937;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-navy);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: 500;
   display: block;
+  font-family: var(--main-font);
 }
 
 .roomNameLabel {
-  color: #6b7280;
+  color: var(--text-gray);
   font-weight: 400;
   margin-right: 4px;
 }
@@ -139,11 +153,12 @@
 
 .lastMessage {
   font-size: 0.75rem;
-  color: #6b7280;
+  color: var(--text-dark-gray);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   padding-right: 8px;
+  font-family: var(--sub-font-medium);
 }
 
 .unreadBadge {
@@ -156,48 +171,8 @@
   padding: 0 4px;
   font-size: 10px;
   font-weight: 700;
-  color: #fff;
-  background-color: #f97316;
+  color: var(--text-white);
+  background-color: var(--c-purple-300);
   border-radius: 9999px;
-}
-
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-  .item:hover {
-    background-color: rgba(55, 65, 81, 0.5);
-  }
-
-  .itemActive {
-    background-color: #374151;
-  }
-
-  .onlineIndicator {
-    border-color: #1f2937;
-  }
-
-  .name {
-    color: #fff;
-  }
-
-  .chatTypeBadge {
-    background-color: rgba(154, 52, 18, 0.3);
-    color: #fb923c;
-    border-color: #7c2d12;
-  }
-
-  .time {
-    color: #9ca3af;
-  }
-
-  .roomName {
-    color: #d1d5db;
-  }
-
-  .roomNameLabel {
-    color: #6b7280;
-  }
-
-  .lastMessage {
-    color: #9ca3af;
-  }
+  font-family: var(--sub-font-bold);
 }
