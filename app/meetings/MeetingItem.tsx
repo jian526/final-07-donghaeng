@@ -7,6 +7,17 @@ import { Meetings } from '@/types/meetings';
 import { formatDate } from '@/lib/common';
 
 export default function MeetingItem({ meeting }: { meeting: Meetings }) {
+  const getDisplayImage = () => {
+    if (meeting.seller_id?.image) {
+      return meeting.seller_id.image;
+    }
+    if (meeting.mainImages?.[0]?.path) {
+      return meeting.mainImages[0].path;
+    }
+    return '/images/logo/logo.svg';
+  };
+
+  const displayImage = getDisplayImage();
   return (
     <>
       <li className={style.card}>
@@ -15,7 +26,7 @@ export default function MeetingItem({ meeting }: { meeting: Meetings }) {
             <div
               className={style.cardImage}
               style={{
-                backgroundImage: meeting.mainImages?.[0]?.path ? `url(${meeting.mainImages[0].path})` : 'none',
+                backgroundImage: `url(${displayImage})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
