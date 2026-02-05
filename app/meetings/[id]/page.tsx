@@ -130,9 +130,9 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
               </div>
 
               {/* 채팅 버튼 */}
-              <button className={style.chatButton} aria-label="채팅하기">
+              <Author meeting={meeting} className={style.chatButton}>
                 <Image src="/icon/chatting.svg" width={56} height={56} alt="채팅" aria-hidden="true" />
-              </button>
+              </Author>
             </div>
           </div>
 

@@ -3,7 +3,7 @@ import useChat from '@/hooks/useChat';
 import useUserStore from '@/zustand/userStore';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import styles from './ChatRoom.module.css';
 
 export default function ChatRoom() {
@@ -16,9 +16,9 @@ export default function ChatRoom() {
   const user = useUserStore((state) => state.user); // 현재 로그인한 사용자 정보
 
   // 메시지 변경 시 실행
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  // useEffect(() => {
+  //   messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  // }, [messages]);
 
   if (!user) return null;
 
@@ -58,7 +58,7 @@ export default function ChatRoom() {
                 </svg>
               </button>
               <div className={styles.partnerInfo}>
-                <Image src={partner?.image || '/images/favicon.svg'} alt={partner.name} width={40} height={40} className={styles.partnerAvatar} />
+                <Image src={partner?.image || '/images/default-profile.png'} alt={partner.name} width={40} height={40} className={styles.partnerAvatar} />
                 <div className={styles.partnerDetails}>
                   <div className={styles.partnerNameRow}>
                     <h3 className={styles.partnerName}>{partner?.name || '상대방'}</h3>
