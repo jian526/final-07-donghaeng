@@ -273,7 +273,7 @@ export default function Add() {
                     </div>
                   ) : imagePreview ? (
                     <div className={style['image-preview']} onClick={() => document.getElementById('meetings-img')?.click()} style={{ cursor: 'pointer' }}>
-                      <Image src={imagePreview} alt="미리보기" style={{ width: '100%', height: 'auto' }} width={100} height={100} />
+                      <Image src={imagePreview} alt="미리보기" style={{ objectFit: 'cover', objectPosition: 'center' }} width={100} height={100} />
                     </div>
                   ) : (
                     <div className={style['ractingle']} onClick={() => document.getElementById('meetings-img')?.click()} style={{ cursor: 'pointer' }}>
@@ -322,7 +322,7 @@ export default function Add() {
 
                 <fieldset className={style['age-fieldset']}>
                   <label htmlFor="age">나이</label>
-                  <div>
+                  <div className={style['age-select']}>
                     <select required id="age" name="age" className={style['select-btn']}>
                       <option value="" disabled defaultValue=""></option>
                       <option value="10">10대</option>
