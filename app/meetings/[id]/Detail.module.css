@@ -188,7 +188,7 @@
   display: inline-flex;
   width: 35px;
   height: 32px;
-  background-color: var(--text-navy);
+  background-color: var(--text-lavender);
   mask: url('/icon/heart.svg') no-repeat center;
   mask-size: contain;
   -webkit-mask: url('/icon/heart.svg') no-repeat center;
@@ -205,7 +205,7 @@
 .bpm p {
   font-family: var(--sub-font-bold);
   font-size: 15px;
-  color: var(--text-navy);
+  color: var(--text-lavender);
 }
 .beatPoint {
   margin-top: -2px;

@@ -110,7 +110,7 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
                     <div className={style.bpm}>
                       <p className={style.beatPoint}>{hostUser.bpm}</p>
                       <br />
-                      <p>BPM</p>
+                      <p>70 BPM</p>
                     </div>
                   </div>
                 </div>
