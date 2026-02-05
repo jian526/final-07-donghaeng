@@ -22,7 +22,11 @@ export default function Signup() {
   }, [router, hasHydrated, accessToken]);
 
   const [currentStep, setCurrentStep] = useState(1);
+  // 지금 몇번째 페이지인지 저장하기 위해서 선언
+
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // 회원가입 버튼 눌렀을때 제출 중인지 체크
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -92,14 +96,19 @@ export default function Signup() {
         // 422, 409 등 에러 응답 처리
         if (res.status === 409) {
           setCheckStatus({ ...checkStatus, email: false });
+          // 중복확인 실패
+
           setErrors({ ...errors, email: '이미 존재하는 이메일입니다.' });
+
           setSuccessMessages({ ...successMessages, email: '' });
+          // 성공 메시지 지움
         } else if (res.status === 422) {
           setCheckStatus({ ...checkStatus, email: false });
           setErrors({ ...errors, email: data.message || '유효하지 않은 이메일입니다.' });
           setSuccessMessages({ ...successMessages, email: '' });
         } else {
           throw new Error(data.message || '이메일 확인 실패');
+          // 다른 에러가 뜬 경우 예상못한 에러를 catch로 보냄
         }
         return;
       }
@@ -173,6 +182,7 @@ export default function Signup() {
       [name]: '',
     });
   };
+
   const validateStep1 = () => {
     const newErrors = { ...errors };
     let isValid = true;

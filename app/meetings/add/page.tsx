@@ -17,8 +17,13 @@ export default function Add() {
   const { user } = useUserStore();
 
   const initialState: ActionState | null = null;
+  // 초기값 설정. 타입지정...
+
   const [state, formAction] = useActionState(createMeeting, initialState);
+  // 폼 제출하면 createMeeting 실행
+
   const [, startTransition] = useTransition();
+  // 폼 제출할때 화면 멈추는것을 방지하기 위해...
 
   const accessToken = user?.token?.accessToken;
   const hasHydrated = useUserStore((state) => state.hasHydrated);

@@ -5,18 +5,23 @@ import styles from './Login.module.css';
 import { useActionState, useEffect } from 'react';
 import { login } from '@/actions/user';
 import { useRouter } from 'next/navigation';
-import { useSearchParams } from 'next/navigation';
 import useUserStore from '@/zustand/userStore';
 import useBookmarkStore from '@/zustand/bookmarkStore';
 import Link from 'next/link';
 
 export default function Login() {
   const [userState, formActions, isPending] = useActionState(login, null);
-  const router = useRouter();
-  const redirect = useSearchParams().get('redirect');
+  //  폼을 제출하면 로그인 함수 실행. 로그인 결과를 userStage에 저장한다.
+  // userState: 로그인 결과(성공/실패), formAction: 폼이 제출될때 실행할 함수, isPending: 로그인 중인지 확인
+
   const setUser = useUserStore((state) => state.setUser);
+  // Zustand에서 유저 정보 저장하는 함수 가져오기
+
   const fetchBookmarks = useBookmarkStore((state) => state.fetchBookmarks);
+  // 로그인 성공하면 북마크 목록을 불러온다
+
   const { user } = useUserStore();
+  const router = useRouter();
   const accessToken = user?.token?.accessToken;
   const hasHydrated = useUserStore((state) => state.hasHydrated);
 
@@ -54,12 +59,12 @@ export default function Login() {
           await fetchBookmarks(accessToken);
         }
 
-        router.push(redirect || '/');
+        router.push('/');
       }
     };
 
     handleLoginSuccess();
-  }, [userState, router, redirect, setUser, fetchBookmarks, hasHydrated, accessToken]);
+  }, [userState, router, setUser, fetchBookmarks, hasHydrated, accessToken]);
 
   return (
     <BlankLayout>
