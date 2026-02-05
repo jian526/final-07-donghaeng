@@ -60,7 +60,9 @@ export default function Header() {
             <div className={styles[`user-info-wrapper`]}>
               <ul>
                 <li>
-                  <button onClick={handleLogout}>로그아웃</button>
+                  <button className={styles[`logout-btn`]} onClick={handleLogout}>
+                    로그아웃
+                  </button>
                 </li>
                 <li>
                   <Link href="/notifications">

@@ -23,7 +23,6 @@ export async function createApply(prevState: ActionState, formData: FormData): P
   const accessToken = formData.get('accessToken');
   const productsStr = formData.get('products') as string;
   const extraStr = formData.get('extra') as string;
-  const id = formData.get('id');
 
   const body = {
     products: productsStr ? JSON.parse(productsStr) : undefined,
@@ -55,7 +54,7 @@ export async function createApply(prevState: ActionState, formData: FormData): P
 
   if (data.ok) {
     updateTag('orders');
-    redirect(`/meetings/${id}`); // 신청한 모임 상세 페이지로 리다이렉트
+    return { ok: 1, message: '신청이 완료되었습니다.' };
   } else {
     return data; // 에러 응답 객체 반환
   }
