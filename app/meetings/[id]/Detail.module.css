@@ -256,15 +256,17 @@
   transition: all 0.3s;
 }
 
-.applyBtn {
-  background-color: var(--bg-lavender);
+.applyBtn,
+.adminBtn {
+  background-color: var(--bg-sky);
   color: var(--text-navy);
   transition: all 0.2s ease;
   white-space: nowrap;
 }
 
-.applyBtn:hover {
-  background-color: var(--c-purple-300);
+.applyBtn:hover,
+.adminBtn:hover {
+  background-color: var(--bg-lightsky);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
