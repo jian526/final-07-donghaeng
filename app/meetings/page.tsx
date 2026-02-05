@@ -6,12 +6,12 @@ import Category from '@/app/meetings/Category';
 import MeetingItem from '@/app/meetings/MeetingItem';
 
 interface PageProps {
-  searchParams: Promise<{ keyword?: string }>;
+  searchParams: Promise<{ keyword?: string; category?: string }>;
 }
 
 export default async function Meetinglist({ searchParams }: PageProps) {
-  const { keyword } = await searchParams;
-  const result = await getMeetings(keyword); // 키워드에 대한 모임리스트 조회
+  const { keyword, category } = await searchParams;
+  const result = await getMeetings(keyword, category); // 키워드에 대한 모임리스트 조회
 
   return (
     <>
