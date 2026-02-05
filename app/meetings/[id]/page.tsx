@@ -36,6 +36,9 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
   }
   const hostUser = userRes.item;
 
+  // 호스트 프로필 이미지 (seller_id.image 우선 사용)
+  const hostProfileImage = hostUser.image || '/images/logo/logo.svg';
+
   return (
     <DefaultLayout>
       <main className={style.main}>
@@ -44,11 +47,19 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
             <div className={style.cardHeader}>
               {/* 캐릭터 이미지 - 작은 크기로 왼쪽 상단 */}
               <figure className={style.characterWrapper}>
-                {meeting.mainImages && meeting.mainImages[0] && <Image src={meeting.mainImages[0].path} alt={meeting.mainImages[0].name} fill className={style.characterImage} unoptimized />}
+                {meeting.mainImages && meeting.mainImages[0] && (
+                  <Image
+                    src={meeting.mainImages[0].path}
+                    alt={meeting.mainImages[0].name}
+                    fill
+                    className={style.characterImage}
+                    unoptimized
+                  />
+                )}
                 <figcaption className={'sr-only'}>캐릭터 이미지</figcaption>
               </figure>
 
-              {/* 타이틀 + 메타정보 (이미지 옆) */}
+              {/* 타이틀 + 메타 정보 (이미지 옆) */}
               <div className={style.headerContent}>
                 <h1 className={style.title}>{meeting.name}</h1>
 
@@ -96,7 +107,15 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
           {/* 호스트 정보 섹션 */}
           <div className={style.bottomSection}>
             <figure className={style.userCharacterWrapper}>
-              <div className={style.userCharacterImage}></div>
+              {/* 수정: 호스트 프로필 이미지 표시 */}
+              <div
+                className={style.userCharacterImage}
+                style={{
+                  backgroundImage: `url(${hostProfileImage})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              ></div>
               <figcaption className={'sr-only'}>사용자 캐릭터</figcaption>
             </figure>
 
@@ -108,7 +127,7 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
                   <div className={style.userStatus}>
                     <span className={style.heartIcon} aria-hidden="true"></span>
                     <div className={style.bpm}>
-                      <p className={style.beatPoint}>{hostUser.bpm}70</p>
+                      <p className={style.beatPoint}>{hostUser.bpm}</p>
                       <p>BPM</p>
                     </div>
                   </div>
