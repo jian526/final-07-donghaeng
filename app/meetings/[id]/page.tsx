@@ -6,6 +6,7 @@ import { getDetail } from '@/lib/meetings';
 import NavigateButton from '@/app/meetings/[id]/NavigateButton';
 import { formatDate } from '@/lib/common';
 import { getUserInfo } from '@/lib/user';
+import Author from '@/app/components/ui/Author';
 
 export const dynamic = 'force-dynamic';
 
