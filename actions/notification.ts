@@ -56,3 +56,42 @@ export async function createNoti(prevState: ActionState, formData: FormData): Pr
     return { ok: 0, message: '일시적인 네트워크 문제로 승인 처리에 실패했습니다.' };
   }
 }
+
+// 전체 읽음 처리
+export async function notiAllRead(accessToken: string) {
+  try {
+    // 내 알림 목록 전체를 읽음 상태로 수정
+    const res = await fetch(`${API_URL}/notifications/read`, {
+      method: 'PATCH',
+      headers: {
+        'Client-Id': CLIENT_ID,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error('전체 읽음 처리 실패:', error);
+    return { ok: 0 };
+  }
+}
+
+// 개별 읽음 처리
+export async function notiOneRead(accessToken: string, notiId: string) {
+  try {
+    // 특정 알림을 읽음 상태로 수정
+    const res = await fetch(`${API_URL}/notifications/${notiId}/read`, {
+      method: 'PATCH',
+      headers: {
+        'Client-Id': CLIENT_ID,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const data = await res.json();
+    console.log('개별 읽음 처리 성공:', data);
+    return data;
+  } catch (error) {
+    console.error('개별 읽음 처리 실패:', error);
+    return { ok: 0 };
+  }
+}

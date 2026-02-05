@@ -3,6 +3,7 @@ import { io, Socket } from 'socket.io-client';
 import useUserStore from '@/zustand/userStore';
 import { NewNotification } from '@/types/notification';
 import useNotiStore from '@/zustand/notificationStore';
+import { notiAllRead, notiOneRead } from '@/actions/notification';
 
 let globalNotiSocket: Socket | null = null; // 소켓 연결 객체를 하나만 유지하기 위한 변수
 let isConnecting = false; // 현재 연결 시도 여부를 체크하는 변수
@@ -12,6 +13,8 @@ export function useNoti() {
   const userId = user?._id;
 
   const { notiSocket, setNotiSocket, notifications, setNotifications } = useNotiStore();
+
+  const accessToken = useUserStore.getState().user?.token?.accessToken;
 
   useEffect(() => {
     // 로그인 하지 않거나, 소켓 연결이 되어있거나, 현재 연결 시도 중이면 반환
@@ -67,8 +70,13 @@ export function useNoti() {
   }, [userId, notiSocket, setNotiSocket, setNotifications]);
 
   // 전체 읽음 처리, 로컬에서 isRead: true로 처리
-  const markAllRead = () => {
-    if (notiSocket && userId) {
+  const markAllRead = async () => {
+    // 토큰, 소켓, 유저 id가 없으면 반환
+    if (!accessToken || !notiSocket || !userId) return;
+
+    // 전체 읽음 처리
+    const result = await notiAllRead(accessToken);
+    if (result.ok) {
       notiSocket.emit('markAllRead', userId);
       // Optimistic update (optional)
       const updatedNotis = notifications.map((n) => ({ ...n, isRead: true }));
@@ -76,15 +84,18 @@ export function useNoti() {
     }
   };
 
-  // 전체 삭제 처리, 로컬에서 빈 배열로 처리
-  const deleteAll = () => {
-    if (notiSocket && userId) {
-      notiSocket.emit('deleteAll', userId);
-      // Optimistic update
-      setNotifications([]);
-    }
+  // 개별 읽음 처리, 로컬에서 isRead: true로 처리
+  const markOneRead = async (notiId: string) => {
+    if (!accessToken) return;
+
+    // 서버에 개별 읽음 처리 요청
+    notiOneRead(accessToken, notiId);
+
+    // 해당 알림만 읽음 처리
+    const updatedNotis = notifications.map((n) => (n._id === notiId ? { ...n, isRead: true } : n));
+    setNotifications(updatedNotis);
   };
 
-  // 알림 목록, 전체 읽음, 전체 삭제 반환
-  return { notifications, setNotifications, markAllRead, deleteAll };
+  // 알림 목록, 전체 읽음, 개별 읽음 반환
+  return { notifications, setNotifications, markAllRead, markOneRead };
 }

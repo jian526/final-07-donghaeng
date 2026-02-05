@@ -16,23 +16,25 @@
   margin-bottom: 20px;
 }
 
+.notifications-wrap p {
+  font-family: var(--sub-font-medium);
+  font-size: 16px;
+}
+
 .btn {
   display: flex;
   gap: 10px;
   justify-content: right;
   /* min-width: 440px; */
-}
 
-.btn button {
-  width: 88px;
-  height: 40px;
-  background-color: var(--bg-sky);
-  border-radius: 50px;
-  font-family: var(--sub-font-medium);
-  font-weight: 700;
-  font-size: 14px;
-}
-
-:global(button:nth-child(1)) {
-  background-color: var(--bg-lightsky);
+  button {
+    width: 88px;
+    height: 40px;
+    background-color: var(--c-slateblue-300);
+    border-radius: 50px;
+    font-family: var(--sub-font-medium);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+  }
 }

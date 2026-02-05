@@ -6,9 +6,14 @@ import Link from 'next/link';
 import { Notification } from '@/types/notification';
 import styles from './NotificationItem.module.css';
 
-export default function NotificationItem({ notification }: { notification: Notification }) {
+export default function NotificationItem({ notification, isRead = false, markOneRead }: { notification: Notification; isRead?: boolean; markOneRead: (notiId: string) => void }) {
+  // 개별 읽음 처리 함수
+  const handleClick = async () => {
+    if (!isRead && markOneRead) await markOneRead(notification._id);
+    console.log(notification._id);
+  };
   return (
-    <Link href={`/meetings/${notification.extra?.meetingId}`} className={styles['alert']}>
+    <Link href={`/meetings/${notification.extra?.meetingId}`} className={isRead ? `${styles['alert']} ${styles['alert-read']}` : styles['alert']} onClick={handleClick}>
       <Image className={styles['img']} src={notification.extra?.mainImages || logo} width="240" height="130" alt="알림 이미지" />
       <div className={styles['txt']}>
         <span>{notification.extra?.meetingTitle}</span>
