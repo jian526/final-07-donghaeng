@@ -21,4 +21,8 @@ export interface Meetings {
     survey1: string;
     survey2: string;
   };
+  seller: {
+    _id: number;
+    name: string;
+  };
 }
