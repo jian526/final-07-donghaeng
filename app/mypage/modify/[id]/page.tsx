@@ -22,12 +22,20 @@ export default function Modify() {
   // actions에서 선언한 updataUser 사용
   const [state, formAction, isPending] = useActionState(updateUser, null);
 
+  // 토큰 가져오기
+  const accessToken = user?.token?.accessToken;
+  // zustand의 복원 여부 확인
+  // 로컬스토리지 복원이 끝나기 전에 잘못된 리다이렉트가 발생하는 걸 방지
+  const hasHydrated = useUserStore((state) => state.hasHydrated);
+
   // 파일을 참조할 ref
   const fileInput = useRef<HTMLInputElement>(null);
   // 파일의 상태를 변경하는 state
   const [profileImage, setProfileImage] = useState(user?.image || profile.src);
   // 업로드된 이미지 경로를 저장하는 state
   const [uploadImagePath, setUploadImagePath] = useState(user?.image || '');
+  // 이미지 업로드 중 상태
+  const [isUploading, setIsUploading] = useState(false);
 
   // user.region을 지역과 시/군/구로 공백을 기준으로 나누는 변수
   const parts = user?.region?.split(' ');
@@ -55,6 +63,12 @@ export default function Modify() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // 파일 크기 검증 (5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert('이미지 크기는 5MB 이하여야 합니다.');
+      return;
+    }
+
     // 미리보기
     if (file) {
       // 파일을 브라우저에서 바로 볼 수 있는 임시 URL로 변환
@@ -64,11 +78,33 @@ export default function Modify() {
     }
 
     // 서버에 경로 업로드
-    const result = await uploadFile(file);
-    if (result.ok === 1) {
-      setUploadImagePath(result.item[0].path);
+    setIsUploading(true);
+    try {
+      const result = await uploadFile(file);
+      if (result.ok === 1) {
+        // 성공 응답일 때만 실행
+        setUploadImagePath(result.item[0].path);
+      } else {
+        alert('이미지 업로드에 실패했습니다.');
+      }
+    } catch (error) {
+      console.error('이미지 업로드 에러:', error);
+      alert('이미지 업로드 중 오류가 발생했습니다.');
+    } finally {
+      // finally는 try catch 끝난 후 무조건 실행
+      setIsUploading(false);
     }
   };
+
+  // 토큰이 없는 경우 강제 이동
+  useEffect(() => {
+    // 로컬 스토리지 복원 안끝났으면 아~무것도 안함
+    if (!hasHydrated) return;
+
+    if (!accessToken) {
+      router.replace('/login');
+    }
+  }, [hasHydrated, accessToken, router]);
 
   return (
     <>
@@ -80,7 +116,7 @@ export default function Modify() {
           <input type="hidden" name="email" value={user?.email || ''} />
           <input type="hidden" name="image" value={uploadImagePath} />
           <input type="hidden" name="region" value={selectedDistrict ? `${selectedCity} ${selectedDistrict}` : selectedCity} />
-          <input type="file" name="image-preview" accept="image/*" hidden ref={fileInput} onChange={handleImageChange} />
+          <input type="file" accept="image/*" hidden ref={fileInput} onChange={handleImageChange} />
           <main className={styles['modify-div']}>
             <div className={styles['profile-top']}>
               <div className={styles['img-wrapper']}>
@@ -96,8 +132,8 @@ export default function Modify() {
                     취소
                   </button>
                 </Link>
-                <button type="submit" className={styles['btn-complete']}>
-                  {isPending ? '수정중...' : '완료'}
+                <button type="submit" className={styles['btn-complete']} disabled={isUploading || isPending}>
+                  {isUploading ? '업로드중...' : isPending ? '수정중...' : '완료'}
                 </button>
               </div>
             </div>
