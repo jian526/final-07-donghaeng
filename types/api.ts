@@ -1,5 +1,6 @@
 import { Apply } from '@/types/apply';
 import { Bookmarks } from '@/types/bookmarks';
+import { ChatRoom } from '@/types/chat';
 import { Manage } from '@/types/manage';
 import { Meetings } from '@/types/meetings';
 import { User } from '@/types/user';
@@ -43,6 +44,16 @@ export interface BookmarksInfoRes {
 export interface BookmarksResponse {
   ok: number;
   item: Bookmarks[];
+}
+
+export interface ChatRoomListRes {
+  ok: 1;
+  item: ChatRoom[];
+}
+
+export interface ChatRoomInfoRes {
+  ok: 1;
+  item: ChatRoom;
 }
 
 // 서버 검증 에러 타입

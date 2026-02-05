@@ -1,0 +1,111 @@
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: 100%;
+  border-right: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.containerHidden {
+  display: none;
+}
+
+.header {
+  height: 64px;
+  padding: 0 16px;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.searchContainer {
+  padding: 12px;
+}
+
+.searchInputWrapper {
+  position: relative;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 8px 12px 8px 36px;
+  background-color: #f3f4f6;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  transition: box-shadow 0.2s;
+}
+
+.searchInput:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #f97316;
+}
+
+.searchIcon {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  color: #9ca3af;
+}
+
+.roomList {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.emptyList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  color: #9ca3af;
+  text-align: center;
+}
+
+.emptyText {
+  font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .container {
+    width: 320px;
+  }
+
+  .containerHidden {
+    display: flex;
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .container {
+    border-right-color: #374151;
+  }
+
+  .header {
+    border-bottom-color: #374151;
+    background-color: rgba(31, 41, 55, 0.5);
+  }
+
+  .title {
+    color: #f3f4f6;
+  }
+
+  .searchInput {
+    background-color: #374151;
+    color: #f3f4f6;
+  }
+}

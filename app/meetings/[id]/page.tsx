@@ -6,6 +6,7 @@ import { getDetail } from '@/lib/meetings';
 import NavigateButton from '@/app/meetings/[id]/NavigateButton';
 import { formatDate } from '@/lib/common';
 import { getUserInfo } from '@/lib/user';
+import Author from '@/app/components/ui/Author';
 
 export default async function Detail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -120,9 +121,9 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
               </div>
 
               {/* 채팅 버튼 - 우측 끝 */}
-              <div className={style.chatButton} aria-label="채팅하기">
+              <Author meeting={meeting} className={style.chatButton}>
                 <Image src="/icon/chatting.svg" width={56} height={56} alt="채팅" aria-hidden="true" />
-              </div>
+              </Author>
             </div>
           </div>
           <NavigateButton meeting={meeting} />
