@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import style from './Detail.module.css';
+import { useRouter } from 'next/navigation';
 import useUserStore from '@/zustand/userStore';
 import { Meetings } from '@/types/meetings';
 import { useActionState, useEffect, useState } from 'react';
@@ -10,10 +11,22 @@ import { getMyMeetings } from '@/lib/meetings';
 
 export default function NavigateButton({ meeting }: { meeting: Meetings }) {
   const user = useUserStore((state) => state.user);
+  const router = useRouter();
   const [, formAction] = useActionState(deleteMeeting, null);
   const [isApplied, setIsApplied] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  // const [shouldApply, setShouldApplay] = useState(false);
 
+  //신청하기 버튼 클릭 시 로그인 체크후 리다이렉트
+  const handleApplyClick = () => {
+    if (!user) {
+      //로그인 안된 경우 로그인 페이지로 리다이렉트
+      router.push('/login');
+    } else {
+      //로그인 된 경우 신청페이지로 이동
+      router.push(`/meetings/${meeting._id}/apply`);
+    }
+  };
   // 신청 여부 확인
   useEffect(() => {
     const checkApplyStatus = async () => {
@@ -31,8 +44,6 @@ export default function NavigateButton({ meeting }: { meeting: Meetings }) {
           console.log('현재 모임 ID:', meeting._id);
           //item이 배열인지 확인
           const items = Array.isArray(response.item) ? response.item : [response.item];
-          // 현재 모임에 신청했는지 확인
-          // const applied = response.item.some((order) => Number(order.product_id) === Number(meeting._id) && order.state === 'OS040');
           console.log('items 배열:', items);
           console.log(
             '각 items의 product_id와 state:',
@@ -86,9 +97,9 @@ export default function NavigateButton({ meeting }: { meeting: Meetings }) {
                 신청완료
               </button>
             ) : (
-              <Link className={style.applyBtn} href={`/meetings/${meeting._id}/apply`}>
+              <button onClick={handleApplyClick} className={style.applyBtn}>
                 신청하기
-              </Link>
+              </button>
             )}
           </div>
         )}
