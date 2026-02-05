@@ -7,6 +7,7 @@ import { Meetings } from '@/types/meetings';
 import { formatDate } from '@/lib/common';
 
 export default function MeetingItem({ meeting }: { meeting: Meetings }) {
+  console.log('meeting', meeting);
   return (
     <>
       <li className={style.card}>

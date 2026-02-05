@@ -474,7 +474,8 @@
 
 @media (max-width: 768px) {
   .mainLayout {
-    min-width: 320px;
+    width: 95vw;
+    min-width: 300px;
     padding: 1rem 0.75rem;
   }
 
@@ -515,4 +516,10 @@
   min-height: 300px;
   color: var(--text-gray);
   padding-bottom: 40px;
+}
+
+@media (max-width: 480px) {
+  .pageTitle {
+    font-size: 24px;
+  }
 }
