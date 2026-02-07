@@ -162,6 +162,7 @@
 
 .registerButton {
   padding: 22px 50px;
+  margin-right: 10px;
   width: 220px;
   height: 70px;
   background-color: var(--bg-lavender);
@@ -280,7 +281,11 @@
   color: var(--text-navy);
   margin-top: 10px;
   margin-bottom: 7px;
+  line-height: 1.2;
   flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .bookmarkIcon {
