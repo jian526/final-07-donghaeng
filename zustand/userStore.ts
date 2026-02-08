@@ -40,6 +40,7 @@ const UserStore: StateCreator<UserStoreState> = (set, get) => ({
       console.log('리프레시 토큰이 없습니다');
       return false;
     }
+    // 로그인을 했는지 안햇는지....
 
     try {
       // GET 방식으로 변경! Header에 refreshToken 넣기
@@ -55,8 +56,9 @@ const UserStore: StateCreator<UserStoreState> = (set, get) => ({
       }
 
       const data = await response.json();
+      // 서버 응답 제이슨 객체로 변환
 
-      // 새 액세스 토큰으로 유저 정보 업데이트
+      //// 새 액세스 토큰으로 유저 정보 업데이트
       set({
         user: {
           ...user,
