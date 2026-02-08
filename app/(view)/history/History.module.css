@@ -43,11 +43,12 @@
 
 .beforeBtn,
 .afterBtn {
-  width: 88px;
+  width: 75px;
   height: 45px;
   border-radius: 25px;
   font-family: var(--sub-font-medium);
   font-weight: 700;
+  cursor: pointer;
 }
 .beforeBtn {
   margin-right: 15px;
@@ -62,7 +63,7 @@
 .card {
   position: relative;
   width: calc(100% - 30px);
-  max-width: 740px;
+  /* max-width: 740px; */
   height: 225px;
   background-color: var(--bg-sky);
   border: 5px solid var(--border-darksky);
@@ -71,11 +72,14 @@
   padding: 20px;
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 
 .cardContent {
   display: flex;
   align-items: center;
+  width: 100%;
+  overflow: hidden;
 }
 
 .imageWrapper {
@@ -98,9 +102,11 @@
 
 .infoWrapper {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  overflow: hidden;
 }
 
 .cardTitle {
@@ -115,6 +121,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  word-break: break-word;
 }
 
 .infoList {
@@ -131,10 +138,15 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .infoItem p {
   font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .arrowIcon {

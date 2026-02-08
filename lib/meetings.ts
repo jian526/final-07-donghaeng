@@ -8,10 +8,69 @@ const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID || '';
  * @param {string} keyword - 검색 키워드 (선택)
  * @returns {Promise<MeetingsListRes | ErrorRes>} - 모임 목록 응답 객체
  */
-export async function getMeetings(keyword?: string): Promise<MeetingsListRes | ErrorRes> {
+export async function getMeetings(keyword?: string, category?: string): Promise<MeetingsListRes | ErrorRes> {
   try {
     const params = new URLSearchParams();
-
+    switch (category) {
+      case 'all':
+        break;
+      case 'health':
+        params.append('custom', `{"extra.category": "운동"}`);
+        break;
+      case 'cook':
+        params.append('custom', `{"extra.category": "요리 / 제조"}`);
+        break;
+      case 'festival':
+        params.append('custom', `{"extra.category": "문화 / 공연 / 축제"}`);
+        break;
+      case 'arcade':
+        params.append('custom', `{"extra.category": "게임 / 오락"}`);
+        break;
+      case 'book':
+        params.append('custom', `{"extra.category": "인문학 / 책 / 글"}`);
+        break;
+      case 'outdoor':
+        params.append('custom', `{"extra.category": "아웃도어 / 여행"}`);
+        break;
+      case 'social':
+        params.append('custom', `{"extra.category": "사교"}`);
+        break;
+      case 'music':
+        params.append('custom', `{"extra.music": "음악 / 악기"}`);
+        break;
+      case 'job':
+        params.append('custom', `{"extra.category": "업종 / 직무"}`);
+        break;
+      case 'language':
+        params.append('custom', `{"extra.category": "외국 / 언어"}`);
+        break;
+      case 'make':
+        params.append('custom', `{"extra.category": "공예 / 만들기"}`);
+        break;
+      case 'dance':
+        params.append('custom', `{"extra.category": "댄스 / 무용"}`);
+        break;
+      case 'volunteer':
+        params.append('custom', `{"extra.category": "봉사활동"}`);
+        break;
+      case 'picture':
+        params.append('custom', `{"extra.category": "사진 / 영상"}`);
+        break;
+      case 'self':
+        params.append('custom', `{"extra.category": "자기계발"}`);
+        break;
+      case 'sports':
+        params.append('custom', `{"extra.category": "스포츠 관람"}`);
+        break;
+      case 'pet':
+        params.append('custom', `{"extra.category": "반려동물"}`);
+        break;
+      case 'bike':
+        params.append('custom', `{"extra.category": "자동차 / 바이크"}`);
+        break;
+      default:
+        break;
+    }
     if (keyword) {
       // keyword가 존재하면 params에 keyword 파라미터를 추가
       params.set('keyword', keyword);
@@ -65,7 +124,10 @@ export async function getDetail(_id: string): Promise<MeetingsInfoRes | ErrorRes
  */
 export async function getMyMeetings(accessToken: string): Promise<ApplyListRes | ErrorRes> {
   try {
-    const res = await fetch(`${API_URL}/orders`, {
+    const custom = encodeURIComponent(JSON.stringify({ state: 'OS040' }));
+    // state 파라미터가 없어서 찾아보니 custom query를 사용하면 된다고함.
+    // 객체를 문자열로 변환후에 URL로 인코딩하여 전달하니 원하는대로 나오게 되었다.
+    const res = await fetch(`${API_URL}/orders?custom=${custom}`, {
       headers: {
         'Client-Id': CLIENT_ID,
         Authorization: `Bearer ${accessToken}`,

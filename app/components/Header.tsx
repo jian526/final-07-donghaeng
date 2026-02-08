@@ -6,6 +6,7 @@ import MobileSidebar from '../components/MobileSidebar';
 import { useState } from 'react';
 import useUserStore from '@/zustand/userStore';
 import useBookmarkStore from '@/zustand/bookmarkStore';
+import ChatNotification from '@/app/chat/components/ChatBadge';
 
 export default function Header() {
   const isLogin = useUserStore((state) => state.isLogin);
@@ -60,7 +61,12 @@ export default function Header() {
             <div className={styles[`user-info-wrapper`]}>
               <ul>
                 <li>
-                  <button onClick={handleLogout}>로그아웃</button>
+                  <button className={styles[`logout-btn`]} onClick={handleLogout}>
+                    로그아웃
+                  </button>
+                </li>
+                <li>
+                  <ChatNotification />
                 </li>
                 <li>
                   <Link href="/notifications">
@@ -91,6 +97,7 @@ export default function Header() {
 
           {/* 모바일 메뉴 */}
           <div className={styles[`mobile-menu`]}>
+            <ChatNotification />
             <Link href="/notifications">
               <Image src="/icon/notification.svg" width={25} height={30} alt="알림 이미지" />
             </Link>

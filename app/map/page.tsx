@@ -60,7 +60,7 @@ export default function Map() {
                       setSelectedId(meeting._id);
                     }}
                   >
-                    <Image src={meeting.mainImages[0]?.path || logo.src} alt="모임 사진" width={90} height={80} />
+                    <Image src={meeting.mainImages[0]?.path || logo.src} className={styles['meeting-img']} alt="모임 사진" width={90} height={80} />
                     <div className={styles['meeting-info-li-div']}>
                       <dt>{meeting.name}</dt>
                       <dd>
@@ -77,7 +77,7 @@ export default function Map() {
             </div>
 
             {/* props로 필요한 정보들 전달 */}
-            <KakaoMap width="100%" lat={37.5709} lng={126.978} className={styles.map} meetings={filteredMeetings} selectedId={selectedId} />
+            <KakaoMap width="100%" lat={37.5709} lng={126.978} className={styles.map} meetings={filteredMeetings} selectedId={selectedId} mapPage={true} />
           </div>
         </main>
       </DefaultLayout>

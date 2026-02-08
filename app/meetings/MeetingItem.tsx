@@ -7,6 +7,7 @@ import { Meetings } from '@/types/meetings';
 import { formatDate } from '@/lib/common';
 
 export default function MeetingItem({ meeting }: { meeting: Meetings }) {
+  console.log('meeting', meeting);
   return (
     <>
       <li className={style.card}>
@@ -24,7 +25,7 @@ export default function MeetingItem({ meeting }: { meeting: Meetings }) {
               <div className={style.cardHeader}>
                 <h3 className={style.cardTitle}>{meeting.name}</h3>
                 <div className={style.bookmarkIcon}>
-                  <BookmarkButton meetingId={meeting._id} />
+                  <BookmarkButton width={27} height={35} meetingId={meeting._id} />
                 </div>
               </div>
               <div className={style.cardMetadata}>

@@ -5,9 +5,42 @@ import 'swiper/css/free-mode';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper/modules';
 import style from './MeetingList.module.css';
+import { useRouter, useSearchParams } from 'next/navigation';
+
+const categoryMap: Record<string, string> = {
+  '전체': 'all',
+  '운동': 'health',
+  '요리 / 제조': 'cook',
+  '문화 / 공연 / 축제': 'festival',
+  '게임 / 오락': 'arcade',
+  '인문학 / 책 / 글': 'book',
+  '아웃도어 / 여행': 'outdoor',
+  '사교': 'social',
+  '음악 / 악기': 'music',
+  '업종 / 직무': 'job',
+  '외국 / 언어': 'language',
+  '공예 / 만들기': 'make',
+  '댄스 / 무용': 'dance',
+  '봉사활동': 'volunteer',
+  '사진 / 영상': 'picture',
+  '자기계발': 'self',
+  '스포츠 관람': 'sports',
+  '반려동물': 'pet',
+  '자동차 / 바이크': 'bike',
+};
 
 export default function Category() {
-  const categories = ['전체', '운동', '요리 / 제조', '문화 / 공연 / 축제', '게임 / 오락', '인문학 / 책 / 글', '아웃도어 / 여행', '사교', '음악 / 악기', '업종 / 직무', '외국 / 언어', '공예 / 만들기', '댄스 / 무용', '봉사활동', '사진 / 영상', '자기계발', '스포츠 관람', '반려동물', '자동차 / 바이크'];
+  const categories = Object.keys(categoryMap);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentCategory = searchParams.get('category') || 'all';
+
+  const handleCategory = (category: string) => {
+    const slug = categoryMap[category];
+    if (slug) {
+      router.push(`/meetings?category=${slug}`);
+    }
+  };
 
   return (
     <>
@@ -15,7 +48,11 @@ export default function Category() {
         <div className={style.categoryListDesktop}>
           <ul className={style.categoryList}>
             {categories.map((category, index) => (
-              <li key={index} className={`${style.categoryItem}`}>
+              <li
+                key={index}
+                onClick={() => handleCategory(category)}
+                className={`${style.categoryItem} ${currentCategory === categoryMap[category] ? style.active : ''}`}
+              >
                 {category}
               </li>
             ))}
@@ -36,7 +73,11 @@ export default function Category() {
         >
           {categories.map((category) => (
             <SwiperSlide key={category} className={style.categorySlide}>
-              <button type="button" className={`${style.categoryChip}`}>
+              <button
+                type="button"
+                className={`${style.categoryChip} ${currentCategory === categoryMap[category] ? style.categoryChipActive : ''}`}
+                onClick={() => handleCategory(category)}
+              >
                 {category}
               </button>
             </SwiperSlide>
