@@ -133,55 +133,53 @@ export default function HistoryPage() {
 
   return (
     <>
-      <DefaultLayout>
-        <main className={style.container}>
-          {
-            <div className={style.contentWrapper}>
-              <h1 className={style.title}>모임 조회</h1>
-              <div className={style.btnGroup}>
-                <button className={`${style.beforeBtn}  ${filter === 'before' ? style.active : ''} `} onClick={() => setFilter('before')}>
-                  참여 전
-                </button>
-                <button className={`${style.afterBtn} ${filter === 'after' ? style.active : ''} `} onClick={() => setFilter('after')}>
-                  참여 후
-                </button>
-              </div>
-              {isEmpty ? (
-                <div className={style.empty}> 신청한 모임이 없습니다.</div>
-              ) : (
-                <Swiper
-                  modules={[Pagination]}
-                  spaceBetween={40}
-                  slidesPerView={'auto'}
-                  centeredSlides={true}
-                  pagination={{
-                    clickable: true,
-                  }}
-                  className={style.swiper}
-                  breakpoints={{
-                    0: {
-                      enabled: false, // 모바일
-                      centeredSlides: false,
-                    },
-                    1024: {
-                      enabled: true, // 웹
-                      centeredSlides: true,
-                    },
-                  }}
-                >
-                  {filteredMeetings.map((apply) =>
-                    apply.products.map((meeting) => (
-                      <SwiperSlide key={meeting._id}>
-                        <MeetingCard meeting={meeting} isPast={isPastMeeting(meeting.extra?.date || '')} />
-                      </SwiperSlide>
-                    ))
-                  )}
-                </Swiper>
-              )}
+      <main className={style.container}>
+        {
+          <div className={style.contentWrapper}>
+            <h1 className={style.title}>모임 조회</h1>
+            <div className={style.btnGroup}>
+              <button className={`${style.beforeBtn}  ${filter === 'before' ? style.active : ''} `} onClick={() => setFilter('before')}>
+                참여 전
+              </button>
+              <button className={`${style.afterBtn} ${filter === 'after' ? style.active : ''} `} onClick={() => setFilter('after')}>
+                참여 후
+              </button>
             </div>
-          }
-        </main>
-      </DefaultLayout>
+            {isEmpty ? (
+              <div className={style.empty}> 신청한 모임이 없습니다.</div>
+            ) : (
+              <Swiper
+                modules={[Pagination]}
+                spaceBetween={40}
+                slidesPerView={'auto'}
+                centeredSlides={true}
+                pagination={{
+                  clickable: true,
+                }}
+                className={style.swiper}
+                breakpoints={{
+                  0: {
+                    enabled: false, // 모바일
+                    centeredSlides: false,
+                  },
+                  1024: {
+                    enabled: true, // 웹
+                    centeredSlides: true,
+                  },
+                }}
+              >
+                {filteredMeetings.map((apply) =>
+                  apply.products.map((meeting) => (
+                    <SwiperSlide key={meeting._id}>
+                      <MeetingCard meeting={meeting} isPast={isPastMeeting(meeting.extra?.date || '')} />
+                    </SwiperSlide>
+                  ))
+                )}
+              </Swiper>
+            )}
+          </div>
+        }
+      </main>
     </>
   );
 }
