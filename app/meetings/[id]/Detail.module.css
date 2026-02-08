@@ -429,6 +429,10 @@
   .bookmarkPart {
     top: 125px;
   }
+  .userMode {
+    position: relative;
+    right: 10px;
+  }
 }
 @media (max-width: 768px) {
   .headerContent {
@@ -446,11 +450,19 @@
   .statusText {
     width: 100%;
   }
+  .appliedBtn,
+  .applyBtn {
+    position: absolute;
+    right: -10px;
+  }
 }
 @media (max-width: 480px) {
+  .contentCard {
+    margin-left: 10px;
+  }
   .userCharacterImage {
-    width: 100px;
-    height: 80px;
+    width: 110px;
+    height: 70px;
   }
   .title {
     margin-left: -10px;
@@ -461,6 +473,7 @@
   .bottomSection {
     padding: 20px;
     height: 100px;
+    margin-left: 10px;
   }
   .chatButton img {
     width: 40px !important;
@@ -510,13 +523,18 @@
   .bookmarkPart {
     top: 110px;
   }
+  .appliedBtn,
+  .applyBtn {
+    position: absolute;
+    right: -20px;
+  }
 }
 
 @media (max-width: 320px) {
   .contentCard {
     width: calc(100vw - 40px);
     min-width: unset;
-    margin-left: -15px;
+    margin-left: 0px;
   }
 
   .title {
@@ -535,15 +553,14 @@
   .bottomSection {
     width: calc(100vw - 40px);
     min-width: unset;
-    margin-left: -15px;
+    margin-left: 0;
     gap: 12px;
   }
   /* 호스트 캐릭터 이미지 축소 */
   .userCharacterImage {
     width: 80px;
-    height: 70px;
+    height: 80px;
   }
-
   /* 호스트 정보 영역 전체폭 차지 */
   .hostInfo {
     width: 100%;
@@ -566,7 +583,7 @@
   }
 
   .statusText {
-    width: 100%;
+    width: 80%;
     font-size: 14px;
   }
 
@@ -574,6 +591,6 @@
     font-size: 12px;
   }
   .userMode {
-    margin-right: -25px;
+    right: 0px;
   }
 }
