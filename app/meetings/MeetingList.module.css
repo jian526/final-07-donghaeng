@@ -303,6 +303,11 @@
 }
 
 .metadataLine {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 18px;
   color: var(--text-gray);
   margin: 0;
