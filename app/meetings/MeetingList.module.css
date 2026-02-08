@@ -5,7 +5,7 @@
   max-width: 1760px;
   justify-content: center;
   width: 100%;
-  padding: 45px 40px 185px 40px;
+  padding: 45px 50px 185px 40px;
   gap: 40px;
 }
 
@@ -41,9 +41,11 @@
 }
 
 .categoryItem {
-  padding: 0.75rem 1rem;
+  padding: 1rem;
+  padding-left: 0;
   font-family: var(--sub-font-medium);
   font-size: 1rem;
+  width: 150px;
   white-space: nowrap;
   color: var(--text-black);
   cursor: pointer;
@@ -51,7 +53,8 @@
   transition: all 0.2s ease;
 }
 
-.categoryItem:hover {
+.categoryItem:hover,
+.categoryItem:focus {
   background-color: var(--bg-lightlavender);
   color: var(--text-navy);
 }
@@ -108,7 +111,8 @@
   transition: all 0.2s ease;
 }
 
-.categoryChip:hover {
+.categoryChip:hover,
+.categoryChip:focus {
   background-color: var(--bg-sky);
   border-color: var(--border-sky);
   color: var(--text-white);
@@ -160,6 +164,7 @@
 
 .registerButton {
   padding: 22px 50px;
+  margin-right: 10px;
   width: 220px;
   height: 70px;
   background-color: var(--bg-lavender);
@@ -206,7 +211,7 @@
 
 .meetingBorder {
   border: 5px solid var(--border-lavender);
-  max-width: 1350px;
+  max-width: 1380px;
   padding: 40px;
   border-radius: 25px;
   box-sizing: border-box;
@@ -278,7 +283,11 @@
   color: var(--text-navy);
   margin-top: 10px;
   margin-bottom: 7px;
+  line-height: 1.2;
   flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .bookmarkIcon {
