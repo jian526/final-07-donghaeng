@@ -411,7 +411,7 @@
   .bookmarkIcon {
     width: 27px;
     height: 25px;
-    top: 30px;
+    top: 32px;
     right: 100px;
   }
 
@@ -555,6 +555,7 @@
   .cardImage {
     width: 35%;
     min-width: 90px;
+    height: 175px;
   }
 
   .cardTitle {
@@ -566,7 +567,7 @@
   }
 
   .bookmarkIcon {
-    top: 5px;
+    top: 35px;
     right: 0;
   }
 }
