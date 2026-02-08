@@ -169,7 +169,6 @@
 }
 
 .statusText {
-  width: 90%;
   font-size: 18px;
   color: var(--text-navy);
   white-space: wrap;
@@ -256,15 +255,17 @@
   transition: all 0.3s;
 }
 
-.applyBtn {
-  background-color: var(--bg-lavender);
+.applyBtn,
+.adminBtn {
+  background-color: var(--bg-sky);
   color: var(--text-navy);
   transition: all 0.2s ease;
   white-space: nowrap;
 }
 
-.applyBtn:hover {
-  background-color: var(--c-purple-300);
+.applyBtn:hover,
+.adminBtn:hover {
+  background-color: var(--bg-lightsky);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -351,6 +352,7 @@
     word-wrap: break-word;
     position: relative;
     padding: 0;
+    overflow: hidden;
   }
   .headerContent {
     z-index: 10;
@@ -566,7 +568,7 @@
   }
 
   .statusText {
-    width: 100%;
+    width: 90%;
     font-size: 14px;
   }
 

@@ -3,8 +3,10 @@
   width: 100%;
   flex-direction: column;
   height: 100%;
-  border-right: 1px solid #e5e7eb;
+  border-right: 1px solid var(--border-lavender);
+  border-bottom: 1px solid var(--border-lavender);
   flex-shrink: 0;
+  background-color: var(--bg-white);
 }
 
 .containerHidden {
@@ -14,17 +16,18 @@
 .header {
   height: 64px;
   padding: 0 16px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border-lavender);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
+  background-color: var(--bg-lightlavender);
 }
 
 .title {
   font-size: 1.125rem;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--text-navy);
+  font-family: var(--main-font);
 }
 
 .searchContainer {
@@ -38,16 +41,21 @@
 .searchInput {
   width: 100%;
   padding: 8px 12px 8px 36px;
-  background-color: #f3f4f6;
-  border: none;
-  border-radius: 8px;
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-lavender);
+  border-radius: 20px;
   font-size: 0.875rem;
+  font-family: var(--sub-font-medium);
   transition: box-shadow 0.2s;
 }
 
 .searchInput:focus {
   outline: none;
-  box-shadow: 0 0 0 2px #f97316;
+  box-shadow: 0 0 0 2px var(--bg-lavender);
+}
+
+.searchInput::placeholder {
+  color: var(--text-gray);
 }
 
 .searchIcon {
@@ -55,8 +63,10 @@
   height: 16px;
   position: absolute;
   left: 12px;
-  top: 12px;
-  color: #9ca3af;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-lavender);
+  display: flex;
 }
 
 .roomList {
@@ -70,12 +80,13 @@
   align-items: center;
   justify-content: center;
   padding: 32px;
-  color: #9ca3af;
+  color: var(--text-gray);
   text-align: center;
 }
 
 .emptyText {
   font-size: 0.875rem;
+  font-family: var(--sub-font-medium);
 }
 
 /* Responsive */
@@ -86,26 +97,5 @@
 
   .containerHidden {
     display: flex;
-  }
-}
-
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-  .container {
-    border-right-color: #374151;
-  }
-
-  .header {
-    border-bottom-color: #374151;
-    background-color: rgba(31, 41, 55, 0.5);
-  }
-
-  .title {
-    color: #f3f4f6;
-  }
-
-  .searchInput {
-    background-color: #374151;
-    color: #f3f4f6;
   }
 }

@@ -8,6 +8,8 @@ import { formatDate } from '@/lib/common';
 import { getUserInfo } from '@/lib/user';
 import Author from '@/app/components/ui/Author';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Detail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const res = await getDetail(id);
@@ -25,7 +27,9 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
 
   const meeting = res.item;
 
+  // seller_id로 호스트 정보 가져오기
   const userRes = await getUserInfo(String(meeting.seller_id));
+
   if (userRes.ok === 0) {
     return (
       <DefaultLayout>
@@ -35,7 +39,11 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
       </DefaultLayout>
     );
   }
+
   const hostUser = userRes.item;
+
+  console.log('hostUser.comment:', hostUser.comment);
+  console.log('hostUser.bpm', hostUser.bpm);
 
   return (
     <DefaultLayout>
@@ -43,17 +51,17 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
         <div>
           <div className={style.contentCard}>
             <div className={style.cardHeader}>
-              {/* 캐릭터 이미지 - 작은 크기로 왼쪽 상단 */}
+              {/* 캐릭터 이미지 */}
               <figure className={style.characterWrapper}>
                 {meeting.mainImages && meeting.mainImages[0] && <Image src={meeting.mainImages[0].path} alt={meeting.mainImages[0].name} fill className={style.characterImage} unoptimized />}
                 <figcaption className={'sr-only'}>캐릭터 이미지</figcaption>
               </figure>
 
-              {/* 타이틀 + 메타정보 (이미지 옆) */}
+              {/* 타이틀 + 메타정보 */}
               <div className={style.headerContent}>
                 <h1 className={style.title}>{meeting.name}</h1>
 
-                {/* meetingInfo: #카테고리 | 장소 · 나이대 · 성별 · 최소 - 최대 인원 */}
+                {/* meetingInfo */}
                 <ul className={style.meetingInfo}>
                   <li className={style.meetingInfoCategory}>#{meeting.extra.category}</li>
                   <li className={style.meetingInfoDivider} aria-hidden="true">
@@ -72,8 +80,7 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
                     ·
                   </li>
                   <li>
-                    {meeting.buyQuantity}명/
-                    {meeting.quantity}명
+                    {meeting.buyQuantity}명/{meeting.quantity}명
                   </li>
                   <li className={style.meetingInfoDot} aria-hidden="true">
                     ·
@@ -82,7 +89,7 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
                 </ul>
               </div>
 
-              {/* 북마크 버튼 - 카드 우측 상단 고정 */}
+              {/* 북마크 버튼 */}
               <div className={style.bookmarkPart}>
                 <BookmarkButton meetingId={meeting._id} width={27} height={35} desktopWidth={40} desktopHeight={45} />
               </div>
@@ -97,35 +104,38 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
           {/* 호스트 정보 섹션 */}
           <div className={style.bottomSection}>
             <figure className={style.userCharacterWrapper}>
-              <div className={style.userCharacterImage}></div>
+              {/* 호스트 프로필 이미지 */}
+              {hostUser.image ? <Image src={hostUser.image} alt={`${hostUser.name} 프로필`} width={170} height={150} className={style.userCharacterImage} style={{ objectFit: 'cover', borderRadius: '25px' }} unoptimized /> : <div className={style.userCharacterImage}></div>}
               <figcaption className={'sr-only'}>사용자 캐릭터</figcaption>
             </figure>
 
             <div className={style.hostInfo}>
-              {/* 이름 + 하트 BPM (같은 줄) */}
               <div className={style.statusRow}>
                 <div className={style.hostNameRow}>
+                  {/* 호스트 이름 */}
                   <p className={style.userName}>{hostUser.name}</p>
+
+                  {/* BPM 정보 */}
                   <div className={style.userStatus}>
                     <span className={style.heartIcon} aria-hidden="true"></span>
                     <div className={style.bpm}>
-                      <p className={style.beatPoint}>{hostUser.bpm}</p>
-                      <br />
-                      <p>70 BPM</p>
+                      <p className={style.beatPoint}>{hostUser.bpm || 70}</p>
+                      <p>BPM</p>
                     </div>
                   </div>
                 </div>
 
-                {/* 상태 메시지 (이름 아래) */}
+                {/* 호스트 상태 메시지 */}
                 <p className={style.statusText}>{hostUser.comment || '상태 메시지 없음'}</p>
               </div>
 
-              {/* 채팅 버튼 - 우측 끝 */}
+              {/* 채팅 버튼 */}
               <Author meeting={meeting} className={style.chatButton}>
                 <Image src="/icon/chatting.svg" width={56} height={56} alt="채팅" aria-hidden="true" />
               </Author>
             </div>
           </div>
+
           <NavigateButton meeting={meeting} />
         </div>
       </main>

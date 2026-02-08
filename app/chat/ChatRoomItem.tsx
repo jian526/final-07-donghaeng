@@ -16,7 +16,7 @@ export default function ChatRoomItem({ room, isActive, onSelect, onLeave }: Chat
   // 현재 로그인한 사용자를 제외한 상대방 정보 추출
   const partner = room.members.find((m) => String(m._id) !== String(currentUser?._id));
   const displayName = partner?.name || '알 수 없는 사용자';
-  const displayImage = partner?.image || '/images/favicon.svg';
+  const displayImage = partner?.image || '/images/default-profile.png';
 
   // 마지막 메시지 정보
   const lastMessage = room.lastMessage;
