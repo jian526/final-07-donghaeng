@@ -69,21 +69,21 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
                   </li>
                   <li>{meeting.extra.region}</li>
                   <li className={style.meetingInfoDot} aria-hidden="true">
-                    ·
+                    |
                   </li>
                   <li>{meeting.extra.age}대</li>
                   <li className={style.meetingInfoDot} aria-hidden="true">
-                    ·
+                    |
                   </li>
                   <li>{meeting.extra.gender}</li>
                   <li className={style.meetingInfoDot} aria-hidden="true">
-                    ·
+                    |
                   </li>
                   <li>
                     {meeting.buyQuantity}명/{meeting.quantity}명
                   </li>
                   <li className={style.meetingInfoDot} aria-hidden="true">
-                    ·
+                    |
                   </li>
                   <li>{formatDate(meeting.extra.date)}</li>
                 </ul>
@@ -128,12 +128,11 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
                 {/* 호스트 상태 메시지 */}
                 <p className={style.statusText}>{hostUser.comment || '상태 메시지 없음'}</p>
               </div>
-
-              {/* 채팅 버튼 */}
-              <Author meeting={meeting} className={style.chatButton}>
-                <Image src="/icon/chatting.svg" width={56} height={56} alt="채팅" aria-hidden="true" />
-              </Author>
             </div>
+            {/* 채팅 버튼 */}
+            <Author meeting={meeting} className={style.chatButton}>
+              <Image src="/icon/chatting.svg" width={56} height={56} alt="채팅" aria-hidden="true" />
+            </Author>
           </div>
 
           <NavigateButton meeting={meeting} />
