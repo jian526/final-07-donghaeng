@@ -1,9 +1,8 @@
 import style from './MeetingList.module.css';
 import Link from 'next/link';
 import DefaultLayout from '@/app/components/DefaultLayout';
-import { getMeetings } from '@/lib/meetings';
 import Category from '@/app/meetings/Category';
-import MeetingItem from '@/app/meetings/MeetingItem';
+import FilterMeetingList from '@/app/meetings/FilterMeetingList';
 
 const categoryNameMap: Record<string, string> = {
   health: '운동',
@@ -33,7 +32,6 @@ interface PageProps {
 export default async function Meetinglist({ searchParams }: PageProps) {
   const { keyword, category } = await searchParams;
   const categoryName = category && category !== 'all' ? categoryNameMap[category] : '';
-  const result = await getMeetings(keyword, category); // 키워드에 대한 모임리스트 조회
 
   return (
     <>
@@ -60,22 +58,7 @@ export default async function Meetinglist({ searchParams }: PageProps) {
             <Category />
 
             <section className={style.mainContent}>
-              <div className={style.meetingBorder}>
-                <div className={style.filterBar}></div>
-                {result.ok ? (
-                  result.item.length > 0 ? (
-                    <ul className={style.meetingGrid}>
-                      {result.item.map((meeting) => (
-                        <MeetingItem key={meeting._id} meeting={meeting} />
-                      ))}
-                    </ul>
-                  ) : (
-                    <div className={style['none-data']}>검색 결과가 없습니다.</div>
-                  )
-                ) : (
-                  <p>에러발생</p>
-                )}
-              </div>
+              <FilterMeetingList keyword={keyword} category={category} />
             </section>
           </div>
         </main>
