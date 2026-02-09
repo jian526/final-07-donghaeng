@@ -215,7 +215,7 @@ export default function Add() {
             <h2>모임 등록</h2>
             <fieldset className={style['title-fieldset']}>
               <label htmlFor="meetings-title">모임 제목</label>
-              <input className={style['title-input']} type="text" id="meetings-title" name="meetings-title" />
+              <input className={style['title-input']} maxLength={40} type="text" id="meetings-title" name="meetings-title" placeholder="모임 제목을 입력해주세요." />
             </fieldset>
 
             <fieldset className={style['category-fieldset']}>
@@ -298,7 +298,7 @@ export default function Add() {
                 <label htmlFor="region" className={style['region-label']}>
                   장소
                 </label>
-                <input className={`${style['region-input']} `} type="text" name="region" id="region" placeholder="모임 장소를 입력해주세요" required></input>
+                <input className={`${style['region-input']} `} maxLength={40} type="text" name="region" id="region" placeholder="모임 장소를 입력해주세요" required></input>
               </fieldset>
 
               <fieldset className={style['gender-fieldset']}>
@@ -351,7 +351,7 @@ export default function Add() {
                     <path d="M0 1.5C0 0.670312 0.574554 0 1.28571 0H16.7143C17.4254 0 18 0.670312 18 1.5C18 2.32969 17.4254 3 16.7143 3H1.28571C0.574554 3 0 2.32969 0 1.5Z" fill="#323577" />
                   </svg>
                 </button>
-                <input type="number" id="count-input" name="count-input" min="0" max="300" value={count} onChange={handleCountChange} readOnly />
+                <input type="number" id="count-input" name="count-input" min="0" max="300" value={count} onChange={handleCountChange} />
                 <button type="button" className={style['count-btn, increase']} onClick={handleIncrease}>
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
