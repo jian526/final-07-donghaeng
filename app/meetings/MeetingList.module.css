@@ -285,6 +285,7 @@
   margin-bottom: 7px;
   line-height: 1.2;
   flex: 1;
+  width: 80%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -416,8 +417,8 @@
   .bookmarkIcon {
     width: 27px;
     height: 25px;
-    top: 32px;
-    right: 100px;
+    top: 100px;
+    right: 0;
   }
 
   .cardHeader {
