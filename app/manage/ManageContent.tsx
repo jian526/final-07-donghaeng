@@ -43,7 +43,7 @@ export default function ManageContent() {
   if (!accessToken) return null;
 
   if (isEmpty) {
-    return <div className={style.empty}>신청한 모임이 없습니다.</div>;
+    return <div className={style.empty}>등록한 모임이 없습니다.</div>;
   }
 
   return <ManageSwiper meetings={meetings} />;
