@@ -49,11 +49,11 @@ export default async function Meetinglist({ searchParams }: PageProps) {
             <div className={style.headerSection}>
               <div className={style.titleSection}>
                 <h1 className={style.pageTitle}>{keyword ? `"${keyword}"` : categoryName || '모임 리스트'}</h1>
+                <Link href="/meetings/add" className={style.registerButton}>
+                  <span className={style.desktopText}>모임 등록하기</span>
+                  <span className={style.mobileText}>모임 등록</span>
+                </Link>
               </div>
-              <Link href="/meetings/add" className={style.registerButton}>
-                <span className={style.desktopText}>모임 등록하기</span>
-                <span className={style.mobileText}>모임 등록</span>
-              </Link>
             </div>
           </div>
           <div className={style.row}>
