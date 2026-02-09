@@ -10,6 +10,7 @@ import useUserStore from '@/zustand/userStore';
 import { Manage } from '@/types/manage';
 import Image from 'next/image';
 import toast, { Toaster } from 'react-hot-toast';
+import { createNoti } from '@/actions/notification';
 
 interface ManageContentProps {
   productId: number;
@@ -47,14 +48,28 @@ export default function ManageContent({ productId }: ManageContentProps) {
     const result = await patchManage(null, formData);
 
     if (result?.ok === 1) {
+      const applicant = manage?.find((item) => item._id === applicantId);
+      const productIdFromApplicant = applicant?.products[0]?._id;
       if (isApprove) {
-        const applicant = manage?.find((item) => item._id === applicantId);
-        const productIdFromApplicant = applicant?.products[0]?._id;
         if (productIdFromApplicant && accessToken) {
           const productData = await getSellerProduct(accessToken, productIdFromApplicant);
           const currentBuyQuantity = productData.ok === 1 ? productData.item?.buyQuantity || 0 : 0;
           await updateBuyQuantity(accessToken, productIdFromApplicant, currentBuyQuantity + 1);
         }
+      }
+
+      // 알림 생성
+      if (applicant && accessToken) {
+        // 알림에 필요한 정보들을 append를 통해 넣기
+        const notiFormData = new FormData();
+        notiFormData.append('accessToken', accessToken);
+        notiFormData.append('target_id', String(applicant.user_id));
+        notiFormData.append('content', isApprove ? '모임에 승인되었습니다.' : '모임에 거절되었습니다.');
+        notiFormData.append('type', 'noti');
+        notiFormData.append('meetingId', String(productId));
+        notiFormData.append('meetingTitle', applicant?.products[0]?.name || '');
+        notiFormData.append('mainImages', applicant?.products[0]?.image?.path || '');
+        await createNoti(null, notiFormData);
       }
       toast.success(isApprove ? '승인되었습니다.' : '거절되었습니다.');
       setManage((prev) => prev?.filter((item) => item._id !== applicantId));
@@ -81,10 +96,7 @@ export default function ManageContent({ productId }: ManageContentProps) {
             >
               확인
             </button>
-            <button
-              onClick={() => toast.dismiss(t.id)}
-              className={styles['toast-btn-cancel']}
-            >
+            <button onClick={() => toast.dismiss(t.id)} className={styles['toast-btn-cancel']}>
               취소
             </button>
           </div>
