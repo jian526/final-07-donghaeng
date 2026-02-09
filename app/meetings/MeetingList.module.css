@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   max-width: 1760px;
+  margin: 0 auto;
   justify-content: center;
   width: 100%;
   padding: 45px 50px 185px 40px;
@@ -14,11 +15,6 @@
   top: 0;
   left: 10px;
   max-width: 1760px;
-}
-.titleSection {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
 }
 .row {
   display: flex;
@@ -257,11 +253,14 @@
 
 .cardImage {
   width: 100%;
-  aspect-ratio: 380 / 235;
+  aspect-ratio: 1/1;
+  object-fit: cover;
   background-image: url('/images/img2.png');
   background-size: cover;
   background-position: center;
   flex-shrink: 0;
+  border: 1px solid var(--border-lavender);
+  border-radius: 25px;
 }
 
 .cardContent {
@@ -287,10 +286,13 @@
   margin-bottom: 7px;
   line-height: 1.2;
   flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
   width: 80%;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   overflow: hidden;
-  text-overflow: ellipsis;
+  /* text-overflow: ellipsis; */
 }
 
 .bookmarkIcon {
@@ -298,24 +300,38 @@
   top: 70px;
   right: 0px;
 }
-
+.rowWrap {
+  display: flex;
+  gap: 7px;
+}
 .cardMetadata {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 10px;
 }
-
 .metadataLine {
+  font-size: 18px;
+  color: var(--text-gray);
+  white-space: nowrap;
+}
+.metadataLine2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  width: 80%;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 18px;
   color: var(--text-gray);
   margin: 0;
 }
-
+.divider {
+  width: 1px;
+  height: 18px;
+  background-color: var(--text-gray);
+  opacity: 0.7;
+  align-self: center;
+}
 /* 태블릿 (1024px 이하) */
 @media (max-width: 1024px) {
   .mainLayout {
@@ -328,7 +344,10 @@
 
   .topHeader {
     left: 0;
-    padding: 0 5px;
+    padding: 0;
+  }
+  .home {
+    margin-left: 5px;
   }
 
   .breadcrumb {
@@ -385,12 +404,11 @@
     width: 100%;
   }
   .cardImage {
-    width: 40%;
+    width: 30%;
     min-width: 120px;
-    height: 200px;
+    height: 150px;
+    margin-right: 10px;
     flex-shrink: 0;
-    border: 1px solid var(--border-lavender);
-    border-radius: 25px;
   }
 
   .meetingCard {
@@ -410,27 +428,34 @@
 
   .cardContent {
     flex: 1;
-    padding: 10px;
+    padding-left: 20px;
     padding-right: 40px;
-    height: 200px;
+    min-height: 140px;
     justify-content: space-between;
     overflow: hidden;
   }
 
   .bookmarkIcon {
-    width: 27px;
-    height: 25px;
+    width: 18px;
+    height: 23px;
     top: 35px;
     right: 0;
+  }
+  .bookmark-btn {
+    width: 18px;
+    height: 23px;
   }
 
   .cardHeader {
     margin-top: 0;
-    width: 100%;
+    width: 90%;
   }
 
+  .metadataLine2 {
+    font-size: 16px;
+  }
   .metadataLine {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .card {
@@ -444,13 +469,8 @@
 
   .headerSection {
     margin-bottom: 5px;
-    flex-direction: column;
     position: relative;
     gap: 10px;
-    width: 100%;
-  }
-
-  .titleSection {
     width: 100%;
   }
 
@@ -519,6 +539,8 @@
   .cardImage {
     width: 35%;
     min-width: 100px;
+    /* height: auto;
+    min-height: 150px; */
   }
 
   .cardContent {
@@ -531,11 +553,9 @@
     font-size: 18px;
   }
 
-  .metadataLine {
-    font-size: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .metadataLine2 {
+    font-size: 13px;
+    /* overflow: hidden; */
   }
 }
 
@@ -558,10 +578,14 @@
   .pageTitle {
     font-size: 20px;
   }
+  .cardContent {
+    min-height: 140px;
+  }
 
   .cardImage {
-    width: 35%;
-    min-width: 90px;
+    width: 45%;
+    min-width: 100px;
+    aspect-ratio: 1/1;
   }
   .cardHeader {
     width: 85%;
@@ -569,7 +593,9 @@
   .cardTitle {
     font-size: 16px;
   }
-
+  .cardMetadata {
+    gap: 0;
+  }
   .metadataLine {
     font-size: 13px;
   }
@@ -577,5 +603,19 @@
   .bookmarkIcon {
     top: 35px;
     right: 0;
+  }
+}
+@media (max-width: 350px) {
+  .rowWrap {
+    gap: 3px;
+  }
+}
+
+@media (max-width: 319px) {
+  .cardContent {
+    min-height: 100px;
+  }
+  .cardImage {
+    height: 100px;
   }
 }
