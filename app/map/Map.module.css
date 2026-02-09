@@ -223,38 +223,6 @@
     height: 700px;
     overflow-y: scroll;
 
-    .search-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 10px auto 15px;
-      padding: 10px 15px;
-      width: 100%;
-      max-width: 350px;
-      border: 3px solid var(--border-navy);
-      border-radius: 50px;
-      background: var(--bg-white);
-
-      input {
-        flex: 1;
-        border: none;
-        outline: none;
-        font-size: 14px;
-        font-family: var(--sub-font-medium);
-        color: var(--text-navy);
-        background: transparent;
-
-        &::placeholder {
-          color: var(--text-gray);
-        }
-      }
-
-      svg {
-        flex-shrink: 0;
-        cursor: pointer;
-      }
-    }
-
     .meeting-info-li-div {
       width: 350px;
       margin-left: 2%;
@@ -298,6 +266,23 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
+    }
+
+    /* 스크롤 바 */
+    &::-webkit-scrollbar {
+      width: 20px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--bg-sky);
+      border-radius: 10px;
+      border: 5px solid transparent;
+      background-clip: padding-box;
+    }
+
+    &::-webkit-scrollbar-button {
+      display: block;
+      height: 8px;
     }
   }
 

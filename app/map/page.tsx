@@ -46,10 +46,6 @@ export default function Map() {
           </div>
           <div className={styles['map-metting-div']}>
             <div className={styles['metting-list']}>
-              {/* <div className={styles['search-bar']}>
-                <input type="text" placeholder="검색어를 입력하세요" />
-                <Image src={search.src} alt="검색" width={20} height={20} />
-              </div> */}
               <ul>
                 {filteredMeetings.map((meeting) => (
                   // li 클릭 시 해당되는 모임 id 저장
