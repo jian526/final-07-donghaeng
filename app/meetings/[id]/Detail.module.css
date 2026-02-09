@@ -56,7 +56,7 @@
 }
 
 .title {
-  margin-top: 58px;
+  width: 80%;
   font-family: var(--main-font);
   font-size: 28px;
   color: var(--text-black);
@@ -92,8 +92,8 @@
 /* 북마크 버튼 - 카드 우측 상단 고정 */
 .bookmarkPart {
   position: absolute;
-  top: 70px;
-  right: 0;
+  top: 65px;
+  right: -20px;
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
@@ -138,6 +138,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.contentBody p {
+  white-space: pre-wrap;
 }
 
 /* 호스트 정보 영역 (이름 + BPM + 상태메시지) */
@@ -336,6 +340,16 @@
   width: 100%;
 }
 
+.title {
+  width: 80%;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* 표시할 줄 수 */
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+}
+
 /* ===== 반응형 - 1024px 이하 ===== */
 @media (max-width: 1024px) {
   .main {
@@ -365,7 +379,7 @@
     height: 200px;
   }
   .characterWrapper {
-    width: 82.5vw;
+    width: 83vw;
     min-width: 270px;
     height: 300px;
     position: absolute;
@@ -377,17 +391,21 @@
   }
   .title {
     margin-left: 20px;
+    line-height: 1.5;
   }
   .meetingInfo {
     margin-left: 20px;
   }
 
+  .headerContent {
+    width: 90%;
+  }
+
   .contentBody {
     width: 100%;
-    height: 300px;
     padding: 20px;
     position: relative;
-    top: -35px;
+    top: 0;
     z-index: 20;
     background-color: var(--bg-white);
     border-radius: 25px;
@@ -430,6 +448,7 @@
   }
   .bookmarkPart {
     top: 125px;
+    right: 10px;
   }
   .userMode {
     position: relative;
@@ -519,7 +538,7 @@
   }
   .title {
     margin-top: 0px;
-    width: 80%;
+
     font-size: 24px;
   }
   .bookmarkPart {
