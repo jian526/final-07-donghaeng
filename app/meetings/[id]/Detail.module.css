@@ -14,12 +14,17 @@
   padding: 40px 240px 108px 240px;
 }
 
+.mainHeader {
+  margin: 0 auto;
+}
+
 /* ===== 콘텐츠 카드 ===== */
 .contentCard {
   background-color: var(--bg-white);
   border: 5px solid var(--border-lavender);
   border-radius: 20px;
   padding: 35px;
+  width: 100%;
   position: relative;
 }
 
@@ -353,14 +358,14 @@
 /* ===== 반응형 - 1024px 이하 ===== */
 @media (max-width: 1024px) {
   .main {
-    padding: 40px;
-    margin-right: -40px;
+    padding: 20px;
+    /* margin-right: -40px; */
   }
   .contentCard {
     display: flex;
     flex-direction: column;
     width: 84vw;
-    min-width: 300px;
+    min-width: 280px;
     padding-top: 0;
     margin-right: 0;
     word-wrap: break-word;
@@ -478,9 +483,6 @@
   }
 }
 @media (max-width: 480px) {
-  .contentCard {
-    margin-left: 10px;
-  }
   .userCharacterImage {
     width: 110px;
     height: 70px;
@@ -494,14 +496,18 @@
   .bottomSection {
     padding: 20px;
     height: 100px;
-    margin-left: 10px;
+  }
+  .hostInfo {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .chatButton img {
     width: 40px !important;
     height: 40px !important;
   }
-  .bpm p {
-    font-size: 12px;
+  .bpm .font {
+    font-size: 10px;
   }
 
   .heartIcon {
@@ -538,8 +544,7 @@
   }
   .title {
     margin-top: 0px;
-
-    font-size: 24px;
+    font-size: 20px;
   }
   .bookmarkPart {
     top: 110px;
@@ -548,6 +553,9 @@
   .applyBtn {
     position: absolute;
     right: -20px;
+  }
+  .statusText {
+    width: 80%;
   }
 }
 
@@ -560,7 +568,6 @@
 
   .title {
     margin-top: 0px;
-    margin-left: -10px;
     font-size: 20px;
   }
 
@@ -583,11 +590,6 @@
     height: 80px;
   }
   /* 호스트 정보 영역 전체폭 차지 */
-  .hostInfo {
-    width: 100%;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
 
   .statusRow {
     width: 100%;
@@ -604,7 +606,6 @@
   }
 
   .statusText {
-    width: 80%;
     font-size: 14px;
   }
 

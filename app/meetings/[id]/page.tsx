@@ -48,7 +48,7 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
   return (
     <DefaultLayout>
       <main className={style.main}>
-        <div>
+        <div className={style.mainHeader}>
           <div className={style.contentCard}>
             <div className={style.cardHeader}>
               {/* 캐릭터 이미지 */}
@@ -120,7 +120,7 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
                     <span className={style.heartIcon} aria-hidden="true"></span>
                     <div className={style.bpm}>
                       <p className={style.beatPoint}>{hostUser.bpm || 70}</p>
-                      <p>BPM</p>
+                      <p className={style.font}>BPM</p>
                     </div>
                   </div>
                 </div>
