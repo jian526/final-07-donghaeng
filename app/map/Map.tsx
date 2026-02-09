@@ -33,8 +33,8 @@ export default function Map({ meetings }: MapProps) {
              */}
             <Filter onFilterChanges={handleFilterChange} />
           </div>
-          <div className={styles['map-metting-div']}>
-            <div className={styles['metting-list']}>
+          <div className={styles['map-meeting-div']}>
+            <div className={styles['meeting-list']}>
               <ul>
                 {filteredMeetings.map((meeting) => (
                   // li 클릭 시 해당되는 모임 id 저장

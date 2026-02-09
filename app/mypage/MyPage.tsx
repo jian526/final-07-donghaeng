@@ -56,7 +56,7 @@ export default function MyPage() {
                 <p className={styles.nickname}>{user?.name}</p>
                 <p className={styles.email}>{user?.email}</p>
                 <p className={styles.etc}>
-                  {user?.gender} | {user?.age}대 | {user?.region}
+                  {user?.gender} <span>|</span> {user?.age}대 <span>|</span> {user?.region}
                 </p>
 
                 <figure>

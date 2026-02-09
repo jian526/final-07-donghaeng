@@ -54,6 +54,10 @@
   }
   .etc {
     color: var(--text-darksky);
+
+    span {
+      margin-inline: 3%;
+    }
   }
 
   figure {
