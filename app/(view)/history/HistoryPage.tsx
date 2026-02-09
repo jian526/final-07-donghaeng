@@ -10,7 +10,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import DefaultLayout from '@/app/components/DefaultLayout';
 import useUserStore from '@/zustand/userStore';
 import { getMyMeetings } from '@/lib/meetings';
 import { Apply } from '@/types/apply';
@@ -138,6 +137,9 @@ export default function HistoryPage() {
           <div className={style.contentWrapper}>
             <h1 className={style.title}>모임 조회</h1>
             <div className={style.btnGroup}>
+              <button className={`${style.allBtn}  ${filter === 'all' ? style.active : ''} `} onClick={() => setFilter('all')}>
+                전체
+              </button>
               <button className={`${style.beforeBtn}  ${filter === 'before' ? style.active : ''} `} onClick={() => setFilter('before')}>
                 참여 전
               </button>
