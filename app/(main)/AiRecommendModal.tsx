@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import { Meetings } from '@/types/meetings';
+import { getAiRecommendation } from '@/actions/ai-recommend';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -97,16 +98,11 @@ export default function AiRecommendModal({ open, onClose }: { open: boolean; onC
     setRecommendedMeetings([]);
   };
 
-  // AI 추천 API 호출
+  // AI 추천 Server Action 호출
   const fetchRecommendation = async (finalAnswers: typeof answers) => {
     setIsLoading(true);
     try {
-      const res = await fetch('/api/ai-recommend', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ answers: finalAnswers }),
-      });
-      const data = await res.json();
+      const data = await getAiRecommendation(finalAnswers);
       setRecommendedMeetings(data.meetings || []);
     } catch (error) {
       console.error('AI 추천 요청 실패:', error);

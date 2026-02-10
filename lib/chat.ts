@@ -1,4 +1,4 @@
-import { apiCall } from '@/app/chat/api/api';
+import { apiCall } from '@/actions/chat';
 import { ChatRoomInfoRes, ChatRoomListRes } from '@/types/api';
 
 /**

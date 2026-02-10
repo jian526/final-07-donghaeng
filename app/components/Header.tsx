@@ -6,7 +6,7 @@ import MobileSidebar from '../components/MobileSidebar';
 import { useState } from 'react';
 import useUserStore from '@/zustand/userStore';
 import useBookmarkStore from '@/zustand/bookmarkStore';
-import ChatNotification from '@/app/chat/components/ChatBadge';
+import ChatNotification from '@/app/chat/ChatBadge';
 
 export default function Header() {
   const isLogin = useUserStore((state) => state.isLogin);
