@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 취미공유 앱 (Hobby Sharing App)
 
-## Getting Started
+Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
 
-First, run the development server:
+## 📋 프로젝트 개요
+
+사용자들이 자신의 취미를 공유하고 소통할 수 있는 게시판 형태의 웹 애플리케이션입니다.
+
+## 👥 팀 멤버
+
+- 유현욱
+- 채민기
+- 김지안
+- 김현주
+
+## 🛠 기술 스택
+
+### Frontend
+
+- **Framework**: React + Next.js (App Router)
+- **Styling**: CSS
+- **State Management**: Zustand (sessionStorage persist)
+- **Data Fetching**: Fetch API + Next.js Server Actions
+
+### Key Features
+
+- 서버/클라이언트 컴포넌트 혼합 구성
+- 캐시 태그 기반 데이터 갱신 (`revalidateTag`, `revalidatePath`)
+- sessionStorage 기반 인증 상태 관리
+
+## 📁 주요 기능
+
+- **사용자 인증**: 로그인/회원가입
+- **게시판**: 게시글 목록 조회, 상세 보기
+- **게시글 관리**: 작성, 수정, 삭제
+- **댓글 시스템**: 댓글 작성 및 관리
+- **권한 관리**: 작성자 기반 수정/삭제 권한
+
+## 🔧 환경 설정
+
+### 환경 변수
+
+`.env.local` 파일을 생성하고 다음 변수를 설정하세요:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+NEXT_PUBLIC_API_URL=your_api_url
+NEXT_PUBLIC_CLIENT_ID=your_client_id
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 설치 및 실행
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# 의존성 설치
+npm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# 개발 서버 실행
+npm run dev
 
-## Learn More
+# 프로덕션 빌드
+npm run build
 
-To learn more about Next.js, take a look at the following resources:
+# 프로덕션 서버 실행
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+개발 서버는 [http://localhost:3000](http://localhost:3000)에서 실행됩니다.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🏗 시스템 아키텍처
 
-## Deploy on Vercel
+### 데이터 흐름
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **조회**: 서버 컴포넌트에서 게시글/댓글 데이터 fetch
+2. **생성/수정/삭제**: Server Action으로 API 호출
+3. **캐시 갱신**: 성공 시 자동으로 캐시 업데이트
+4. **인증**: 로그인 성공 시 Zustand store에 사용자 정보 저장
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### API 통신
+
+- 모든 요청에 `Client-Id` 헤더 포함
+- 인증이 필요한 요청은 `Authorization: Bearer <token>` 헤더 사용
+- 서버 측에서 권한 검증 수행
+
+## 🔐 보안
+
+- 인증 필요 기능은 로그인 사용자만 접근 가능
+- 게시글/댓글 수정/삭제는 작성자 본인만 가능
+- 토큰은 sessionStorage에 저장 (브라우저 종료 시 자동 삭제)
+
+## 📄 참고 문서
+
+프로젝트 관련 상세 문서는 다음을 참고하세요:
+
+- 요구사항정의서.md
+- 기능정의서.md
+- 화면정의서.md
+- 시스템설계서.md
+
+---
+
+**개발 환경**: Node.js 18+ 권장
