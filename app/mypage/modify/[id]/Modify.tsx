@@ -109,7 +109,7 @@ export default function Modify() {
   return (
     <>
       <DefaultLayout>
-        <form action={formAction}>
+        <form className={styles['modify-form']} action={formAction}>
           {/* 서버에 보내기 위한 토큰과 id 값 */}
           <input type="hidden" name="accessToken" value={user?.token?.accessToken || ''} />
           <input type="hidden" name="_id" value={user?._id || ''} />

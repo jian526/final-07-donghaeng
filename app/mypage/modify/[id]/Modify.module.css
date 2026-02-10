@@ -1,18 +1,22 @@
 /* 수정 페이지 전체 div */
+.modify-form {
+  width: 100%;
+  padding: 20px;
+}
 .modify-div {
   width: 100%;
   max-width: 500px;
-  min-width: 320px;
-  height: 700px;
+  min-width: 280px;
   box-shadow: 0 0 15px var(--c-lavender-200);
   border-radius: 25px;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-block: 50px 25px;
   padding: 20px;
   font-size: 14px;
   font-family: var(--sub-font-medium);
   box-sizing: border-box;
-  margin-bottom: 25px;
+
+  /* 초이스 .js select 2 라이브러리 사용 npm에서 찾기 */
 }
 
 /* 프로필, 버튼을 묶는 div */
@@ -189,6 +193,75 @@
   width: 15px;
   height: 10px;
   pointer-events: none;
+}
+
+/* react-select 컨테이너 */
+.city,
+.district,
+.age,
+.gender {
+  flex: 1;
+  min-width: 120px;
+}
+
+/* react-select 커스텀 스타일 */
+.select-control {
+  border: 3px solid var(--border-lavender) !important;
+  border-radius: 25px !important;
+  min-height: 50px !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+}
+
+.select-control:hover {
+  border-color: var(--border-lavender) !important;
+}
+
+.select-value-container {
+  padding-left: 15px !important;
+}
+
+.select-single-value {
+  color: var(--text-navy) !important;
+}
+
+.select-placeholder {
+  color: #888 !important;
+}
+
+.select-indicator-separator {
+  display: none !important;
+}
+
+.select-dropdown-indicator {
+  color: var(--text-navy) !important;
+}
+
+.select-menu {
+  border-radius: 15px !important;
+  overflow: hidden !important;
+  border: 2px solid var(--border-lavender) !important;
+}
+
+.select-menu-list {
+  padding: 0 !important;
+}
+
+.select-option {
+  cursor: pointer !important;
+  color: var(--text-navy) !important;
+}
+
+.select-option:hover {
+  background-color: #e8e0ff !important;
+}
+
+.select-option-selected {
+  background-color: var(--bg-lavender) !important;
+}
+
+.select-option-focused {
+  background-color: #e8e0ff !important;
 }
 
 /* 360px 이하일때 반응형 */
