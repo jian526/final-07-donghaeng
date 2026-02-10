@@ -38,26 +38,26 @@ export default async function Meetinglist({ searchParams }: PageProps) {
       <DefaultLayout>
         <main className={style.mainLayout}>
           {/* 데스크톱: 사이드바 카테고리 (왼쪽) */}
-          <div className={style.topHeader}>
-            <div className={style.breadcrumb}>
-              <span className={style.home}>홈</span>
-              <span className={style.breadcrumbSeparator}>&gt;</span>
-              <span className={style.listTitle}>{categoryName || '모임 리스트'}</span>
+          <div className={style.container}>
+            <div className={style.topHeader}>
+              <div className={style.breadcrumb}>
+                <span className={style.home}>홈</span>
+                <span className={style.breadcrumbSeparator}>&gt;</span>
+                <span className={style.listTitle}>{categoryName || '모임 리스트'}</span>
+              </div>
+              <div className={style.headerSection}>
+                <h1 className={style.pageTitle}>{keyword ? `"${keyword}"` : categoryName || '모임 리스트'}</h1>
+                <Link href="/meetings/add" className={style.registerButton}>
+                  <span className={style.desktopText}>모임 등록하기</span>
+                  <span className={style.mobileText}>모임 등록</span>
+                </Link>
+              </div>
             </div>
-            <div className={style.headerSection}>
-              <h1 className={style.pageTitle}>{keyword ? `"${keyword}"` : categoryName || '모임 리스트'}</h1>
-              <Link href="/meetings/add" className={style.registerButton}>
-                <span className={style.desktopText}>모임 등록하기</span>
-                <span className={style.mobileText}>모임 등록</span>
-              </Link>
-            </div>
-          </div>
-          <div className={style.row}>
-            <Category />
+            <div className={style.row}>
+              <Category />
 
-            <section className={style.mainContent}>
               <FilterMeetingList keyword={keyword} category={category} />
-            </section>
+            </div>
           </div>
         </main>
       </DefaultLayout>
