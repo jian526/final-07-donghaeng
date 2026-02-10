@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import { io, Socket } from 'socket.io-client';
 import { ChatMessage, ChatRoom, ChatRoomState } from '@/types/chat';
 import { User } from '@/types/user';
-import { getMyRooms } from '@/app/chat/api/chat';
+import { getMyRooms } from '@/lib/chat';
 
 const SERVER = process.env.NEXT_PUBLIC_PRIVATE_CHAT_URL;
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;

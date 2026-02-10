@@ -1,3 +1,5 @@
+'use server';
+
 import OpenAI from 'openai';
 import { getMeetings } from '@/lib/meetings';
 import { Meetings } from '@/types/meetings';
@@ -6,10 +8,15 @@ const client = new OpenAI({
   apiKey: process.env.AI_API_KEY,
 });
 
-export async function POST(request: Request) {
-  const body = await request.json();
-  const { answers } = body;
+interface Answers {
+  age: string;
+  gender: string;
+  preference1: string;
+  preference2: string;
+  preference3: string;
+}
 
+export async function getAiRecommendation(answers: Answers) {
   const categories = ['운동', '요리 / 제조', '문화 / 공연 / 축제', '게임 / 오락'];
 
   // AI에게 카테고리 추천 요청
@@ -56,8 +63,8 @@ export async function POST(request: Request) {
     }
   }
 
-  return Response.json({
+  return {
     categories: recommendedCategories,
     meetings: recommendedMeetings,
-  });
+  };
 }

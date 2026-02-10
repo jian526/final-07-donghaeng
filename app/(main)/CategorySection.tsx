@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from '../Main.module.css';
+import styles from './Main.module.css';
 import BookmarkButton from '@/app/components/BookmarkButton';
 import { Meetings } from '@/types/meetings';
 

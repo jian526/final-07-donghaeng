@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import styles from '../Main.module.css';
+import styles from './Main.module.css';
 import AiRecommendModal from './AiRecommendModal';
 
 export default function SearchAiSection() {

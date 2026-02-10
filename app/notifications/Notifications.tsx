@@ -1,9 +1,9 @@
 'use client';
 
 import DefaultLayout from '@/app/components/DefaultLayout';
-import styles from './notifications.module.css';
+import styles from './Notifications.module.css';
 import { useNoti } from '@/hooks/useNoti';
-import NotificationItem from '@/app/components/NotificationItem';
+import NotificationItem from './NotificationItem';
 import useUserStore from '@/zustand/userStore';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';

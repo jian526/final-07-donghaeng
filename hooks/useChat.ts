@@ -1,4 +1,4 @@
-import { getRoomInfo } from '@/app/chat/api/chat';
+import { getRoomInfo } from '@/lib/chat';
 import useChatStore from '@/zustand/chatStore';
 import useUserStore from '@/zustand/userStore';
 import { useCallback, useEffect, useMemo } from 'react';
