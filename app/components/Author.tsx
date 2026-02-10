@@ -28,7 +28,7 @@ export default function Author({ meeting, children, className }: AuthorProps) {
   }, []);
 
   return (
-    <div className={className ?? styles.authorContainer} ref={authorRef}>
+    <div className={`${styles.authorContainer} ${className ?? ''}`} ref={authorRef}>
       <div className={children ? styles.authorTriggerCustom : styles.authorTrigger} onClick={() => setShowTooltip(!showTooltip)}>
         {children ?? meeting.name}
       </div>

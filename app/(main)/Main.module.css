@@ -22,7 +22,7 @@
 
   .search-bar-wrapper {
     display: inline-flex;
-    border: 2px solid var(--border-navy);
+    border: 3px solid var(--border-navy);
     border-radius: 50px;
     height: 48px;
     width: calc(100% - 50px);
@@ -67,7 +67,7 @@
     font-family: var(--sub-font-medium);
     font-size: 16px;
     color: var(--text-lavender);
-    border: 2px solid var(--border-navy);
+    border: 3px solid var(--border-navy);
     border-radius: 50%;
     width: 50px;
     aspect-ratio: 1 / 1;
@@ -145,7 +145,7 @@
     .meetings-image-box {
       position: relative;
       aspect-ratio: 1 / 1;
-      border: 1px solid var(--border-lavender);
+      border: 2px solid var(--border-lavender);
       border-radius: 25px;
       overflow: hidden;
 
