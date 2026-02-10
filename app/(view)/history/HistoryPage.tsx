@@ -35,7 +35,7 @@ export default function HistoryPage() {
   hasHydrated가 false면 복원중이기때문에 기다려야함
   이게 없을경우? 새로고침시 user가 null이 되어서 로그인 페이지로 영원히...간다
   */
-  const [filter, setFilter] = useState<'all' | 'before' | 'after'>('all');
+  const [filter, setFilter] = useState<'all' | 'before' | 'after'>('before');
   // 참여 전후 필터 상태. 버튼클릭하면 상태가 변경
 
   const isPastMeeting = (meetingDate: string) => {
