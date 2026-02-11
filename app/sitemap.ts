@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { getMeetings } from '@/lib/meetings';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://moa.vercel.app';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://final-07-moa-release.vercel.app';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const res = await getMeetings();

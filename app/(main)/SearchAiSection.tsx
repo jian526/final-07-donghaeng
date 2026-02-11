@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import styles from './Main.module.css';
-import AiRecommendModal from './AiRecommendModal';
+
+const AiRecommendModal = dynamic(() => import('./AiRecommendModal'));
 
 export default function SearchAiSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);

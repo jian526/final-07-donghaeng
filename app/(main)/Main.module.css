@@ -2,9 +2,9 @@
   width: 100%;
   height: auto;
   aspect-ratio: 1280 / 600;
-  background-image: url('/images/mobile-banner.png');
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .search-ai-wrapper {
@@ -168,9 +168,7 @@
 
 @media (min-width: 1024px) {
   .banner {
-    height: auto;
     aspect-ratio: 1920 / 600;
-    background-image: url('/images/desktop-banner.png');
   }
 
   .search-ai-wrapper {
@@ -252,4 +250,8 @@
       }
     }
   }
+}
+
+.loading-skeleton {
+  min-height: 1200px;
 }
