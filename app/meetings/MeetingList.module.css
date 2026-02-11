@@ -206,6 +206,7 @@
   display: flex;
   flex-wrap: wrap;
 }
+
 .filterBar div {
   display: flex;
 }
@@ -293,9 +294,7 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   width: 80%;
-  /* white-space: nowrap; */
   overflow: hidden;
-  /* text-overflow: ellipsis; */
 }
 
 .bookmarkIcon {
@@ -303,20 +302,24 @@
   top: 70px;
   right: 0px;
 }
+
 .rowWrap {
   display: flex;
   gap: 7px;
 }
+
 .cardMetadata {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+
 .metadataLine {
   font-size: 18px;
   color: var(--text-gray);
   white-space: nowrap;
 }
+
 .metadataLine2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -328,6 +331,7 @@
   color: var(--text-gray);
   margin: 0;
 }
+
 .divider {
   width: 1px;
   height: 18px;
@@ -335,6 +339,7 @@
   opacity: 0.7;
   align-self: center;
 }
+
 /* 태블릿 (1024px 이하) */
 @media (max-width: 1024px) {
   .mainLayout {
@@ -349,6 +354,7 @@
     left: 0;
     padding: 0;
   }
+
   .home {
     margin-left: 5px;
   }
@@ -406,6 +412,7 @@
     grid-template-columns: repeat(1, 1fr);
     width: 100%;
   }
+
   .cardImage {
     width: 30%;
     min-width: 120px;
@@ -443,6 +450,7 @@
     top: 35px;
     right: 0;
   }
+
   .bookmark-btn {
     width: 18px;
     height: 23px;
@@ -531,15 +539,12 @@
 
   .card {
     margin-bottom: 20px;
-
     max-width: 100%;
   }
 
   .cardImage {
     width: 35%;
     min-width: 100px;
-    /* height: auto;
-    min-height: 150px; */
   }
 
   .cardContent {
@@ -554,7 +559,6 @@
 
   .metadataLine2 {
     font-size: 13px;
-    /* overflow: hidden; */
   }
 }
 
@@ -577,6 +581,7 @@
   .pageTitle {
     font-size: 20px;
   }
+
   .cardContent {
     min-height: 140px;
   }
@@ -586,15 +591,19 @@
     min-width: 100px;
     aspect-ratio: 1/1;
   }
+
   .cardHeader {
     width: 85%;
   }
+
   .cardTitle {
     font-size: 16px;
   }
+
   .cardMetadata {
     gap: 0;
   }
+
   .metadataLine {
     font-size: 13px;
   }
