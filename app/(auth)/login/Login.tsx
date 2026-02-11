@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import useUserStore from '@/zustand/userStore';
 import useBookmarkStore from '@/zustand/bookmarkStore';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Login() {
   const [userState, formActions, isPending] = useActionState(login, null);
@@ -76,7 +77,9 @@ export default function Login() {
             />
           </svg>
         </button>
-        <div className={styles['logo-img']}></div>
+        <div className={styles['logo-img']}>
+          <Image src="/logo/logo.svg" alt="Moa 로고" width={220} height={192} priority />
+        </div>
         <form className={styles['form']} action={formActions}>
           <fieldset className={styles['email-fieldset fieldset']}>
             <label htmlFor="email" className={styles['label']}>

@@ -10,9 +10,8 @@
 
 .logo-img {
   width: 220px;
-  height: 192px;
-  background: url('./../../../public/logo/logo.svg') center/contain no-repeat;
   margin: 0 auto;
+  text-align: center;
 }
 
 .form {

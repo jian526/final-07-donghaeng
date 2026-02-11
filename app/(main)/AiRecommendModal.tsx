@@ -134,11 +134,11 @@ export default function AiRecommendModal({ open, onClose }: { open: boolean; onC
           <div className={styles[`btn-wrapper`]}>
             {step !== 'intro' && step !== 'result' && (
               <button className={styles[`back-btn`]} type="button" onClick={goBack} aria-label="뒤로가기">
-                <Image src="/icon/left.svg" alt="" width={11} height={20} />
+                <Image src="/icon/left.svg" alt="뒤로가기" width={11} height={20} />
               </button>
             )}
             <button className={styles[`close-btn`]} type="button" onClick={handleClose} aria-label="닫기">
-              <Image src="/icon/close.svg" alt="" width={20} height={20} />
+              <Image src="/icon/close.svg" alt="닫기" width={20} height={20} />
             </button>
           </div>
 
