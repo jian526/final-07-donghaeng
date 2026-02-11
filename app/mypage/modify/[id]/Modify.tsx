@@ -139,19 +139,20 @@ export default function Modify() {
             </div>
             <div>
               <div className={styles['nickname-div']}>
-                <span>닉네임</span>
-                <input name="name" defaultValue={user?.name || '닉네임'}></input>
+                <label htmlFor="nickname">닉네임</label>
+                <input id="nickname" name="name" defaultValue={user?.name || '닉네임'}></input>
               </div>
 
               <div className={styles['introduce-div']}>
-                <span>소개</span>
-                <textarea name="comment" maxLength={50} defaultValue={user?.comment || '나의 소개를 쓰는 공간'}></textarea>
+                <label htmlFor="comment">소개</label>
+                <textarea id="comment" name="comment" maxLength={50} defaultValue={user?.comment || '나의 소개를 쓰는 공간'}></textarea>
               </div>
               <div className={styles['address-div']}>
                 <div>
-                  <span>지역 </span>
+                  <label htmlFor="city">지역 </label>
                   <div className={styles['select-wrapper']}>
                     <select
+                      id="city"
                       value={selectedCity}
                       onChange={(e) => {
                         setSelectedCity(e.target.value);
@@ -171,9 +172,9 @@ export default function Modify() {
                 </div>
 
                 <div>
-                  <span className={styles['district-label']}>시/군/구 </span>
+                  <label htmlFor="district" className={styles['district-label']}>시/군/구 </label>
                   <div className={styles['select-wrapper']}>
-                    <select value={selectedDistrict} disabled={!selectedCity} className={styles['district']} onChange={(e) => setSelectedDistrict(e.target.value)}>
+                    <select id="district" value={selectedDistrict} disabled={!selectedCity} className={styles['district']} onChange={(e) => setSelectedDistrict(e.target.value)}>
                       <option value="">{selectedCity ? '시/군/구' : '지역을 선택해주세요'}</option>
                       {selectedCity &&
                         regionData[selectedCity]?.map((district) => (
@@ -189,9 +190,9 @@ export default function Modify() {
 
               <div className={styles['etc-div']}>
                 <div>
-                  <span>나이</span>
+                  <label htmlFor="age">나이</label>
                   <div className={styles['select-wrapper']}>
-                    <select name="age" defaultValue={user?.age || ''}>
+                    <select id="age" name="age" defaultValue={user?.age || ''}>
                       <option value="10">10대</option>
                       <option value="20">20대</option>
                       <option value="30">30대</option>
@@ -202,9 +203,9 @@ export default function Modify() {
                 </div>
 
                 <div>
-                  <span>성별</span>
+                  <label htmlFor="gender">성별</label>
                   <div className={styles['select-wrapper']}>
-                    <select name="gender" defaultValue={user?.gender || '성별'}>
+                    <select id="gender" name="gender" defaultValue={user?.gender || '성별'}>
                       <option value="남">남</option>
                       <option value="여">여</option>
                     </select>
