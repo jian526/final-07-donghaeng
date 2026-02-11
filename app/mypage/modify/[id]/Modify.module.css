@@ -15,8 +15,6 @@
   font-size: 14px;
   font-family: var(--sub-font-medium);
   box-sizing: border-box;
-
-  /* 초이스 .js select 2 라이브러리 사용 npm에서 찾기 */
 }
 
 /* 프로필, 버튼을 묶는 div */
@@ -140,10 +138,12 @@
 .etc-div {
   span {
     display: inline-block;
-    font-size: 20px;
+    font-size: 18px;
     font-family: var(--main-font);
     color: var(--text-gray);
     width: 70px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   input,
@@ -164,7 +164,7 @@
   display: flex;
   align-items: center;
   margin-block: 20px;
-  gap: 30px;
+  gap: 20px;
 
   select {
     flex: 1;
@@ -174,25 +174,37 @@
   }
 }
 
+.district-label {
+  font-size: 16px !important;
+}
+
 .address-div > div,
 .etc-div > div {
-  position: relative;
   display: flex;
   align-items: center;
   flex: 1;
   min-width: 100px;
 }
 
-.address-div img,
-.etc-div img {
-  cursor: pointer;
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 15px;
-  height: 10px;
-  pointer-events: none;
+.select-wrapper {
+  position: relative;
+  flex: 1;
+  max-width: 220px;
+
+  select {
+    width: 100%;
+  }
+
+  img {
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 10px;
+    pointer-events: none;
+  }
 }
 
 /* react-select 컨테이너 */
@@ -204,72 +216,25 @@
   min-width: 120px;
 }
 
-/* react-select 커스텀 스타일 */
-.select-control {
-  border: 3px solid var(--border-lavender) !important;
-  border-radius: 25px !important;
-  min-height: 50px !important;
-  cursor: pointer !important;
-  box-shadow: none !important;
-}
-
-.select-control:hover {
-  border-color: var(--border-lavender) !important;
-}
-
-.select-value-container {
-  padding-left: 15px !important;
-}
-
-.select-single-value {
-  color: var(--text-navy) !important;
-}
-
-.select-placeholder {
-  color: #888 !important;
-}
-
-.select-indicator-separator {
-  display: none !important;
-}
-
-.select-dropdown-indicator {
-  color: var(--text-navy) !important;
-}
-
-.select-menu {
-  border-radius: 15px !important;
-  overflow: hidden !important;
-  border: 2px solid var(--border-lavender) !important;
-}
-
-.select-menu-list {
-  padding: 0 !important;
-}
-
-.select-option {
-  cursor: pointer !important;
-  color: var(--text-navy) !important;
-}
-
-.select-option:hover {
-  background-color: #e8e0ff !important;
-}
-
-.select-option-selected {
-  background-color: var(--bg-lavender) !important;
-}
-
-.select-option-focused {
-  background-color: #e8e0ff !important;
-}
-
 /* 360px 이하일때 반응형 */
-@media (max-width: 360px) {
+@media (max-width: 460px) {
   .btn-div {
     flex-direction: column-reverse;
     justify-content: start;
     align-items: end;
+  }
+
+  .address-div,
+  .etc-div {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin: 0 0 10px 0;
+  }
+
+  .address-div > div,
+  .etc-div > div {
+    width: 70%;
   }
 }
 
