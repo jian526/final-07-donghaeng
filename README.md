@@ -47,137 +47,185 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
 | **커뮤니케이션** | ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white) ![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white) ![Discord](https://img.shields.io/badge/Discord-5865F2?style=flat-square&logo=discord&logoColor=white) ![Notion](https://img.shields.io/badge/Notion-000000?style=flat-square&logo=notion&logoColor=white) |
 | **배포**         | ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)                                                                                                                                                                                                                                                                                                       |
 
+### 개발환경
+
+## 개발 환경
+
+| 구분     | 종류                                    |
+| -------- | --------------------------------------- |
+| FrontEnd | React, Axios, CSS module, Zustand, Next |
+| BackEnd  | MongoDB, Kakao Map API, OpenAI API      |
+
+## 라이브러리 사용 이유
+
+| 종류       | 이유                                                              |
+| ---------- | ----------------------------------------------------------------- |
+| React      | 재사용 가능한 컴포넌트 사용하기 위해 사용                         |
+| Zustand    | 단순한 상태 관리와 용이한 유지 보수를 위해 사용                   |
+| Axios      | HTTP 통신 로직을 쉽게 관리하기 위해 사용                          |
+| CSS Module | 스타일 관리의 독립성을 줄이고 유지 보수성을 향상 시키기 위해 사용 |
+
 ### 🖥️ 서비스 소개
 
-#### 🔐 로그인/회원가입 페이지
+## 주요 기능
+
+### 🔐 로그인/회원가입
 
 - 이메일 로그인 가능
-- 회원가입은 각각의 유효성 검사에 맞게 입력
-- 주소 API 사용하여 주소 입력
-<div align="center">
-  <img src="docs/gif/회원가입.gif" width="75%" />
-  <img src="docs/gif/회원가입_모바일버전.gif" width="15%" />
-</div>
-<div align="center">
-  <img src="docs/gif/로그인.gif" width="75%" />
-  <img src="docs/gif/로그인_모바일버전.gif" width="15%" />
-</div>
+- 회원가입 시 각 항목별 유효성 검사
+- 주소 API를 통한 주소 입력
 
-#### 🏠 홈화면
+| 데스크톱                                       | 모바일                                                    |
+| ---------------------------------------------- | --------------------------------------------------------- |
+| <img src="docs/gif/회원가입.gif" width="600"/> | <img src="docs/gif/회원가입_모바일버전.gif" width="200"/> |
+| <img src="docs/gif/로그인.gif" width="600"/>   | <img src="docs/gif/로그인_모바일버전.gif" width="200"/>   |
 
-- 메인 배너 및 서비스 안내, 모임 리스트 추천, 지도 미리보기: 카카오맵 연동
+---
+
+### 🏠 홈화면
+
+- 메인 배너 및 서비스 안내
+- 모임 리스트 추천
+- 지도 미리보기: 카카오맵 연동
 - 검색 기능: 키워드 및 카테고리 검색
 
-<div align="center">
-  <img src="docs/gif/홈화면.gif" width="75%" />
-  <img src="docs/gif/홈화면_모바일버전.gif" width="15%" />
-</div>
+| 데스크톱                                     | 모바일                                                  |
+| -------------------------------------------- | ------------------------------------------------------- |
+| <img src="docs/gif/홈화면.gif" width="600"/> | <img src="docs/gif/홈화면_모바일버전.gif" width="200"/> |
 
-#### 모임목록 페이지
+---
 
-- 카테고리별, 필터별 검색, 검색어 검색, 북마크 기능
-<div align="center">
-  <img src="docs/gif/모임리스트.gif" width="75%" />
-  <img src="docs/gif/모임리스트_모바일버전.gif" width="15%" />
-</div>
-<div align="center">
-<img src="docs/gif/모임리스트2.gif" width="100%" />
-</div>
+### 📋 모임목록
 
-#### 모임상세
+- 카테고리별, 필터별 검색
+- 검색어 검색
+- 북마크 기능
 
-- 상세 정보 조회, 주최자 프로필
-<div align="center">
-  <img src="docs/gif/상세페이지.gif" width="75%" />
-  <img src="docs/gif/상세페이지_모바일버전.gif" width="15%" />
-</div>
+| 데스크톱                                          | 모바일                                                      |
+| ------------------------------------------------- | ----------------------------------------------------------- |
+| <img src="docs/gif/모임리스트.gif" width="600"/>  | <img src="docs/gif/모임리스트_모바일버전.gif" width="200"/> |
+| <img src="docs/gif/모임리스트2.gif" width="600"/> |                                                             |
 
-#### 모임등록
+---
 
-- 이미지 업로드, 질문지 작성
-<div align="center">
-  <img src="docs/gif/모임등록.gif" width="75%" />
-  <img src="docs/gif/모임등록_모바일버전.gif" width="15%" />
-</div>
+### 📄 모임상세
 
-#### 모임수정
+- 상세 정보 조회
+- 주최자 프로필 확인
 
-- 이미지 업로드 수정, 질문지 작성 수정
-<div align="center">
-  <img src="docs/gif/모임수정.gif" width="75%" />
-  <img src="docs/gif/모임수정_모바일버전.gif" width="15%" />
-</div>
+| 데스크톱                                         | 모바일                                                      |
+| ------------------------------------------------ | ----------------------------------------------------------- |
+| <img src="docs/gif/상세페이지.gif" width="600"/> | <img src="docs/gif/상세페이지_모바일버전.gif" width="200"/> |
 
-#### 모임 신청
+---
 
-- 질문지 답변, 신청 관리
+### ➕ 모임등록
 
-<div align="center">
-  <img src="docs/gif/모임신청.png" width="75%" />
-  <img src="docs/gif/모임신청_모바일버전.gif" width="15%" />
-</div>
+- 이미지 업로드
+- 질문지 작성
 
-#### 모임조회
+| 데스크톱                                       | 모바일                                                    |
+| ---------------------------------------------- | --------------------------------------------------------- |
+| <img src="docs/gif/모임등록.gif" width="600"/> | <img src="docs/gif/모임등록_모바일버전.gif" width="200"/> |
 
-- 전체, 참여전, 참여후 보여줌
-<div align="center">
-  <img src="docs/gif/모임조회.gif" width="75%" />
-  <img src="docs/gif/모임조회_모바일버전.gif" width="15%" />
-</div>
+---
 
-#### 북마크
+### ✏️ 모임수정
 
-- 북마크 토글로 북마크 목록 추가 및 제거 가능
-<div align="center">
-  <img src="docs/gif/북마크.gif" width="75%" />
-  <img src="docs/gif/북마크_모바일버전.gif" width="15%" />
-</div>
+- 이미지 업로드 수정
+- 질문지 작성 수정
 
-#### 마이페이지
+| 데스크톱                                       | 모바일                                                    |
+| ---------------------------------------------- | --------------------------------------------------------- |
+| <img src="docs/gif/모임수정.gif" width="600"/> | <img src="docs/gif/모임수정_모바일버전.gif" width="200"/> |
 
-프로필 수정, 관리하기, 모임조회, 북마크 연결
+---
 
-<div align="center">
-  <img src="docs/gif/마이페이지.png" width="75%" />
-  <img src="docs/gif/마이페이지_모바일버전.png" width="15%" />
-</div>
+### ✉️ 모임신청
 
-#### 관리페이지
+- 질문지 답변
+- 신청 관리
 
-- 참여 신청자 조회, 질문지 답변 확인, 승인/거절 처리, 알림 전송
+| 데스크톱                                       | 모바일                                                    |
+| ---------------------------------------------- | --------------------------------------------------------- |
+| <img src="docs/gif/모임신청.png" width="600"/> | <img src="docs/gif/모임신청_모바일버전.gif" width="200"/> |
 
-<div align="center">
-  <img src="docs/gif/관리페이지.gif" width="75%" />
-  <img src="docs/gif/마이페이지_모바일버전.png" width="15%" />
-</div>
+---
 
-#### 모임지도
+### 👀 모임조회
+
+- 전체, 참여 전, 참여 후 구분 표시
+
+| 데스크톱                                       | 모바일                                                    |
+| ---------------------------------------------- | --------------------------------------------------------- |
+| <img src="docs/gif/모임조회.gif" width="600"/> | <img src="docs/gif/모임조회_모바일버전.gif" width="200"/> |
+
+---
+
+### ⭐ 북마크
+
+- 북마크 토글로 목록 추가/제거 가능
+
+| 데스크톱                                     | 모바일                                                  |
+| -------------------------------------------- | ------------------------------------------------------- |
+| <img src="docs/gif/북마크.gif" width="600"/> | <img src="docs/gif/북마크_모바일버전.gif" width="200"/> |
+
+---
+
+### 👤 마이페이지
+
+- 프로필 수정
+- 관리하기
+- 모임조회
+- 북마크 연결
+
+| 데스크톱                                         | 모바일                                                      |
+| ------------------------------------------------ | ----------------------------------------------------------- |
+| <img src="docs/gif/마이페이지.png" width="600"/> | <img src="docs/gif/마이페이지_모바일버전.png" width="200"/> |
+
+---
+
+### ⚙️ 관리페이지
+
+- 참여 신청자 조회
+- 질문지 답변 확인
+- 승인/거절 처리
+- 알림 전송
+
+| 데스크톱                                         | 모바일                                                      |
+| ------------------------------------------------ | ----------------------------------------------------------- |
+| <img src="docs/gif/관리페이지.gif" width="600"/> | <img src="docs/gif/관리페이지_모바일버전.png" width="200"/> |
+
+---
+
+### 🗺️ 모임지도
 
 - 필터로 모임 필터링
 - 지역별 모임 위치 표시 (카카오맵 API)
 
-<div align="center">
-  <img src="docs/gif/지도페이지.gif" width="75%" />
-  <img src="docs/gif/지도페이지_모바일버전.gif" width="15%" />
-</div>
+| 데스크톱                                         | 모바일                                                      |
+| ------------------------------------------------ | ----------------------------------------------------------- |
+| <img src="docs/gif/지도페이지.gif" width="600"/> | <img src="docs/gif/지도페이지_모바일버전.gif" width="200"/> |
 
-#### ai추천
+---
 
-- AI 기반 모임 추천 결과
+### 🤖 AI 추천
 
-<div align="center">
-  <img src="docs/gif/ai.gif" width="75%" />
-  <img src="docs/gif/ai_모바일버전.gif" width="15%" />
-</div>
+- AI 기반 모임 추천 결과 제공
 
-#### 1:1채팅
+| 데스크톱                                 | 모바일                                              |
+| ---------------------------------------- | --------------------------------------------------- |
+| <img src="docs/gif/ai.gif" width="600"/> | <img src="docs/gif/ai_모바일버전.gif" width="200"/> |
+
+---
+
+### 💬 1:1 채팅
 
 - 주최자와 실시간 채팅
 
-<div align="center">
-  <img src="docs/gif/채팅.png" width="75%" />
-  <img src="docs/gif/채팅_모바일버전.png" width="15%" />
-</div>
+| 데스크톱                                   | 모바일                                                |
+| ------------------------------------------ | ----------------------------------------------------- |
+| <img src="docs/gif/채팅.png" width="600"/> | <img src="docs/gif/채팅_모바일버전.png" width="200"/> |
 
 ### 🔄워크플로우
 
