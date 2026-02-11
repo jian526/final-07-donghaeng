@@ -31,16 +31,16 @@ export default function MeetingItem({ meeting }: { meeting: Meetings }) {
                 </div>
               </div>
               <ul className={style.cardMetadata}>
-                <div className={style.rowWrap}>
-                  <li className={style.metadataLine}>{formatDate(meeting.extra.date)}</li>
-                  <li className={style.divider}></li>
-                  <li className={style.metadataLine}>{meeting.extra.gender}</li>
-                  <li className={style.divider}></li>
-                  <li className={style.metadataLine}>{meeting.extra.age}대</li>
-                </div>
-                <div className={style.rowWrap}>
-                  <li className={style.metadataLine2}>{meeting.extra.region}</li>
-                </div>
+                <li className={style.rowWrap}>
+                  <span className={style.metadataLine}>{formatDate(meeting.extra.date)}</span>
+                  <span className={style.divider}></span>
+                  <span className={style.metadataLine}>{meeting.extra.gender}</span>
+                  <span className={style.divider}></span>
+                  <span className={style.metadataLine}>{meeting.extra.age}대</span>
+                </li>
+                <li className={style.rowWrap}>
+                  <span className={style.metadataLine2}>{meeting.extra.region}</span>
+                </li>
               </ul>
             </figcaption>
           </figure>
