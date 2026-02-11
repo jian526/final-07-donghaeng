@@ -25,7 +25,7 @@
 
 ## 🌐 배포 주소
 
-- [배포 URL](https://final-07-moa-release.vercel.app/)
+- [모아 바로가기](https://final-07-moa-release.vercel.app/)
 
 ## 📌 주요 기능
 
@@ -53,6 +53,13 @@
 
 2026.1.14 ~ 2026.02.13
 
+## 협업 방식
+
+- 노션을 활용하여 명세작성, 회의록을 지속적으로 공유<br/>
+  [notion 링크](https://www.notion.so/7-2e873873401a80709a8ed42bfad39a26)
+
+  [Figma 링크](https://www.figma.com/design/bQ9xGM4rZjbJu0V7hqCulL/7%ED%8C%80---Moa?node-id=1-2&p=f&t=ElobrNkcDryHPCCS-0)
+
 ## 👥 프로젝트 팀 소개
 
 | 프로필                                                    | 이름   | 역할       | 담당 페이지                                                                                                             | GitHub                                  |
@@ -67,20 +74,13 @@
 | 분류             | 기술                                                                                                                                                                                                                                                                                                                                                                                                      |
 | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **프론트엔드**   | ![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white) ![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)                                                                                 |
-| **상태 관리**    | ![Zustand](https://img.shields.io/badge/Zustand-000000?style=flat-square) ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=axios&logoColor=white)                                                                                                                                                                                                                                |
+| **상태 관리**    | ![Zustand](https://img.shields.io/badge/Zustand-000000?style=flat-square)                                                                                                                                                                                                                                                                                                                                 |
 | **백엔드/DB**    | ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)                                                                                                                                                                                                                                                                                                    |
 | **API**          | ![Kakao](https://img.shields.io/badge/Kakao_Map_API-FFCD00?style=flat-square&logo=kakao&logoColor=black) ![OpenAI](https://img.shields.io/badge/OpenAI_API-412991?style=flat-square&logo=openai&logoColor=white)                                                                                                                                                                                          |
 | **UI/UX**        | ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=figma&logoColor=white)                                                                                                                                                                                                                                                                                                          |
 | **개발 환경**    | ![VS Code](https://img.shields.io/badge/Visual_Studio_Code-007ACC?style=flat-square&logo=visualstudiocode&logoColor=white)                                                                                                                                                                                                                                                                                |
 | **커뮤니케이션** | ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white) ![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white) ![Discord](https://img.shields.io/badge/Discord-5865F2?style=flat-square&logo=discord&logoColor=white) ![Notion](https://img.shields.io/badge/Notion-000000?style=flat-square&logo=notion&logoColor=white) |
 | **배포**         | ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)                                                                                                                                                                                                                                                                                                       |
-
-## 🛠 개발 환경
-
-| 구분     | 종류                                |
-| -------- | ----------------------------------- |
-| FrontEnd | React, Next.js, CSS Module, Zustand |
-| BackEnd  | MongoDB, Kakao Map API, OpenAI API  |
 
 ## 📚 라이브러리 사용 이유
 
