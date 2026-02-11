@@ -38,7 +38,7 @@ export default function Header() {
           </div>
 
           {/* 데스크탑 메뉴 */}
-          <div className={styles[`meetings-wrapper`]}>
+          <nav aria-label="메인 메뉴" className={styles[`meetings-wrapper`]}>
             <ul>
               <li>
                 <Link href="/meetings">모임</Link>
@@ -53,7 +53,7 @@ export default function Header() {
               <Link href="/history">모임 조회</Link>
             </li> */}
             </ul>
-          </div>
+          </nav>
 
           {/* 데스크탑 유저 정보 */}
           {isLogin ? (
@@ -100,8 +100,8 @@ export default function Header() {
             <Link href="/notifications">
               <Image src="/icon/notification.svg" width={25} height={30} alt="알림 이미지" />
             </Link>
-            <button className={styles[`hamburger-btn`]} onClick={toggleSidebar}>
-              <Image src="/icon/hamburger.svg" width={30} height={28} alt="메뉴" />
+            <button className={styles[`hamburger-btn`]} onClick={toggleSidebar} aria-expanded={isSidebarOpen} aria-label="메뉴 열기">
+              <Image src="/icon/hamburger.svg" width={30} height={28} alt="" aria-hidden="true" />
             </button>
           </div>
         </div>
