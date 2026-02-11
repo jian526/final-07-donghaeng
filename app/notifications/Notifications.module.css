@@ -32,7 +32,7 @@
   button {
     width: 88px;
     height: 40px;
-    background-color: var(--c-slateblue-300);
+    background-color: var(--bg-darksky);
     border-radius: 50px;
     font-family: var(--sub-font-medium);
     font-weight: 700;

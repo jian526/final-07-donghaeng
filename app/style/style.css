@@ -39,6 +39,8 @@
   --bg-lightsky: var(--c-sky-50);
   --bg-sky: var(--c-blue-200);
   --bg-pink: var(--c-pink-200);
+  --bg-darksky: var(--c-slateblue-300);
+  --bg-gray: var(--c-gray);
 
   /* Text */
   --text-red: var(--c-red-600);
