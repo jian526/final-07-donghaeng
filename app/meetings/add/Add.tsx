@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import style from './create.module.css';
-import DefaultLayout from '@/app/components/DefaultLayout';
+import style from './Create.module.css';
 import { useActionState, useEffect, useState, useTransition } from 'react';
 import useUserStore from '@/zustand/userStore';
 
