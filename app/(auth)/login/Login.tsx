@@ -94,10 +94,10 @@ export default function Login() {
               비밀번호
             </label>
             <br />
-            <input className={styles['input']} name="password" type="password" id="password" placeholder="비밀번호를 입력해 주세요" required />
+            <input className={styles['input']} name="password" type="password" id="password" placeholder="비밀번호를 입력해 주세요" required aria-describedby={userState?.ok === 0 ? 'login-password-error' : undefined} />
 
             {/* 에러메시지 */}
-            {userState?.ok === 0 && <span className={styles['field-message']}>비밀번호를 다시 입력해 주세요</span>}
+            {userState?.ok === 0 && <span id="login-password-error" role="alert" className={styles['field-message']}>비밀번호를 다시 입력해 주세요</span>}
           </fieldset>
 
           <button type="submit" className={styles['btn']} disabled={isPending}>
