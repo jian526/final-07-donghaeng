@@ -42,12 +42,12 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
 - 회원가입은 각각의 유효성 검사에 맞게 입력
 - 주소 api사용하여 주소 입력
 <div align="center">
-  <img src="docs/videos/회원가입.gif" width="75%" />
-  <img src="docs/videos/회원가입_모바일버전.gif" width="15%" />
+  <img src="docs/gif/회원가입.gif" width="75%" />
+  <img src="docs/gif/회원가입_모바일버전.gif" width="15%" />
 </div>
 <div align="center">
-  <img src="docs/videos/로그인.gif" width="75%" />
-  <img src="docs/videos/로그인_모바일버전.gif" width="15%" />
+  <img src="docs/gif/로그인.gif" width="75%" />
+  <img src="docs/gif/로그인_모바일버전.gif" width="15%" />
 </div>
 
 #### 🏠 홈화면
@@ -55,32 +55,32 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
 - 모임 리스트 추천, 지도 보여주기, 검색하기
 
 <div align="center">
-  <img src="docs/videos/홈화면.gif" width="75%" />
-  <img src="docs/videos/홈화면_모바일버전.gif" width="15%" />
+  <img src="docs/gif/홈화면.gif" width="75%" />
+  <img src="docs/gif/홈화면_모바일버전.gif" width="15%" />
 </div>
 
 #### 모임리스트 페이지
 
 - 카테고리별, 필터별 검색, 검색어 검색
 <div align="center">
-  <img src="docs/videos/모임리스트.gif" width="75%" />
-  <img src="docs/videos/모임리스트_모바일버전.gif" width="15%" />
+  <img src="docs/gif/모임리스트.gif" width="75%" />
+  <img src="docs/gif/모임리스트_모바일버전.gif" width="15%" />
 </div>
 
 #### 모임조회
 
 - 전체, 참여전, 참여후 보여줌
 <div align="center">
-  <img src="docs/videos/모임조회.gif" width="75%" />
-  <img src="docs/videos/모임조회_모바일버전.gif" width="15%" />
+  <img src="docs/gif/모임조회.gif" width="75%" />
+  <img src="docs/gif/모임조회_모바일버전.gif" width="15%" />
 </div>
 
 #### 북마크
 
 - 북마크 토글로 북마크 목록 추가 및 제거 가능
 <div align="center">
-  <img src="docs/videos/북마크.gif" width="75%" />
-  <img src="docs/videos/북마크_모바일버전.gif" width="15%" />
+  <img src="docs/gif/북마크.gif" width="75%" />
+  <img src="docs/gif/북마크_모바일버전.gif" width="15%" />
 </div>
 
 #### 마이페이지
@@ -88,8 +88,8 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
 프로필 수정, 관리하기, 모임조회, 북마크에 연결할 수 있음
 
 <div align="center">
-  <img src="docs/videos/마이페이지.png" width="75%" />
-  <img src="docs/videos/마이페이지_모바일버전.png" width="15%" />
+  <img src="docs/gif/마이페이지.png" width="75%" />
+  <img src="docs/gif/마이페이지_모바일버전.png" width="15%" />
 </div>
 
 #### 관리페이지
@@ -97,8 +97,8 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
 모임 관리를 할 수 있고, 승인 거절도 할수 있음
 
 <div align="center">
-  <img src="docs/videos/관리페이지.gif" width="75%" />
-  <img src="docs/videos/마이페이지_모바일버전.png" width="15%" />
+  <img src="docs/gif/관리페이지.gif" width="75%" />
+  <img src="docs/gif/마이페이지_모바일버전.png" width="15%" />
 </div>
 
 #### 모임지도
@@ -106,8 +106,8 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
 모임을 필터로 필터화할수 있고, 모임지역들의 지도가 오버레이로 뜸(카카오api이용)
 
 <div align="center">
-  <img src="docs/videos/지도페이지.gif" width="75%" />
-  <img src="docs/videos/지도페이지_모바일버전.gif" width="15%" />
+  <img src="docs/gif/지도페이지.gif" width="75%" />
+  <img src="docs/gif/지도페이지_모바일버전.gif" width="15%" />
 </div>
 
 #### ai추천
@@ -115,8 +115,8 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
 ai로 검사하고 모임 추천 결과
 
 <div align="center">
-  <img src="docs/videos/ai.gif" width="75%" />
-  <img src="docs/videos/ai_모바일버전.gif" width="15%" />
+  <img src="docs/gif/ai.gif" width="75%" />
+  <img src="docs/gif/ai_모바일버전.gif" width="15%" />
 </div>
 
 #### 1:1채팅
