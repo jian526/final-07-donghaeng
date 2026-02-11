@@ -179,7 +179,14 @@ export default function KakaoMap({ width = '100%', lat = 37.5709, lng = 126.978,
       {isLoaded ? (
         <Map center={center} style={{ width: '100%', height: '100%' }} level={7}>
           {markerData.map((item, index) => (
-            <MapMarker key={index} position={item.coords} onClick={() => setSelectedMarker(item)} />
+            <MapMarker
+              key={index}
+              position={item.coords}
+              onClick={() => {
+                setSelectedMarker(item);
+                setCenter(item.coords);
+              }}
+            />
           ))}
           {selectedMarker && (!mapPage || !isMobile) && (
             <CustomOverlayMap position={selectedMarker.coords} yAnchor={1.3}>
