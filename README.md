@@ -60,7 +60,7 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
   <img src="docs/gif/홈화면_모바일버전.gif" width="15%" />
 </div>
 
-#### 모임리스트 페이지
+#### 모임목록 페이지
 
 - 카테고리별, 필터별 검색, 검색어 검색, 북마크 기능
 <div align="center">
@@ -68,13 +68,13 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
   <img src="docs/gif/모임리스트_모바일버전.gif" width="15%" />
 </div>
 
-#### 모임목록
-
-- 카테고리별 필터링, 검색
-
 #### 모임상세
 
 - 상세 정보 조회, 주최자 프로필
+<div align="center">
+  <img src="docs/gif/상세페이지.gif" width="75%" />
+  <img src="docs/gif/상세페이지_모바일버전.gif" width="15%" />
+</div>
 
 #### 모임등록/수정
 
