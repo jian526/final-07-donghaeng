@@ -86,7 +86,7 @@
 
   .marker-info-content {
     height: 60px;
-    gap: 5px;
+    gap: 10px;
 
     .marker-img {
       min-width: 7vw;
