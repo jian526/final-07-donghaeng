@@ -256,7 +256,7 @@ export default function AiRecommendModal({ open, onClose }: { open: boolean; onC
           {/* Step: result */}
           {step === 'result' && (
             <>
-              <div className={styles[`mobile-recommend-wrapper`]}>
+              <div className={styles[`mobile-recommend-wrapper`]} aria-live="polite">
                 {isLoading ? (
                   <p>AI가 모임을 추천하고 있어요...</p>
                 ) : (
@@ -277,7 +277,7 @@ export default function AiRecommendModal({ open, onClose }: { open: boolean; onC
                   </div>
                 ))}
               </div>
-              <div className={styles[`desktop-recommend-wrapper`]}>
+              <div className={styles[`desktop-recommend-wrapper`]} aria-live="polite">
                 {isLoading ? (
                   <p>AI가 모임을 추천하고 있어요...</p>
                 ) : (

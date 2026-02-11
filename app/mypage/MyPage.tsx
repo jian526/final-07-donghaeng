@@ -96,10 +96,8 @@ export default function MyPage() {
             <div className={styles['profile-information']}>
               <div className={styles['profile-img-wrapper']}>
                 <Image src={user?.image || profile.src} alt="프로필이미지" width={135} height={135} className={styles['profile-img']} />
-                <Link href={`/mypage/modify/${user?._id}`}>
-                  <button type="button" className={styles['pencil-btn']}>
-                    <img src={pencil.src} alt="연필" />
-                  </button>
+                <Link href={`/mypage/modify/${user?._id}`} className={styles['pencil-btn']} aria-label="프로필 수정">
+                  <img src={pencil.src} alt="" />
                 </Link>
               </div>
               <div className={styles['user-info-mobile']}>
@@ -168,20 +166,14 @@ export default function MyPage() {
               </p>
             </div>
             <div className={styles['history-button']}>
-              <Link href="/bookmarks">
-                <button type="button" className={styles['btn-bookmark']}>
-                  북마크
-                </button>
+              <Link href="/bookmarks" className={styles['btn-bookmark']}>
+                북마크
               </Link>
-              <Link href="/manage">
-                <button type="button" className={styles['btn-manage']}>
-                  관리하기
-                </button>
+              <Link href="/manage" className={styles['btn-manage']}>
+                관리하기
               </Link>
-              <Link href="/history">
-                <button type="button" className={styles['btn-attend-meetings']}>
-                  참여 모임
-                </button>
+              <Link href="/history" className={styles['btn-attend-meetings']}>
+                참여 모임
               </Link>
             </div>
           </div>
