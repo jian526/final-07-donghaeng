@@ -55,7 +55,7 @@ export default function Map({ meetings }: MapProps) {
                     }}
                   >
                     <Image src={meeting.mainImages[0]?.path || logo.src} className={styles['meeting-img']} alt="모임 사진" width={90} height={80} />
-                    <div className={styles['meeting-info-li-div']}>
+                    <dl className={styles['meeting-info-li-div']}>
                       <dt>{meeting.name}</dt>
                       <dd>
                         <Image src={tag.src} alt="태그" width={20} height={12} />
@@ -64,7 +64,7 @@ export default function Map({ meetings }: MapProps) {
                       <dd>
                         <Image src={calender.src} alt="정보" width={20} height={12} /> {meeting.extra.date}
                       </dd>
-                    </div>
+                    </dl>
                   </li>
                 ))}
               </ul>
