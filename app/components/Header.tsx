@@ -35,7 +35,7 @@ export default function Header() {
         <div className={styles[`header-container`]}>
           <div className={styles[`logo-wrapper`]}>
             <Link href="/">
-              <Image src="/logo/logo.svg" width={40} height={35} alt="로고 이미지" />
+              <Image src="/logo/logo.svg" width={40} height={35} alt="Moa 홈" />
             </Link>
           </div>
 
@@ -71,7 +71,7 @@ export default function Header() {
                 </li>
                 <li>
                   <Link href="/notifications">
-                    <Image src="/icon/notification.svg" width={43} height={50} alt="알림 이미지" />
+                    <Image src="/icon/notification.svg" width={43} height={50} alt="알림" />
                   </Link>
                 </li>
                 <li>
@@ -100,7 +100,7 @@ export default function Header() {
           <div className={styles[`mobile-menu`]}>
             <ChatNotification />
             <Link href="/notifications">
-              <Image src="/icon/notification.svg" width={25} height={30} alt="알림 이미지" />
+              <Image src="/icon/notification.svg" width={25} height={30} alt="알림" />
             </Link>
             <button className={styles[`hamburger-btn`]} onClick={toggleSidebar} aria-expanded={isSidebarOpen} aria-label="메뉴 열기">
               <Image src="/icon/hamburger.svg" width={30} height={28} alt="" aria-hidden="true" />
