@@ -48,12 +48,15 @@ export default function Category() {
         <div className={style.categoryListDesktop}>
           <ul className={style.categoryList}>
             {categories.map((category, index) => (
-              <li
-                key={index}
-                onClick={() => handleCategory(category)}
-                className={`${style.categoryItem} ${currentCategory === categoryMap[category] ? style.active : ''}`}
-              >
-                {category}
+              <li key={index}>
+                <button
+                  type="button"
+                  onClick={() => handleCategory(category)}
+                  className={`${style.categoryItem} ${currentCategory === categoryMap[category] ? style.active : ''}`}
+                  aria-current={currentCategory === categoryMap[category] ? 'true' : undefined}
+                >
+                  {category}
+                </button>
               </li>
             ))}
           </ul>
