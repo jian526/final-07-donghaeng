@@ -76,13 +76,30 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
   <img src="docs/gif/상세페이지_모바일버전.gif" width="15%" />
 </div>
 
-#### 모임등록/수정
+#### 모임등록
 
 - 이미지 업로드, 질문지 작성
+<div align="center">
+  <img src="docs/gif/모임등록.gif" width="75%" />
+  <img src="docs/gif/모임등록_모바일버전.gif" width="15%" />
+</div>
+
+#### 모임수정
+
+- 이미지 업로드 수정, 질문지 작성 수정
+<div align="center">
+  <img src="docs/gif/모임수정.gif" width="75%" />
+  <img src="docs/gif/모임수정_모바일버전.gif" width="15%" />
+</div>
 
 #### 모임 신청
 
 - 질문지 답변, 신청 관리
+
+<div align="center">
+  <img src="docs/gif/모임신청.png" width="75%" />
+  <img src="docs/gif/모임신청_모바일버전.gif" width="15%" />
+</div>
 
 #### 모임조회
 
@@ -139,6 +156,13 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
 
 #### 1:1채팅
 
+- 주최자와 실시간 채팅
+
+<div align="center">
+  <img src="docs/gif/채팅.png" width="75%" />
+  <img src="docs/gif/채팅_모바일버전.png" width="15%" />
+</div>
+
 ### 🔄워크플로우
 
 <img src="docs/images/워크플로우.png" alt="워크플로우" width="300">
@@ -170,6 +194,12 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
 
 ## 🏗 시스템 아키텍처
 
+- Frontend: React + Next.js (App Router)
+  Styling: CSS
+- 상태 관리: Zustand (sessionStorage persist)
+- 서버 통신: Fetch + Next Server Actions
+- 캐시/갱신: fetch 캐시 태그 + revalidateTag, revalidatePath
+
 ### 데이터 흐름
 
 1. **조회**: 서버 컴포넌트에서 게시글/댓글 데이터 fetch
@@ -183,7 +213,7 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
 - 인증이 필요한 요청은 `Authorization: Bearer <token>` 헤더 사용
 - 서버 측에서 권한 검증 수행
 
-## 🔐 보안
+## 🔐 보안 및 정책
 
 - 인증 필요 기능은 로그인 사용자만 접근 가능
 - 게시글/댓글 수정/삭제는 작성자 본인만 가능
