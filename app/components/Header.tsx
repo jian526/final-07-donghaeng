@@ -13,7 +13,6 @@ export default function Header() {
   const user = useUserStore((state) => state.user);
   const resetUser = useUserStore((state) => state.resetUser);
   const resetBookmark = useBookmarkStore((state) => state.resetBookmark);
-  console.log('로그인상태', isLogin);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
