@@ -1,8 +1,8 @@
 .banner {
   width: 100%;
   height: auto;
-  aspect-ratio: 640 / 360;
-  background-image: url('/images/moa_mobile_640x360.png');
+  aspect-ratio: 1280 / 600;
+  background-image: url('/images/mobile-banner.png');
   background-size: cover;
   background-position: center;
 }
@@ -170,7 +170,7 @@
   .banner {
     height: auto;
     aspect-ratio: 1920 / 600;
-    background-image: url('/images/moa_desktop_1920x600.png');
+    background-image: url('/images/desktop-banner.png');
   }
 
   .search-ai-wrapper {
