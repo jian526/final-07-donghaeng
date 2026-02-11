@@ -7,6 +7,16 @@ import CategorySection from './CategorySection';
 import { getMeetings } from '@/lib/meetings';
 import { Meetings } from '@/types/meetings';
 import KakaoMap from '@/app/map/KakaoMap';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '홈',
+  description: 'Moa에서 운동, 요리, 문화, 게임 등 다양한 카테고리의 모임을 찾아보세요. AI 추천으로 나에게 맞는 모임을 발견할 수 있습니다.',
+  openGraph: {
+    title: '홈 | Moa',
+    description: 'Moa에서 다양한 카테고리의 모임을 찾아보세요.',
+  },
+};
 
 const CATEGORIES = ['운동', '요리 / 제조', '문화 / 공연 / 축제', '게임 / 오락'] as const;
 
