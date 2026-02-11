@@ -52,7 +52,7 @@
 
 .input::placeholder {
   color: var(--text-lavender);
-  font-family: 'Gmarket Sans TTF';
+  font-family: var(--sub-font-medium);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -62,7 +62,7 @@
 .field-message {
   color: var(--text-red);
   text-align: center;
-  font-family: 'Noto Sans KR';
+  font-family: var(--danger-font);
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -97,7 +97,7 @@
 .login-help {
   color: var(--text-navy);
   text-align: center;
-  font-family: 'Gmarket Sans TTF';
+  font-family: var(--sub-font-light);
   font-size: 16px;
   font-style: normal;
   font-weight: 300;

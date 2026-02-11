@@ -1,6 +1,5 @@
 'use client';
 
-import BlankLayout from '@/app/components/BlankLayout';
 import styles from './Login.module.css';
 import { useActionState, useEffect } from 'react';
 import { login } from '@/actions/user';

@@ -163,14 +163,12 @@
 }
 
 .region-fieldset label {
-  /* margin-top: 10px; */
   display: flex;
   align-items: center;
 }
 
 .region-input {
   width: 100%;
-  /* max-width: 864px; */
   font-size: 14px;
   height: 45px;
   font-family: var(--sub-font-medium);
@@ -180,7 +178,6 @@
 .region-fieldset label {
   width: 30px;
   line-height: 20px;
-  /* font-size: 3.2vw; */
 }
 
 .age-fieldset {
@@ -246,7 +243,6 @@
 
 .date-input {
   width: 100%;
-  /* min-width: 290px; */
   max-width: 864px;
   font-size: 14px;
   height: 45px;
