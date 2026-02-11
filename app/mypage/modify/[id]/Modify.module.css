@@ -7,7 +7,7 @@
   width: 100%;
   max-width: 500px;
   min-width: 280px;
-  box-shadow: 0 0 15px var(--c-lavender-200);
+  box-shadow: 0 0 15px var(--bg-lavender);
   border-radius: 25px;
   margin: 0 auto;
   margin-block: 50px 25px;

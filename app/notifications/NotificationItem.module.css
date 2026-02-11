@@ -22,7 +22,7 @@
 
 /* 읽음 처리 */
 .alert-read {
-  background-color: var(--bg-gray, #d9d9d9);
+  background-color: var(--bg-gray);
   opacity: 0.55;
 }
 
