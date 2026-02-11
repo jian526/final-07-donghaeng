@@ -167,12 +167,14 @@ export default function Modify() {
                         </option>
                       ))}
                     </select>
-                    <img src={down.src} alt="화살표" />
+                    <Image src={down} alt="" width={16} height={16} />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="district" className={styles['district-label']}>시/군/구 </label>
+                  <label htmlFor="district" className={styles['district-label']}>
+                    시/군/구{' '}
+                  </label>
                   <div className={styles['select-wrapper']}>
                     <select id="district" value={selectedDistrict} disabled={!selectedCity} className={styles['district']} onChange={(e) => setSelectedDistrict(e.target.value)}>
                       <option value="">{selectedCity ? '시/군/구' : '지역을 선택해주세요'}</option>
@@ -183,7 +185,7 @@ export default function Modify() {
                           </option>
                         ))}
                     </select>
-                    <img src={down.src} alt="화살표" />
+                    <Image src={down} alt="" width={16} height={16} />
                   </div>
                 </div>
               </div>
@@ -198,7 +200,7 @@ export default function Modify() {
                       <option value="30">30대</option>
                       <option value="40">40대 이상</option>
                     </select>
-                    <img src={down.src} alt="화살표" />
+                    <Image src={down} alt="" width={16} height={16} />
                   </div>
                 </div>
 
@@ -209,7 +211,7 @@ export default function Modify() {
                       <option value="남">남</option>
                       <option value="여">여</option>
                     </select>
-                    <img src={down.src} alt="화살표" />
+                    <Image src={down} alt="" width={16} height={16} />
                   </div>
                 </div>
               </div>
