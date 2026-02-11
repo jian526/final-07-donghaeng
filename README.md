@@ -10,13 +10,11 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
 
 - 배포 URL: https://final-07-moa-release.vercel.app/
 
-- 아이디: s1@market.com - 비밀번호: 11111111
-
 ## 개발기간
 
-2026/1/14(수)~2026/1/21(수): 기획
-2026/1/22(목)~2026/2/9(월): 개발
-2026/2/10(화)~2026/2/12(목): 점검
+2026/1/14(수)~2026/1/21(수): 기획<br/>
+2026/1/22(목)~2026/2/9(월): 개발<br/>
+2026/2/10(화)~2026/2/12(목): 점검<br/>
 2026/2/13(금): 수료
 
 ## 👥 팀 멤버
@@ -121,7 +119,8 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
 
 ### ➕ 모임등록
 
-- 이미지 업로드
+- 모임제목, 카테고리, 설명, 날짜, 장소, 성별, 나이, 인원
+- 모임 이미지 업로드
 - 질문지 작성
 
 | 데스크톱                                       | 모바일                                                    |
@@ -132,6 +131,7 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
 
 ### ✏️ 모임수정
 
+- 기존 모임 내용 호출
 - 이미지 업로드 수정
 - 질문지 작성 수정
 
@@ -240,26 +240,18 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
 | **현주** | 북마크 클릭 시 여러 개가 동시에 선택되는 버그 발생. `git pull`을 받지 않아 최신 코드가 누락됨.                                                                                                                                                                                                                                                                                                                                                                                                             | `git pull`, `git merge`를 통해 최신 코드 동기화 후 해결                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | **지안** | 1. **Git 브랜치 동기화 문제**: `develop` 브랜치에서 `git pull`이 정상적으로 되지 않는 문제 발생<br/>2. **CSS Module `:global` 사용 문제**: CSS Module에서 `:global`을 사용하면서 스타일이 전역으로 적용되어 다른 페이지에도 영향을 주는 문제 발생<br/>3. **로그인 상태 유지 문제**: 로그인 여부를 `useState`로만 판단해 로그인되지 않았을 경우 로그인 페이지로 강제 이동하도록 구현했는데, 새로고침 시 로그인 상태에서도 로그인 화면으로 이동하는 문제 발생. Hydration 이전 상태를 `false`로 인식했기 때문 | 1. **Git 동기화 해결**: rebase 사용 시 발생하는 히스토리 오염 문제를 팀원들에게 공유. 이후 `git pull`이 되지 않는 경우 `rebase` 대신 `merge` 전략을 사용하도록 협업 방식을 정리하여 develop 브랜치와의 버전을 안정적으로 맞춤<br/>2. **CSS 격리**: `:global` 사용을 최소화하고, 필요한 경우 더 구체적인 선택자를 사용하여 적용 범위를 제한. 컴포넌트 단위로 스타일이 격리되도록 구조 개선<br/>3. **Hydration 처리**: `useStore.ts`에 `setHasHydrated`를 추가하여 상태가 hydration된 이후에만 로그인 여부를 판단하도록 수정. 새로고침 시에도 로그인 상태가 정상적으로 유지되도록 개선 |
 
-### Key Features
-
-- 서버/클라이언트 컴포넌트 혼합 구성
-- 캐시 태그 기반 데이터 갱신 (`revalidateTag`, `revalidatePath`)
-- sessionStorage 기반 인증 상태 관리
-
 ## 📁 주요 기능
 
 - **사용자 인증**: 로그인/회원가입
-- **게시글**: 게시글 목록 조회, 상세 보기
-- **게시글 관리**: 작성, 수정, 삭제
-- **채팅 시스템**: 댓글 작성 및 관리
+- **모임**: 모임 목록 조회, 상세 보기
+- **모임 관리**: 작성, 수정, 삭제
+- **채팅 시스템**: 1:1 채팅
 - **권한 관리**: 작성자 기반 수정/삭제 권한
-
-개발 서버는 [http://localhost:3000](http://localhost:3000)에서 실행됩니다.
 
 ## 🏗 시스템 아키텍처
 
 - Frontend: React + Next.js (App Router)
-  Styling: CSS
+  Styling: CSS module
 - 상태 관리: Zustand (sessionStorage persist)
 - 서버 통신: Fetch + Next Server Actions
 - 캐시/갱신: fetch 캐시 태그 + revalidateTag, revalidatePath
@@ -280,8 +272,8 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
 ## 🔐 보안 및 정책
 
 - 인증 필요 기능은 로그인 사용자만 접근 가능
-- 게시글/댓글 수정/삭제는 작성자 본인만 가능
-- 토큰은 sessionStorage에 저장 (브라우저 종료 시 자동 삭제)
+- ahdla 수정/삭제는 작성자 본인만 가능
+- 토큰은 localStorage에 저장 (브라우저 종료 시 자동 삭제)
 
 **개발 환경**: Node.js 18+ 권장
 
@@ -420,129 +412,3 @@ src
 |  └─ userStore.ts
 └─
 ```
-
-## 📂 주요 디렉토리 설명
-
-### 🔐 `/app/(auth)`
-
-**인증 관련 페이지**
-
-- `login/page.tsx` - 로그인 페이지
-- `signup/page.tsx` - 회원가입 페이지
-
-### 🏠 `/app/(main)`
-
-**메인 페이지**
-
-- `page.tsx` - 메인 페이지
-- `components/` - 메인 페이지 전용 컴포넌트
-  - `Hamburger.tsx` - 햄버거 메뉴
-  - `AiRecommendModal.tsx` - AI 추천 모달
-
-### 👁️ `/app/(view)`
-
-**뷰 페이지**
-
-- `Bookmarks/page.tsx` - 북마크 목록 페이지
-- `History/page.tsx` - 히스토리 페이지
-
-### 🧩 `/app/components`
-
-**공통 컴포넌트**
-
-- `Filter.tsx` - 필터 컴포넌트
-- `Footer.tsx` - 푸터 컴포넌트
-- `Header.tsx` - 헤더 컴포넌트
-
-### 👥 `/app/meetings`
-
-**모임 관련 페이지**
-
-- `page.tsx` - 모임 목록 페이지
-- `add/page.tsx` - 모임 등록 페이지
-- `[id]/page.tsx` - 모임 상세 페이지
-- `[id]/apply/page.tsx` - 모임 신청 페이지
-- `[id]/edit/page.tsx` - 모임 수정 페이지
-
-### 🗺️ `/app/map`
-
-**지도 페이지**
-
-- `page.tsx` - 모임 지도 페이지
-
-### 👤 `/app/mypage`
-
-**마이페이지**
-
-- `page.tsx` - 마이페이지
-- `modify/page.tsx` - 프로필 수정 페이지
-
-### 🔔 `/app/notifications`
-
-**알림 페이지**
-
-- `page.tsx` - 알림 목록 페이지
-
-### ❓ `/app/faq`
-
-**FAQ 페이지**
-
-- `page.tsx` - 자주 묻는 질문 페이지
-
-### 📋 `/app/manage`
-
-**관리 페이지**
-
-- `page.tsx` - 모임 관리 페이지
-
-### 🔧 `/lib`
-
-**라이브러리 및 유틸리티**
-
-#### `/lib/api`
-
-API 호출 함수
-
-- `auth.ts` - 인증 관련 API
-- `meeting.ts` - 모임 관련 API
-- `bookmark.ts` - 북마크 관련 API
-- `notification.ts` - 알림 관련 API
-- `ai.ts` - AI 추천 관련 API
-
-#### `/lib/hooks`
-
-커스텀 React Hooks
-
-- `useAuth.ts` - 인증 관련 Hook
-- `useMeeting.ts` - 모임 관련 Hook
-- `useBookmark.ts` - 북마크 관련 Hook
-
-#### `/lib/utils`
-
-유틸리티 함수
-
-- `validators.ts` - 유효성 검사 함수
-- `format.ts` - 포맷팅 함수
-
-### 💾 `/store`
-
-**상태 관리 (Zustand)**
-
-- `authStore.ts` - 인증 상태 관리
-- `userStore.ts` - 사용자 정보 상태 관리
-- `meetingStore.ts` - 모임 정보 상태 관리
-
-### 📝 `/types`
-
-**TypeScript 타입 정의**
-
-- `auth.ts` - 인증 관련 타입
-- `meeting.ts` - 모임 관련 타입
-- `user.ts` - 사용자 관련 타입
-- `notification.ts` - 알림 관련 타입
-
-### 🎨 `/styles`
-
-**전역 스타일**
-
-- `globals.css` - 전역 CSS
