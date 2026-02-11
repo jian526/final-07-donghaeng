@@ -67,6 +67,9 @@ Next.js App Router 기반의 취미 공유 커뮤니티 플랫폼입니다.
   <img src="docs/gif/모임리스트.gif" width="75%" />
   <img src="docs/gif/모임리스트_모바일버전.gif" width="15%" />
 </div>
+<div align="center">
+<img src="docs/gif/모임리스트2.gif" width="100%" />
+</div>
 
 #### 모임상세
 
