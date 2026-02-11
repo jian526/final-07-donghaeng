@@ -97,7 +97,7 @@ export default function MyPage() {
               <div className={styles['profile-img-wrapper']}>
                 <Image src={user?.image || profile.src} alt="프로필이미지" width={135} height={135} className={styles['profile-img']} />
                 <Link href={`/mypage/modify/${user?._id}`} className={styles['pencil-btn']} aria-label="프로필 수정">
-                  <img src={pencil.src} alt="" />
+                  <Image src={pencil} alt="" width={24} height={24} />
                 </Link>
               </div>
               <div className={styles['user-info-mobile']}>
@@ -150,8 +150,10 @@ export default function MyPage() {
             </div>
 
             <div className={styles['my-introduce-mobile']}>
-              <dt>소개</dt>
-              <dd>{user?.comment || '소개를 적는 공간'}</dd>
+              <dl>
+                <dt>소개</dt>
+                <dd>{user?.comment || '소개를 적는 공간'}</dd>
+              </dl>
             </div>
             <div className={styles['history-meetings']}>
               <p>
