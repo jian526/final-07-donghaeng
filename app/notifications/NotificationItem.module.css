@@ -39,7 +39,7 @@
 
 /* 텍스트 크기 조정 */
 .txt {
-  margin: 20px 25px 20px 0;
+  margin: 20px 45px 20px 0;
   min-width: 0;
   overflow: hidden;
   flex: 1;

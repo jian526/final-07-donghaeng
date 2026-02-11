@@ -1,11 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import style from './edit.module.css';
+import style from './Edit.module.css';
 import DefaultLayout from '@/app/components/DefaultLayout';
 import { useActionState, useEffect, useState, useTransition } from 'react';
 import useUserStore from '@/zustand/userStore';
-
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ActionState, updateMeeting } from '@/actions/meetings';
