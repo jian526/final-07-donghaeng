@@ -323,9 +323,11 @@
   border-radius: 25px;
   border: 5px solid var(--border-lavender);
   font-family: var(--sub-font-bold);
-  text-align: center;
   padding: 5px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-wrap {
