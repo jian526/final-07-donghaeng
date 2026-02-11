@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styles from './Header.module.css';
 import MobileSidebar from '../components/MobileSidebar';
 import { useState } from 'react';
@@ -14,6 +15,7 @@ export default function Header() {
   const resetUser = useUserStore((state) => state.resetUser);
   const resetBookmark = useBookmarkStore((state) => state.resetBookmark);
 
+  const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // 로그아웃 핸들러
@@ -41,10 +43,10 @@ export default function Header() {
           <nav aria-label="메인 메뉴" className={styles[`meetings-wrapper`]}>
             <ul>
               <li>
-                <Link href="/meetings">모임</Link>
+                <Link href="/meetings" aria-current={pathname.startsWith('/meetings') ? 'page' : undefined}>모임</Link>
               </li>
               <li>
-                <Link href="/map">지도</Link>
+                <Link href="/map" aria-current={pathname.startsWith('/map') ? 'page' : undefined}>지도</Link>
               </li>
               {/* <li>
               <Link href="/bookmarks">북마크</Link>
