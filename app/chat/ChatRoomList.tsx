@@ -20,7 +20,7 @@ export default function ChatRoomList({ rooms, activeRoomId, onSelectRoom, onLeav
       {/* 검색바 */}
       <div className={styles.searchContainer}>
         <div className={styles.searchInputWrapper}>
-          <input type="text" placeholder="상대방 검색..." className={styles.searchInput} />
+          <input type="text" placeholder="상대방 검색..." className={styles.searchInput} aria-label="채팅방 검색" />
           <svg className={styles.searchIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
