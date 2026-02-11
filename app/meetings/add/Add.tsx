@@ -382,10 +382,8 @@ export default function Add() {
             <button className={style['btn']} type="submit">
               등록
             </button>
-            <Link href={'/meetings'}>
-              <button className={style['btn-2']} type="button">
-                취소
-              </button>
+            <Link href="/meetings" className={style['btn-2']}>
+              취소
             </Link>
           </div>
         </form>
