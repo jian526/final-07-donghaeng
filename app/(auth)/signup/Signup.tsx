@@ -4,6 +4,7 @@ import style from './signup.module.css';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import useUserStore from '@/zustand/userStore';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Signup() {
   const { user } = useUserStore();
@@ -164,7 +165,7 @@ export default function Signup() {
       }
     } catch (error) {
       console.error(error);
-      alert('중복확인에 실패했습니다.');
+      toast.error('중복확인에 실패했습니다.');
     }
   };
 
@@ -307,14 +308,14 @@ export default function Signup() {
       const data = await res.json();
 
       if (data.ok === 1) {
-        alert('회원 가입이 완료되었습니다. 로그인 페이지로 이동합니다.');
-        router.push('/login');
+        toast.success('회원 가입이 완료되었습니다. 로그인 페이지로 이동합니다.');
+        setTimeout(() => router.push('/login'), 1500);
       } else {
-        alert(data.message || '회원가입에 실패했습니다.');
+        toast.error(data.message || '회원가입에 실패했습니다.');
       }
     } catch (error) {
       console.error(error);
-      alert('일시적인 네트워크 문제가 발생했습니다.');
+      toast.error('일시적인 네트워크 문제가 발생했습니다.');
     } finally {
       setIsSubmitting(false);
     }
@@ -322,6 +323,7 @@ export default function Signup() {
 
   return (
     <main className={style['main']}>
+      <Toaster position="top-center" />
       <div className={style['signup-wrap']}>
         <form onSubmit={handleSubmit}>
           {/* ==================== 첫 번째 페이지 ==================== */}
