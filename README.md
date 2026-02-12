@@ -97,8 +97,8 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/로그인.gif" width="600"/>   | <img src="docs/gif/로그인_모바일버전.gif" width="200"/>   |
-| <img src="docs/gif/회원가입.gif" width="600"/> | <img src="docs/gif/회원가입_모바일버전.gif" width="200"/> |
+| <img src="docs/gif/로그인.gif" width="500"/>   | <img src="docs/gif/로그인_모바일버전.gif" width="200"/>   |
+| <img src="docs/gif/회원가입.gif" width="500"/> | <img src="docs/gif/회원가입_모바일버전.gif" width="200"/> |
 
 ---
 
@@ -112,7 +112,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/홈화면.gif" width="600"/> | <img src="docs/gif/홈화면_모바일버전.gif" width="200"/> |
+| <img src="docs/gif/홈화면.gif" width="500"/> | <img src="docs/gif/홈화면_모바일버전.gif" width="200"/> |
 
 
 ---
@@ -125,8 +125,8 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/모임리스트.gif" width="600"/>  | <img src="docs/gif/모임리스트_모바일버전.gif" width="200"/> |
-| <img src="docs/gif/모임리스트2.gif" width="600"/> |                                                           |
+| <img src="docs/gif/모임리스트.gif" width="500"/>  | <img src="docs/gif/모임리스트_모바일버전.gif" width="200"/> |
+| <img src="docs/gif/모임리스트2.gif" width="500"/> |                                                           |
 
 ---
 
@@ -139,7 +139,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/상세페이지.gif" width="600"/> | <img src="docs/gif/상세페이지_모바일버전.gif" width="200"/> |
+| <img src="docs/gif/상세페이지.gif" width="500"/> | <img src="docs/gif/상세페이지_모바일버전.gif" width="200"/> |
 
 ---
 
@@ -151,7 +151,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/모임등록.gif" width="600"/> | <img src="docs/gif/모임등록_모바일버전.gif" width="200"/> |
+| <img src="docs/gif/모임등록.gif" width="500"/> | <img src="docs/gif/모임등록_모바일버전.gif" width="200"/> |
 
 ---
 
@@ -163,7 +163,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/모임수정.gif" width="600"/> | <img src="docs/gif/모임수정_모바일버전.gif" width="200"/> |
+| <img src="docs/gif/모임수정.gif" width="500"/> | <img src="docs/gif/모임수정_모바일버전.gif" width="200"/> |
 
 ---
 
@@ -174,7 +174,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/모임신청.png" width="600"/> | <img src="docs/gif/모임신청_모바일버전.gif" width="200"/> |
+| <img src="docs/gif/모임신청.png" width="500"/> | <img src="docs/gif/모임신청_모바일버전.gif" width="200"/> |
 
 ---
 
@@ -185,7 +185,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/모임조회.gif" width="600"/> | <img src="docs/gif/모임조회_모바일버전.gif" width="200"/> |
+| <img src="docs/gif/모임조회.gif" width="500"/> | <img src="docs/gif/모임조회_모바일버전.gif" width="200"/> |
 
 ---
 
@@ -195,7 +195,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/북마크.gif" width="600"/> | <img src="docs/gif/북마크_모바일버전.gif" width="200"/> |
+| <img src="docs/gif/북마크.gif" width="500"/> | <img src="docs/gif/북마크_모바일버전.gif" width="200"/> |
 
 
 ---
@@ -209,7 +209,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/마이페이지.png" width="600"/> | <img src="docs/gif/마이페이지_모바일버전.png" width="200"/> |
+| <img src="docs/gif/마이페이지.png" width="500"/> | <img src="docs/gif/마이페이지_모바일버전.png" width="200"/> |
 
 ---
 
@@ -222,7 +222,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/관리페이지.gif" width="600"/> | <img src="docs/gif/관리페이지_모바일버전.png" width="200"/> |
+| <img src="docs/gif/관리페이지.gif" width="500"/> | <img src="docs/gif/관리페이지_모바일버전.png" width="200"/> |
 
 ---
 
@@ -235,7 +235,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/채팅.png" width="600"/> | <img src="docs/gif/채팅_모바일버전.png" width="200"/> |
+| <img src="docs/gif/채팅.png" width="500"/> | <img src="docs/gif/채팅_모바일버전.png" width="200"/> |
 
 ---
 
@@ -247,7 +247,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/지도페이지.gif" width="600"/> | <img src="docs/gif/지도페이지_모바일버전.gif" width="200"/> |
+| <img src="docs/gif/지도페이지.gif" width="500"/> | <img src="docs/gif/지도페이지_모바일버전.gif" width="200"/> |
 
 ---
 
@@ -273,7 +273,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/ai.gif" width="600"/> | <img src="docs/gif/ai_모바일버전.gif" width="200"/> |
+| <img src="docs/gif/ai.gif" width="500"/> | <img src="docs/gif/ai_모바일버전.gif" width="200"/> |
 
 ---
 
