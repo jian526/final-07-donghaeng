@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/images/og-img.png',
+        url: 'https://res.cloudinary.com/ddedslqvv/image/upload/v1770883665/febc15-final07-ecad/He2FHL1YX.png',
         width: 1200,
         height: 630,
         alt: 'Moa 모임 플랫폼 대표 이미지',
