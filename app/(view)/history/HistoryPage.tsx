@@ -15,6 +15,7 @@ import { getMyMeetingsAccess } from '@/lib/meetings';
 import { Apply } from '@/types/apply';
 import MeetingCard from '@/app/(view)/history/MeetingCard';
 import { useRouter } from 'next/navigation'; //next/router면 안됨 사유 우리는 App Router를 쓰니깐@@!
+import HistorySwiper from '@/app/(view)/history/HistorySwiper';
 
 export default function HistoryPage() {
   const { user } = useUserStore();
@@ -163,34 +164,7 @@ export default function HistoryPage() {
           ) : isEmpty ? (
             <p className={style.empty}>신청한 모임이 없습니다.</p>
           ) : (
-            <Swiper
-              modules={[Pagination]}
-              spaceBetween={40}
-              slidesPerView={'auto'}
-              centeredSlides={true}
-              pagination={{
-                clickable: true,
-              }}
-              className={style.swiper}
-              breakpoints={{
-                0: {
-                  enabled: false, // 모바일
-                  centeredSlides: false,
-                },
-                1024: {
-                  enabled: true, // 웹
-                  centeredSlides: true,
-                },
-              }}
-            >
-              {filteredMeetings.map((apply) =>
-                apply.products.map((meeting) => (
-                  <SwiperSlide key={meeting._id}>
-                    <MeetingCard meeting={meeting} isPast={isPastMeeting(meeting.extra?.date || '')} />
-                  </SwiperSlide>
-                ))
-              )}
-            </Swiper>
+            <HistorySwiper filteredMeetings={filteredMeetings} isPastMeeting={isPastMeeting} />
           )}
         </div>
       }

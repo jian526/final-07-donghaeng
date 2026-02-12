@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import style from './ManageAllPage.module.css';
 import useUserStore from '@/zustand/userStore';
 import { getMyAddMeetings } from '@/lib/meetings';
 import { Meetings } from '@/types/meetings';
-import ManageSwiper from './ManageSwiper';
+
+const ManageSwiper = dynamic(() => import('./ManageSwiper'), { ssr: false });
 
 export default function ManageContent() {
   const router = useRouter();
