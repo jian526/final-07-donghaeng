@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styles from './Header.module.css';
 import MobileSidebar from '../components/MobileSidebar';
 import { useState } from 'react';
@@ -13,8 +14,8 @@ export default function Header() {
   const user = useUserStore((state) => state.user);
   const resetUser = useUserStore((state) => state.resetUser);
   const resetBookmark = useBookmarkStore((state) => state.resetBookmark);
-  console.log('로그인상태', isLogin);
 
+  const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // 로그아웃 핸들러
@@ -34,18 +35,18 @@ export default function Header() {
         <div className={styles[`header-container`]}>
           <div className={styles[`logo-wrapper`]}>
             <Link href="/">
-              <Image src="/logo/logo.svg" width={40} height={35} alt="로고 이미지" />
+              <Image src="/logo/logo.svg" width={40} height={35} alt="Moa 홈" />
             </Link>
           </div>
 
           {/* 데스크탑 메뉴 */}
-          <div className={styles[`meetings-wrapper`]}>
+          <nav aria-label="메인 메뉴" className={styles[`meetings-wrapper`]}>
             <ul>
               <li>
-                <Link href="/meetings">모임</Link>
+                <Link href="/meetings" aria-current={pathname.startsWith('/meetings') ? 'page' : undefined}>모임</Link>
               </li>
               <li>
-                <Link href="/map">지도</Link>
+                <Link href="/map" aria-current={pathname.startsWith('/map') ? 'page' : undefined}>지도</Link>
               </li>
               {/* <li>
               <Link href="/bookmarks">북마크</Link>
@@ -54,7 +55,7 @@ export default function Header() {
               <Link href="/history">모임 조회</Link>
             </li> */}
             </ul>
-          </div>
+          </nav>
 
           {/* 데스크탑 유저 정보 */}
           {isLogin ? (
@@ -70,7 +71,7 @@ export default function Header() {
                 </li>
                 <li>
                   <Link href="/notifications">
-                    <Image src="/icon/notification.svg" width={43} height={50} alt="알림 이미지" />
+                    <Image src="/icon/notification.svg" width={43} height={50} alt="알림" />
                   </Link>
                 </li>
                 <li>
@@ -99,10 +100,10 @@ export default function Header() {
           <div className={styles[`mobile-menu`]}>
             <ChatNotification />
             <Link href="/notifications">
-              <Image src="/icon/notification.svg" width={25} height={30} alt="알림 이미지" />
+              <Image src="/icon/notification.svg" width={25} height={30} alt="알림" />
             </Link>
-            <button className={styles[`hamburger-btn`]} onClick={toggleSidebar}>
-              <Image src="/icon/hamburger.svg" width={30} height={28} alt="메뉴" />
+            <button className={styles[`hamburger-btn`]} onClick={toggleSidebar} aria-expanded={isSidebarOpen} aria-label="메뉴 열기">
+              <Image src="/icon/hamburger.svg" width={30} height={28} alt="" aria-hidden="true" />
             </button>
           </div>
         </div>

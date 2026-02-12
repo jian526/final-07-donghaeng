@@ -72,7 +72,7 @@ const useChatStore = create<ChatStoreState>((set, get) => ({
 
         // 1. 만약 채팅 목록에 없는 방의 메시지라면, 방 목록을 새로고침
         if (!targetRoom) {
-          const serverRooms = await getMyRooms(user.token!.accessToken);
+          const serverRooms = await getMyRooms();
           get().setRooms(serverRooms, user._id);
           return;
         }
@@ -128,7 +128,7 @@ const useChatStore = create<ChatStoreState>((set, get) => ({
       set({ chatSocket: socket });
 
       // 리스너 등록 후 방 목록 API 호출
-      const serverRooms = await getMyRooms(user.token!.accessToken);
+      const serverRooms = await getMyRooms();
       get().setRooms(serverRooms, user._id);
     } catch (err) {
       console.error('채팅 서버 연결 실패:', err);

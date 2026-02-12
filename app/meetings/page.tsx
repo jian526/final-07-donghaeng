@@ -3,6 +3,16 @@ import Link from 'next/link';
 import DefaultLayout from '@/app/components/DefaultLayout';
 import Category from '@/app/meetings/Category';
 import FilterMeetingList from '@/app/meetings/FilterMeetingList';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '모임 리스트',
+  description: '다양한 카테고리의 모임을 검색하고 찾아보세요. 운동, 요리, 문화, 게임 등 관심 있는 모임에 참여할 수 있습니다.',
+  openGraph: {
+    title: '모임 리스트 | Moa',
+    description: '다양한 카테고리의 모임을 검색하고 찾아보세요.',
+  },
+};
 
 const categoryNameMap: Record<string, string> = {
   health: '운동',
@@ -34,14 +44,16 @@ export default async function Meetinglist({ searchParams }: PageProps) {
   const categoryName = category && category !== 'all' ? categoryNameMap[category] : '';
 
   return (
-    <>
-      <DefaultLayout>
-        <main className={style.mainLayout}>
-          {/* 데스크톱: 사이드바 카테고리 (왼쪽) */}
+    <DefaultLayout>
+      <main className={style.mainLayout}>
+        {/* 데스크톱: 사이드바 카테고리 (왼쪽) */}
+        <div className={style.container}>
           <div className={style.topHeader}>
             <div className={style.breadcrumb}>
               <span className={style.home}>홈</span>
-              <span className={style.breadcrumbSeparator}>&gt;</span>
+              <span className={style.breadcrumbSeparator} aria-hidden="true">
+                &gt;
+              </span>
               <span className={style.listTitle}>{categoryName || '모임 리스트'}</span>
             </div>
             <div className={style.headerSection}>
@@ -55,12 +67,10 @@ export default async function Meetinglist({ searchParams }: PageProps) {
           <div className={style.row}>
             <Category />
 
-            <section className={style.mainContent}>
-              <FilterMeetingList keyword={keyword} category={category} />
-            </section>
+            <FilterMeetingList keyword={keyword} category={category} />
           </div>
-        </main>
-      </DefaultLayout>
-    </>
+        </div>
+      </main>
+    </DefaultLayout>
   );
 }
