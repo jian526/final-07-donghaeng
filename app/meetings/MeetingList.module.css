@@ -259,7 +259,6 @@
   width: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
-  background-image: url('/images/img2.png');
   background-size: cover;
   background-position: center;
   flex-shrink: 0;
