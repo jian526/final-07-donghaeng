@@ -2,9 +2,7 @@
 
 지도 기반 모임 탐색과 AI 맞춤 모임 추천을 통한 취미 공유 커뮤니티 플랫폼입니다.
 
-<!-- 배너 이미지 추가 시 주석 해제
 ![banner-image](docs/images/배너.png)
--->
 
 ## 📋 프로젝트 개요
 
@@ -99,7 +97,8 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| ![회원가입](docs/images/wireframe-register.png) | ![로그인](docs/images/wireframe-login.png) |
+| <img src="docs/gif/로그인.gif" width="600"/>   | <img src="docs/gif/로그인_모바일버전.gif" width="200"/>   |
+| <img src="docs/gif/회원가입.gif" width="600"/> | <img src="docs/gif/회원가입_모바일버전.gif" width="200"/> |
 
 ---
 
@@ -111,9 +110,10 @@
 - 키워드 검색 기능
 - AI 추천 모달
 
-| 데스크톱 |
-| :---: |
-| ![홈화면](docs/images/wireframe-mainpage.png) |
+| 데스크톱 | 모바일 |
+| :---: | :---: |
+| <img src="docs/gif/홈화면.gif" width="600"/> | <img src="docs/gif/홈화면_모바일버전.gif" width="200"/> |
+
 
 ---
 
@@ -123,9 +123,10 @@
 - 북마크 기능
 - 무한 스크롤 지원
 
-| 데스크톱 |
-| :---: |
-| ![모임목록](docs/images/wireframe-meetup-list.png) |
+| 데스크톱 | 모바일 |
+| :---: | :---: |
+| <img src="docs/gif/모임리스트.gif" width="600"/>  | <img src="docs/gif/모임리스트_모바일버전.gif" width="200"/> |
+| <img src="docs/gif/모임리스트2.gif" width="600"/> |                                                           |
 
 ---
 
@@ -136,9 +137,9 @@
 - 모임 신청, 관리, 수정, 삭제
 - 주최자와 1:1 채팅
 
-| 데스크톱 |
-| :---: |
-| ![모임상세](docs/images/wireframe-meetup-detail.png) |
+| 데스크톱 | 모바일 |
+| :---: | :---: |
+| <img src="docs/gif/상세페이지.gif" width="600"/> | <img src="docs/gif/상세페이지_모바일버전.gif" width="200"/> |
 
 ---
 
@@ -148,9 +149,21 @@
 - 모임 이미지 업로드 (Cloudinary)
 - 질문지 작성 (최대 2개)
 
-| 데스크톱 |
-| :---: |
-| ![모임등록](docs/images/wireframe-meetup-create.png) |
+| 데스크톱 | 모바일 |
+| :---: | :---: |
+| <img src="docs/gif/모임등록.gif" width="600"/> | <img src="docs/gif/모임등록_모바일버전.gif" width="200"/> |
+
+---
+
+### ✏️ 모임수정
+
+- 기존 모임 내용 호출
+- 이미지 업로드 수정
+- 질문지 작성 수정
+
+| 데스크톱 | 모바일 |
+| :---: | :---: |
+| <img src="docs/gif/모임수정.gif" width="600"/> | <img src="docs/gif/모임수정_모바일버전.gif" width="200"/> |
 
 ---
 
@@ -159,9 +172,9 @@
 - 질문지 답변
 - 신청 관리
 
-| 데스크톱 |
-| :---: |
-| ![모임신청](docs/images/wireframe-meetup-apply.png) |
+| 데스크톱 | 모바일 |
+| :---: | :---: |
+| <img src="docs/gif/모임신청.png" width="600"/> | <img src="docs/gif/모임신청_모바일버전.gif" width="200"/> |
 
 ---
 
@@ -170,9 +183,9 @@
 - 전체, 참여 전, 참여 후 구분 표시
 - 신청 대기/승인/거절 상태 표시
 
-| 데스크톱 |
-| :---: |
-| ![모임조회](docs/images/wireframe-meetup-history.png) |
+| 데스크톱 | 모바일 |
+| :---: | :---: |
+| <img src="docs/gif/모임조회.gif" width="600"/> | <img src="docs/gif/모임조회_모바일버전.gif" width="200"/> |
 
 ---
 
@@ -180,9 +193,10 @@
 
 - 북마크 토글로 목록 추가/제거
 
-| 데스크톱 |
-| :---: |
-| ![북마크](docs/images/wireframe-bookmark.png) |
+| 데스크톱 | 모바일 |
+| :---: | :---: |
+| <img src="docs/gif/북마크.gif" width="600"/> | <img src="docs/gif/북마크_모바일버전.gif" width="200"/> |
+
 
 ---
 
@@ -193,9 +207,9 @@
 - 모임 조회
 - 북마크 연결
 
-| 프로필 | 수정 |
+| 데스크톱 | 모바일 |
 | :---: | :---: |
-| ![마이페이지](docs/images/wireframe-mypage-profile.png) | ![수정](docs/images/wireframe-mypage-edit.png) |
+| <img src="docs/gif/마이페이지.png" width="600"/> | <img src="docs/gif/마이페이지_모바일버전.png" width="200"/> |
 
 ---
 
@@ -206,9 +220,9 @@
 - 승인/거절 처리
 - 알림 전송
 
-| 데스크톱 |
-| :---: |
-| ![관리페이지](docs/images/wireframe-participant-manage.png) |
+| 데스크톱 | 모바일 |
+| :---: | :---: |
+| <img src="docs/gif/관리페이지.gif" width="600"/> | <img src="docs/gif/관리페이지_모바일버전.png" width="200"/> |
 
 ---
 
@@ -219,6 +233,10 @@
 - 메시지 읽음 상태 추적
 - 채팅방 나가기 기능
 
+| 데스크톱 | 모바일 |
+| :---: | :---: |
+| <img src="docs/gif/채팅.png" width="600"/> | <img src="docs/gif/채팅_모바일버전.png" width="200"/> |
+
 ---
 
 ### 🗺️ 모임지도
@@ -227,9 +245,9 @@
 - 지역별 모임 위치 표시 (카카오맵 API)
 - 마커 클릭 시 모임 정보 오버레이
 
-| 데스크톱 |
-| :---: |
-| ![지도페이지](docs/images/wireframe-map.png) |
+| 데스크톱 | 모바일 |
+| :---: | :---: |
+| <img src="docs/gif/지도페이지.gif" width="600"/> | <img src="docs/gif/지도페이지_모바일버전.gif" width="200"/> |
 
 ---
 
@@ -239,9 +257,11 @@
 - 승인/거절 알림
 - 알림 읽음 상태 관리
 
-| 데스크톱 |
-| :---: |
-| ![알림](docs/images/wireframe-notification.png) |
+| 데스크톱 | 모바일 |
+| :---: | :---: |
+| <img width="500" src="https://github.com/user-attachments/assets/63a9a455-6e60-4ccf-bcf4-85e0b4fe5ee7" /> | <img width="200" src="https://github.com/user-attachments/assets/d0d18642-5d92-4c66-8b3c-d6cf2b67e445" /> |
+
+
 
 ---
 
@@ -251,7 +271,17 @@
 - OpenAI GPT-4o-mini를 통한 맞춤 카테고리 추천
 - 추천 카테고리 기반 모임 필터링
 
+| 데스크톱 | 모바일 |
+| :---: | :---: |
+| <img src="docs/gif/ai.gif" width="600"/> | <img src="docs/gif/ai_모바일버전.gif" width="200"/> |
+
 ---
+
+## 🔄 워크플로우
+
+<div align="center">
+  <img src="docs/images/워크플로우.png" alt="워크플로우" width="600">
+</div>
 
 ## 🐛 트러블슈팅
 
