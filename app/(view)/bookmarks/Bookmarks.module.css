@@ -202,7 +202,7 @@
   width: calc(100% - 30px);
   height: 225px;
   background-color: var(--bg-white);
-  border: 5px solid var(--c-gray-25);
+  border: 5px solid var(--bg-gray-25);
   border-radius: 25px;
   margin: 0 auto;
   padding: 20px;
@@ -217,7 +217,7 @@
   margin-right: 20px;
   flex-shrink: 0;
   border-radius: 20px;
-  background: linear-gradient(90deg, var(--c-gray-25) 25%, #f0f0f0 50%, var(--c-gray-25) 75%);
+  background: linear-gradient(90deg, var(--bg-gray-25) 25%, var(--bg-gray) 50%, var(--bg-gray-25) 75%);
   background-size: 800px 100%;
   animation: shimmer 1.5s infinite ease-in-out;
 }
@@ -233,7 +233,7 @@
   width: 55%;
   height: 22px;
   border-radius: 6px;
-  background: linear-gradient(90deg, var(--c-gray-25) 25%, #f0f0f0 50%, var(--c-gray-25) 75%);
+  background: linear-gradient(90deg, var(--bg-gray-25) 25%, var(--bg-gray) 50%, var(--bg-gray-25) 75%);
   background-size: 800px 100%;
   animation: shimmer 1.5s infinite ease-in-out;
 }
@@ -242,7 +242,7 @@
   width: 40%;
   height: 14px;
   border-radius: 4px;
-  background: linear-gradient(90deg, var(--c-gray-25) 25%, #f0f0f0 50%, var(--c-gray-25) 75%);
+  background: linear-gradient(90deg, var(--bg-gray-25) 25%, var(--bg-gray) 50%, var(--bg-gray-25) 75%);
   background-size: 800px 100%;
   animation: shimmer 1.5s infinite ease-in-out;
 }
@@ -251,7 +251,7 @@
   width: 30%;
   height: 14px;
   border-radius: 4px;
-  background: linear-gradient(90deg, var(--c-gray-25) 25%, #f0f0f0 50%, var(--c-gray-25) 75%);
+  background: linear-gradient(90deg, var(--bg-gray-25) 25%, var(--bg-gray) 50%, var(--bg-gray-25) 75%);
   background-size: 800px 100%;
   animation: shimmer 1.5s infinite ease-in-out;
 }
