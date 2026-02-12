@@ -80,6 +80,7 @@ export default function Category() {
                 type="button"
                 className={`${style.categoryChip} ${currentCategory === categoryMap[category] ? style.categoryChipActive : ''}`}
                 onClick={() => handleCategory(category)}
+                aria-current={currentCategory === categoryMap[category] ? 'true' : undefined}
               >
                 {category}
               </button>
