@@ -219,9 +219,10 @@
 - 승인/거절 처리
 - 알림 전송
 
+
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/67c29016-fa41-47ff-84fb-f803c901a404" width="500"/> | <img src="https://github.com/user-attachments/assets/9570d478-8910-478e-a535-3ad9f5401e0d" width="200"/> |
+| <img src="https://github.com/user-attachments/assets/20430a45-0f98-46ed-bc14-93ce2206cedc" width="500"/> | <img src="https://github.com/user-attachments/assets/9570d478-8910-478e-a535-3ad9f5401e0d" width="200"/> |
 
 ---
 
