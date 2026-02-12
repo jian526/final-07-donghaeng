@@ -6,7 +6,7 @@
 
 ## 📋 프로젝트 개요
 
-취미 중심 사용자 연결을 통한 간편한 모임 참여 플랫폼입니다.
+취미 중심 사용자 연결을 통한 간편한 모임 참여 플랫폼입니다. </br>
 지도 기반 모임 탐색, AI 맞춤 모임 추천, 1:1 실시간 채팅 기능을 제공하여
 부담 없이 새로운 경험을 시작할 수 있도록 돕습니다.
 
@@ -21,7 +21,7 @@
 - Socket.io 기반 1:1 실시간 채팅
 - OpenAI GPT를 활용한 AI 성향 기반 모임 추천
 - 카테고리별, 최신순 정렬
-- 다중 필터 선택 시 즉시 결과 반영 (지역, 날짜, 성별, 나이대)
+- 다중 필터 선택 시 즉시 결과 반영 (지역, 날짜, 성별, 나이대 등)
 
 ### 지도 기반 모임 탐색
 
@@ -32,9 +32,9 @@
 
 ### 마이페이지 관리
 
-- 프로필 정보 수정 (닉네임, 지역, 나이, 성별, 자기소개)
-- 모임 관리하기 (신청자 승인/거절)
+- 프로필 정보 수정 (닉네임, 자기소개, 지역, 나이, 성별)
 - 북마크 추가/삭제
+- 모임 관리하기 (신청자 승인/거절)
 - 모임 조회 (전체/참여 전/참여 후)
 
 ### 모임 생명주기 관리
@@ -52,8 +52,8 @@
 
 | 프로필 | 이름 | 역할 | 담당 페이지 | GitHub |
 | :---: | :---: | :---: | :--- | :---: |
-| <img src="https://github.com/minggichae.png" width="80"> | 채민기 | 팀장, PM | 마이페이지, 수정페이지<br/>지도 페이지<br/>알림 페이지<br/>필터 컴포넌트 | [GitHub](https://github.com/minggichae) |
-| <img src="https://github.com/holyhw.png" width="80"> | 유현욱 | 팀원, PL | 헤더, 푸터 컴포넌트<br/>메인페이지, AI 추천<br/>모임/참여자 관리 페이지<br/>채팅 페이지<br/>북마크 기능 | [GitHub](https://github.com/holyhw) |
+| <img src="https://github.com/minggichae.png" width="80"> | 채민기 | 팀장, PM | 마이 페이지, 수정 페이지<br/>지도 페이지<br/>알림 페이지<br/>필터 컴포넌트 | [GitHub](https://github.com/minggichae) |
+| <img src="https://github.com/holyhw.png" width="80"> | 유현욱 | 팀원, PL | 헤더, 푸터 컴포넌트<br/>메인 페이지, AI 추천<br/>모임/참여자 관리 페이지<br/>채팅 페이지<br/>북마크 기능 | [GitHub](https://github.com/holyhw) |
 | <img src="https://github.com/kkhhjjoo.png" width="80"> | 김현주 | 팀원, 서기 | 모임 리스트 페이지<br/>모임 상세 페이지 | [GitHub](https://github.com/kkhhjjoo) |
 | <img src="https://github.com/jian526.png" width="80"> | 김지안 | 팀원, 발표 | 로그인, 회원가입 페이지<br/>모임 등록/수정 페이지<br/>모임 조회 페이지 | [GitHub](https://github.com/jian526) |
 
@@ -110,7 +110,6 @@
 - 키워드 검색 기능
 - AI 추천 모달
 
-
 | 데스크톱 | 모바일 |
 | :---: | :---: |
 | <img src="https://github.com/user-attachments/assets/fa1023ff-5af8-46c7-a10a-fae2eeb2924a" width="500"/> | <img src="https://github.com/user-attachments/assets/09b66980-cd58-488a-bc7a-aa10c2ef8788" width="200"/> |
@@ -119,9 +118,8 @@
 
 ### 📋 모임목록
 
-- 카테고리별, 필터별 검색 (지역, 날짜, 성별, 나이대)
+- 카테고리별, 필터별 검색 (지역, 날짜, 성별, 나이대 등)
 - 북마크 기능
-- 무한 스크롤 지원
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
@@ -169,7 +167,6 @@
 ### ✉️ 모임신청
 
 - 질문지 답변
-- 신청 관리
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
@@ -177,11 +174,9 @@
 
 ---
 
-
 ### 👀 모임조회
 
 - 전체, 참여 전, 참여 후 구분 표시
-- 신청 대기/승인/거절 상태 표시
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
@@ -202,9 +197,9 @@
 ### 👤 마이페이지
 
 - 프로필 수정
+- 북마크 연결
 - 모임 관리
 - 모임 조회
-- 북마크 연결
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
@@ -219,13 +214,11 @@
 - 승인/거절 처리
 - 알림 전송
 
-
 | 데스크톱 | 모바일 |
 | :---: | :---: |
 | <img src="https://github.com/user-attachments/assets/20430a45-0f98-46ed-bc14-93ce2206cedc" width="500"/> | <img src="https://github.com/user-attachments/assets/9570d478-8910-478e-a535-3ad9f5401e0d" width="200"/> |
 
 ---
-
 
 ### 💬 채팅
 
@@ -238,8 +231,6 @@
 | :---: | :---: |
 | <img width="500" src="https://github.com/user-attachments/assets/3ae5c0a6-8572-45c5-8c29-39e220e97f3e" /> | <img width="200" src="https://github.com/user-attachments/assets/a60ce7ca-d37c-4f17-8afb-50d277c7dd08" /> |
 
-
-
 ---
 
 ### 🗺️ 모임지도
@@ -250,7 +241,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/moa_map_desktop.gif" width="500"/> | <img src="https://github.com/user-attachments/assets/23334bf7-47d0-4156-85ab-c146c39d7a33" width="200"/> |
+| <img src="https://github.com/user-attachments/assets/35cdd3d9-2e0c-4df6-8f6c-13d5c831e9aa" width="500"/> | <img src="https://github.com/user-attachments/assets/23334bf7-47d0-4156-85ab-c146c39d7a33" width="200"/> |
 
 ---
 
@@ -264,13 +255,11 @@
 | :---: | :---: |
 | <img width="500" src="https://github.com/user-attachments/assets/63a9a455-6e60-4ccf-bcf4-85e0b4fe5ee7" /> | <img width="200" src="https://github.com/user-attachments/assets/d0d18642-5d92-4c66-8b3c-d6cf2b67e445" /> |
 
-
-
 ---
 
 ### 🤖 AI 추천
 
-- 사용자 정보 입력 (나이, 성별, 선호도)
+- 사용자 정보 파악 (나이, 성별, 선호도 등)
 - OpenAI GPT-4o-mini를 통한 맞춤 카테고리 추천
 - 추천 카테고리 기반 모임 필터링
 
@@ -322,7 +311,7 @@
 | **현주** | 북마크 클릭 시 여러 개가 동시에 선택되는 버그 발생. `git pull`을 받지 않아 최신 코드가 누락됨.                                                                                                                                                                                                                                                                                                                                                                                                             | `git pull`, `git merge`를 통해 최신 코드 동기화 후 해결                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | **지안** | 1. **Git 브랜치 동기화 문제**: `develop` 브랜치에서 `git pull`이 정상적으로 되지 않는 문제 발생<br/>2. **CSS Module `:global` 사용 문제**: CSS Module에서 `:global`을 사용하면서 스타일이 전역으로 적용되어 다른 페이지에도 영향을 주는 문제 발생<br/>3. **로그인 상태 유지 문제**: 로그인 여부를 `useState`로만 판단해 로그인되지 않았을 경우 로그인 페이지로 강제 이동하도록 구현했는데, 새로고침 시 로그인 상태에서도 로그인 화면으로 이동하는 문제 발생. Hydration 이전 상태를 `false`로 인식했기 때문 | 1. **Git 동기화 해결**: rebase 사용 시 발생하는 히스토리 오염 문제를 팀원들에게 공유. 이후 `git pull`이 되지 않는 경우 `rebase` 대신 `merge` 전략을 사용하도록 협업 방식을 정리하여 develop 브랜치와의 버전을 안정적으로 맞춤<br/>2. **CSS 격리**: `:global` 사용을 최소화하고, 필요한 경우 더 구체적인 선택자를 사용하여 적용 범위를 제한. 컴포넌트 단위로 스타일이 격리되도록 구조 개선<br/>3. **Hydration 처리**: `useStore.ts`에 `setHasHydrated`를 추가하여 상태가 hydration된 이후에만 로그인 여부를 판단하도록 수정. 새로고침 시에도 로그인 상태가 정상적으로 유지되도록 개선 |
 
-## 회고
+## 💭 회고
 
 <details>
   <summary>민기</summary>
@@ -340,17 +329,18 @@
 </details>
 <details>
   <summary>현주</summary>
-  <ul><li> 좋았던 점: React와 next.js로 프로젝트를 만드는것은 처음이었는데 조원분들의 도움으로 프로젝트를 만들 수 있었고, 문제없이 순항한 것 같아 만족스럽습니다. </li>
-  <li>아쉬웠던 점: 4개의 파트를 맡았었는데 저의 안일함으로 지연이 되서 부분은 다른 분들이 맡게 되어 아쉬웠습니다.</li>
+  <ul>
+    <li>좋았던 점: React와 next.js로 프로젝트를 만드는것은 처음이었는데 조원분들의 도움으로 프로젝트를 만들 수 있었고, 문제없이 순항한 것 같아 만족스럽습니다.</li>
+    <li>아쉬웠던 점: 4개의 파트를 맡았었는데 저의 안일함으로 지연이 되서 부분은 다른 분들이 맡게 되어 아쉬웠습니다.</li>
   </ul>
 </details>
 <details>
   <summary>지안</summary>
-  <ul><li>좋았던 점: 좋은 팀원들을 만나 많이 배울 수 있게 되어서 정말 좋았고, Next.js로 웹페이지를 만든 경험이 생겨서 만족스러웠습니다.</li>
-  <li>아쉬웠던 점: 브랜치 관리에 대한 이해 부족으로 협업 과정에서 어려움을 겪었으며, 이를 통해 체계적인 Git 활용 능력의 중요성을 깨닫게 되었습니다. </li>
+  <ul>
+    <li>좋았던 점: 좋은 팀원들을 만나 많이 배울 수 있게 되어서 정말 좋았고, Next.js로 웹페이지를 만든 경험이 생겨서 만족스러웠습니다.</li>
+    <li>아쉬웠던 점: 브랜치 관리에 대한 이해 부족으로 협업 과정에서 어려움을 겪었으며, 이를 통해 체계적인 Git 활용 능력의 중요성을 깨닫게 되었습니다.</li>
   </ul>
 </details>
-
 
 ## 📁 프로젝트 폴더 구조
 
