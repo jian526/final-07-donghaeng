@@ -110,10 +110,10 @@
 - 키워드 검색 기능
 - AI 추천 모달
 
+
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/홈화면.gif" width="500"/> | <img src="docs/gif/홈화면_모바일버전.gif" width="200"/> |
-
+| <img src="https://github.com/user-attachments/assets/fa1023ff-5af8-46c7-a10a-fae2eeb2924a" width="500"/> | <img src="https://github.com/user-attachments/assets/09b66980-cd58-488a-bc7a-aa10c2ef8788" width="200"/> |
 
 ---
 
@@ -125,8 +125,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/모임리스트.gif" width="500"/>  | <img src="docs/gif/모임리스트_모바일버전.gif" width="200"/> |
-| <img src="docs/gif/모임리스트2.gif" width="500"/> |                                                           |
+| <img src="https://github.com/user-attachments/assets/fdd8ddc0-92dd-49af-838d-49b8043a8f25" width="500"/>  | <img src="https://github.com/user-attachments/assets/16ff602c-0387-4b43-9cbe-ff5a316175a9" width="200"/> |
 
 ---
 
@@ -139,7 +138,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/상세페이지.gif" width="500"/> | <img src="docs/gif/상세페이지_모바일버전.gif" width="200"/> |
+| <img src="https://github.com/user-attachments/assets/961f10da-ba25-4339-b26f-4b26e9c2554e" width="500"/> | <img src="https://github.com/user-attachments/assets/04b1c14b-ce17-4f68-80c7-893c3d91701e" width="200"/> |
 
 ---
 
@@ -163,7 +162,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/모임수정.gif" width="500"/> | <img src="docs/gif/모임수정_모바일버전.gif" width="200"/> |
+| <img src="https://github.com/user-attachments/assets/9b473952-88ef-4949-8a4e-bbafd24ff90c" width="500"/> | <img src="https://github.com/user-attachments/assets/50314b45-1419-4208-a6ce-fbaf2deb37be" width="200"/> |
 
 ---
 
@@ -178,6 +177,7 @@
 
 ---
 
+
 ### 👀 모임조회
 
 - 전체, 참여 전, 참여 후 구분 표시
@@ -185,7 +185,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/모임조회.gif" width="500"/> | <img src="docs/gif/모임조회_모바일버전.gif" width="200"/> |
+| <img src="https://github.com/user-attachments/assets/a2d5cd1f-5515-46e5-9a7a-1716481ef1e8" width="500"/> | <img src="https://github.com/user-attachments/assets/b3e9e6ab-6cbc-46c7-b5a4-879ed6e8eb2f" width="200"/> |
 
 ---
 
@@ -195,8 +195,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/북마크.gif" width="500"/> | <img src="docs/gif/북마크_모바일버전.gif" width="200"/> |
-
+| <img src="https://github.com/user-attachments/assets/67efefd9-5fec-4e38-bb4e-dafc0ecfb79f" width="500"/> | <img src="https://github.com/user-attachments/assets/c1c7cbdf-5a99-4f68-a495-54501f37b5ab" width="200"/> |
 
 ---
 
@@ -222,9 +221,10 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/관리페이지.gif" width="500"/> | <img src="docs/gif/관리페이지_모바일버전.png" width="200"/> |
+| <img src="https://github.com/user-attachments/assets/67c29016-fa41-47ff-84fb-f803c901a404" width="500"/> | <img src="https://github.com/user-attachments/assets/9570d478-8910-478e-a535-3ad9f5401e0d" width="200"/> |
 
 ---
+
 
 ### 💬 채팅
 
@@ -249,7 +249,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="docs/gif/지도페이지.gif" width="500"/> | <img src="docs/gif/지도페이지_모바일버전.gif" width="200"/> |
+| <img src="https://github.com/user-attachments/assets/35cdd3d9-2e0c-4df6-8f6c-13d5c831e9aa" width="500"/> | <img src="https://github.com/user-attachments/assets/23334bf7-47d0-4156-85ab-c146c39d7a33" width="200"/> |
 
 ---
 
