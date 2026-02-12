@@ -51,7 +51,9 @@ export default async function Meetinglist({ searchParams }: PageProps) {
           <div className={style.topHeader}>
             <div className={style.breadcrumb}>
               <span className={style.home}>홈</span>
-              <span className={style.breadcrumbSeparator} aria-hidden="true">&gt;</span>
+              <span className={style.breadcrumbSeparator} aria-hidden="true">
+                &gt;
+              </span>
               <span className={style.listTitle}>{categoryName || '모임 리스트'}</span>
             </div>
             <div className={style.headerSection}>

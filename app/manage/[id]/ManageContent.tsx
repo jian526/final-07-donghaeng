@@ -107,7 +107,48 @@ export default function ManageContent({ productId }: ManageContentProps) {
   };
 
   if (isLoading) {
-    return <p className={styles['no-applicants']}>로딩중...</p>;
+    return (
+      <>
+        {Array.from({ length: 2 }).map((_, i) => (
+          <div key={i} className={styles['applicant-div-skelton']}>
+            {/* 데스크탑 프로필 이미지 */}
+            <div className={styles['profile-img-desktop']} />
+
+            <div className={styles['applicant-btn-wrapper']}>
+              <div className={styles['applicant-information']}>
+                {/* 모바일 프로필 이미지 */}
+                <div className={styles['profile-img-mobile']} />
+
+                {/* 이름 */}
+                <div className={styles['name']} />
+
+                {/* bpm 영역 */}
+                <div className={styles['bpm']} />
+              </div>
+
+              {/* 버튼 */}
+              <div className={styles['btn-div']}>
+                <div className={styles['btn']} />
+                <div className={styles['btn']} />
+              </div>
+            </div>
+
+            {/* 질문 영역 */}
+            <div className={styles['question-div-bundle']}>
+              <div className={styles['question-div']}>
+                <div className={styles['question']} />
+                <div className={styles['answer']} />
+              </div>
+
+              <div className={styles['question-div']}>
+                <div className={styles['question']} />
+                <div className={styles['answer']} />
+              </div>
+            </div>
+          </div>
+        ))}
+      </>
+    );
   }
 
   if (!manage || manage.length === 0) {

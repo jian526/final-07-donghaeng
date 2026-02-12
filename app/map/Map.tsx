@@ -34,6 +34,9 @@ export default function Map({ meetings }: MapProps) {
         </div>
         <div className={styles['map-meeting-div']}>
           <div className={styles['meeting-list']}>
+            {filteredMeetings.length === 0 ? (
+              <p className={styles['none-data']}>조건에 맞는 모임이 없습니다.</p>
+            ) : (
             <ul>
               {filteredMeetings.map((meeting) => (
                 // li 클릭 시 해당되는 모임 id 저장
@@ -67,6 +70,7 @@ export default function Map({ meetings }: MapProps) {
                 </li>
               ))}
             </ul>
+            )}
           </div>
 
           {/* props로 필요한 정보들 전달 */}
