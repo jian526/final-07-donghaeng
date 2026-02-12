@@ -652,7 +652,7 @@
   width: 100%;
   aspect-ratio: 1/1;
   border-radius: 25px;
-  background: linear-gradient(90deg, var(--bg-gray-25) 25%, var(--bg-gray) 50%, var(--c-gray-25) 75%);
+  background: linear-gradient(90deg, var(--bg-gray-25) 25%, var(--bg-gray) 50%, var(--bg-gray-25) 75%);
   background-size: 800px 100%;
   animation: shimmer 1.5s infinite ease-in-out;
 }
@@ -669,7 +669,7 @@
   width: 60%;
   height: 24px;
   border-radius: 6px;
-  background: linear-gradient(90deg, var(--bg-gray-25) 25%, var(--bg-gray) 50%, var(--c-gray-25) 75%);
+  background: linear-gradient(90deg, var(--bg-gray-25) 25%, var(--bg-gray) 50%, var(--bg-gray-25) 75%);
   background-size: 800px 100%;
   animation: shimmer 1.5s infinite ease-in-out;
 }
@@ -678,7 +678,7 @@
   width: 80%;
   height: 18px;
   border-radius: 4px;
-  background: linear-gradient(90deg, var(--bg-gray-25) 25%, var(--bg-gray) 50%, var(--c-gray-25) 75%);
+  background: linear-gradient(90deg, var(--bg-gray-25) 25%, var(--bg-gray) 50%, var(--bg-gray-25) 75%);
   background-size: 800px 100%;
   animation: shimmer 1.5s infinite ease-in-out;
 }
@@ -687,7 +687,7 @@
   width: 40%;
   height: 18px;
   border-radius: 4px;
-  background: linear-gradient(90deg, var(--bg-gray-25) 25%, var(--bg-gray) 50%, var(--c-gray-25) 75%);
+  background: linear-gradient(90deg, var(--bg-gray-25) 25%, var(--bg-gray) 50%, var(--bg-gray-25) 75%);
   background-size: 800px 100%;
   animation: shimmer 1.5s infinite ease-in-out;
 }
