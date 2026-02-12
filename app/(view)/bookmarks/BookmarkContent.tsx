@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import style from './Bookmarks.module.css';
 import useUserStore from '@/zustand/userStore';
 import { getUserBookmarksList } from '@/lib/bookmarks';
 import { Bookmarks } from '@/types/bookmarks';
-import BookmarkSwiper from './BookmarkSwiper';
+
+const BookmarkSwiper = dynamic(() => import('./BookmarkSwiper'), { ssr: false });
 
 export default function BookmarkContent() {
   const { user } = useUserStore();
