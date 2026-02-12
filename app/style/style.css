@@ -41,6 +41,7 @@
   --bg-pink: var(--c-pink-200);
   --bg-darksky: var(--c-slateblue-300);
   --bg-gray: var(--c-gray);
+  --bg-gray-25: var(--c-gray-25);
 
   /* Text */
   --text-red: var(--c-red-600);
