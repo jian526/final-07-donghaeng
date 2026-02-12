@@ -250,7 +250,7 @@
 
 | 데스크톱 | 모바일 |
 | :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/35cdd3d9-2e0c-4df6-8f6c-13d5c831e9aa" width="500"/> | <img src="https://github.com/user-attachments/assets/23334bf7-47d0-4156-85ab-c146c39d7a33" width="200"/> |
+| <img src="docs/gif/moa_map_desktop.gif" width="500"/> | <img src="https://github.com/user-attachments/assets/23334bf7-47d0-4156-85ab-c146c39d7a33" width="200"/> |
 
 ---
 
