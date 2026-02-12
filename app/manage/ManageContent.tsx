@@ -38,7 +38,23 @@ export default function ManageContent() {
     fetchMyAddMeetings();
   }, [hasHydrated, accessToken, router]);
 
-  if (!hasHydrated || isLoading) return null;
+  if (!hasHydrated || isLoading) {
+    return (
+      <div className={style['skeleton-list']}>
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div key={i} className={style['skeleton-card']}>
+            <div className={style['skeleton-img']} />
+            <div className={style['skeleton-info']}>
+              <div className={style['skeleton-title']} />
+              <div className={style['skeleton-line']} />
+              <div className={style['skeleton-line']} />
+              <div className={style['skeleton-line-short']} />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   if (!accessToken) return null;
 
