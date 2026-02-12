@@ -50,7 +50,7 @@ export default function BookmarkContent() {
   if (!accessToken) return null;
 
   if (isEmpty) {
-    return <div className={style.empty}>북마크한 모임이 없습니다.</div>;
+    return <p className={style.empty}>북마크한 모임이 없습니다.</p>;
   }
 
   return <BookmarkSwiper bookmarks={bookmarks} />;

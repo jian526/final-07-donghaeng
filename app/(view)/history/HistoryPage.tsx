@@ -131,24 +131,23 @@ export default function HistoryPage() {
   // 필터링된 모임 목록 계산. 렌더링할때마다(필터가 바뀔때마다) 다시 계산됨
 
   return (
-    <>
       <main className={style.container}>
         {
           <div className={style.contentWrapper}>
             <h1 className={style.title}>모임 조회</h1>
-            <div className={style.btnGroup}>
-              <button className={`${style.allBtn}  ${filter === 'all' ? style.active : ''} `} onClick={() => setFilter('all')}>
+            <div className={style.btnGroup} role="group" aria-label="모임 필터">
+              <button className={`${style.allBtn}  ${filter === 'all' ? style.active : ''} `} aria-pressed={filter === 'all'} onClick={() => setFilter('all')}>
                 전체
               </button>
-              <button className={`${style.beforeBtn}  ${filter === 'before' ? style.active : ''} `} onClick={() => setFilter('before')}>
+              <button className={`${style.beforeBtn}  ${filter === 'before' ? style.active : ''} `} aria-pressed={filter === 'before'} onClick={() => setFilter('before')}>
                 참여 전
               </button>
-              <button className={`${style.afterBtn} ${filter === 'after' ? style.active : ''} `} onClick={() => setFilter('after')}>
+              <button className={`${style.afterBtn} ${filter === 'after' ? style.active : ''} `} aria-pressed={filter === 'after'} onClick={() => setFilter('after')}>
                 참여 후
               </button>
             </div>
             {isEmpty ? (
-              <div className={style.empty}> 신청한 모임이 없습니다.</div>
+              <p className={style.empty}>신청한 모임이 없습니다.</p>
             ) : (
               <Swiper
                 modules={[Pagination]}
@@ -182,6 +181,5 @@ export default function HistoryPage() {
           </div>
         }
       </main>
-    </>
   );
 }

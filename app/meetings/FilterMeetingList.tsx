@@ -26,25 +26,23 @@ export default function FilterMeetingList({ keyword, category }: { keyword?: str
   const { filteredMeetings, handleFilterChange } = useFilter(meetings);
 
   return (
-    <>
-      <div className={style.meetingBorder}>
-        <div className={style.filterBar}>
-          <Filter onFilterChanges={handleFilterChange} showCategory={false} />
-        </div>
-        {meetings ? (
-          meetings.length > 0 ? (
-            <ul className={style.meetingGrid}>
-              {filteredMeetings.map((meeting) => (
-                <MeetingItem key={meeting._id} meeting={meeting} />
-              ))}
-            </ul>
-          ) : (
-            <div className={style['none-data']}>검색 결과가 없습니다.</div>
-          )
-        ) : (
-          <p>에러발생</p>
-        )}
+    <div className={style.meetingBorder}>
+      <div className={style.filterBar}>
+        <Filter onFilterChanges={handleFilterChange} showCategory={false} />
       </div>
-    </>
+      {meetings ? (
+        meetings.length > 0 ? (
+          <ul className={style.meetingGrid}>
+            {filteredMeetings.map((meeting) => (
+              <MeetingItem key={meeting._id} meeting={meeting} />
+            ))}
+          </ul>
+        ) : (
+          <p className={style['none-data']}>검색 결과가 없습니다.</p>
+        )
+      ) : (
+        <p>에러발생</p>
+      )}
+    </div>
   );
 }

@@ -39,7 +39,9 @@ export default function Notifications() {
         <div className={styles['notifications-wrap']}>
           <h2>알림</h2>
           <div className={styles['btn']}>
-            <button onClick={markAllRead}>전체 읽음</button>
+            <button type="button" onClick={markAllRead}>
+              전체 읽음
+            </button>
           </div>
           <div aria-live="polite">
             {notifications.length > 0 ? (
