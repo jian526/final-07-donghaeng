@@ -86,14 +86,14 @@ export default function Login() {
             <label htmlFor="email" className={styles['label']}>
               이메일
             </label>
-            <input className={styles['input']} name="email" type="email" id="email" placeholder="이메일을 입력해 주세요" required />
+            <input defaultValue="guest@moa.com" className={styles['input']} name="email" type="email" id="email" placeholder="이메일을 입력해 주세요" required />
           </div>
 
           <div className={styles['fieldset']}>
             <label htmlFor="password" className={styles['label']}>
               비밀번호
             </label>
-            <input className={styles['input']} name="password" type="password" id="password" placeholder="비밀번호를 입력해 주세요" required aria-describedby={userState?.ok === 0 ? 'login-password-error' : undefined} />
+            <input defaultValue="11111111" className={styles['input']} name="password" type="password" id="password" placeholder="비밀번호를 입력해 주세요" required aria-describedby={userState?.ok === 0 ? 'login-password-error' : undefined} />
 
             {/* 에러메시지 */}
             {userState?.ok === 0 && (
