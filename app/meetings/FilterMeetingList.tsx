@@ -50,11 +50,15 @@ export default function FilterMeetingList({ keyword, category }: { keyword?: str
           ))}
         </ul>
       ) : meetings.length > 0 ? (
-        <ul className={style.meetingGrid}>
-          {filteredMeetings.map((meeting) => (
-            <MeetingItem key={meeting._id} meeting={meeting} />
-          ))}
-        </ul>
+        filteredMeetings.length > 0 ? (
+          <ul className={style.meetingGrid}>
+            {filteredMeetings.map((meeting) => (
+              <MeetingItem key={meeting._id} meeting={meeting} />
+            ))}
+          </ul>
+        ) : (
+          <p className={style['none-data']}>조건에 맞는 모임이 없습니다.</p>
+        )
       ) : (
         <p className={style['none-data']}>검색 결과가 없습니다.</p>
       )}
